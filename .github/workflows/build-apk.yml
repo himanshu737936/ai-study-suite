@@ -58,6 +58,18 @@ jobs:
           # pre-accept any missing SDK licences so Gradle can auto-download components
           yes 2>/dev/null | sdkmanager --licenses > /dev/null 2>&1 || true
 
+      - name: Expose sdkmanager where Bubblewrap expects it
+        run: |
+          # Bubblewrap validates the SDK by looking for <sdk>/tools or <sdk>/bin,
+          # and resolves sdkmanager at <sdk>/bin/sdkmanager. Modern runner images
+          # ship it under cmdline-tools/<version>/bin instead, so link it across.
+          SDKMGR=$(find "$ANDROID_HOME/cmdline-tools" -name sdkmanager -type f 2>/dev/null | head -1)
+          echo "found sdkmanager: $SDKMGR"
+          sudo mkdir -p "$ANDROID_HOME/bin"
+          sudo ln -sf "$SDKMGR" "$ANDROID_HOME/bin/sdkmanager"
+          ls -la "$ANDROID_HOME/bin/"
+          "$ANDROID_HOME/bin/sdkmanager" --version || true
+
       - name: Configure Bubblewrap (skip interactive JDK/SDK prompts)
         run: |
           mkdir -p "$HOME/.bubblewrap"
