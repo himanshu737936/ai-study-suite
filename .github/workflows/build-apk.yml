@@ -82,14 +82,10 @@ jobs:
           BUBBLEWRAP_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD || 'AiStudySuitePro2026' }}
           BUBBLEWRAP_KEY_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD || 'AiStudySuitePro2026' }}
         run: |
-          # Pre-write the manifest checksum so Bubblewrap does not prompt
-          # "would you like to regenerate your project?" (it uses sha1 of twa-manifest.json).
-          # NOTE: bubblewrap reads this file and compares it byte-for-byte with
-          # sha1(twa-manifest.json) — a trailing newline makes it think the manifest changed.
-          printf '%s' "$(sha1sum twa-manifest.json | cut -d' ' -f1)" > manifest-checksum.txt
-          echo "manifest-checksum.txt -> [$(cat manifest-checksum.txt)]"
-          # Answer every remaining confirmation prompt with its default (always "yes"),
-          # so bubblewrap can regenerate the Android project non-interactively.
+          # Do NOT pre-write manifest-checksum.txt: when the checksum matches, Bubblewrap
+          # skips regenerating the Android project, so ./gradlew never gets created and the
+          # build fails. We want the regeneration, so we answer every confirmation prompt
+          # with its default ("yes") instead — this generates gradlew + app/ from the manifest.
           yes '' | bubblewrap build --skipPwaValidation
 
       - name: Show build outputs
