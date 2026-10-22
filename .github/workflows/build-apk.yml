@@ -84,9 +84,13 @@ jobs:
         run: |
           # Pre-write the manifest checksum so Bubblewrap does not prompt
           # "would you like to regenerate your project?" (it uses sha1 of twa-manifest.json).
-          sha1sum twa-manifest.json | cut -d' ' -f1 > manifest-checksum.txt
-          echo "manifest-checksum.txt -> $(cat manifest-checksum.txt)"
-          bubblewrap build --skipPwaValidation
+          # NOTE: bubblewrap reads this file and compares it byte-for-byte with
+          # sha1(twa-manifest.json) — a trailing newline makes it think the manifest changed.
+          printf '%s' "$(sha1sum twa-manifest.json | cut -d' ' -f1)" > manifest-checksum.txt
+          echo "manifest-checksum.txt -> [$(cat manifest-checksum.txt)]"
+          # Answer every remaining confirmation prompt with its default (always "yes"),
+          # so bubblewrap can regenerate the Android project non-interactively.
+          yes '' | bubblewrap build --skipPwaValidation
 
       - name: Show build outputs
         if: always()
