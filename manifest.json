@@ -1,0 +1,15 @@
+{
+  "name": "AI Study Suite PRO",
+  "short_name": "AI Study",
+  "description": "PDF ya book ki photo se AI quiz, flashcards, mind map, cheat sheet — UPSC / UPPCS / SSC prep.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#05070f",
+  "theme_color": "#6d6ff5",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
