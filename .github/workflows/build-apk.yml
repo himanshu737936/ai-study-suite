@@ -76,17 +76,27 @@ jobs:
           printf '{"jdkPath":"%s","androidSdkPath":"%s"}\n' "$JAVA_HOME" "$ANDROID_HOME" > "$HOME/.bubblewrap/config.json"
           cat "$HOME/.bubblewrap/config.json"
 
+      - name: Generate the Android project (bubblewrap update)
+        run: |
+          # Step 1: generate gradlew + app/ + build.gradle from twa-manifest.json.
+          # Confirmation prompts are answered with their default ("yes").
+          yes '' | bubblewrap update || true
+          echo "--- generated ---"
+          ls -la
+          test -f gradlew && echo "OK: gradlew present" || echo "WARN: gradlew missing"
+
       - name: Build signed APK
-        timeout-minutes: 25
+        timeout-minutes: 20
         env:
           BUBBLEWRAP_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD || 'AiStudySuitePro2026' }}
           BUBBLEWRAP_KEY_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD || 'AiStudySuitePro2026' }}
         run: |
-          # Do NOT pre-write manifest-checksum.txt: when the checksum matches, Bubblewrap
-          # skips regenerating the Android project, so ./gradlew never gets created and the
-          # build fails. We want the regeneration, so we answer every confirmation prompt
-          # with its default ("yes") instead — this generates gradlew + app/ from the manifest.
-          yes '' | bubblewrap build --skipPwaValidation
+          # Step 2: record the manifest checksum (no trailing newline — Bubblewrap compares it
+          # byte-for-byte) so `build` sees an unchanged manifest and skips regeneration.
+          # This keeps Gradle's stdin clean: no `yes` pipe is used here.
+          printf '%s' "$(sha1sum twa-manifest.json | cut -d' ' -f1)" > manifest-checksum.txt
+          echo "checksum -> [$(cat manifest-checksum.txt)]"
+          bubblewrap build --skipPwaValidation
 
       - name: Show build outputs
         if: always()
