@@ -29,8 +29,16 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Android SDK (preinstalled on the runner)
+        run: |
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
+          ls -1 "$ANDROID_HOME" 2>/dev/null || true
+          echo "platforms:"; ls -1 "$ANDROID_HOME/platforms" 2>/dev/null || true
+          echo "build-tools:"; ls -1 "$ANDROID_HOME/build-tools" 2>/dev/null || true
+          # make sure Gradle/bubblewrap see the preinstalled SDK
+          echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> "$GITHUB_ENV"
 
       - name: Set up Node 20
         uses: actions/setup-node@v4
