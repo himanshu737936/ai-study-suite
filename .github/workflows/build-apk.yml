@@ -58,7 +58,14 @@ jobs:
           # pre-accept any missing SDK licences so Gradle can auto-download components
           yes 2>/dev/null | sdkmanager --licenses > /dev/null 2>&1 || true
 
+      - name: Configure Bubblewrap (skip interactive JDK/SDK prompts)
+        run: |
+          mkdir -p "$HOME/.bubblewrap"
+          printf '{"jdkPath":"%s","androidSdkPath":"%s"}\n' "$JAVA_HOME" "$ANDROID_HOME" > "$HOME/.bubblewrap/config.json"
+          cat "$HOME/.bubblewrap/config.json"
+
       - name: Build signed APK
+        timeout-minutes: 25
         env:
           BUBBLEWRAP_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD || 'AiStudySuitePro2026' }}
           BUBBLEWRAP_KEY_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD || 'AiStudySuitePro2026' }}
