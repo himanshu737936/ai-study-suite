@@ -82,6 +82,10 @@ jobs:
           BUBBLEWRAP_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD || 'AiStudySuitePro2026' }}
           BUBBLEWRAP_KEY_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD || 'AiStudySuitePro2026' }}
         run: |
+          # Pre-write the manifest checksum so Bubblewrap does not prompt
+          # "would you like to regenerate your project?" (it uses sha1 of twa-manifest.json).
+          sha1sum twa-manifest.json | cut -d' ' -f1 > manifest-checksum.txt
+          echo "manifest-checksum.txt -> $(cat manifest-checksum.txt)"
           bubblewrap build --skipPwaValidation
 
       - name: Show build outputs
