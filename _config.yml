@@ -1,0 +1,19 @@
+# GitHub Pages (Jekyll) configuration
+#
+# The app itself is plain static HTML — there is nothing to build.
+# Jekyll is only used here to keep internal / non-website files out of the
+# published site (a signing key, CI config, docs, etc.).
+#
+# Files and folders starting with "_" or "." are already skipped by Jekyll,
+# which covers `_headers` and `.github/`.
+
+exclude:
+  - signing.keystore
+  - twa-manifest.json
+  - netlify.toml
+  - README.md
+  - LICENSE
+  - manifest-checksum.txt
+  - app
+  - gradlew
+  - gradlew.bat
