@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v18.2** · Single-file app · No build step · No backend · Bring your own API key
+> **v18.3** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -96,7 +96,13 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **📚 PDF Library** — store PDFs in the browser (IndexedDB) so you never re-upload them.
 - **🗓️ Revision Plan** — exam countdown + today's plan (due SRS cards, weakest topics, streak).
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
-- **🧪 Self-Test & Data** — 16-point health check, **API usage meter**, and **Backup / Restore** (all your data in one JSON file).
+- **👤 Account** — optional email/password sign-in (Firebase Auth): Create account, Login, Forgot password, Sign out. The app works fully without it.
+
+### v18.3 — accounts replace Cloud Sync
+
+- **Cloud Sync (Google Drive) removed.** The entire Google OAuth + Drive `appDataFolder` path, and the **Self-Test & Backup** section, are gone.
+- **New 👤 Account section** — optional **email + password** sign-in via **Firebase Authentication**: Create account, Login, Forgot password, Sign out, plus a one-time setup card where you paste your own free Firebase web config (stored locally). Login is **optional** — every study feature works without an account.
+- **Bug fixes:** the Results screen no longer re-counts stats every time it is opened; the daily plan's *Due SRS cards* now reads the right field (it was always 0); the daily plan and Adaptive Practice now use the persisted error log instead of the current session; success messages show as a green toast instead of a red one with a ⚠️.
 
 ### v18.2 — Google sign-in: errors that actually tell you what to fix
 
@@ -280,7 +286,6 @@ On mobile, **swipe left** for next question and **swipe right** for the previous
 | **Scorecard PDF** | Full session report with proof key |
 | **DOCX** | Cheat sheet as an editable Word document |
 | **Question-set JSON** | Share/import a saved quiz |
-| **Backup JSON** | Everything — keys, SRS, sets, library, progress, settings |
 
 ---
 
@@ -289,7 +294,7 @@ On mobile, **swipe left** for next question and **swipe right** for the previous
 - **Your files never leave your device.** PDF parsing and OCR run entirely in the browser. Only the *extracted text* is sent to your chosen AI provider.
 - **Your API key goes straight to the provider** — as a request header, never through a third-party server, and **never inside the prompt** (so a malicious PDF can't make the model leak it).
 - **Key storage is opt-in:** by default keys live in `sessionStorage` and vanish when the tab closes. "Remember key" moves them to `localStorage`, and you can additionally **encrypt saved keys with a passphrase** (AES-GCM + PBKDF2, 150k iterations).
-- **Content Security Policy** locks `connect-src` to the AI providers only — so even if something were injected, a key couldn't be exfiltrated elsewhere.
+- **Content Security Policy** locks `connect-src` to the AI providers (plus Firebase, if you use accounts) — so even if something were injected, a key couldn't be exfiltrated elsewhere.
 - **Security headers** via the included `_headers` file (`X-Frame-Options`, `nosniff`, `Referrer-Policy: no-referrer`, HSTS, Permissions-Policy, CSP).
 - **XSS-safe rendering:** all AI-generated content is escaped before it touches the DOM.
 - **🗑️ Clear all saved data** button wipes every locally stored key and record.
@@ -354,9 +359,9 @@ Just serve the repository root as static files — GitHub Pages, Cloudflare Page
 
 ---
 
-## 🧪 Self-test
+## 👤 Account (optional)
 
-Open **Self-Test** in the sidebar and press **Run self-test**. It checks 16 things — sections, core functions, libraries, Web Crypto, IndexedDB, storage, CSP, duplicate IDs, providers, service worker — and shows the API usage meter plus backup/restore.
+Open **Account** in the sidebar to sign in or create an account with **email + password**, powered by **Firebase Authentication**. The app has **no backend of its own** — you paste your own free Firebase web config once (API key, auth domain, project ID, app ID) and it is stored locally. **Login is entirely optional**; the app is fully usable without it. Sign-in needs HTTPS (or `localhost`) — it will not work from `file://`.
 
 ---
 
