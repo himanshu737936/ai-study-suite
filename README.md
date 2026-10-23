@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v12.0** · Single-file app · No build step · No backend · Bring your own API key
+> **v13.0** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -98,7 +98,14 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **🧪 Self-Test & Data** — 16-point health check, **API usage meter**, and **Backup / Restore** (all your data in one JSON file).
 
-### Smart revision (new in v12)
+### Advanced UI (new in v13)
+- **Refined design system** — a full token pass: layered elevation, hairline highlights, a consistent spacing scale, and a proper type stack with tabular numerals for every stat.
+- **Upgraded components** — gradient buttons with hover lift, shimmer and press states; glass header with `backdrop-filter`; cards, tiles and option buttons with hover elevation and focus rings.
+- **Sidebar** — active-item accent bar with a gradient highlight, smoother hover motion, and divider lines on group headers.
+- **Motion** — staggered section entrance, reduced-motion support, and themed scrollbars, text selection and keyboard focus outlines.
+- **Mobile polish** — larger touch targets, tighter spacing and static header on small screens.
+
+### Smart revision (v12)
 - **📕 Mistake Notebook** — every question you get wrong is collected automatically, with your answer vs the correct one, topic and source page. Retry just your mistakes, or turn them into flashcards with one tap.
 - **🎚️ Adaptive Practice** — the app reads your topic-wise accuracy and builds a study plan: what's weak, what's average, what's strong. One click sets the focus and difficulty for your next quiz.
 - **🎧 Listen Mode** — hands-free audio revision. It reads your due flashcards (or all cards, or your mistakes) aloud one after another with adjustable speed — perfect for a walk or commute.
@@ -266,4 +273,4 @@ If this helped your preparation, a ⭐ on the repo means a lot.
 
 ---
 
-<p align="center"><em>AI Study Suite PRO v12.0 — study smarter, not longer.</em></p>
+<p align="center"><em>AI Study Suite PRO v13.0 — study smarter, not longer.</em></p>
