@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v16.0** · Single-file app · No build step · No backend · Bring your own API key
+> **v17.0** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -97,6 +97,33 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **🗓️ Revision Plan** — exam countdown + today's plan (due SRS cards, weakest topics, streak).
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **🧪 Self-Test & Data** — 16-point health check, **API usage meter**, and **Backup / Restore** (all your data in one JSON file).
+
+### v17 — faster, safer, and better at teaching
+
+**Performance**
+- **~350 KB lighter first load.** jsPDF and autoTable are no longer fetched on page load — they load on demand the first time you export something (`ensureExportLibs()`). Verified: `window.jspdf` is absent at startup and present after the first export.
+- The splash no longer waits for the export libraries.
+
+**Reliability**
+- **Proper network retry** — up to 3 attempts with exponential backoff + jitter, honouring the server's `Retry-After` header, and now retrying transient failures (HTTP 5xx, network drops), not just rate limits. Real HTTP status codes are surfaced in error messages.
+
+**Accessibility**
+- **Focus management** — opening a section moves keyboard/screen-reader focus to that section's heading, and the hardware back gesture does the same.
+- **Live regions** — status text is `role="status" aria-live="polite"`; errors are announced via `role="alert"` plus a screen-reader-only live region.
+- **Skip-to-content** link at the top of the page (visible on keyboard focus).
+
+**PWA**
+- **Install button** — appears in the header when the browser offers installation (`beforeinstallprompt`), and confirms when the app is installed.
+
+**Data safety**
+- **Storage-quota guard** — a full device now shows a clear, actionable message instead of failing silently.
+- **Backup nudge** — if you have study data and haven't backed up in 14 days, the dashboard reminds you.
+
+**Study value**
+- **“Aaj ka revision” on the dashboard** — aggregates flashcards due for review (from the spaced-repetition schedule) and logged mistakes into one line, with a one-tap *Revision shuru karo* that launches the right session.
+- **Mistake reason tagging** — tag every mistake as *Concept gap*, *Silly mistake*, *Guessed* or *Time out*. The notebook then shows an actionable insight, e.g. *“50% of your mistakes are silly mistakes — you know this, just slow down and read every option.”* This turns “I got it wrong” into “here is what to fix”.
+
+**Self-test is now 24 checks**, including the security posture and the lazy-load helper.
 
 ### v16 — model refresh + attack hardening
 
