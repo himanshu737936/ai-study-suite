@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v14.0** · Single-file app · No build step · No backend · Bring your own API key
+> **v14.1** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 

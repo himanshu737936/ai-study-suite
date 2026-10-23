@@ -30,7 +30,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'">
-  <title>AI Study Suite PRO v14.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v14.1 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -772,7 +772,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v14.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v14.1</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -790,7 +790,7 @@
         <div class="sb-logo">&#129504;</div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v14.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v14.1 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -837,7 +837,7 @@
       <div class="brand-icon">🧠</div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v14.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v14.1 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -1756,7 +1756,7 @@
       <span class="credit-heart">&#10084;&#65039;</span>
       <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
       <span class="credit-dot"></span>
-      <span class="credit-tag">AI Study Suite PRO v14.0</span>
+      <span class="credit-tag">AI Study Suite PRO v14.1</span>
     </div>
   </footer>
 
@@ -2191,7 +2191,31 @@
 
     // ==================== PWA: offline shell ====================
     if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
-      window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then((reg) => {
+          // a new version is waiting → activate it right away
+          const activate = (w) => { try { w && w.postMessage('SKIP_WAITING'); } catch (e) {} };
+          activate(reg.waiting);
+          reg.addEventListener('updatefound', () => {
+            const nw = reg.installing;
+            if (!nw) return;
+            nw.addEventListener('statechange', () => {
+              if (nw.state === 'installed' && navigator.serviceWorker.controller) activate(nw);
+            });
+          });
+        }).catch(() => {});
+        // reload exactly once when the new worker takes control (guarded, no loops)
+        let reloaded = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (reloaded) return;
+          reloaded = true;
+          try {
+            if (sessionStorage.getItem('ai_sw_updated') === '1') return;
+            sessionStorage.setItem('ai_sw_updated', '1');
+          } catch (e) {}
+          location.reload();
+        });
+      });
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -4191,7 +4215,7 @@
       doc.rect(0, 0, 210, 28, 'F');
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(15);
-      doc.text("AI Study Suite v14.0 - UPSC / UPPCS / SSC Scorecard", 14, 13);
+      doc.text("AI Study Suite v14.1 - UPSC / UPPCS / SSC Scorecard", 14, 13);
       doc.setFontSize(9);
       doc.text(`PDF: ${currentPdfName}  |  Score: ${score}/${total} (${accuracy}%)  |  Date: ${new Date().toLocaleDateString()}`, 14, 22);
 
@@ -4214,7 +4238,7 @@
       try {
         const endY = (doc.lastAutoTable && doc.lastAutoTable.finalY ? doc.lastAutoTable.finalY + 12 : 280);
         doc.setFontSize(8); doc.setTextColor(140, 140, 140);
-        doc.text("Made by Himanshu  |  AI Study Suite v14.0", 14, Math.min(endY, 290));
+        doc.text("Made by Himanshu  |  AI Study Suite v14.1", 14, Math.min(endY, 290));
       } catch (e) {}
       doc.save(`UPSC_UPPCS_SSC_Scorecard_${Date.now()}.pdf`);
     }
@@ -4231,7 +4255,7 @@
       try {
         const endY = (doc.lastAutoTable && doc.lastAutoTable.finalY ? doc.lastAutoTable.finalY + 12 : 280);
         doc.setFontSize(8); doc.setTextColor(140, 140, 140);
-        doc.text("Made by Himanshu  |  AI Study Suite v14.0", 14, Math.min(endY, 290));
+        doc.text("Made by Himanshu  |  AI Study Suite v14.1", 14, Math.min(endY, 290));
       } catch (e) {}
       doc.save(`Exam_Cheat_Sheet_${Date.now()}.pdf`);
     }
@@ -4908,7 +4932,7 @@
         let pdfs = [], sets = [];
         try { pdfs = await idbAll('pdfs'); } catch (e) {}
         try { sets = await idbAll('sets'); } catch (e) {}
-        const payload = { app: 'AI Study Suite', version: 'v14.0', exportedAt: new Date().toISOString(), localStorage: ls, pdfs, sets };
+        const payload = { app: 'AI Study Suite', version: 'v14.1', exportedAt: new Date().toISOString(), localStorage: ls, pdfs, sets };
         const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
@@ -5016,7 +5040,7 @@
     async function exportSet(id) {
       const rec = await idbGet('sets', id);
       if (!rec) return;
-      downloadJson({ app: 'AI Study Suite', kind: 'question-set', version: 'v14.0', name: rec.name, count: rec.count, questions: rec.questions }, (rec.name || 'set').replace(/[^a-z0-9]+/gi, '_').slice(0, 40) + '.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'question-set', version: 'v14.1', name: rec.name, count: rec.count, questions: rec.questions }, (rec.name || 'set').replace(/[^a-z0-9]+/gi, '_').slice(0, 40) + '.json');
     }
     function downloadJson(obj, filename) {
       const blob = new Blob([JSON.stringify(obj)], { type: 'application/json' });
@@ -5276,7 +5300,7 @@
     }
     function exportMistakes() {
       if (!mistakeBank.length) { showError('Export karne ke liye kuch nahi hai.'); return; }
-      downloadJson({ app: 'AI Study Suite', kind: 'mistake-notebook', version: 'v14.0', exportedAt: new Date().toISOString(), mistakes: mistakeBank }, 'mistake_notebook.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'mistake-notebook', version: 'v14.1', exportedAt: new Date().toISOString(), mistakes: mistakeBank }, 'mistake_notebook.json');
     }
     function clearMistakes() { if (!confirm('Poora mistake notebook clear karein?')) return; mistakeBank = []; saveMistakes(); renderMistakes(); }
 
@@ -5480,7 +5504,7 @@
     }
     function exportDoubts() {
       if (!doubtHistory.length) { showError('Export karne ke liye kuch nahi hai.'); return; }
-      downloadJson({ app: 'AI Study Suite', kind: 'doubt-history', version: 'v14.0', exportedAt: new Date().toISOString(), doubts: doubtHistory }, 'doubt_history.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'doubt-history', version: 'v14.1', exportedAt: new Date().toISOString(), doubts: doubtHistory }, 'doubt_history.json');
     }
     function clearDoubts() { if (!confirm('Poori doubt history clear karein?')) return; doubtHistory = []; saveDoubts(); renderDoubts(); }
 
