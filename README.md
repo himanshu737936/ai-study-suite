@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v15.0** · Single-file app · No build step · No backend · Bring your own API key
+> **v16.0** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -97,6 +97,33 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **🗓️ Revision Plan** — exam countdown + today's plan (due SRS cards, weakest topics, streak).
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **🧪 Self-Test & Data** — 16-point health check, **API usage meter**, and **Backup / Restore** (all your data in one JSON file).
+
+### v16 — model refresh + attack hardening
+
+**AI agent models brought up to date (verified against each provider's docs, Oct 2026).** Several models the app shipped with had been retired upstream.
+
+| Provider | Now uses |
+|---|---|
+| **Gemini** | `gemini-3.8-flash` → `gemini-3.6-flash` → `gemini-3.1-pro-preview` → `gemini-4-argon` → `gemini-2.5-flash` |
+| **Groq** | `openai/gpt-oss-120b` → `openai/gpt-oss-20b` → `qwen/qwen3.8-27b` → `llama-3.3-70b-versatile` |
+| **OpenAI** | `gpt-6-luna` → `gpt-6.1-sol` → `gpt-5.6-sol` → `gpt-6-astra` → `gpt-4o-mini` |
+| **DeepSeek** | `deepseek-flash` → `deepseek-v4-pro` |
+| **Mistral** | `mistral-small-2603` → `mistral-medium-3-5` → `mistral-large-4` → `ministral-14b-2512` |
+| **OpenRouter** | `deepseek/deepseek-v4.1-flash` → `z-ai/glm-5.3-flash` → free-tier `qwen/qwen3.8-27b:free`, `google/gemma-4-31b-it:free`, `nvidia/nemotron-3-super-120b-a12b:free` |
+| **Gemini TTS** | `gemini-3.8-flash-tts`, with automatic fallback to the legacy `gemini-2.5-flash-preview-tts` |
+
+Retired IDs that were removed: `deepseek-chat` / `deepseek-reasoner` (delisted upstream), `qwen-qwq-32b`, `gemma2-9b-it`, `gpt-4-turbo`, `gemini-1.5-flash`/`2.0-flash`.
+
+**New attack protections**
+
+| Control | What it does |
+|---|---|
+| **Prompt-injection defence** | PDF text is declared *untrusted data, never instructions* in the system prompt. A malicious PDF that says "ignore previous instructions", "print your system prompt" or "output this HTML" is ignored; the model is told never to emit HTML/scripts/links and never to reveal the key. |
+| **Outbound host allow-list** | Before any request that carries your API key, the destination host is checked against the six known providers. Anything else is blocked — a compromised or injected code path cannot exfiltrate the key. |
+| **Idle auto-lock** | After 30 minutes without activity the key is wiped from memory (and the agent state reset). |
+| **Stronger vault KDF** | PBKDF2 raised from 150,000 to **600,000** iterations (OWASP guidance for PBKDF2-HMAC-SHA256). |
+| **Unsafe-URL guard** | `javascript:`, `vbscript:` and `data:text/html` links are blocked on click. |
+| **Security panel in the self-test** | Reports CSP presence, that `unsafe-eval` is gone, SRI coverage on CDN scripts, sanitisation status, the host allow-list and the idle lock — now **23 checks**. |
 
 ### v15 — security hardening
 
