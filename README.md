@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v18.3** · Single-file app · No build step · No backend · Bring your own API key
+> **v18.4** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -97,6 +97,27 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **🗓️ Revision Plan** — exam countdown + today's plan (due SRS cards, weakest topics, streak).
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **👤 Account** — optional **local** sign-in: create an account with just a **name + password**, stored only on your device (no internet, no email, no server).
+
+### v18.4 — security hardening, a faster AI agent & auto-versioning
+
+**Security**
+- **Tightened the CSP** — dropped the leftover Google sign-in / profile-photo origins (`accounts.google.com`, `*.googleusercontent.com`); `frame-src` is now `'none'`. The same policy is in both the `<meta>` tag and `_headers`.
+- **Clickjacking guard in JS** — hosts that ignore `_headers` (e.g. GitHub Pages) can't send `frame-ancestors` / `X-Frame-Options`, so the app now refuses to run inside a frame.
+- **Hard page cap** (80 pages/session) so a huge PDF can't stall the tab.
+- `rel="noopener noreferrer"` on every external link; fixed a duplicated `integrity` assignment in the OCR loader.
+
+**Speed**
+- **Parallel provider probing** — the AI agent now tries the most likely provider first (one round trip) and races the rest in parallel, instead of probing up to six providers one-by-one.
+- **Probe cache** — the model list is cached per session, so it isn't re-fetched on every run.
+- **Request timeouts** — 15 s for probes, 120 s for generation, so a hung connection fails over instead of stalling.
+
+**UX**
+- **Quiz / Flashcards / Mind Map / Cheat Sheet** in the sidebar now open what you already generated instead of resetting to Setup.
+- **Undo** on destructive actions (clear mistakes / doubts / error log, delete a set or a library PDF).
+- A dismissible **Quick start** card; automatic respect for the OS **reduce-motion** setting.
+
+**Versioning**
+- The version now lives in one place (`<meta name="app-version">`) and is shown everywhere in the UI. A GitHub Action (`.github/workflows/version-bump.yml`) **auto-bumps the patch version on every push** and syncs `sw.js`.
 
 ### v18.3 — accounts replace Cloud Sync
 
