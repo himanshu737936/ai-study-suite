@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v18.5** · Single-file app · No build step · No backend · Bring your own API key
+> **v18.6** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -97,6 +97,14 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **🗓️ Revision Plan** — exam countdown + today's plan (due SRS cards, weakest topics, streak).
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **👤 Account** — optional **local** sign-in: create an account with just a **name + password**, stored only on your device (no internet, no email, no server).
+
+### v18.6 — per-theme galaxy, animated credits & polish
+
+- **The galaxy now changes with the theme** — each theme has its own starfield/nebula palette (Ocean = teal, Forest = green, Sunset = warm orange, Rose = magenta, Sepia = gold, Midnight/True Dark = violet), plus its own base tone and brightness.
+- **Light (white) theme removed** — the app is always dark now. An old `light` preference safely falls back to Midnight.
+- **Credits animated & modernised** — the footer and sidebar credits are now gradient "pills" with a slow glow sweep and a shimmering name; the splash title shimmers. (Two `@keyframes` — `shimmer` and `creditGlow` — were defined but never actually applied; they are now wired up.)
+- **New: "Animated galaxy background" on/off switch** in the accessibility panel (also honoured by "Reset to default").
+- **Skipped-question count** is now shown on the results screen (the counter existed but was never displayed).
 
 ### v18.5 — live galaxy background
 
