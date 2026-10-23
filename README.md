@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v18.4** · Single-file app · No build step · No backend · Bring your own API key
+> **v18.5** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -97,6 +97,13 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **🗓️ Revision Plan** — exam countdown + today's plan (due SRS cards, weakest topics, streak).
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **👤 Account** — optional **local** sign-in: create an account with just a **name + password**, stored only on your device (no internet, no email, no server).
+
+### v18.5 — live galaxy background
+
+- **Animated starfield + nebula behind the whole app** — drawn on a lightweight canvas (`#galaxy-bg`) with a slow swirl, drifting nebula clouds and the occasional shooting star, so something is always moving.
+- **Panels made translucent** so the galaxy shows through the frosted-glass cards, sidebar and header (readability preserved with the existing `backdrop-filter` blur).
+- **Theme-aware** — the nebula tints itself to the active theme (violet / cyan / ocean / forest / sunset / rose) and switches to a soft pastel cloud on the light theme.
+- **Battery-friendly** — capped at ~40 fps, pauses when the tab is hidden, and renders a single static frame when the OS asks for reduced motion (or the in-app a11y switch is on).
 
 ### v18.4 — security hardening, a faster AI agent & auto-versioning
 
