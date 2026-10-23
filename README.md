@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v14.1** · Single-file app · No build step · No backend · Bring your own API key
+> **v15.0** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -97,6 +97,23 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **🗓️ Revision Plan** — exam countdown + today's plan (due SRS cards, weakest topics, streak).
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **🧪 Self-Test & Data** — 16-point health check, **API usage meter**, and **Backup / Restore** (all your data in one JSON file).
+
+### v15 — security hardening
+
+A full vulnerability pass. The app handles **your API keys** and **untrusted documents**, so AI output, imported files and backup files are all treated as hostile input.
+
+| Area | What was done |
+|---|---|
+| **XSS via AI output** | Every AI-derived string is sanitised at ingestion (`sanitizeAI`) — HTML tags and entity-encoded tags are stripped — and escaped at every render site. Verified with an automated runtime probe that injects `<img onerror>` payloads into every render path (0 exploitable sinks). |
+| **Imported sets** | Questions from imported `.json` files are re-validated and normalised (max 500, sanitised fields) instead of being stored raw. |
+| **Backup restore** | Only storage keys matching the app's own `ai_study_*_v*` pattern are restored, with type and size checks — a backup file can no longer write arbitrary storage entries. |
+| **Supply chain** | All CDN scripts (pdf.js, jsPDF, autoTable, Tesseract) are pinned and carry **Subresource Integrity** hashes. |
+| **CSP** | `unsafe-eval` removed (verified unnecessary — PDF parsing tested with and without). Added `form-action 'none'` and `frame-ancestors 'none'`. |
+| **Headers** | `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer`, HSTS (preload), COOP, `X-Permitted-Cross-Domain-Policies: none`, restrictive Permissions-Policy. |
+| **Key storage** | `sessionStorage` by default (cleared when the tab closes); optional localStorage with an **AES-GCM 256 + PBKDF2 (150,000 iterations)** passphrase vault. Keys are sent in request headers, never in URLs. |
+| **Repo hygiene** | A leaked Android signing keystore and a hardcoded keystore password in CI were removed from the public repository. |
+
+**Known limitation:** the CSP keeps `'unsafe-inline'` for `script-src` because the UI uses inline event handlers. Inline-handler XSS is mitigated by the sanitisation + escaping above rather than by CSP. Migrating every handler to `addEventListener` would allow dropping it.
 
 ### v14 — smoother, smarter, tidier
 - **Splash screen re-engineered for performance** — the particle field now uses pre-rendered glow sprites instead of per-particle canvas shadows, a spatial-hash grid for the connection lines (linear instead of quadratic), a frame-rate gate, and adaptive quality tiers (lite / medium / full) that step down automatically if frames get slow. The heavy animated `background-clip: text` gradients and drop-shadow filters on the splash were removed. Measured canvas cost: **~0.27 ms per frame**.

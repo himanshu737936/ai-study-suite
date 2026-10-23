@@ -29,8 +29,8 @@
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'">
-  <title>AI Study Suite PRO v14.1 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'">
+  <title>AI Study Suite PRO v15.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -772,7 +772,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v14.1</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v15.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -790,7 +790,7 @@
         <div class="sb-logo">&#129504;</div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v14.1 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v15.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -837,7 +837,7 @@
       <div class="brand-icon">🧠</div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v14.1 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v15.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -1756,7 +1756,7 @@
       <span class="credit-heart">&#10084;&#65039;</span>
       <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
       <span class="credit-dot"></span>
-      <span class="credit-tag">AI Study Suite PRO v14.1</span>
+      <span class="credit-tag">AI Study Suite PRO v15.0</span>
     </div>
   </footer>
 
@@ -2261,6 +2261,29 @@
         .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
     }
+    // ---- SECURITY: strip anything that could become markup/script when an
+    // untrusted string (AI output, imported file, backup) is rendered. ----
+    function sanitizeAI(v) {
+      if (typeof v !== 'string') return v;
+      return v
+        .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '')
+        .replace(/<\/?[a-zA-Z][^>]*>/g, '')     // real HTML tags
+        .replace(/&#x?[0-9a-f]{1,7};?/gi, '')   // numeric entities hiding tags
+        .replace(/\\u003c|\\u003e/gi, '');      // escaped angle brackets
+    }
+    function sanitizeDeep(v, depth) {
+      depth = depth || 0;
+      if (depth > 4 || v == null) return v;
+      if (typeof v === 'string') return sanitizeAI(v);
+      if (Array.isArray(v)) return v.map(x => sanitizeDeep(x, depth + 1));
+      if (typeof v === 'object') {
+        const out = {};
+        for (const k of Object.keys(v)) out[k] = sanitizeDeep(v[k], depth + 1);
+        return out;
+      }
+      return v;
+    }
+
     function addAriaLabels() {
       document.querySelectorAll('.icon-btn').forEach(b => { if (!b.getAttribute('aria-label') && b.title) b.setAttribute('aria-label', b.title); });
       const map = { 'pomo-btn': 'Pomodoro start/pause', 'pomo-display': 'Pomodoro time remaining', 'timer-display': 'Question timer' };
@@ -2307,7 +2330,7 @@
     }
     function normalizeOptions(raw) {
       if (!Array.isArray(raw)) return null;
-      let opts = raw.map(o => (o == null ? '' : String(o).trim())).filter(o => o.length > 0);
+      let opts = raw.map(o => sanitizeAI(o == null ? '' : String(o).trim())).filter(o => o.length > 0);
       if (opts.length > 6) opts = opts.slice(0, 6);
       return opts.length >= 2 ? opts : null;
     }
@@ -2320,17 +2343,17 @@
       if (ci == null && q.answer != null) ci = normalizeIndex(q.answer, options);
       if (ci == null) ci = 0;
       return {
-        examTag: q.examTag || "UPSC / UPPCS / SSC",
-        topic: q.topic || "PDF Topic",
+        examTag: sanitizeAI(q.examTag || "UPSC / UPPCS / SSC"),
+        topic: sanitizeAI(q.topic || "PDF Topic"),
         sourcePage: normalizePage(q.sourcePage),
-        question: String(q.question || "").trim() || "(question missing)",
+        question: sanitizeAI(String(q.question || "").trim()) || "(question missing)",
         options,
         correctIndex: ci,
-        clue: q.clue || "Read the statements carefully.",
-        explanation: q.explanation || "Verified from uploaded PDF.",
-        sourceQuote: q.sourceQuote || "",
-        currentContext: q.currentContext || "",
-        pyq: q.pyq || ""
+        clue: sanitizeAI(q.clue || "Read the statements carefully."),
+        explanation: sanitizeAI(q.explanation || "Verified from uploaded PDF."),
+        sourceQuote: sanitizeAI(q.sourceQuote || ""),
+        currentContext: sanitizeAI(q.currentContext || ""),
+        pyq: sanitizeAI(q.pyq || "")
       };
     }
     function extractArray(parsed, keys, depth = 0) {
@@ -2489,6 +2512,9 @@
       ocrLibPromise = new Promise((resolve, reject) => {
         const s = document.createElement('script');
         s.src = "https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/5.1.1/tesseract.min.js";
+        s.integrity = "sha512-mpQLT7yiRJ06RkhNTYhVnvvr3c71il3h+wEI16ICc+fnFHxrBRoJrMmDJ8iBY04+U/FgTj7xah5Vbltq5pg+aQ==";
+        s.crossOrigin = "anonymous";
+        s.referrerPolicy = "no-referrer";
         s.integrity = "sha384-GJqSu7vueQ9qN0E9yLPb3Wtpd7OrgK8KmYzC8T1IysG1bcvxvIO4qtYR/D3A991F";
         s.crossOrigin = "anonymous";
         s.referrerPolicy = "no-referrer";
@@ -3318,8 +3344,8 @@
           const rawCards = await callAIJson(prompt);
           flashcardData = extractArray(rawCards, ['flashcards', 'cards']).map(c => ({
             topic: c.topic || 'PDF Concept',
-            front: String(c.front || '').trim(),
-            back: String(c.back || '').trim(),
+            front: sanitizeAI(String(c.front || '').trim()),
+            back: sanitizeAI(String(c.back || '').trim()),
             keyTakeaway: c.keyTakeaway || ''
           })).filter(c => c.front && c.back);
           if (flashcardData.length === 0) throw new Error("Flashcards generate nahi ho paye. Dobara try karein.");
@@ -3504,7 +3530,7 @@
         topicStats[topic].correct++;
         saveErrorLog();
         expBox.className = "explanation-card exp-correct";
-        feedbackTitle.innerHTML = `<span style="color:var(--emerald);">✅ Bilkul Sahi Jawab! (Verified from PDF Page ${q.sourcePage || '1'})</span>`;
+        feedbackTitle.innerHTML = `<span style="color:var(--emerald);">✅ Bilkul Sahi Jawab! (Verified from PDF Page ${escapeHtml(q.sourcePage || '1')})</span>`;
       } else {
         if (clickedBtn) clickedBtn.classList.add('option-wrong');
         wrongQuestions.push(q);
@@ -3512,7 +3538,7 @@
         errorLog[topicKey].wrong++;
         saveErrorLog();
         expBox.className = "explanation-card exp-wrong";
-        feedbackTitle.innerHTML = `<span style="color:var(--rose);">${selectedIndex === -1 ? "⏰ Time Out!" : "❌ Galat Jawab!"} Sahi Option: ${String.fromCharCode(65 + correctIdx)} (PDF Page ${q.sourcePage || '1'})</span>`;
+        feedbackTitle.innerHTML = `<span style="color:var(--rose);">${selectedIndex === -1 ? "⏰ Time Out!" : "❌ Galat Jawab!"} Sahi Option: ${String.fromCharCode(65 + correctIdx)} (PDF Page ${escapeHtml(q.sourcePage || '1')})</span>`;
       }
 
       userResponses.push({
@@ -4215,7 +4241,7 @@
       doc.rect(0, 0, 210, 28, 'F');
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(15);
-      doc.text("AI Study Suite v14.1 - UPSC / UPPCS / SSC Scorecard", 14, 13);
+      doc.text("AI Study Suite v15.0 - UPSC / UPPCS / SSC Scorecard", 14, 13);
       doc.setFontSize(9);
       doc.text(`PDF: ${currentPdfName}  |  Score: ${score}/${total} (${accuracy}%)  |  Date: ${new Date().toLocaleDateString()}`, 14, 22);
 
@@ -4238,7 +4264,7 @@
       try {
         const endY = (doc.lastAutoTable && doc.lastAutoTable.finalY ? doc.lastAutoTable.finalY + 12 : 280);
         doc.setFontSize(8); doc.setTextColor(140, 140, 140);
-        doc.text("Made by Himanshu  |  AI Study Suite v14.1", 14, Math.min(endY, 290));
+        doc.text("Made by Himanshu  |  AI Study Suite v15.0", 14, Math.min(endY, 290));
       } catch (e) {}
       doc.save(`UPSC_UPPCS_SSC_Scorecard_${Date.now()}.pdf`);
     }
@@ -4255,7 +4281,7 @@
       try {
         const endY = (doc.lastAutoTable && doc.lastAutoTable.finalY ? doc.lastAutoTable.finalY + 12 : 280);
         doc.setFontSize(8); doc.setTextColor(140, 140, 140);
-        doc.text("Made by Himanshu  |  AI Study Suite v14.1", 14, Math.min(endY, 290));
+        doc.text("Made by Himanshu  |  AI Study Suite v15.0", 14, Math.min(endY, 290));
       } catch (e) {}
       doc.save(`Exam_Cheat_Sheet_${Date.now()}.pdf`);
     }
@@ -4932,7 +4958,7 @@
         let pdfs = [], sets = [];
         try { pdfs = await idbAll('pdfs'); } catch (e) {}
         try { sets = await idbAll('sets'); } catch (e) {}
-        const payload = { app: 'AI Study Suite', version: 'v14.1', exportedAt: new Date().toISOString(), localStorage: ls, pdfs, sets };
+        const payload = { app: 'AI Study Suite', version: 'v15.0', exportedAt: new Date().toISOString(), localStorage: ls, pdfs, sets };
         const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
@@ -4949,9 +4975,25 @@
         const j = JSON.parse(await f.text());
         if (!j || !j.localStorage) throw new Error('Ye valid backup file nahi hai');
         if (!confirm('Restore karne se current data replace ho jayega. Continue?')) return;
-        Object.keys(j.localStorage).forEach(k => { try { localStorage.setItem(k, j.localStorage[k]); } catch (e) {} });
-        for (const p2 of (j.pdfs || [])) { try { await idbPut('pdfs', p2); } catch (e) {} }
-        for (const s2 of (j.sets || [])) { try { await idbPut('sets', s2); } catch (e) {} }
+        // only restore keys this app actually owns — a backup file must not be
+        // able to write arbitrary storage entries
+        const ALLOWED = /^ai_study_[a-z0-9_]+_v(7|9|10|12)$/;
+        let restored = 0, skipped = 0;
+        Object.keys(j.localStorage).forEach(k => {
+          if (!ALLOWED.test(k)) { skipped++; return; }
+          const val = j.localStorage[k];
+          if (typeof val !== 'string' || val.length > 2_000_000) { skipped++; return; }
+          try { localStorage.setItem(k, val); restored++; } catch (e) {}
+        });
+        for (const p2 of (j.pdfs || [])) {
+          if (!p2 || typeof p2 !== 'object' || typeof p2.data !== 'string') continue;
+          try { await idbPut('pdfs', { id: String(p2.id || 'pdf_' + Date.now()).slice(0, 80), name: sanitizeAI(String(p2.name || 'document.pdf')).slice(0, 120), pages: Number(p2.pages) || 0, savedAt: Number(p2.savedAt) || Date.now(), data: p2.data }); } catch (e) {}
+        }
+        for (const s2 of (j.sets || [])) {
+          if (!s2 || typeof s2 !== 'object' || !Array.isArray(s2.questions)) continue;
+          try { await idbPut('sets', { id: String(s2.id || 'set_' + Date.now()).slice(0, 80), name: sanitizeAI(String(s2.name || 'set')).slice(0, 60), count: s2.questions.length, savedAt: Number(s2.savedAt) || Date.now(), questions: s2.questions.slice(0, 500).map(normalizeQuestion).filter(Boolean) }); } catch (e) {}
+        }
+        console.log('restore: ' + restored + ' keys restored, ' + skipped + ' skipped');
         showError('✅ Restore ho gaya — reload kar rahe hain...');
         setTimeout(() => location.reload(), 1000);
       } catch (e) { showError('Restore fail: ' + (e.message || e)); }
@@ -5040,7 +5082,7 @@
     async function exportSet(id) {
       const rec = await idbGet('sets', id);
       if (!rec) return;
-      downloadJson({ app: 'AI Study Suite', kind: 'question-set', version: 'v14.1', name: rec.name, count: rec.count, questions: rec.questions }, (rec.name || 'set').replace(/[^a-z0-9]+/gi, '_').slice(0, 40) + '.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'question-set', version: 'v15.0', name: rec.name, count: rec.count, questions: rec.questions }, (rec.name || 'set').replace(/[^a-z0-9]+/gi, '_').slice(0, 40) + '.json');
     }
     function downloadJson(obj, filename) {
       const blob = new Blob([JSON.stringify(obj)], { type: 'application/json' });
@@ -5053,9 +5095,12 @@
       if (!f) return;
       try {
         const j = JSON.parse(await f.text());
-        const qs = j.questions || (Array.isArray(j) ? j : null);
-        if (!qs || !qs.length) throw new Error('Is file mein questions nahi mile');
-        await idbPut('sets', { id: 'set_' + Date.now(), name: (j.name || f.name || 'Imported set').slice(0, 60), count: qs.length, savedAt: Date.now(), questions: qs });
+        const raw = j.questions || (Array.isArray(j) ? j : null);
+        if (!raw || !raw.length) throw new Error('Is file mein questions nahi mile');
+        if (raw.length > 500) throw new Error('Ye file bahut badi hai (max 500 questions).');
+        const qs = raw.map(normalizeQuestion).filter(Boolean);
+        if (!qs.length) throw new Error('Is file mein valid questions nahi mile.');
+        await idbPut('sets', { id: 'set_' + Date.now(), name: sanitizeAI(String(j.name || f.name || 'Imported set')).slice(0, 60), count: qs.length, savedAt: Date.now(), questions: qs });
         showError('✅ Set import ho gaya (' + qs.length + ' questions).');
         refreshSetsCount();
         renderSets();
@@ -5300,7 +5345,7 @@
     }
     function exportMistakes() {
       if (!mistakeBank.length) { showError('Export karne ke liye kuch nahi hai.'); return; }
-      downloadJson({ app: 'AI Study Suite', kind: 'mistake-notebook', version: 'v14.1', exportedAt: new Date().toISOString(), mistakes: mistakeBank }, 'mistake_notebook.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'mistake-notebook', version: 'v15.0', exportedAt: new Date().toISOString(), mistakes: mistakeBank }, 'mistake_notebook.json');
     }
     function clearMistakes() { if (!confirm('Poora mistake notebook clear karein?')) return; mistakeBank = []; saveMistakes(); renderMistakes(); }
 
@@ -5504,7 +5549,7 @@
     }
     function exportDoubts() {
       if (!doubtHistory.length) { showError('Export karne ke liye kuch nahi hai.'); return; }
-      downloadJson({ app: 'AI Study Suite', kind: 'doubt-history', version: 'v14.1', exportedAt: new Date().toISOString(), doubts: doubtHistory }, 'doubt_history.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'doubt-history', version: 'v15.0', exportedAt: new Date().toISOString(), doubts: doubtHistory }, 'doubt_history.json');
     }
     function clearDoubts() { if (!confirm('Poori doubt history clear karein?')) return; doubtHistory = []; saveDoubts(); renderDoubts(); }
 
