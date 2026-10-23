@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#6d6ff5">
-  <meta name="app-version" content="18.5.1">
+  <meta name="app-version" content="18.6.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -31,7 +31,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src 'none'">
-  <title>AI Study Suite PRO v18.5.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.6.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -105,22 +105,6 @@
     body[data-theme="forest"] { --bg:#050f0a; --bg-soft:#0a1a12; --surface:#0c2118; --surface-2:#103021; --surface-3:#17462f; --line:#1d5a3c; --line-soft:#14472f; --deep:#04100a; --primary:#10b981; --primary-2:#84cc16; --primary-glow:rgba(16,185,129,0.35); --cyan:#5eead4; --glow-1:#0d3b28; --glow-2:#0a2f1c; }
     body[data-theme="sunset"] { --bg:#140806; --bg-soft:#1f0d08; --surface:#26110b; --surface-2:#331811; --surface-3:#4a2418; --line:#5e2f1e; --line-soft:#4a2517; --deep:#120705; --primary:#f97316; --primary-2:#f43f5e; --primary-glow:rgba(249,115,22,0.35); --cyan:#fdba74; --glow-1:#4a1f10; --glow-2:#3b1414; }
     body[data-theme="rose"] { --bg:#100512; --bg-soft:#1b0a1f; --surface:#230d29; --surface-2:#2f1236; --surface-3:#431b4d; --line:#552364; --line-soft:#431b4d; --deep:#0f0511; --primary:#d946ef; --primary-2:#8b5cf6; --primary-glow:rgba(217,70,239,0.35); --cyan:#f0abfc; --glow-1:#3c1046; --glow-2:#2a0f3a; }
-    body[data-theme="light"] { --panel: rgba(255,255,255,0.72); --header-bg: rgba(255,255,255,0.82); --card-bg: rgba(255,255,255,0.74); --side-a: rgba(255,255,255,0.86); --side-b: rgba(244,246,251,0.86); --bg:#f4f6fb; --bg-soft:#eaeef7; --surface:#ffffff; --surface-2:#eef1f8; --surface-3:#e2e7f2; --line:#c7d0e2; --line-soft:#dde3ef; --deep:#ffffff; --text:#0e1526; --muted:#56628a; --primary:#4f46e5; --primary-2:#7c3aed; --primary-glow:rgba(79,70,229,0.25); --cyan:#0891b2; --glow-1:#dfe6fb; --glow-2:#d8f1f7; --shadow:0 16px 40px rgba(20,30,60,0.14); --shadow-sm:0 8px 20px rgba(20,30,60,0.10); }
-    body[data-theme="light"] [style*="color:#fff"], body[data-theme="light"] [style*="color:#e2e8f0"],
-    body[data-theme="light"] [style*="color:#cbd5e1"], body[data-theme="light"] [style*="color:#eef2ff"] { color:#0e1526 !important; }
-    body[data-theme="light"] [style*="background:var(--deep)"], body[data-theme="light"] [style*="background:var(--deep)"],
-    body[data-theme="light"] [style*="background:#0d1424"], body[data-theme="light"] [style*="background:#121b30"] { background:#eef1f8 !important; }
-    body[data-theme="light"] .brand-title, body[data-theme="light"] .step-title, body[data-theme="light"] .question-heading,
-    body[data-theme="light"] .section-title, body[data-theme="light"] .option-btn, body[data-theme="light"] .fc-front,
-    body[data-theme="light"] .fc-back, body[data-theme="light"] .brand-icon, body[data-theme="light"] .sb-name { color:#0e1526 !important; }
-    body[data-theme="light"] .mode-tabs, body[data-theme="light"] .quiz-topbar, body[data-theme="light"] .option-btn,
-    body[data-theme="light"] .drop-zone, body[data-theme="light"] .mindmap-wrapper, body[data-theme="light"] .srs-box,
-    body[data-theme="light"] .stat-box, body[data-theme="light"] .mm-subnode, body[data-theme="light"] .home-status,
-    body[data-theme="light"] .mode-tab:hover, body[data-theme="light"] .demo-btn:hover { background: var(--surface-2) !important; }
-    body[data-theme="light"] .app-header, body[data-theme="light"] .main-card, body[data-theme="light"] .sidebar { background: rgba(255,255,255,0.84) !important; }
-    body[data-theme="light"] .sb-item { color:#3c4868; }
-    body[data-theme="light"] .sb-item:hover { color:#0e1526; }
-    body[data-theme="light"] .mm-root-node, body[data-theme="light"] .btn-primary { color:#fff !important; }
 
     /* ===================== ACCESSIBILITY ===================== */
     body.a11y-lg { zoom: 1.12; }
@@ -205,11 +189,13 @@
     }
     .sb-item.active::before { height: 62%; }
     .sb-item .ico { font-size: 15px; width: 20px; text-align: center; flex: none; }
-    .sb-foot {
-      font-size: 11px; color: var(--muted); text-align: center;
-      padding: 16px 6px 6px; border-top: 1px solid var(--line-soft); margin-top: 10px;
-      letter-spacing: .3px;
-    }
+    .sb-foot { text-align: center; padding: 14px 6px 8px; border-top: 1px solid var(--line-soft); margin-top: 10px; }
+    .sb-credit { display: inline-flex; align-items: center; gap: 6px; padding: 6px 13px; border-radius: 30px;
+      font-size: 11px; color: var(--muted); letter-spacing: .3px;
+      background: linear-gradient(90deg, rgba(109,111,245,.16), rgba(34,211,238,.20), rgba(167,139,250,.16), rgba(109,111,245,.16));
+      background-size: 220% auto; border: 1px solid var(--line-soft); animation: creditGlow 8s linear infinite; }
+    .sb-credit .credit-name { font-size: 11.5px; }
+    .sb-credit .credit-heart { font-size: 13px; }
     .sb-overlay { display: none; }
 
     .hamburger { display: none; background: var(--surface-2); border: 1px solid var(--line); color: #dbe3f5; width: 40px; height: 40px; border-radius: 12px; font-size: 18px; cursor: pointer; }
@@ -631,7 +617,8 @@
       font-size: 27px; font-weight: 900; margin-top: 14px; letter-spacing: .3px;
       background: linear-gradient(90deg, #ffffff 10%, #67e8f9 45%, #a5b4fc 75%, #ffffff 100%);
       -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-      text-shadow: none; will-change: transform;
+      text-shadow: none; will-change: transform, background-position;
+      background-size: 220% auto; animation: shimmer 6s linear infinite;
     }
     @keyframes shimmer { to { background-position: 220% center; } }
     .splash-pro { font-size: 12px; background: rgba(16,185,129,.2); color: #6ee7b7; border: 1px solid rgba(16,185,129,.45);
@@ -669,7 +656,8 @@
     .app-footer { width: 100%; max-width: 1180px; text-align: center; padding: 20px 10px 12px; color: var(--muted); font-size: 12.5px; }
     .credit {
       display: inline-flex; align-items: center; gap: 9px; padding: 9px 18px; border-radius: 30px;
-      background: linear-gradient(90deg, rgba(109,111,245,.16), rgba(34,211,238,.12));
+      background: linear-gradient(90deg, rgba(109,111,245,.16), rgba(34,211,238,.22), rgba(167,139,250,.18), rgba(109,111,245,.16));
+      background-size: 220% auto; animation: creditGlow 8s linear infinite;
       border: 1px solid var(--line); transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
     }
     @keyframes creditGlow { to { background-position: 200% center; } }
@@ -683,7 +671,8 @@
     .credit-by { font-size: 13.5px; color: var(--text); font-weight: 600; }
     .credit-name {
       font-weight: 900; letter-spacing: .5px;
-      background: linear-gradient(90deg, #a5b4fc, #67e8f9, #f0abfc);
+      background: linear-gradient(90deg, #a5b4fc, #67e8f9, #f0abfc, #a5b4fc);
+      background-size: 200% auto; animation: shimmerX 5s linear infinite;
       -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
     }
     .credit-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--line); }
@@ -865,7 +854,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.5.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.6.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -883,7 +872,7 @@
         <div class="sb-logo">&#129504;</div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.5.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.6.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -949,7 +938,7 @@
           </div>
         </div>
       </nav>
-      <div class="sb-foot">Made by Himanshu &#10084;&#65039;</div>
+      <div class="sb-foot"><span class="sb-credit">Made with <span class="credit-heart">&#10084;&#65039;</span> by <span class="credit-name">Himanshu</span></span></div>
     </aside>
     <div class="sb-overlay" id="sb-overlay" onclick="closeSidebar()"></div>
 
@@ -960,7 +949,7 @@
       <div class="brand-icon">🧠</div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.5.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.6.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -992,7 +981,6 @@
           <option value="forest">🌲 Forest</option>
           <option value="sunset">🌅 Sunset</option>
           <option value="rose">🌸 Rose</option>
-          <option value="light">☀️ Light</option>
           <option value="sepia">🟤 Sepia</option>
           <option value="dark">⚫ True Dark</option>
           <option value="auto">🖥️ Auto (system)</option>
@@ -1942,7 +1930,7 @@
       <span class="credit-heart">&#10084;&#65039;</span>
       <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
       <span class="credit-dot"></span>
-      <span class="credit-tag">AI Study Suite PRO v18.5.0</span>
+      <span class="credit-tag">AI Study Suite PRO v18.6.0</span>
     </div>
   </footer>
 
@@ -1964,6 +1952,7 @@
     <label class="a11y-check" style="margin-top:12px;"><input type="checkbox" id="a11y-dyslexic" onchange="toggleA11y('dyslexic', this.checked)"> Dyslexia-friendly font</label>
     <label class="a11y-check"><input type="checkbox" id="a11y-contrast" onchange="toggleA11y('contrast', this.checked)"> High contrast</label>
     <label class="a11y-check"><input type="checkbox" id="a11y-motion" onchange="toggleA11y('reduce', this.checked)"> Reduce motion</label>
+    <label class="a11y-check"><input type="checkbox" id="a11y-galaxy" onchange="toggleGalaxy(this.checked)"> Animated galaxy background</label>
     <button class="btn-secondary" style="width:100%; margin-top:12px;" onclick="resetA11y()">↺ Reset to default</button>
   </div>
 
@@ -2431,6 +2420,14 @@
     // itself to the current theme, pauses when the tab is hidden, and falls back
     // to a single static frame when the OS (or the in-app a11y switch) asks for
     // reduced motion.
+    let _galaxyCtl = null;
+    function galaxyEnabled() { try { return localStorage.getItem('ai_study_galaxy_v20') !== '0'; } catch (e) { return true; } }
+    function toggleGalaxy(on) {
+      try { localStorage.setItem('ai_study_galaxy_v20', on ? '1' : '0'); } catch (e) {}
+      const cv = document.getElementById('galaxy-bg');
+      if (cv) cv.style.display = on ? 'block' : 'none';
+      if (_galaxyCtl) { if (on) _galaxyCtl.start(); else _galaxyCtl.stop(); }
+    }
     function initGalaxy() {
       const cv = document.getElementById('galaxy-bg');
       if (!cv || !cv.getContext) return;
@@ -2441,7 +2438,17 @@
       let stars = [], nebula = [], shots = [];
       let raf = null, last = 0, acc = 0, tsec = 0, resizeT = null;
       let colA = '#6d6ff5', colB = '#22d3ee', colC = '#8b5cf6', base = '#05070f';
-      let lightMode = false;
+      let lightMode = false, bright = 1;
+      // Each theme gets its own galaxy palette, so the sky recolours with the UI.
+      const GALAXY_THEMES = {
+        midnight: { cols: ['#6d6ff5', '#22d3ee', '#a78bfa'], base: '#05070f', bright: 1.00 },
+        dark:     { cols: ['#7c83ff', '#38bdf8', '#c4b5fd'], base: '#010204', bright: 1.06 },
+        ocean:    { cols: ['#0ea5e9', '#22d3ee', '#67e8f9'], base: '#04121a', bright: 0.95 },
+        forest:   { cols: ['#10b981', '#84cc16', '#5eead4'], base: '#050f0a', bright: 0.92 },
+        sunset:   { cols: ['#f97316', '#f43f5e', '#fdba74'], base: '#140806', bright: 1.00 },
+        rose:     { cols: ['#d946ef', '#8b5cf6', '#f0abfc'], base: '#100512', bright: 1.00 },
+        sepia:    { cols: ['#c98a3a', '#e0b26a', '#f0c987'], base: '#17100a', bright: 0.86 }
+      };
       const starSpr = makeStarSprite('255,255,255');
       const starSprDark = makeStarSprite('46,60,110');
 
@@ -2472,6 +2479,9 @@
       }
       function readTheme() {
         try {
+          const name = document.body.dataset.theme || 'midnight';
+          const g = GALAXY_THEMES[name];
+          if (g) { colA = g.cols[0]; colB = g.cols[1]; colC = g.cols[2]; base = g.base; bright = g.bright; lightMode = false; return; }
           const cs = getComputedStyle(document.body);
           colA = (cs.getPropertyValue('--primary') || '').trim() || colA;
           colB = (cs.getPropertyValue('--cyan') || '').trim() || colB;
@@ -2479,6 +2489,7 @@
           base = (cs.getPropertyValue('--bg') || '').trim() || base;
           const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(base);
           lightMode = !!m && (parseInt(m[1], 16) * 0.299 + parseInt(m[2], 16) * 0.587 + parseInt(m[3], 16) * 0.114) > 150;
+          bright = 1;
         } catch (e) {}
       }
       function seedStars() {
@@ -2527,7 +2538,7 @@
           if (nb.x < -0.3) nb.x = 1.3; else if (nb.x > 1.3) nb.x = -0.3;
           if (nb.y < -0.3) nb.y = 1.3; else if (nb.y > 1.3) nb.y = -0.3;
           const s = nb.rad * Math.max(W, H) * 2.2 * (1 + 0.12 * Math.sin(tsec * 0.4 + nb.ph));
-          ctx.globalAlpha = lightMode ? 0.5 : 0.62;
+          ctx.globalAlpha = (lightMode ? 0.5 : 0.62) * bright;
           ctx.drawImage(nb.sprite, nb.x * W - s / 2, nb.y * H - s / 2, s, s);
         }
         const spr = lightMode ? starSprDark : starSpr;
@@ -2538,7 +2549,7 @@
           const y = cyp + Math.sin(st.a) * rr * 0.62;
           const tw = 0.45 + 0.55 * Math.abs(Math.sin(tsec * 1.6 + st.tw));
           const sz = st.sz * 2.7;
-          ctx.globalAlpha = (lightMode ? 0.75 : 1) * tw * (0.42 + 0.78 * st.d);
+          ctx.globalAlpha = (lightMode ? 0.75 : 1) * bright * tw * (0.42 + 0.78 * st.d);
           ctx.drawImage(spr, x - sz / 2, y - sz / 2, sz, sz);
         }
         ctx.globalAlpha = 1;
@@ -2590,10 +2601,11 @@
         draw(0.001);
       }
       function sync() { if (isReduced()) { stop(); draw(0.001); } else start(); }
+      _galaxyCtl = { start: start, stop: stop, redraw: () => draw(0.001), canvas: cv };
 
       readTheme();
       resize();
-      sync();
+      if (galaxyEnabled()) { sync(); } else { cv.style.display = 'none'; }
 
       window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(resize, 150); });
       document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else sync(); });
@@ -4490,7 +4502,7 @@
       const accuracy = total > 0 ? Math.round((score / total) * 100) : 0;
       const proofTxt = proofStats.total ? ` • 🔎 Proof: ${proofStats.verified}/${proofStats.total} verified` : '';
       const consTxt = (consensusStats.agree + consensusStats.disagree + consensusStats.unknown) ? ` • 🔀 2nd model: ${consensusStats.agree} agree / ${consensusStats.disagree} disagree` : '';
-      document.getElementById('result-pdf-subtitle').innerText = `Source: ${currentPdfName} • Visited pages: ${visitedPagesSet.size || lastSampledPagesList.length || 3} of ${totalPdfPages || 3}${proofTxt}${consTxt}`;
+      document.getElementById('result-pdf-subtitle').innerText = `Source: ${currentPdfName} • Visited pages: ${visitedPagesSet.size || lastSampledPagesList.length || 3} of ${totalPdfPages || 3}${proofTxt}${consTxt}${skippedCount ? ' • ⏭ Skipped: ' + skippedCount : ''}`;
       document.getElementById('final-score').innerText = `${score}/${total}`;
       document.getElementById('final-accuracy').innerText = `${accuracy}%`;
       if (!resultsRecorded) {           // record a finished run exactly once
@@ -4889,14 +4901,14 @@
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeA11yPanel(); });
 
     // ==================== THEMES ====================
-    const THEMES = ['midnight', 'ocean', 'forest', 'sunset', 'rose', 'light', 'sepia', 'dark'];
+    const THEMES = ['midnight', 'ocean', 'forest', 'sunset', 'rose', 'sepia', 'dark'];
     let themePref = 'midnight';
     function systemTheme() {
-      try { return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'midnight'; }
-      catch (e) { return 'midnight'; }
+      return 'midnight';   // light theme removed — the app is always dark
     }
     function setTheme(name) {
       themePref = name || 'midnight';
+      if (themePref !== 'auto' && THEMES.indexOf(themePref) === -1) themePref = 'midnight';
       let applied = (themePref === 'auto') ? systemTheme() : themePref;
       if (THEMES.indexOf(applied) === -1) applied = 'midnight';
       document.body.dataset.theme = applied;
@@ -4935,6 +4947,8 @@
         const el = document.getElementById('a11y-' + k); if (el) el.checked = false;
         try { localStorage.removeItem('ai_study_a11y_' + k + '_v9'); } catch (e) {}
       });
+      toggleGalaxy(true);
+      const gEl = document.getElementById('a11y-galaxy'); if (gEl) gEl.checked = true;
     }
     function setA11yFont(size) {
       document.body.classList.remove('a11y-lg', 'a11y-xl');
@@ -4955,6 +4969,7 @@
           document.body.classList.toggle('a11y-' + k, on);
           const el = document.getElementById('a11y-' + k); if (el) el.checked = on;
         });
+        const gEl = document.getElementById('a11y-galaxy'); if (gEl) gEl.checked = galaxyEnabled();
       } catch (e) {}
       updateA11yBtn();
     }
