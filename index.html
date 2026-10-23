@@ -30,7 +30,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com https://accounts.google.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src https://accounts.google.com">
-  <title>AI Study Suite PRO v18.1 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.2 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -852,7 +852,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.1</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.2</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -870,7 +870,7 @@
         <div class="sb-logo">&#129504;</div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.1 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.2 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -948,7 +948,7 @@
       <div class="brand-icon">🧠</div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.1 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.2 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -1785,6 +1785,7 @@
         </div>
         <div class="panel-actions">
           <button class="btn-secondary" onclick="cloudRefresh()">&#128260; Refresh status</button>
+          <button class="btn-secondary" onclick="googleDiagnose()">&#128269; Configuration check</button>
         </div>
       </div>
 
@@ -1804,7 +1805,8 @@
         <ol style="padding-left:18px; font-size:12.5px; line-height:1.8; color:var(--text-muted); display:flex; flex-direction:column; gap:4px; margin-bottom:12px;">
           <li><a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener noreferrer" style="color:#67e8f9;">console.cloud.google.com/apis/credentials</a> kholo &rarr; <b>Create credentials</b> &rarr; <b>OAuth client ID</b></li>
           <li>Application type: <b>Web application</b></li>
-          <li><b>Authorised JavaScript origins</b> mein ye add karo: <code id="g-origin-hint">https://himanshu737936.github.io</code></li>
+          <li><b>Authorised JavaScript origins</b> mein ye add karo: <code id="g-origin-hint">https://himanshu737936.github.io</code>
+              <button class="btn-secondary" style="margin-left:6px; padding:3px 9px; font-size:11px;" onclick="copyText(location.origin, 'Origin')">&#128203; Copy</button></li>
           <li><b>Create</b> dabao &rarr; Client ID copy karo (usme <code>.apps.googleusercontent.com</code> hota hai)</li>
           <li>Usi screen par <b>OAuth consent screen</b> mein apne aap ko test user add karo (agar app "Testing" mein hai)</li>
         </ol>
@@ -1813,6 +1815,7 @@
           <button class="btn-cyan" onclick="saveGoogleClientId()">&#128190; Save</button>
         </div>
         <div id="g-setup-status" class="sec-p" style="margin-top:8px;"></div>
+        <div id="g-diagnose-out" class="hidden" style="margin-top:12px; padding:11px 13px; border-radius:var(--radius-sm); background:var(--deep); border:1px solid var(--line); font-size:12.5px; color:var(--text-muted); line-height:1.7;"></div>
       </div>
 
       <div class="section-box" id="g-account-box">
@@ -1952,7 +1955,7 @@
       <span class="credit-heart">&#10084;&#65039;</span>
       <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
       <span class="credit-dot"></span>
-      <span class="credit-tag">AI Study Suite PRO v18.1</span>
+      <span class="credit-tag">AI Study Suite PRO v18.2</span>
     </div>
   </footer>
 
@@ -4609,7 +4612,7 @@
       doc.rect(0, 0, 210, 28, 'F');
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(15);
-      doc.text("AI Study Suite v18.1 - UPSC / UPPCS / SSC Scorecard", 14, 13);
+      doc.text("AI Study Suite v18.2 - UPSC / UPPCS / SSC Scorecard", 14, 13);
       doc.setFontSize(9);
       doc.text(`PDF: ${currentPdfName}  |  Score: ${score}/${total} (${accuracy}%)  |  Date: ${new Date().toLocaleDateString()}`, 14, 22);
 
@@ -4632,7 +4635,7 @@
       try {
         const endY = (doc.lastAutoTable && doc.lastAutoTable.finalY ? doc.lastAutoTable.finalY + 12 : 280);
         doc.setFontSize(8); doc.setTextColor(140, 140, 140);
-        doc.text("Made by Himanshu  |  AI Study Suite v18.1", 14, Math.min(endY, 290));
+        doc.text("Made by Himanshu  |  AI Study Suite v18.2", 14, Math.min(endY, 290));
       } catch (e) {}
       doc.save(`UPSC_UPPCS_SSC_Scorecard_${Date.now()}.pdf`);
     }
@@ -4650,7 +4653,7 @@
       try {
         const endY = (doc.lastAutoTable && doc.lastAutoTable.finalY ? doc.lastAutoTable.finalY + 12 : 280);
         doc.setFontSize(8); doc.setTextColor(140, 140, 140);
-        doc.text("Made by Himanshu  |  AI Study Suite v18.1", 14, Math.min(endY, 290));
+        doc.text("Made by Himanshu  |  AI Study Suite v18.2", 14, Math.min(endY, 290));
       } catch (e) {}
       doc.save(`Exam_Cheat_Sheet_${Date.now()}.pdf`);
     }
@@ -5418,7 +5421,7 @@
       let pdfs = [], sets = [];
       try { pdfs = await idbAll('pdfs'); } catch (e) {}
       try { sets = await idbAll('sets'); } catch (e) {}
-      return { app: 'AI Study Suite', version: 'v18.1', exportedAt: new Date().toISOString(), localStorage: ls, pdfs, sets };
+      return { app: 'AI Study Suite', version: 'v18.2', exportedAt: new Date().toISOString(), localStorage: ls, pdfs, sets };
     }
 
     async function backupData() {
@@ -5571,7 +5574,7 @@
     async function exportSet(id) {
       const rec = await idbGet('sets', id);
       if (!rec) return;
-      downloadJson({ app: 'AI Study Suite', kind: 'question-set', version: 'v18.1', name: rec.name, count: rec.count, questions: rec.questions }, (rec.name || 'set').replace(/[^a-z0-9]+/gi, '_').slice(0, 40) + '.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'question-set', version: 'v18.2', name: rec.name, count: rec.count, questions: rec.questions }, (rec.name || 'set').replace(/[^a-z0-9]+/gi, '_').slice(0, 40) + '.json');
     }
     function downloadJson(obj, filename) {
       const blob = new Blob([JSON.stringify(obj)], { type: 'application/json' });
@@ -5868,7 +5871,7 @@
     }
     function exportMistakes() {
       if (!mistakeBank.length) { showError('Export karne ke liye kuch nahi hai.'); return; }
-      downloadJson({ app: 'AI Study Suite', kind: 'mistake-notebook', version: 'v18.1', exportedAt: new Date().toISOString(), mistakes: mistakeBank }, 'mistake_notebook.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'mistake-notebook', version: 'v18.2', exportedAt: new Date().toISOString(), mistakes: mistakeBank }, 'mistake_notebook.json');
     }
     function clearMistakes() { if (!confirm('Poora mistake notebook clear karein?')) return; mistakeBank = []; saveMistakes(); renderMistakes(); }
 
@@ -6072,7 +6075,7 @@
     }
     function exportDoubts() {
       if (!doubtHistory.length) { showError('Export karne ke liye kuch nahi hai.'); return; }
-      downloadJson({ app: 'AI Study Suite', kind: 'doubt-history', version: 'v18.1', exportedAt: new Date().toISOString(), doubts: doubtHistory }, 'doubt_history.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'doubt-history', version: 'v18.2', exportedAt: new Date().toISOString(), doubts: doubtHistory }, 'doubt_history.json');
     }
     function clearDoubts() { if (!confirm('Poori doubt history clear karein?')) return; doubtHistory = []; saveDoubts(); renderDoubts(); }
 
@@ -6249,6 +6252,52 @@
       });
       return _gisPromise;
     }
+    // Turns Google's OAuth error codes into the exact thing to fix.
+    function googleErrorHelp(code, desc) {
+      const origin = location.origin;
+      const help = {
+        invalid_client: 'Google ne ye Client ID accept nahi kiya. Sabse aam wajah: us client mein "Authorised JavaScript origins" khaali hai. Fix karo — Google Cloud Console → Credentials → apna OAuth client kholo → "Authorised JavaScript origins" mein EXACT ye daalo: ' + origin + ' (bina trailing slash, bina /ai-study-suite), phir SAVE dabao aur 1-2 minute wait karo. Saath hi check karo: Client ID POORA copy hua ("...apps.googleusercontent.com" tak), aur client ka type "Web application" hai (Desktop/iOS nahi).',
+        origin_mismatch: 'Ye site ka origin (' + origin + ') is Client ID mein register NAHI hai. Google Cloud Console → Credentials → apna OAuth client → "Authorised JavaScript origins" mein EXACT ye daalo: ' + origin + '  (bina trailing slash, bina /ai-study-suite)',
+        idpiframe_initialization_failed: 'Origin register nahi hai ya browser ne third-party cookies block kiye hain. "Authorised JavaScript origins" mein ' + origin + ' add karo, aur browser mein third-party cookies allow karo.',
+        redirect_uri_mismatch: 'Redirect URI galat hai. "Authorised JavaScript origins" mein sirf origin daalo: ' + origin,
+        access_denied: 'Permission deny hui, ya tumhara email OAuth consent screen ke "Test users" mein nahi hai. Console → OAuth consent screen → Test users mein apna email add karo.',
+        popup_closed_by_user: 'Sign-in window band ho gaya. Dobara try karo.',
+        popup_blocked_by_browser: 'Browser ne popup block kiya. Address bar mein popups allow karo, phir dobara try karo.',
+        invalid_request: 'Request invalid — Client ID ka format check karo (usme ".apps.googleusercontent.com" hona chahiye).'
+      };
+      return help[code] || ('Google error: ' + code + (desc ? ' — ' + desc : ''));
+    }
+
+    let _signInWatchdog = null;
+    function startSignInWatchdog() {
+      clearTimeout(_signInWatchdog);
+      _signInWatchdog = setTimeout(() => {
+        if (!googleSignedIn()) {
+          gSetStatus('g-account-status', '⏳ Sign-in complete nahi hua. Agar Google ne "Access blocked / invalid_client / no registered origin" jaisa page dikhaya, to neeche <b>&#128269; Configuration check</b> dabao — wo exact fix batayega.', '#fde68a');
+        }
+      }, 90000);
+    }
+    function stopSignInWatchdog() { clearTimeout(_signInWatchdog); }
+
+    function googleDiagnose() {
+      const origin = location.origin;
+      const cid = googleClientId();
+      const okProto = location.protocol === 'https:' || /^http:\/\/localhost/.test(origin) || /^http:\/\/127\.0\.0\.1/.test(origin);
+      const rows = [];
+      rows.push('<div style="font-weight:800; color:var(--text); margin-bottom:6px;">&#128269; Configuration check</div>');
+      rows.push((cid ? '&#9989;' : '&#10060;') + ' <b>Client ID</b>: ' + (cid ? '<code>' + escapeHtml(cid.slice(0, 30)) + '&hellip;</code>' : 'set nahi hai — Step 1 mein daalo'));
+      rows.push((okProto ? '&#9989;' : '&#10060;') + ' <b>Origin</b>: <code>' + escapeHtml(origin) + '</code>' + (okProto ? '' : ' &mdash; Google sirf <b>https</b> (ya localhost) par sign-in allow karta hai'));
+      rows.push('&#128203; Console mein <b>Authorised JavaScript origins</b> mein <u>exactly</u> ye daalo: <code>' + escapeHtml(origin) + '</code>');
+      rows.push('<span style="color:var(--muted);">Trailing slash, path (/ai-study-suite) ya http:// nahi &mdash; sirf origin.</span>');
+      rows.push('<div style="margin-top:8px; display:flex; flex-wrap:wrap; gap:8px;">'
+        + '<button class="btn-cyan" onclick="copyText(' + JSON.stringify(origin).replace(/"/g, '&quot;') + ', \'Origin\')">&#128203; Origin copy karein</button>'
+        + '<a class="btn-secondary" href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener noreferrer" style="text-decoration:none; display:inline-block;">&#128279; Credentials kholo</a>'
+        + '<a class="btn-secondary" href="https://console.cloud.google.com/apis/credentials/consent" target="_blank" rel="noopener noreferrer" style="text-decoration:none; display:inline-block;">&#128279; Consent screen</a>'
+        + '</div>');
+      const el = document.getElementById('g-diagnose-out');
+      if (el) { el.innerHTML = rows.join('<div style="margin-top:5px;"></div>'); el.classList.remove('hidden'); }
+    }
+
     function decodeJwt(t) {
       try {
         const p = t.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
@@ -6270,8 +6319,10 @@
           });
         }
         _tokenClient.callback = (resp) => {
+          stopSignInWatchdog();
           if (resp && resp.error) {
-            gSetStatus('g-account-status', 'Sign-in fail: ' + resp.error + (resp.error_description ? ' — ' + resp.error_description : ''), '#fda4af');
+            gSetStatus('g-account-status', '&#10060; ' + googleErrorHelp(resp.error, resp.error_description), '#fda4af');
+            googleDiagnose();
             return;
           }
           _gToken = resp.access_token;
@@ -6281,6 +6332,9 @@
           cloudRefresh();
           if (autoSyncOn()) cloudBackupNow(true);
         };
+        startSignInWatchdog();
+        // an empty prompt lets Google skip the consent screen when it is already
+        // granted; the first attempt still shows the full consent flow.
         _tokenClient.requestAccessToken({ prompt: '' });
       } catch (e) {
         gSetStatus('g-account-status', 'Sign-in start nahi ho paya: ' + (e.message || e), '#fda4af');
@@ -6357,6 +6411,11 @@
     function cloudInit() {
       const cidEl = document.getElementById('g-client-id');
       if (cidEl && !cidEl.value) cidEl.value = googleClientId();
+      // sign-in cannot work on file:// or plain http (other than localhost)
+      const protoOk = location.protocol === 'https:' || /^http:\/\/localhost/.test(location.origin) || /^http:\/\/127\.0\.0\.1/.test(location.origin);
+      if (!protoOk) {
+        gSetStatus('g-account-status', '&#9888;&#65039; Google sign-in is page par kaam nahi karega (protocol: ' + location.protocol + '). App ko <b>https</b> par kholo — jaise https://himanshu737936.github.io/ai-study-suite/ — ya localhost par. File se kholne par sirf file backup/restore chalega.', '#fde68a');
+      }
       const originEl = document.getElementById('g-origin-hint');
       if (originEl) originEl.textContent = location.origin;
       const chk = document.getElementById('g-autosync');

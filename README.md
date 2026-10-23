@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v18.1** · Single-file app · No build step · No backend · Bring your own API key
+> **v18.2** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -97,6 +97,16 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **🗓️ Revision Plan** — exam countdown + today's plan (due SRS cards, weakest topics, streak).
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **🧪 Self-Test & Data** — 16-point health check, **API usage meter**, and **Backup / Restore** (all your data in one JSON file).
+
+### v18.2 — Google sign-in: errors that actually tell you what to fix
+
+Setting up OAuth is the one fiddly part of Cloud Sync, and Google's own error page (`Access blocked`, `Error 401: invalid_client`, `no registered origin`) does not say what to change. The app now handles that itself:
+
+- **Every OAuth error is translated into the exact fix**, in plain language, naming *your* live origin — `invalid_client`, `origin_mismatch`, `idpiframe_initialization_failed`, `redirect_uri_mismatch`, `access_denied`, popup blocked/closed, and anything else Google returns.
+- **🔍 Configuration check** button — prints a live checklist: is a client ID set, is the origin usable, and the exact string to paste into *Authorised JavaScript origins*, with a one-tap copy button and direct links to the Credentials and Consent-screen pages.
+- **📋 Copy button** next to the origin in the setup steps, so the value never has to be retyped (a trailing slash or the `/ai-study-suite` path is the usual reason sign-in fails).
+- **Up-front warning** when the page is opened from `file://` or plain `http` — Google sign-in cannot work there; only the file backup/restore will.
+- **90-second watchdog** — if the sign-in window is dismissed or Google blocks it, the app says so instead of hanging silently.
 
 ### v18.1 — screen bug fixes
 
