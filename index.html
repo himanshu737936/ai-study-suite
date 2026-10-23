@@ -30,7 +30,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'">
-  <title>AI Study Suite PRO v11.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v12.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -481,6 +481,18 @@
     @media (prefers-reduced-motion: reduce) { .logo3d, .logo-orbit, .logo-glow, .splash-title, .splash-inner { animation: none !important; } }
 
     /* ===================== Footer ===================== */
+    .mk-item { background: var(--deep); border: 1px solid var(--line); border-left: 3px solid var(--rose); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
+    .mk-q { font-size: 13px; color: var(--text); margin-bottom: 5px; }
+    .mk-meta { font-size: 11.5px; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; }
+    .mk-wrong { color: var(--rose); } .mk-right { color: var(--emerald); }
+    .listen-now { background: var(--deep); border: 1px solid var(--line); border-radius: 12px; padding: 16px; min-height: 96px; font-size: 15px; color: var(--text); line-height: 1.55; }
+    .sprint-card { background: linear-gradient(135deg, rgba(109,111,245,.16), rgba(34,211,238,.10)); border: 1px solid var(--line); border-radius: 14px; padding: 22px; font-size: 17px; line-height: 1.6; color: var(--text); min-height: 130px; }
+    .sprint-badge { display:inline-block; font-size:11px; padding:3px 9px; border-radius:20px; background:var(--surface-2); border:1px solid var(--line); color:var(--cyan); margin-bottom:10px; }
+    .doubt-item { background: var(--deep); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
+    .doubt-q { font-size: 13px; color: var(--cyan); margin-bottom: 5px; }
+    .doubt-a { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+    .progress-thin { height: 6px; border-radius: 6px; background: var(--surface-2); overflow: hidden; }
+    .progress-thin > i { display: block; height: 100%; background: linear-gradient(90deg, var(--primary), var(--cyan)); }
     .app-footer { width: 100%; max-width: 1180px; text-align: center; padding: 20px 10px 12px; color: var(--muted); font-size: 12.5px; }
     .credit { display: inline-flex; align-items: center; gap: 9px; padding: 9px 18px; border-radius: 30px;
       background: linear-gradient(90deg, rgba(109,111,245,.16), rgba(34,211,238,.12), rgba(109,111,245,.16));
@@ -527,7 +539,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v11.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v12.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -545,7 +557,7 @@
         <div class="sb-logo">&#129504;</div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v11.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v12.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -572,6 +584,12 @@
         <button class="sb-item" data-nav="plan" onclick="navGo('plan')"><span class="ico">&#128197;</span> Revision Plan</button>
         <button class="sb-item" data-nav="progress" onclick="navGo('progress')"><span class="ico">&#128200;</span> Progress</button>
         <button class="sb-item" data-nav="health" onclick="navGo('health')"><span class="ico">&#129514;</span> Self-Test</button>
+        <div class="sb-group">Smart Revision</div>
+        <button class="sb-item" data-nav="mistake" onclick="navGo('mistake')"><span class="ico">&#128213;</span> Mistake Notebook</button>
+        <button class="sb-item" data-nav="adaptive" onclick="navGo('adaptive')"><span class="ico">&#127898;&#65039;</span> Adaptive Practice</button>
+        <button class="sb-item" data-nav="listen" onclick="navGo('listen')"><span class="ico">&#127911;</span> Listen Mode</button>
+        <button class="sb-item" data-nav="sprint" onclick="navGo('sprint')"><span class="ico">&#9201;&#65039;</span> Exam-Day Sprint</button>
+        <button class="sb-item" data-nav="doubts" onclick="navGo('doubts')"><span class="ico">&#128172;</span> Doubt History</button>
         <div class="sb-group">Session</div>
         <button class="sb-item" data-nav="results" onclick="navGo('results')"><span class="ico">&#127942;</span> Results</button>
       </nav>
@@ -586,7 +604,7 @@
       <div class="brand-icon">🧠</div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v11.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v12.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -1400,6 +1418,98 @@
       <div id="health-content"></div>
     </div>
 
+    <!-- ==================== MISTAKE NOTEBOOK ==================== -->
+    <div id="mistake-section" class="hidden">
+      <div class="quiz-topbar">
+        <div><h2 class="sec-h2">&#128213; Mistake Notebook</h2><p class="sec-p">Tumhari har galat question yahan automatically jama hoti hai — dobara wahi galti mat karo.</p></div>
+        <div class="panel-actions">
+          <button class="btn-cyan" onclick="practiceMistakes()">&#128260; Practice mistakes</button>
+          <button class="btn-secondary" onclick="mistakesToFlashcards()">&#127183; Flashcards banao</button>
+          <button class="btn-secondary" onclick="exportMistakes()">&#11015;&#65039; Export</button>
+          <button class="btn-secondary" onclick="clearMistakes()">&#128465;&#65039; Clear</button>
+        </div>
+      </div>
+      <div id="mistake-stats"></div>
+      <div id="mistake-list"></div>
+    </div>
+
+    <!-- ==================== ADAPTIVE PRACTICE ==================== -->
+    <div id="adaptive-section" class="hidden">
+      <div class="quiz-topbar">
+        <div><h2 class="sec-h2">&#127898;&#65039; Adaptive Practice</h2><p class="sec-p">App tumhari accuracy dekh kar khud decide karta hai ki kaunse topics par aur mehnat chahiye.</p></div>
+        <div class="panel-actions">
+          <button class="btn-cyan" onclick="runAdaptivePractice()">&#127919; Adaptive quiz banao</button>
+        </div>
+      </div>
+      <div id="adaptive-content"></div>
+    </div>
+
+    <!-- ==================== LISTEN MODE ==================== -->
+    <div id="listen-section" class="hidden">
+      <div class="quiz-topbar">
+        <div><h2 class="sec-h2">&#127911; Listen Mode</h2><p class="sec-p">Hands-free revision — cards apne aap bole jayenge. Chalo, chalte-chalte revision karo.</p></div>
+        <div class="panel-actions">
+          <button class="btn-cyan" id="listen-play-btn" onclick="listenToggle()">&#9654; Play</button>
+          <button class="btn-secondary" onclick="listenPrev()">&#9198;&#65039; Pichla</button>
+          <button class="btn-secondary" onclick="listenNext()">&#9197;&#65039; Agla</button>
+        </div>
+      </div>
+      <div class="section-box">
+        <div class="panel-row" style="margin-bottom:10px;">
+          <div class="pr-t" id="listen-counter">0 / 0</div>
+          <div class="pr-s" id="listen-status">Ready</div>
+        </div>
+        <div class="progress-thin" style="margin-bottom:12px;"><i id="listen-bar" style="width:0%"></i></div>
+        <div class="listen-now" id="listen-now">Listen Mode chalu karne ke liye <b>Play</b> dabayein. (Browser voice use hoti hai — free aur offline.)</div>
+        <div style="display:flex; gap:10px; align-items:center; margin-top:12px; flex-wrap:wrap;">
+          <label style="font-size:12px; color:var(--text-muted);">Source</label>
+          <select id="listen-source" class="theme-select" onchange="listenLoadSource()">
+            <option value="due">&#9200; Due flashcards (SRS)</option>
+            <option value="all">&#127183; Saare flashcards</option>
+            <option value="mistakes">&#128213; Mistake questions</option>
+          </select>
+          <label style="font-size:12px; color:var(--text-muted); margin-left:8px;">Speed</label>
+          <input type="range" id="listen-rate" min="0.6" max="1.6" step="0.1" value="1" oninput="listenSetRate(this.value)" style="width:110px;">
+          <span id="listen-rate-val" style="font-size:12px; color:var(--cyan);">1.0x</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== EXAM-DAY SPRINT ==================== -->
+    <div id="sprint-section" class="hidden">
+      <div class="quiz-topbar">
+        <div><h2 class="sec-h2">&#9201;&#65039; Exam-Day Sprint</h2><p class="sec-p">Exam se pehle 15 minute ka rapid-fire recap — sirf sabse high-yield points.</p></div>
+        <div class="panel-actions">
+          <button class="btn-cyan" id="sprint-start-btn" onclick="sprintToggle()">&#9654; Sprint shuru karo</button>
+        </div>
+      </div>
+      <div class="section-box">
+        <div class="panel-row" style="margin-bottom:12px;">
+          <div class="pr-t" id="sprint-timer" style="font-size:22px; font-variant-numeric:tabular-nums;">15:00</div>
+          <div class="pr-s" id="sprint-progress">0 / 0 points</div>
+        </div>
+        <div class="progress-thin" style="margin-bottom:14px;"><i id="sprint-bar" style="width:0%"></i></div>
+        <div class="sprint-card" id="sprint-card"><span class="sprint-badge">Ready</span><br>Sprint shuru karne ke liye <b>&#9654; Sprint shuru karo</b> dabayein. Main tumhare saved material se high-yield points nikaal kar ek-ek karke dikhaunga.</div>
+        <div style="display:flex; gap:8px; margin-top:14px; flex-wrap:wrap;">
+          <button class="btn-secondary" onclick="sprintNext()">&#9197;&#65039; Agla point</button>
+          <button class="btn-secondary" onclick="sprintPrev()">&#9198;&#65039; Pichla</button>
+          <button class="btn-secondary" onclick="sprintBuild()">&#128260; Dobara build karo</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== DOUBT HISTORY ==================== -->
+    <div id="doubts-section" class="hidden">
+      <div class="quiz-topbar">
+        <div><h2 class="sec-h2">&#128172; Doubt History</h2><p class="sec-p">Quiz ke dauraan pooche gaye saare doubts yahan save rehte hain — baad me padh sakte ho.</p></div>
+        <div class="panel-actions">
+          <button class="btn-secondary" onclick="exportDoubts()">&#11015;&#65039; Export</button>
+          <button class="btn-secondary" onclick="clearDoubts()">&#128465;&#65039; Clear</button>
+        </div>
+      </div>
+      <div id="doubts-content"></div>
+    </div>
+
   </main>
 
   <footer class="app-footer">
@@ -1408,7 +1518,7 @@
       <span class="credit-heart">&#10084;&#65039;</span>
       <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
       <span class="credit-dot"></span>
-      <span class="credit-tag">AI Study Suite PRO v11.0</span>
+      <span class="credit-tag">AI Study Suite PRO v12.0</span>
     </div>
   </footer>
 
@@ -1749,6 +1859,8 @@
       loadStats();
       loadUsage();
       loadProgress();
+      loadMistakes();
+      loadDoubts();
       updateExamCountdown();
       restoreUILang();
       refreshSetsCount();
@@ -3027,6 +3139,7 @@
       } else {
         if (clickedBtn) clickedBtn.classList.add('option-wrong');
         wrongQuestions.push(q);
+        logMistake(q, selectedIndex);
         errorLog[topicKey].wrong++;
         saveErrorLog();
         expBox.className = "explanation-card exp-wrong";
@@ -3131,6 +3244,7 @@
       try {
         const reply = await callUniversalAI(`PDF Page ${q.sourcePage || 1} Text: "${pageContext.substring(0, 2000)}". Question: "${q.question}". Correct Answer: "${q.options[q.correctIndex]}". Student Doubt: "${doubtText}". Answer strictly from the PDF in 2-3 concise lines.`, false);
         respBox.innerHTML = `<b>🎓 PDF AI Tutor:</b> ${escapeHtml(reply)}`;
+        logDoubt(doubtText, reply, { topic: q.topic, page: q.sourcePage });
       } catch (e) {
         respBox.innerText = `⚠️ Live Doubt पूछने ke liye Setup screen par apni API Key dalein.`;
       } finally {
@@ -3691,7 +3805,7 @@
       doc.rect(0, 0, 210, 28, 'F');
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(15);
-      doc.text("AI Study Suite v11.0 - UPSC / UPPCS / SSC Scorecard", 14, 13);
+      doc.text("AI Study Suite v12.0 - UPSC / UPPCS / SSC Scorecard", 14, 13);
       doc.setFontSize(9);
       doc.text(`PDF: ${currentPdfName}  |  Score: ${score}/${total} (${accuracy}%)  |  Date: ${new Date().toLocaleDateString()}`, 14, 22);
 
@@ -3714,7 +3828,7 @@
       try {
         const endY = (doc.lastAutoTable && doc.lastAutoTable.finalY ? doc.lastAutoTable.finalY + 12 : 280);
         doc.setFontSize(8); doc.setTextColor(140, 140, 140);
-        doc.text("Made by Himanshu  |  AI Study Suite v11.0", 14, Math.min(endY, 290));
+        doc.text("Made by Himanshu  |  AI Study Suite v12.0", 14, Math.min(endY, 290));
       } catch (e) {}
       doc.save(`UPSC_UPPCS_SSC_Scorecard_${Date.now()}.pdf`);
     }
@@ -3731,7 +3845,7 @@
       try {
         const endY = (doc.lastAutoTable && doc.lastAutoTable.finalY ? doc.lastAutoTable.finalY + 12 : 280);
         doc.setFontSize(8); doc.setTextColor(140, 140, 140);
-        doc.text("Made by Himanshu  |  AI Study Suite v11.0", 14, Math.min(endY, 290));
+        doc.text("Made by Himanshu  |  AI Study Suite v12.0", 14, Math.min(endY, 290));
       } catch (e) {}
       doc.save(`Exam_Cheat_Sheet_${Date.now()}.pdf`);
     }
@@ -4225,7 +4339,7 @@
     function hideAllSections() {
       clearInterval(timerInterval);
       window.speechSynthesis?.cancel();
-      ['setup-section', 'quiz-section', 'flashcard-section', 'mindmap-section', 'notes-section', 'result-section', 'mains-section', 'blurt-section', 'weakness-section', 'visual-section', 'teach-section', 'sets-section', 'library-section', 'plan-section', 'progress-section', 'health-section'].forEach(id => {
+      ['setup-section', 'quiz-section', 'flashcard-section', 'mindmap-section', 'notes-section', 'result-section', 'mains-section', 'blurt-section', 'weakness-section', 'visual-section', 'teach-section', 'sets-section', 'library-section', 'plan-section', 'progress-section', 'health-section', 'mistake-section', 'adaptive-section', 'listen-section', 'sprint-section', 'doubts-section'].forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
         document.getElementById(id).classList.add('hidden');
@@ -4373,7 +4487,7 @@
         let pdfs = [], sets = [];
         try { pdfs = await idbAll('pdfs'); } catch (e) {}
         try { sets = await idbAll('sets'); } catch (e) {}
-        const payload = { app: 'AI Study Suite', version: 'v11.0', exportedAt: new Date().toISOString(), localStorage: ls, pdfs, sets };
+        const payload = { app: 'AI Study Suite', version: 'v12.0', exportedAt: new Date().toISOString(), localStorage: ls, pdfs, sets };
         const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
@@ -4481,7 +4595,7 @@
     async function exportSet(id) {
       const rec = await idbGet('sets', id);
       if (!rec) return;
-      downloadJson({ app: 'AI Study Suite', kind: 'question-set', version: 'v11.0', name: rec.name, count: rec.count, questions: rec.questions }, (rec.name || 'set').replace(/[^a-z0-9]+/gi, '_').slice(0, 40) + '.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'question-set', version: 'v12.0', name: rec.name, count: rec.count, questions: rec.questions }, (rec.name || 'set').replace(/[^a-z0-9]+/gi, '_').slice(0, 40) + '.json');
     }
     function downloadJson(obj, filename) {
       const blob = new Blob([JSON.stringify(obj)], { type: 'application/json' });
@@ -4591,8 +4705,8 @@
             'dash.questions': '🧠 Questions made', 'dash.accuracy': '🎯 Overall accuracy', 'dash.streak': '🔥 Study streak', 'dash.exam': '📅 Exam countdown', 'dash.sets': '🗂️ Saved sets', 'btn.generate': 'Generate Questions' }
     };
     const NAV_I18N = {
-      hi: { setup:'सेटअप', quiz:'क्विज़', flashcards:'फ्लैशकार्ड', mindmap:'माइंड मैप', notes:'चीट शीट', mains:'मेन्स', blurt:'ब्लर्टिंग', teach:'टीच-बैक', visual:'विज़ुअल टूल्स', weakness:'कमज़ोरी', results:'रिज़ल्ट', sets:'मेरे सेट', library:'PDF लाइब्रेरी', plan:'रिवीज़न प्लान', progress:'प्रोग्रेस', health:'सेल्फ-टेस्ट' },
-      en: { setup:'Setup', quiz:'Quiz', flashcards:'Flashcards', mindmap:'Mind Map', notes:'Cheat Sheet', mains:'Mains', blurt:'Blurting', teach:'Teach-Back', visual:'Visual Tools', weakness:'Weakness', results:'Results', sets:'My Sets', library:'PDF Library', plan:'Revision Plan', progress:'Progress', health:'Self-Test' }
+      hi: { setup:'सेटअप', quiz:'क्विज़', flashcards:'फ्लैशकार्ड', mindmap:'माइंड मैप', notes:'चीट शीट', mains:'मेन्स', blurt:'ब्लर्टिंग', teach:'टीच-बैक', visual:'विज़ुअल टूल्स', weakness:'कमज़ोरी', results:'रिज़ल्ट', sets:'मेरे सेट', library:'PDF लाइब्रेरी', plan:'रिवीज़न प्लान', progress:'प्रोग्रेस', health:'सेल्फ-टेस्ट', mistake:'गलती नोटबुक', adaptive:'अडैप्टिव प्रैक्टिस', listen:'लिसन मोड', sprint:'एग्ज़ाम-डे स्प्रिंट', doubts:'डाउट हिस्ट्री' },
+      en: { setup:'Setup', quiz:'Quiz', flashcards:'Flashcards', mindmap:'Mind Map', notes:'Cheat Sheet', mains:'Mains', blurt:'Blurting', teach:'Teach-Back', visual:'Visual Tools', weakness:'Weakness', results:'Results', sets:'My Sets', library:'PDF Library', plan:'Revision Plan', progress:'Progress', health:'Self-Test', mistake:'Mistake Notebook', adaptive:'Adaptive Practice', listen:'Listen Mode', sprint:'Exam-Day Sprint', doubts:'Doubt History' }
     };
     function setUILang(lang) {
       try { localStorage.setItem('ai_study_ui_lang_v10', lang); } catch (e) {}
@@ -4673,6 +4787,281 @@
         else if (currentIndex > 0) { currentIndex--; renderQuestion(); }
       }
     }, { passive: true });
+
+    // ==================== MISTAKE NOTEBOOK ====================
+    let mistakeBank = [];
+    function loadMistakes() { try { mistakeBank = JSON.parse(localStorage.getItem('ai_study_mistakes_v12') || '[]'); } catch (e) { mistakeBank = []; } }
+    function saveMistakes() { try { localStorage.setItem('ai_study_mistakes_v12', JSON.stringify(mistakeBank.slice(-400))); } catch (e) {} }
+    function logMistake(q, chosenIndex) {
+      try {
+        const key = (q.question || '').slice(0, 120);
+        if (mistakeBank.some(m => m.key === key)) return;
+        mistakeBank.push({ key, question: q.question, options: q.options, correctIndex: q.correctIndex,
+          chosenIndex, topic: q.topic || 'General', sourcePage: q.sourcePage, explanation: q.explanation,
+          sourceQuote: q.sourceQuote, examTag: q.examTag, ts: Date.now() });
+        saveMistakes();
+      } catch (e) {}
+    }
+    function openMistakes() {
+      hideAllSections();
+      document.getElementById('mistake-section').classList.remove('hidden');
+      setActiveNav('mistake');
+      renderMistakes();
+    }
+    function renderMistakes() {
+      const st = document.getElementById('mistake-stats');
+      const list = document.getElementById('mistake-list');
+      if (!mistakeBank.length) {
+        st.innerHTML = '';
+        list.innerHTML = '<div class="section-box">Abhi koi galti record nahi hui. Quiz do — jo bhi galat hoga, wo apne aap yahan aa jayega. 💪</div>';
+        return;
+      }
+      const byTopic = {};
+      mistakeBank.forEach(m => { byTopic[m.topic] = (byTopic[m.topic] || 0) + 1; });
+      const top = Object.entries(byTopic).sort((a, b) => b[1] - a[1]).slice(0, 5);
+      st.innerHTML = '<div class="section-box"><div class="section-title">&#128202; Summary</div><div class="hs-tiles">'
+        + '<div class="hs-tile"><span class="hs-k">Total mistakes</span><span class="hs-v">' + mistakeBank.length + '</span></div>'
+        + '<div class="hs-tile"><span class="hs-k">Topics affected</span><span class="hs-v">' + Object.keys(byTopic).length + '</span></div>'
+        + '</div>'
+        + (top.length ? '<div style="margin-top:12px;">' + top.map(([t, c]) => '<div class="panel-row"><div class="pr-t">' + escapeHtml(t) + '</div><div class="pr-s">' + c + ' galti</div></div>').join('') + '</div>' : '')
+        + '</div>';
+      list.innerHTML = '<div class="section-box"><div class="section-title">&#128213; Saari galtiyan (latest first)</div>'
+        + mistakeBank.slice().reverse().map(m => {
+          const correct = (m.options || [])[m.correctIndex] || '';
+          const chosen = (m.options || [])[m.chosenIndex] || '';
+          return '<div class="mk-item"><div class="mk-q">' + escapeHtml(m.question || '') + '</div>'
+            + '<div class="mk-meta"><span class="mk-wrong">&#10007; Tumne chuna: ' + escapeHtml(chosen) + '</span>'
+            + '<span class="mk-right">&#10003; Sahi: ' + escapeHtml(correct) + '</span></div>'
+            + '<div class="mk-meta" style="margin-top:4px;"><span>&#128204; ' + escapeHtml(m.topic) + '</span><span>&#128196; Pg ' + escapeHtml(String(m.sourcePage || '--')) + '</span></div></div>';
+        }).join('') + '</div>';
+    }
+    function practiceMistakes() {
+      if (!mistakeBank.length) { showError('Abhi koi mistake save nahi hui.'); return; }
+      quizData = mistakeBank.map(m => ({ question: m.question, options: m.options, correctIndex: m.correctIndex,
+        explanation: m.explanation, sourcePage: m.sourcePage, topic: m.topic, examTag: m.examTag, sourceQuote: m.sourceQuote }));
+      currentPdfName = currentPdfName || 'Mistake Notebook';
+      launchQuiz();
+    }
+    function mistakesToFlashcards() {
+      if (!mistakeBank.length) { showError('Abhi koi mistake save nahi hui.'); return; }
+      flashcardData = mistakeBank.map(m => ({
+        front: m.question, back: ((m.options || [])[m.correctIndex] || '') + (m.explanation ? (' — ' + m.explanation) : ''),
+        sourcePage: m.sourcePage, topic: m.topic }));
+      fullFlashcardDeck = flashcardData.slice();
+      fcIndex = 0; currentIndex = 0;
+      setStudyMode('flashcards');
+      launchFlashcards();
+      showError('🎴 ' + flashcardData.length + ' flashcards mistakes se ban gaye.');
+    }
+    function exportMistakes() {
+      if (!mistakeBank.length) { showError('Export karne ke liye kuch nahi hai.'); return; }
+      downloadJson({ app: 'AI Study Suite', kind: 'mistake-notebook', version: 'v12.0', exportedAt: new Date().toISOString(), mistakes: mistakeBank }, 'mistake_notebook.json');
+    }
+    function clearMistakes() { if (!confirm('Poora mistake notebook clear karein?')) return; mistakeBank = []; saveMistakes(); renderMistakes(); }
+
+    // ==================== ADAPTIVE PRACTICE ====================
+    function adaptiveWeakTopics() {
+      const rows = Object.entries(topicStats || {}).map(([t, v]) => ({ t, total: v.total || 0, correct: v.correct || 0 }))
+        .filter(x => x.total > 0).map(x => ({ ...x, acc: Math.round((x.correct / x.total) * 100) }));
+      return rows.sort((a, b) => a.acc - b.acc);
+    }
+    function openAdaptive() {
+      hideAllSections();
+      document.getElementById('adaptive-section').classList.remove('hidden');
+      setActiveNav('adaptive');
+      renderAdaptive();
+    }
+    function renderAdaptive() {
+      const el = document.getElementById('adaptive-content');
+      const rows = adaptiveWeakTopics();
+      if (!rows.length) {
+        el.innerHTML = '<div class="section-box">Abhi data nahi hai. Ek quiz do — phir main tumhari accuracy dekh kar batata hoon ki kahan mehnat chahiye. 📈</div>';
+        return;
+      }
+      const overall = Math.round(rows.reduce((a, b) => a + b.correct, 0) / Math.max(1, rows.reduce((a, b) => a + b.total, 0)) * 100);
+      const weak = rows.filter(r => r.acc < 60), mid = rows.filter(r => r.acc >= 60 && r.acc < 80), strong = rows.filter(r => r.acc >= 80);
+      let plan = '';
+      if (weak.length) plan += '<div class="panel-row"><div class="pr-t">&#128308; ' + weak.length + ' kamzor topics</div><div class="pr-s">Zyaada practice + easy/medium questions</div></div>';
+      if (mid.length) plan += '<div class="panel-row"><div class="pr-t">&#128993; ' + mid.length + ' theek-theek topics</div><div class="pr-s">Medium difficulty se practice</div></div>';
+      if (strong.length) plan += '<div class="panel-row"><div class="pr-t">&#128994; ' + strong.length + ' strong topics</div><div class="pr-s">Ab hard-level questions ka time</div></div>';
+      el.innerHTML = '<div class="section-box"><div class="section-title">&#127919; Tumhara adaptive plan</div>'
+        + '<div class="hs-tiles">'
+        + '<div class="hs-tile"><span class="hs-k">Overall accuracy</span><span class="hs-v">' + overall + '%</span></div>'
+        + '<div class="hs-tile"><span class="hs-k">Topics tracked</span><span class="hs-v">' + rows.length + '</span></div>'
+        + '<div class="hs-tile"><span class="hs-k">Next focus</span><span class="hs-v">' + (weak[0] ? escapeHtml(weak[0].t).slice(0, 18) : (mid[0] ? escapeHtml(mid[0].t).slice(0, 18) : 'Hard level')) + '</span></div>'
+        + '</div>' + plan + '</div>'
+        + '<div class="section-box"><div class="section-title">&#128202; Topic-wise accuracy (weakest first)</div>'
+        + rows.slice(0, 12).map(r => '<div class="panel-row"><div class="pr-t">' + escapeHtml(r.t) + '</div><div class="pr-s" style="color:' + (r.acc < 60 ? 'var(--rose)' : r.acc < 80 ? 'var(--amber)' : 'var(--emerald)') + ';">' + r.acc + '% (' + r.correct + '/' + r.total + ')</div></div>').join('')
+        + '</div>';
+    }
+    function runAdaptivePractice() {
+      const rows = adaptiveWeakTopics();
+      if (!rows.length) { showError('Pehle ek quiz do — phir adaptive practice kaam karegi.'); return; }
+      const weak = rows.filter(r => r.acc < 80).slice(0, 3).map(r => r.t);
+      const list = (weak.length ? weak : rows.slice(0, 3).map(r => r.t));
+      const level = weak.length ? 'Easy aur medium level ke questions rakho, concepts clear karne ke liye.' : 'Ab hard level ke tricky questions rakho.';
+      const ft = document.getElementById('focus-topic');
+      if (ft) ft.value = 'Sirf in topics par focus karo: ' + list.join(', ') + '. ' + level;
+      showError('🎯 Adaptive quiz taiyaar — focus set ho gaya. Ab Generate dabayein.');
+      navGo('setup');
+      setTimeout(() => { const g = document.getElementById('generate-btn'); if (g) g.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 400);
+    }
+
+    // ==================== LISTEN MODE (hands-free audio) ====================
+    let listenItems = [], listenIdx = 0, listenPlaying = false, listenRate = 1;
+    function listenLoadSource() {
+      const src = (document.getElementById('listen-source') || {}).value || 'due';
+      const deck = (fullFlashcardDeck && fullFlashcardDeck.length) ? fullFlashcardDeck : (flashcardData || []);
+      if (src === 'mistakes') {
+        listenItems = mistakeBank.map(m => ({ label: 'Mistake', text: (m.question || '') + '. Sahi jawab: ' + ((m.options || [])[m.correctIndex] || '') + '. ' + (m.explanation || '') }));
+      } else if (src === 'all') {
+        listenItems = deck.map(fc => ({ label: 'Flashcard', text: (fc.front || '') + '. ' + (fc.back || '') }));
+      } else {
+        const due = deck.filter(fc => { const r = srsStorage[fc.front]; return !r || (r.dueAt || 0) <= Date.now(); });
+        listenItems = (due.length ? due : deck).map(fc => ({ label: 'Due card', text: (fc.front || '') + '. ' + (fc.back || '') }));
+      }
+      listenIdx = 0; listenRender();
+    }
+    function openListenMode() {
+      hideAllSections();
+      document.getElementById('listen-section').classList.remove('hidden');
+      setActiveNav('listen');
+      listenLoadSource();
+    }
+    function listenRender() {
+      const now = document.getElementById('listen-now');
+      const counter = document.getElementById('listen-counter');
+      const bar = document.getElementById('listen-bar');
+      const status = document.getElementById('listen-status');
+      if (!listenItems.length) {
+        now.innerHTML = 'Is source mein kuch nahi mila. Pehle flashcards ya quiz banao.';
+        counter.innerText = '0 / 0'; bar.style.width = '0%'; if (status) status.innerText = 'Khaali';
+        return;
+      }
+      const it = listenItems[listenIdx];
+      now.innerHTML = '<span class="sprint-badge">' + escapeHtml(it.label) + ' ' + (listenIdx + 1) + '/' + listenItems.length + '</span><br>' + escapeHtml(it.text);
+      counter.innerText = (listenIdx + 1) + ' / ' + listenItems.length;
+      bar.style.width = Math.round(((listenIdx + 1) / listenItems.length) * 100) + '%';
+      if (status) status.innerText = listenPlaying ? 'Bol raha hai…' : 'Paused';
+    }
+    function listenToggle() {
+      if (!listenItems.length) listenLoadSource();
+      if (!listenItems.length) { showError('Listen karne ke liye pehle content banao.'); return; }
+      const btn = document.getElementById('listen-play-btn');
+      if (listenPlaying) {
+        listenPlaying = false;
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        if (btn) btn.innerHTML = '&#9654; Play';
+        listenRender();
+      } else {
+        listenPlaying = true;
+        if (btn) btn.innerHTML = '&#10074;&#10074; Pause';
+        listenSpeak();
+      }
+    }
+    function listenSpeak() {
+      if (!listenPlaying) return;
+      if (!('speechSynthesis' in window)) { showError('Is browser mein speech support nahi hai.'); listenPlaying = false; return; }
+      const it = listenItems[listenIdx];
+      if (!it) { listenPlaying = false; const b = document.getElementById('listen-play-btn'); if (b) b.innerHTML = '&#9654; Play'; listenRender(); return; }
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(it.text);
+      u.rate = listenRate; u.lang = (typeof ttsPickLang === 'function') ? ttsPickLang(it.text) : 'en-IN';
+      u.onend = () => { if (!listenPlaying) return; if (listenIdx < listenItems.length - 1) { listenIdx++; listenRender(); setTimeout(listenSpeak, 350); } else { listenPlaying = false; const b = document.getElementById('listen-play-btn'); if (b) b.innerHTML = '&#9654; Play'; listenRender(); } };
+      u.onerror = () => { listenPlaying = false; listenRender(); };
+      listenRender();
+      window.speechSynthesis.speak(u);
+    }
+    function listenNext() { if (!listenItems.length) return; listenIdx = Math.min(listenItems.length - 1, listenIdx + 1); listenRender(); if (listenPlaying) listenSpeak(); }
+    function listenPrev() { if (!listenItems.length) return; listenIdx = Math.max(0, listenIdx - 1); listenRender(); if (listenPlaying) listenSpeak(); }
+    function listenSetRate(v) { listenRate = Number(v) || 1; const el = document.getElementById('listen-rate-val'); if (el) el.innerText = listenRate.toFixed(1) + 'x'; }
+
+    // ==================== EXAM-DAY SPRINT ====================
+    let sprintItems = [], sprintIdx = 0, sprintLeft = 15 * 60, sprintTimer = null, sprintRunning = false;
+    function sprintBuild() {
+      const items = [];
+      const deck = (fullFlashcardDeck && fullFlashcardDeck.length) ? fullFlashcardDeck : (flashcardData || []);
+      deck.forEach(fc => { if (fc && fc.front) items.push({ tag: 'Flashcard', text: (fc.front || '') + ' → ' + (fc.back || '') }); });
+      mistakeBank.slice(-25).forEach(m => { const c = (m.options || [])[m.correctIndex] || ''; if (c) items.push({ tag: 'Mistake fix', text: (m.question || '') + ' → ' + c }); });
+      const weak = adaptiveWeakTopics().filter(r => r.acc < 80).slice(0, 6);
+      weak.forEach(r => items.push({ tag: 'Weak topic', text: r.t + ' — accuracy sirf ' + r.acc + '%. Isse ek baar phir revise karo.' }));
+      const due = deck.filter(fc => { const r = srsStorage[fc.front]; return r && (r.dueAt || 0) <= Date.now(); });
+      if (due.length) items.push({ tag: 'SRS', text: due.length + ' cards aaj revision ke liye due hain — Flashcards kholo.' });
+      const notesEl = document.getElementById('notes-content');
+      if (notesEl) {
+        const txt = (notesEl.innerText || '').split('\n').map(x => x.trim()).filter(x => x.length > 40 && x.length < 260);
+        txt.slice(0, 20).forEach(t => items.push({ tag: 'Cheat sheet', text: t }));
+      }
+      sprintItems = items; sprintIdx = 0; sprintRender();
+      return items.length;
+    }
+    function openSprint() {
+      hideAllSections();
+      document.getElementById('sprint-section').classList.remove('hidden');
+      setActiveNav('sprint');
+      if (!sprintItems.length) { const n = sprintBuild(); if (!n) document.getElementById('sprint-card').innerHTML = '<span class="sprint-badge">Khaali</span><br>Abhi koi saved material nahi hai. Pehle flashcards, quiz ya cheat sheet banao — phir sprint kaam karega.'; }
+    }
+    function sprintRender() {
+      const card = document.getElementById('sprint-card');
+      const prog = document.getElementById('sprint-progress');
+      const bar = document.getElementById('sprint-bar');
+      if (!sprintItems.length) return;
+      const it = sprintItems[sprintIdx];
+      card.innerHTML = '<span class="sprint-badge">' + escapeHtml(it.tag) + '</span><br>' + escapeHtml(it.text);
+      prog.innerText = (sprintIdx + 1) + ' / ' + sprintItems.length + ' points';
+      bar.style.width = Math.round(((sprintIdx + 1) / sprintItems.length) * 100) + '%';
+    }
+    function sprintToggle() {
+      const btn = document.getElementById('sprint-start-btn');
+      if (sprintRunning) { sprintRunning = false; clearInterval(sprintTimer); if (btn) btn.innerHTML = '&#9654; Sprint shuru karo'; return; }
+      if (!sprintItems.length) sprintBuild();
+      if (!sprintItems.length) { showError('Sprint ke liye pehle content banao.'); return; }
+      sprintRunning = true; sprintLeft = 15 * 60;
+      if (btn) btn.innerHTML = '&#10074;&#10074; Roko';
+      sprintTick();
+      sprintTimer = setInterval(sprintTick, 1000);
+    }
+    function sprintTick() {
+      const el = document.getElementById('sprint-timer');
+      if (!sprintRunning) return;
+      sprintLeft--;
+      const m = Math.floor(Math.max(0, sprintLeft) / 60), sec = Math.max(0, sprintLeft) % 60;
+      if (el) el.innerText = m + ':' + String(sec).padStart(2, '0');
+      if (sprintLeft <= 0) { sprintRunning = false; clearInterval(sprintTimer); if (el) el.innerText = '00:00'; showError('⏱️ Sprint khatam! Achha kiya. Ab break lo.'); const b = document.getElementById('sprint-start-btn'); if (b) b.innerHTML = '&#9654; Sprint shuru karo'; }
+    }
+    function sprintNext() { if (!sprintItems.length) return; sprintIdx = Math.min(sprintItems.length - 1, sprintIdx + 1); sprintRender(); }
+    function sprintPrev() { if (!sprintItems.length) return; sprintIdx = Math.max(0, sprintIdx - 1); sprintRender(); }
+
+    // ==================== DOUBT HISTORY ====================
+    let doubtHistory = [];
+    function loadDoubts() { try { doubtHistory = JSON.parse(localStorage.getItem('ai_study_doubts_v12') || '[]'); } catch (e) { doubtHistory = []; } }
+    function saveDoubts() { try { localStorage.setItem('ai_study_doubts_v12', JSON.stringify(doubtHistory.slice(-200))); } catch (e) {} }
+    function logDoubt(q, a, meta) {
+      try { doubtHistory.push({ q, a, topic: (meta && meta.topic) || '', page: (meta && meta.page) || '', ts: Date.now() }); saveDoubts(); } catch (e) {}
+    }
+    function openDoubtHistory() {
+      hideAllSections();
+      document.getElementById('doubts-section').classList.remove('hidden');
+      setActiveNav('doubts');
+      renderDoubts();
+    }
+    function renderDoubts() {
+      const el = document.getElementById('doubts-content');
+      if (!doubtHistory.length) {
+        el.innerHTML = '<div class="section-box">Abhi koi doubt save nahi hua. Quiz ke dauraan <b>&#128172; Ask PDF Doubt</b> use karo — sab yahan jama ho jayenge.</div>';
+        return;
+      }
+      el.innerHTML = '<div class="section-box"><div class="section-title">&#128172; ' + doubtHistory.length + ' saved doubts (latest first)</div>'
+        + doubtHistory.slice().reverse().map(d => '<div class="doubt-item"><div class="doubt-q">&#10067; ' + escapeHtml(d.q) + '</div>'
+          + '<div class="doubt-a">' + escapeHtml(d.a) + '</div>'
+          + '<div class="mk-meta" style="margin-top:6px;">' + (d.topic ? '<span>&#128204; ' + escapeHtml(d.topic) + '</span>' : '') + (d.page ? '<span>&#128196; Pg ' + escapeHtml(String(d.page)) + '</span>' : '') + '<span>' + new Date(d.ts).toLocaleDateString('en-IN') + '</span></div></div>').join('')
+        + '</div>';
+    }
+    function exportDoubts() {
+      if (!doubtHistory.length) { showError('Export karne ke liye kuch nahi hai.'); return; }
+      downloadJson({ app: 'AI Study Suite', kind: 'doubt-history', version: 'v12.0', exportedAt: new Date().toISOString(), doubts: doubtHistory }, 'doubt_history.json');
+    }
+    function clearDoubts() { if (!confirm('Poori doubt history clear karein?')) return; doubtHistory = []; saveDoubts(); renderDoubts(); }
 
     // ==================== PROGRESS HISTORY ====================
     let savedSetsCount = 0;
@@ -4855,6 +5244,11 @@
         else if (id === 'plan') openPlan();
         else if (id === 'progress') openProgress();
         else if (id === 'health') openHealth();
+        else if (id === 'mistake') openMistakes();
+        else if (id === 'adaptive') openAdaptive();
+        else if (id === 'listen') openListenMode();
+        else if (id === 'sprint') openSprint();
+        else if (id === 'doubts') openDoubtHistory();
         else resetApp();
       } catch (e) { reportUnexpectedError(e.message || String(e)); }
       finally { suppressNavRecord = false; }

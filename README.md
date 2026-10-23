@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v11.0** · Single-file app · No build step · No backend · Bring your own API key
+> **v12.0** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -97,6 +97,13 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **🗓️ Revision Plan** — exam countdown + today's plan (due SRS cards, weakest topics, streak).
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **🧪 Self-Test & Data** — 16-point health check, **API usage meter**, and **Backup / Restore** (all your data in one JSON file).
+
+### Smart revision (new in v12)
+- **📕 Mistake Notebook** — every question you get wrong is collected automatically, with your answer vs the correct one, topic and source page. Retry just your mistakes, or turn them into flashcards with one tap.
+- **🎚️ Adaptive Practice** — the app reads your topic-wise accuracy and builds a study plan: what's weak, what's average, what's strong. One click sets the focus and difficulty for your next quiz.
+- **🎧 Listen Mode** — hands-free audio revision. It reads your due flashcards (or all cards, or your mistakes) aloud one after another with adjustable speed — perfect for a walk or commute.
+- **⏱️ Exam-Day Sprint** — a 15-minute countdown that surfaces only the highest-yield points from everything you've saved: flashcards, fixed mistakes, weak topics and cheat-sheet lines.
+- **💬 Doubt History** — every "Ask PDF Doubt" question and answer is saved, so you can revisit what you asked while studying.
 
 ### Experience
 - **Themes:** Midnight · Ocean · Forest · Sunset · Rose · Light · Sepia · True Dark
@@ -259,4 +266,4 @@ If this helped your preparation, a ⭐ on the repo means a lot.
 
 ---
 
-<p align="center"><em>AI Study Suite PRO v11.0 — study smarter, not longer.</em></p>
+<p align="center"><em>AI Study Suite PRO v12.0 — study smarter, not longer.</em></p>
