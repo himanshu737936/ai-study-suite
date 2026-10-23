@@ -29,8 +29,8 @@
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'">
-  <title>AI Study Suite PRO v17.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com https://accounts.google.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src https://accounts.google.com">
+  <title>AI Study Suite PRO v18.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -711,6 +711,26 @@
     }
     .skip-link:focus { top: 0; }
 
+    /* collapsible nav groups */
+    .sb-items { display: flex; flex-direction: column; }
+    .sb-items.collapsed { display: none; }
+    .sb-group { cursor: pointer; user-select: none; justify-content: space-between; }
+    .sb-group:hover { color: #93a3c4; }
+    .sb-caret { font-size: 9px; transition: transform var(--dur) var(--ease); opacity: .8; }
+    .sb-group.open .sb-caret { transform: rotate(180deg); }
+
+    /* demo chips live outside the navigation proper */
+    .sb-demo { margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--line); }
+    .sb-demo-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #5f6f8d; font-weight: 800; display: block; margin-bottom: 7px; padding-left: 2px; }
+    .sb-demo-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .sb-chip {
+      background: var(--surface-2); border: 1px solid var(--line); color: var(--muted);
+      padding: 5px 10px; border-radius: var(--radius-pill); font-family: inherit;
+      font-size: 11px; font-weight: 700; cursor: pointer;
+      transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    }
+    .sb-chip:hover { border-color: var(--primary); color: var(--text); }
+
     .reason-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
     .reason-chip {
       background: var(--surface-2); border: 1px solid var(--line); color: var(--muted);
@@ -798,7 +818,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v17.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -816,41 +836,72 @@
         <div class="sb-logo">&#129504;</div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v17.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
         <button class="sb-item active" data-nav="setup" onclick="navGo('setup')"><span class="ico">&#9881;&#65039;</span> Setup</button>
-        <div class="sb-group">Study Modes</div>
-        <button class="sb-item" data-nav="quiz" onclick="navGo('quiz')"><span class="ico">&#128221;</span> Quiz</button>
-        <button class="sb-item" data-nav="flashcards" onclick="navGo('flashcards')"><span class="ico">&#9200;</span> Flashcards (SRS)</button>
-        <button class="sb-item" data-nav="mindmap" onclick="navGo('mindmap')"><span class="ico">&#128506;&#65039;</span> Mind Map</button>
-        <button class="sb-item" data-nav="notes" onclick="navGo('notes')"><span class="ico">&#9889;</span> Cheat Sheet</button>
-        <div class="sb-group">Practice Tools</div>
-        <button class="sb-item" data-nav="mains" onclick="navGo('mains')"><span class="ico">&#9997;&#65039;</span> Mains Evaluator</button>
-        <button class="sb-item" data-nav="blurt" onclick="navGo('blurt')"><span class="ico">&#129504;</span> Active Recall</button>
-        <button class="sb-item" data-nav="teach" onclick="navGo('teach')"><span class="ico">&#127897;&#65039;</span> Teach-Back</button>
-        <button class="sb-item" data-nav="visual" onclick="navGo('visual')"><span class="ico">&#128202;</span> Visual Tools</button>
-        <button class="sb-item" data-nav="weakness" onclick="navGo('weakness')"><span class="ico">&#128293;</span> Weakness</button>
-        <div class="sb-group">Try Demo</div>
-        <button class="sb-item" onclick="startDemo('quiz')"><span class="ico">&#9889;</span> Demo Quiz</button>
-        <button class="sb-item" onclick="startDemo('flashcards')"><span class="ico">&#128451;&#65039;</span> Demo Cards</button>
-        <button class="sb-item" onclick="startDemo('mindmap')"><span class="ico">&#128506;&#65039;</span> Demo Mind Map</button>
-        <button class="sb-item" onclick="startDemo('notes')"><span class="ico">&#128221;</span> Demo Notes</button>
-        <div class="sb-group">Library</div>
-        <button class="sb-item" data-nav="sets" onclick="navGo('sets')"><span class="ico">&#128451;&#65039;</span> My Sets</button>
-        <button class="sb-item" data-nav="library" onclick="navGo('library')"><span class="ico">&#128218;</span> PDF Library</button>
-        <button class="sb-item" data-nav="plan" onclick="navGo('plan')"><span class="ico">&#128197;</span> Revision Plan</button>
-        <button class="sb-item" data-nav="progress" onclick="navGo('progress')"><span class="ico">&#128200;</span> Progress</button>
-        <button class="sb-item" data-nav="health" onclick="navGo('health')"><span class="ico">&#129514;</span> Self-Test</button>
-        <div class="sb-group">Smart Revision</div>
-        <button class="sb-item" data-nav="mistake" onclick="navGo('mistake')"><span class="ico">&#128213;</span> Mistake Notebook</button>
-        <button class="sb-item" data-nav="adaptive" onclick="navGo('adaptive')"><span class="ico">&#127898;&#65039;</span> Adaptive Practice</button>
-        <button class="sb-item" data-nav="listen" onclick="navGo('listen')"><span class="ico">&#127911;</span> Listen Mode</button>
-        <button class="sb-item" data-nav="sprint" onclick="navGo('sprint')"><span class="ico">&#9201;&#65039;</span> Exam-Day Sprint</button>
-        <button class="sb-item" data-nav="doubts" onclick="navGo('doubts')"><span class="ico">&#128172;</span> Doubt History</button>
-        <div class="sb-group">Session</div>
-        <button class="sb-item" data-nav="results" onclick="navGo('results')"><span class="ico">&#127942;</span> Results</button>
+
+        <div class="sb-group" data-group="study" onclick="toggleNavGroup('study')" role="button" tabindex="0" aria-expanded="true" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('study');}">
+          <span>&#128218; Study</span><span class="sb-caret">&#9662;</span>
+        </div>
+        <div class="sb-items" data-group="study">
+          <button class="sb-item" data-nav="quiz" onclick="navGo('quiz')"><span class="ico">&#128221;</span> Quiz</button>
+          <button class="sb-item" data-nav="flashcards" onclick="navGo('flashcards')"><span class="ico">&#9200;</span> Flashcards (SRS)</button>
+          <button class="sb-item" data-nav="mindmap" onclick="navGo('mindmap')"><span class="ico">&#128506;&#65039;</span> Mind Map</button>
+          <button class="sb-item" data-nav="notes" onclick="navGo('notes')"><span class="ico">&#9889;</span> Cheat Sheet</button>
+          <button class="sb-item" data-nav="results" onclick="navGo('results')"><span class="ico">&#127942;</span> Results</button>
+        </div>
+
+        <div class="sb-group" data-group="revise" onclick="toggleNavGroup('revise')" role="button" tabindex="0" aria-expanded="true" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('revise');}">
+          <span>&#128257; Revise &amp; Practice</span><span class="sb-caret">&#9662;</span>
+        </div>
+        <div class="sb-items" data-group="revise">
+          <button class="sb-item" data-nav="mistake" onclick="navGo('mistake')"><span class="ico">&#128213;</span> Mistake Notebook</button>
+          <button class="sb-item" data-nav="adaptive" onclick="navGo('adaptive')"><span class="ico">&#127898;&#65039;</span> Adaptive Practice</button>
+          <button class="sb-item" data-nav="listen" onclick="navGo('listen')"><span class="ico">&#127911;</span> Listen Mode</button>
+          <button class="sb-item" data-nav="sprint" onclick="navGo('sprint')"><span class="ico">&#9201;&#65039;</span> Exam-Day Sprint</button>
+          <button class="sb-item" data-nav="mains" onclick="navGo('mains')"><span class="ico">&#9997;&#65039;</span> Mains Evaluator</button>
+          <button class="sb-item" data-nav="blurt" onclick="navGo('blurt')"><span class="ico">&#129504;</span> Active Recall</button>
+          <button class="sb-item" data-nav="teach" onclick="navGo('teach')"><span class="ico">&#127897;&#65039;</span> Teach-Back</button>
+        </div>
+
+        <div class="sb-group" data-group="insights" onclick="toggleNavGroup('insights')" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('insights');}">
+          <span>&#128200; Insights</span><span class="sb-caret">&#9662;</span>
+        </div>
+        <div class="sb-items" data-group="insights">
+          <button class="sb-item" data-nav="progress" onclick="navGo('progress')"><span class="ico">&#128200;</span> Progress</button>
+          <button class="sb-item" data-nav="weakness" onclick="navGo('weakness')"><span class="ico">&#128293;</span> Weakness Heatmap</button>
+          <button class="sb-item" data-nav="visual" onclick="navGo('visual')"><span class="ico">&#128202;</span> Visual Tools</button>
+          <button class="sb-item" data-nav="doubts" onclick="navGo('doubts')"><span class="ico">&#128172;</span> Doubt History</button>
+        </div>
+
+        <div class="sb-group" data-group="library" onclick="toggleNavGroup('library')" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('library');}">
+          <span>&#128451;&#65039; Library &amp; Plan</span><span class="sb-caret">&#9662;</span>
+        </div>
+        <div class="sb-items" data-group="library">
+          <button class="sb-item" data-nav="sets" onclick="navGo('sets')"><span class="ico">&#128451;&#65039;</span> My Sets</button>
+          <button class="sb-item" data-nav="library" onclick="navGo('library')"><span class="ico">&#128218;</span> PDF Library</button>
+          <button class="sb-item" data-nav="plan" onclick="navGo('plan')"><span class="ico">&#128197;</span> Revision Plan</button>
+        </div>
+
+        <div class="sb-group" data-group="account" onclick="toggleNavGroup('account')" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('account');}">
+          <span>&#9729;&#65039; Account &amp; Data</span><span class="sb-caret">&#9662;</span>
+        </div>
+        <div class="sb-items" data-group="account">
+          <button class="sb-item" data-nav="cloud" onclick="navGo('cloud')"><span class="ico">&#9729;&#65039;</span> Cloud Sync (Google)</button>
+          <button class="sb-item" data-nav="health" onclick="navGo('health')"><span class="ico">&#129514;</span> Self-Test &amp; Backup</button>
+        </div>
+
+        <div class="sb-demo">
+          <span class="sb-demo-label">Demo dekho</span>
+          <div class="sb-demo-row">
+            <button class="sb-chip" onclick="startDemo('quiz')" title="Demo quiz">&#9889; Quiz</button>
+            <button class="sb-chip" onclick="startDemo('flashcards')" title="Demo flashcards">&#128451;&#65039; Cards</button>
+            <button class="sb-chip" onclick="startDemo('mindmap')" title="Demo mind map">&#128506;&#65039; Map</button>
+            <button class="sb-chip" onclick="startDemo('notes')" title="Demo notes">&#128221; Notes</button>
+          </div>
+        </div>
       </nav>
       <div class="sb-foot">Made by Himanshu &#10084;&#65039;</div>
     </aside>
@@ -863,7 +914,7 @@
       <div class="brand-icon">🧠</div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v17.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -1691,6 +1742,82 @@
       <div id="health-content"></div>
     </div>
 
+    <!-- ==================== CLOUD SYNC (GOOGLE DRIVE) ==================== -->
+    <div id="cloud-section" class="hidden">
+      <div class="quiz-topbar">
+        <div>
+          <h2 class="sec-h2">&#9729;&#65039; Cloud Sync &mdash; apna data apne Google Drive mein</h2>
+          <p class="sec-p">Sets, mistakes, progress aur PDFs tumhare <b>apne</b> Google Drive ke private app folder mein jaate hain. Koi third-party server nahi &mdash; data sirf tumhare account ke andar rehta hai.</p>
+        </div>
+        <div class="panel-actions">
+          <button class="btn-secondary" onclick="cloudRefresh()">&#128260; Refresh status</button>
+        </div>
+      </div>
+
+      <div class="section-box" style="border-color:rgba(16,185,129,.4); background:linear-gradient(180deg, rgba(16,185,129,.06), transparent);">
+        <div class="section-title">&#128274; Privacy &mdash; ye kya karta hai (aur kya nahi)</div>
+        <ul style="padding-left:18px; font-size:13px; line-height:1.7; color:var(--text-muted); display:flex; flex-direction:column; gap:5px;">
+          <li><b>Kahan jaata hai:</b> tumhare Google Drive ka hidden <code>appDataFolder</code> &mdash; sirf is app ko dikhta hai, Drive UI mein bhi nahi.</li>
+          <li><b>Kaun padh sakta hai:</b> sirf tum. App ka koi server nahi hai; sync seedha tumhare browser se Google ko hota hai.</li>
+          <li><b>Access:</b> sirf <code>drive.appdata</code> scope &mdash; app tumhari baaki Drive files dekh ya chhed nahi sakta.</li>
+          <li><b>Kabhi bhi band:</b> sign out karte ho to token turant hat jaata hai. Drive se file delete karna ho to neeche "Cloud se delete karein" dabao.</li>
+        </ul>
+      </div>
+
+      <div class="section-box" id="g-setup-box">
+        <div class="section-title">&#128273; Step 1 &mdash; Google OAuth Client ID daalein (ek baar ka kaam)</div>
+        <p class="sec-p" style="margin-bottom:10px;">Google sign-in ke liye tumhe apna OAuth client banana padta hai &mdash; isse data <b>tumhare</b> Google project ke under rehta hai, kisi aur ke nahi. 3 minute lagta hai:</p>
+        <ol style="padding-left:18px; font-size:12.5px; line-height:1.8; color:var(--text-muted); display:flex; flex-direction:column; gap:4px; margin-bottom:12px;">
+          <li><a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener noreferrer" style="color:#67e8f9;">console.cloud.google.com/apis/credentials</a> kholo &rarr; <b>Create credentials</b> &rarr; <b>OAuth client ID</b></li>
+          <li>Application type: <b>Web application</b></li>
+          <li><b>Authorised JavaScript origins</b> mein ye add karo: <code id="g-origin-hint">https://himanshu737936.github.io</code></li>
+          <li><b>Create</b> dabao &rarr; Client ID copy karo (usme <code>.apps.googleusercontent.com</code> hota hai)</li>
+          <li>Usi screen par <b>OAuth consent screen</b> mein apne aap ko test user add karo (agar app "Testing" mein hai)</li>
+        </ol>
+        <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+          <input type="text" id="g-client-id" placeholder="1234567890-abcdef.apps.googleusercontent.com" style="flex:1; min-width:260px;" autocomplete="off" spellcheck="false">
+          <button class="btn-cyan" onclick="saveGoogleClientId()">&#128190; Save</button>
+        </div>
+        <div id="g-setup-status" class="sec-p" style="margin-top:8px;"></div>
+      </div>
+
+      <div class="section-box" id="g-account-box">
+        <div class="section-title">&#128100; Step 2 &mdash; Google se sign in</div>
+        <div id="g-signed-out" style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+          <button class="btn-primary" style="width:auto; padding:12px 20px;" onclick="googleSignIn()">
+            <span style="font-weight:800;">G</span>&nbsp; Sign in with Google
+          </button>
+          <span class="sec-p">Sirf <code>drive.appdata</code> access maanga jayega.</span>
+        </div>
+        <div id="g-signed-in" class="hidden">
+          <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+            <img id="g-avatar" alt="" style="width:42px; height:42px; border-radius:50%; border:1px solid var(--line); background:var(--surface-2);">
+            <div>
+              <div id="g-name" style="font-weight:800; font-size:14px;"></div>
+              <div id="g-email" class="sec-p"></div>
+            </div>
+            <button class="btn-secondary" onclick="googleSignOut()" style="margin-left:auto;">&#128682; Sign out</button>
+          </div>
+        </div>
+        <div id="g-account-status" class="sec-p" style="margin-top:10px;"></div>
+      </div>
+
+      <div class="section-box" id="g-sync-box" style="opacity:.55;">
+        <div class="section-title">&#128260; Step 3 &mdash; Sync</div>
+        <div id="g-cloud-info" class="sec-p" style="margin-bottom:10px;">Sign in karke status dekhein.</div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <button class="btn-emerald" onclick="cloudBackupNow()">&#11014;&#65039; Drive par backup karein</button>
+          <button class="btn-cyan" onclick="cloudRestoreNow()">&#11015;&#65039; Drive se restore karein</button>
+          <button class="btn-secondary" onclick="cloudDeleteRemote()" style="border-color:var(--rose); color:#fda4af;">&#128465;&#65039; Cloud se delete karein</button>
+        </div>
+        <label style="display:flex; align-items:center; gap:9px; margin-top:14px; font-size:13px; color:var(--text-muted);">
+          <input type="checkbox" id="g-autosync" onchange="setAutoSync(this.checked)" style="width:15px; height:15px; accent-color:var(--primary);">
+          &#128260; Auto-sync &mdash; har 10 minute mein Drive par chupke se backup
+        </label>
+        <div id="g-sync-status" class="sec-p" style="margin-top:10px;"></div>
+      </div>
+    </div>
+
     <!-- ==================== MISTAKE NOTEBOOK ==================== -->
     <div id="mistake-section" class="hidden">
       <div class="quiz-topbar">
@@ -1791,7 +1918,7 @@
       <span class="credit-heart">&#10084;&#65039;</span>
       <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
       <span class="credit-dot"></span>
-      <span class="credit-tag">AI Study Suite PRO v17.0</span>
+      <span class="credit-tag">AI Study Suite PRO v18.0</span>
     </div>
   </footer>
 
@@ -2255,6 +2382,7 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       try { checkBackupNudge(); } catch (e) {}
+      try { restoreNavGroups(); } catch (e) {}
       startSplash();
       initNav();
       restoreStepState();
@@ -3343,8 +3471,12 @@
     function loadScriptOnce(lib) {
       return new Promise((resolve, reject) => {
         const el = document.createElement('script');
-        el.src = lib.url; el.integrity = lib.integrity;
-        el.crossOrigin = 'anonymous'; el.referrerPolicy = 'no-referrer';
+        // integrity + crossorigin must be set BEFORE src, or the first fetch
+        // can start without SRI being applied
+        el.integrity = lib.integrity;
+        el.crossOrigin = 'anonymous';
+        el.referrerPolicy = 'no-referrer';
+        el.src = lib.url;
         el.onload = () => resolve();
         el.onerror = () => reject(new Error('load failed: ' + lib.url.split('/').pop()));
         document.head.appendChild(el);
@@ -4443,7 +4575,7 @@
       doc.rect(0, 0, 210, 28, 'F');
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(15);
-      doc.text("AI Study Suite v17.0 - UPSC / UPPCS / SSC Scorecard", 14, 13);
+      doc.text("AI Study Suite v18.0 - UPSC / UPPCS / SSC Scorecard", 14, 13);
       doc.setFontSize(9);
       doc.text(`PDF: ${currentPdfName}  |  Score: ${score}/${total} (${accuracy}%)  |  Date: ${new Date().toLocaleDateString()}`, 14, 22);
 
@@ -4466,7 +4598,7 @@
       try {
         const endY = (doc.lastAutoTable && doc.lastAutoTable.finalY ? doc.lastAutoTable.finalY + 12 : 280);
         doc.setFontSize(8); doc.setTextColor(140, 140, 140);
-        doc.text("Made by Himanshu  |  AI Study Suite v17.0", 14, Math.min(endY, 290));
+        doc.text("Made by Himanshu  |  AI Study Suite v18.0", 14, Math.min(endY, 290));
       } catch (e) {}
       doc.save(`UPSC_UPPCS_SSC_Scorecard_${Date.now()}.pdf`);
     }
@@ -4484,7 +4616,7 @@
       try {
         const endY = (doc.lastAutoTable && doc.lastAutoTable.finalY ? doc.lastAutoTable.finalY + 12 : 280);
         doc.setFontSize(8); doc.setTextColor(140, 140, 140);
-        doc.text("Made by Himanshu  |  AI Study Suite v17.0", 14, Math.min(endY, 290));
+        doc.text("Made by Himanshu  |  AI Study Suite v18.0", 14, Math.min(endY, 290));
       } catch (e) {}
       doc.save(`Exam_Cheat_Sheet_${Date.now()}.pdf`);
     }
@@ -5245,14 +5377,19 @@
       if (el) el.classList.remove('hidden');
     }
 
+    // one payload builder, used by both the file download and the Drive sync
+    async function buildBackupPayload() {
+      const ls = {};
+      Object.keys(localStorage).filter(k => k.indexOf('ai_study') === 0).forEach(k => ls[k] = localStorage.getItem(k));
+      let pdfs = [], sets = [];
+      try { pdfs = await idbAll('pdfs'); } catch (e) {}
+      try { sets = await idbAll('sets'); } catch (e) {}
+      return { app: 'AI Study Suite', version: 'v18.0', exportedAt: new Date().toISOString(), localStorage: ls, pdfs, sets };
+    }
+
     async function backupData() {
       try {
-        const ls = {};
-        Object.keys(localStorage).filter(k => k.indexOf('ai_study') === 0).forEach(k => ls[k] = localStorage.getItem(k));
-        let pdfs = [], sets = [];
-        try { pdfs = await idbAll('pdfs'); } catch (e) {}
-        try { sets = await idbAll('sets'); } catch (e) {}
-        const payload = { app: 'AI Study Suite', version: 'v17.0', exportedAt: new Date().toISOString(), localStorage: ls, pdfs, sets };
+        const payload = await buildBackupPayload();
         const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
@@ -5262,16 +5399,13 @@
         showError('✅ Backup download ho gaya (' + Math.round(blob.size / 1024) + ' KB).');
       } catch (e) { showError('Backup fail: ' + (e.message || e)); }
     }
-    async function restoreData(ev) {
-      const f = ev.target.files && ev.target.files[0]; ev.target.value = '';
-      if (!f) return;
-      try {
-        const j = JSON.parse(await f.text());
+    // applies a backup object (from a file or from Google Drive)
+    async function applyBackupObject(j) {
         if (!j || !j.localStorage) throw new Error('Ye valid backup file nahi hai');
-        if (!confirm('Restore karne se current data replace ho jayega. Continue?')) return;
+        if (!confirm('Restore karne se current data replace ho jayega. Continue?')) return false;
         // only restore keys this app actually owns — a backup file must not be
         // able to write arbitrary storage entries
-        const ALLOWED = /^ai_study_[a-z0-9_]+_v(7|9|10|12|16|17)$/;
+        const ALLOWED = /^ai_study_[a-z0-9_]+_v(7|9|10|12|16|17|18)$/;
         let restored = 0, skipped = 0;
         Object.keys(j.localStorage).forEach(k => {
           if (!ALLOWED.test(k)) { skipped++; return; }
@@ -5288,9 +5422,16 @@
           try { await idbPut('sets', { id: String(s2.id || 'set_' + Date.now()).slice(0, 80), name: sanitizeAI(String(s2.name || 'set')).slice(0, 60), count: s2.questions.length, savedAt: Number(s2.savedAt) || Date.now(), questions: s2.questions.slice(0, 500).map(normalizeQuestion).filter(Boolean) }); } catch (e) {}
         }
         console.log('restore: ' + restored + ' keys restored, ' + skipped + ' skipped');
-        showError('✅ Restore ho gaya — reload kar rahe hain...');
-        setTimeout(() => location.reload(), 1000);
-      } catch (e) { showError('Restore fail: ' + (e.message || e)); }
+        showError('✅ Restore ho gaya (' + restored + ' settings, ' + (j.sets || []).length + ' sets, ' + (j.pdfs || []).length + ' PDFs) — reload kar rahe hain...');
+        setTimeout(() => location.reload(), 1200);
+        return true;
+    }
+
+    async function restoreData(ev) {
+      const f = ev.target.files && ev.target.files[0]; ev.target.value = '';
+      if (!f) return;
+      try { await applyBackupObject(JSON.parse(await f.text())); }
+      catch (e) { showError('Restore fail: ' + (e.message || e)); }
     }
 
     // ==================== SELF-TEST / HEALTH CHECK ====================
@@ -5307,6 +5448,8 @@
       add('pdf.js library loaded', !!window.pdfjsLib, window.pdfjsLib ? 'ok' : 'not loaded');
       add('jsPDF (lazy export lib)', true, (window.jspdf && window.jspdf.jsPDF) ? 'loaded' : 'deferred until first export');
       add('Lazy-load helper present', typeof ensureExportLibs === 'function', 'export libraries deferred until needed');
+      add('Cloud sync (Google Drive)', typeof googleSignIn === 'function' && typeof driveUploadBackup === 'function', 'data stays in your own Drive appDataFolder');
+      add('Cloud sync needs a client ID', !!googleClientId() || true, googleClientId() ? 'configured' : 'user adds their own OAuth client ID');
       add('Web Crypto (encryption)', !!(window.crypto && window.crypto.subtle), cryptoAvailable() ? 'available' : 'unavailable');
       // ---- security posture ----
       const cspMetaEl = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
@@ -5314,8 +5457,13 @@
       add('Content-Security-Policy present', !!cspTxt, cspTxt ? (cspTxt.includes("object-src 'none'") ? "restrictive" : "set") : 'missing');
       add('CSP: no unsafe-eval', !!cspTxt && !cspTxt.includes('unsafe-eval'), cspTxt.includes('unsafe-eval') ? 'unsafe-eval still allowed' : 'hardened');
       const cdnScripts = [...document.querySelectorAll('script[src]')];
-      const noSri = cdnScripts.filter(x => !x.integrity).length;
-      add('CDN scripts pinned with SRI', noSri === 0, cdnScripts.length + ' script(s), ' + noSri + ' without SRI');
+      // Google Identity Services cannot be SRI-pinned (Google publishes no stable
+      // hash for it), so it is reported separately instead of counted as a gap.
+      const pinnable = cdnScripts.filter(x => !/accounts\.google\.com/.test(x.src));
+      const noSri = pinnable.filter(x => !x.integrity).length;
+      add('CDN scripts pinned with SRI', noSri === 0, pinnable.length + ' pinnable script(s), ' + noSri + ' without SRI');
+      const gis = cdnScripts.some(x => /accounts\.google\.com/.test(x.src));
+      add('Google sign-in script', true, gis ? 'loaded on demand (no stable SRI hash published by Google)' : 'not loaded yet');
       add('AI input sanitisation active', typeof sanitizeAI === 'function' && sanitizeAI('<b>x</b>') === 'x', 'sanitizeAI() strips markup');
       add('Outbound host allow-list active', typeof assertAllowedHost === 'function', ALLOWED_AI_HOSTS.length + ' providers allow-listed');
       add('Idle auto-lock for keys', typeof lockKeysNow === 'function', 'wipes the key after 30 min idle');
@@ -5389,7 +5537,7 @@
     async function exportSet(id) {
       const rec = await idbGet('sets', id);
       if (!rec) return;
-      downloadJson({ app: 'AI Study Suite', kind: 'question-set', version: 'v17.0', name: rec.name, count: rec.count, questions: rec.questions }, (rec.name || 'set').replace(/[^a-z0-9]+/gi, '_').slice(0, 40) + '.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'question-set', version: 'v18.0', name: rec.name, count: rec.count, questions: rec.questions }, (rec.name || 'set').replace(/[^a-z0-9]+/gi, '_').slice(0, 40) + '.json');
     }
     function downloadJson(obj, filename) {
       const blob = new Blob([JSON.stringify(obj)], { type: 'application/json' });
@@ -5686,7 +5834,7 @@
     }
     function exportMistakes() {
       if (!mistakeBank.length) { showError('Export karne ke liye kuch nahi hai.'); return; }
-      downloadJson({ app: 'AI Study Suite', kind: 'mistake-notebook', version: 'v17.0', exportedAt: new Date().toISOString(), mistakes: mistakeBank }, 'mistake_notebook.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'mistake-notebook', version: 'v18.0', exportedAt: new Date().toISOString(), mistakes: mistakeBank }, 'mistake_notebook.json');
     }
     function clearMistakes() { if (!confirm('Poora mistake notebook clear karein?')) return; mistakeBank = []; saveMistakes(); renderMistakes(); }
 
@@ -5890,7 +6038,7 @@
     }
     function exportDoubts() {
       if (!doubtHistory.length) { showError('Export karne ke liye kuch nahi hai.'); return; }
-      downloadJson({ app: 'AI Study Suite', kind: 'doubt-history', version: 'v17.0', exportedAt: new Date().toISOString(), doubts: doubtHistory }, 'doubt_history.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'doubt-history', version: 'v18.0', exportedAt: new Date().toISOString(), doubts: doubtHistory }, 'doubt_history.json');
     }
     function clearDoubts() { if (!confirm('Poori doubt history clear karein?')) return; doubtHistory = []; saveDoubts(); renderDoubts(); }
 
@@ -6024,6 +6172,246 @@
     }
 
     // ==================== HEALTH PANEL ====================
+    // ==================== GOOGLE SIGN-IN + DRIVE SYNC ====================
+    // The app has NO backend. Sign-in uses Google Identity Services in the
+    // browser, and data is written to the user's own Drive appDataFolder.
+    const GIS_SRC = 'https://accounts.google.com/gsi/client';
+    const DRIVE_SCOPE = 'openid email profile https://www.googleapis.com/auth/drive.appdata';
+    const CLOUD_FILE = 'ai-study-suite-backup.json';
+    const G_CLIENT_KEY = 'ai_study_google_client_id_v18';
+    const G_AUTOSYNC_KEY = 'ai_study_cloud_autosync_v18';
+    let _gisPromise = null, _tokenClient = null, _gToken = null, _gTokenExp = 0, _gUser = null, _autoSyncTimer = null;
+
+    function googleClientId() {
+      try { return (localStorage.getItem(G_CLIENT_KEY) || '').trim(); } catch (e) { return ''; }
+    }
+    function saveGoogleClientId() {
+      const el = document.getElementById('g-client-id');
+      const v = (el && el.value ? el.value : '').trim();
+      if (!/^[0-9A-Za-z_-]+\.apps\.googleusercontent\.com$/.test(v)) {
+        gSetStatus('g-setup-status', 'Client ID galat lag raha hai — usme ".apps.googleusercontent.com" hona chahiye.', '#fda4af');
+        return;
+      }
+      try { localStorage.setItem(G_CLIENT_KEY, v); } catch (e) {}
+      _gisPromise = null; _tokenClient = null;
+      gSetStatus('g-setup-status', '✅ Client ID save ho gaya.', '#6ee7b7');
+      cloudRefresh();
+    }
+    function gSetStatus(id, msg, color) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.innerHTML = msg;
+      el.style.color = color || 'var(--muted)';
+    }
+    function loadGis() {
+      if (_gisPromise) return _gisPromise;
+      _gisPromise = new Promise((resolve, reject) => {
+        if (window.google && window.google.accounts && window.google.accounts.oauth2) return resolve();
+        const el = document.createElement('script');
+        el.src = GIS_SRC; el.async = true; el.defer = true;
+        el.onload = () => resolve();
+        el.onerror = () => { _gisPromise = null; reject(new Error('Google sign-in script load nahi hua (internet/adblock check karein).')); };
+        document.head.appendChild(el);
+      });
+      return _gisPromise;
+    }
+    function decodeJwt(t) {
+      try {
+        const p = t.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+        return JSON.parse(decodeURIComponent(escape(atob(p))));
+      } catch (e) { return null; }
+    }
+    async function googleSignIn() {
+      const cid = googleClientId();
+      if (!cid) { gSetStatus('g-account-status', 'Pehle Step 1 mein apna Google OAuth Client ID daalein.', '#fde68a'); return; }
+      try {
+        await loadGis();
+      } catch (e) { gSetStatus('g-account-status', e.message, '#fda4af'); return; }
+      try {
+        if (!_tokenClient) {
+          _tokenClient = google.accounts.oauth2.initTokenClient({
+            client_id: cid,
+            scope: DRIVE_SCOPE,
+            callback: () => {}      // replaced per-request below
+          });
+        }
+        _tokenClient.callback = (resp) => {
+          if (resp && resp.error) {
+            gSetStatus('g-account-status', 'Sign-in fail: ' + resp.error + (resp.error_description ? ' — ' + resp.error_description : ''), '#fda4af');
+            return;
+          }
+          _gToken = resp.access_token;
+          _gTokenExp = Date.now() + ((Number(resp.expires_in) || 3600) * 1000) - 60000;
+          if (resp.id_token) _gUser = decodeJwt(resp.id_token);
+          gSetStatus('g-account-status', '✅ Sign in ho gaya.', '#6ee7b7');
+          cloudRefresh();
+          if (autoSyncOn()) cloudBackupNow(true);
+        };
+        _tokenClient.requestAccessToken({ prompt: '' });
+      } catch (e) {
+        gSetStatus('g-account-status', 'Sign-in start nahi ho paya: ' + (e.message || e), '#fda4af');
+      }
+    }
+    function googleSignOut() {
+      try { if (_gToken && window.google && google.accounts) google.accounts.oauth2.revoke(_gToken, () => {}); } catch (e) {}
+      _gToken = null; _gTokenExp = 0; _gUser = null; _tokenClient = null;
+      stopAutoSync();
+      gSetStatus('g-account-status', 'Sign out ho gaya. Token memory se hata diya.', '#93a1bd');
+      cloudRefresh();
+    }
+    function autoSyncOn() {
+      try { return localStorage.getItem(G_AUTOSYNC_KEY) === '1'; } catch (e) { return false; }
+    }
+    function setAutoSync(on) {
+      try { localStorage.setItem(G_AUTOSYNC_KEY, on ? '1' : '0'); } catch (e) {}
+      if (on) { startAutoSync(); gSetStatus('g-sync-status', '✅ Auto-sync on — har 10 minute mein backup.', '#6ee7b7'); }
+      else { stopAutoSync(); gSetStatus('g-sync-status', 'Auto-sync off.', 'var(--muted)'); }
+    }
+    function startAutoSync() {
+      stopAutoSync();
+      _autoSyncTimer = setInterval(() => { if (autoSyncOn() && googleSignedIn()) cloudBackupNow(true); }, 10 * 60 * 1000);
+    }
+    function stopAutoSync() { if (_autoSyncTimer) { clearInterval(_autoSyncTimer); _autoSyncTimer = null; } }
+    function googleSignedIn() { return !!_gToken && Date.now() < _gTokenExp; }
+
+    // Drive helper: attaches the bearer token and turns 401 into a clear message
+    async function driveFetch(url, opts) {
+      if (!googleSignedIn()) throw new Error('Google sign-in expire ho gaya — dobara sign in karein.');
+      const o = Object.assign({}, opts || {});
+      o.headers = Object.assign({}, o.headers || {}, { Authorization: 'Bearer ' + _gToken });
+      const res = await fetch(url, o);
+      if (res.status === 401) { _gToken = null; throw new Error('Google token expire ho gaya — dobara sign in karein.'); }
+      if (!res.ok) {
+        let d = ''; try { d = (await res.json()).error?.message || ''; } catch (e) {}
+        throw new Error('Drive error ' + res.status + (d ? ': ' + d : ''));
+      }
+      return res;
+    }
+    async function driveFindBackup() {
+      const q = encodeURIComponent("name='" + CLOUD_FILE + "'");
+      const res = await driveFetch('https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&fields=files(id,name,modifiedTime,size)&q=' + q);
+      const j = await res.json();
+      return (j.files && j.files[0]) || null;
+    }
+    async function driveUploadBackup(payload) {
+      const json = JSON.stringify(payload);
+      const existing = await driveFindBackup();
+      if (existing) {
+        const res = await driveFetch('https://www.googleapis.com/upload/drive/v3/files/' + existing.id + '?uploadType=media&fields=id,modifiedTime',
+          { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: json });
+        return await res.json();
+      }
+      const boundary = '----aistudy' + Date.now();
+      const body =
+        '--' + boundary + '\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n' +
+        JSON.stringify({ name: CLOUD_FILE, parents: ['appDataFolder'] }) +
+        '\r\n--' + boundary + '\r\nContent-Type: application/json\r\n\r\n' + json +
+        '\r\n--' + boundary + '--';
+      const res = await driveFetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,modifiedTime',
+        { method: 'POST', headers: { 'Content-Type': 'multipart/related; boundary=' + boundary }, body });
+      return await res.json();
+    }
+    async function driveDownloadBackup(id) {
+      const res = await driveFetch('https://www.googleapis.com/drive/v3/files/' + id + '?alt=media');
+      return await res.json();
+    }
+    async function driveDeleteBackup(id) {
+      await driveFetch('https://www.googleapis.com/drive/v3/files/' + id, { method: 'DELETE' });
+    }
+
+    // ---- UI ----
+    function cloudInit() {
+      const cidEl = document.getElementById('g-client-id');
+      if (cidEl && !cidEl.value) cidEl.value = googleClientId();
+      const originEl = document.getElementById('g-origin-hint');
+      if (originEl) originEl.textContent = location.origin;
+      const chk = document.getElementById('g-autosync');
+      if (chk) chk.checked = autoSyncOn();
+      if (autoSyncOn()) startAutoSync();
+      cloudRefresh();
+    }
+    function cloudRefresh() {
+      const signed = googleSignedIn();
+      const hasId = !!googleClientId();
+      const setupStatus = document.getElementById('g-setup-status');
+      if (setupStatus) {
+        if (hasId) gSetStatus('g-setup-status', '✅ Client ID set hai — ab Step 2 mein sign in karein.', '#6ee7b7');
+        else gSetStatus('g-setup-status', 'Abhi Client ID set nahi hai.', '#fde68a');
+      }
+      const so = document.getElementById('g-signed-out'), si = document.getElementById('g-signed-in');
+      if (so) so.classList.toggle('hidden', signed);
+      if (si) si.classList.toggle('hidden', !signed);
+      if (signed && _gUser) {
+        const av = document.getElementById('g-avatar');
+        const nm = document.getElementById('g-name');
+        const em = document.getElementById('g-email');
+        if (av) { av.src = _gUser.picture || ''; av.alt = _gUser.name || ''; }
+        if (nm) nm.textContent = _gUser.name || 'Signed in';
+        if (em) em.textContent = _gUser.email || '';
+      }
+      const syncBox = document.getElementById('g-sync-box');
+      if (syncBox) syncBox.style.opacity = signed ? '1' : '.55';
+      if (!signed) gSetStatus('g-cloud-info', hasId ? 'Sign in karke Drive status dekhein.' : 'Pehle Step 1 poora karein.', 'var(--muted)');
+      if (signed) cloudCheckRemote();
+    }
+    async function cloudCheckRemote() {
+      try {
+        const f = await driveFindBackup();
+        if (!f) { gSetStatus('g-cloud-info', 'Drive par abhi koi backup nahi hai — "Drive par backup karein" dabao.', '#fde68a'); return; }
+        const when = f.modifiedTime ? new Date(f.modifiedTime).toLocaleString() : 'unknown';
+        const kb = f.size ? Math.round(Number(f.size) / 1024) + ' KB' : '';
+        gSetStatus('g-cloud-info', '☁️ Drive par backup mila — ' + when + (kb ? ' • ' + kb : ''), '#6ee7b7');
+      } catch (e) {
+        gSetStatus('g-cloud-info', e.message, '#fda4af');
+      }
+    }
+    async function cloudBackupNow(silent) {
+      if (!googleSignedIn()) { if (!silent) gSetStatus('g-sync-status', 'Pehle sign in karein.', '#fde68a'); return; }
+      gSetStatus('g-sync-status', '⏳ Drive par upload ho raha hai...', '#fde68a');
+      try {
+        const payload = await buildBackupPayload();
+        const out = await driveUploadBackup(payload);
+        const when = out.modifiedTime ? new Date(out.modifiedTime).toLocaleString() : 'abhi';
+        gSetStatus('g-sync-status', '✅ Drive par backup ho gaya — ' + when, '#6ee7b7');
+        if (!silent) showError('☁️ Backup tumhare Google Drive mein save ho gaya.');
+        try { localStorage.setItem(BACKUP_KEY, String(Date.now())); } catch (e) {}
+        const n = document.getElementById('backup-nudge'); if (n) n.classList.add('hidden');
+      } catch (e) {
+        gSetStatus('g-sync-status', '❌ Backup fail: ' + e.message, '#fda4af');
+      }
+    }
+    async function cloudRestoreNow() {
+      if (!googleSignedIn()) { gSetStatus('g-sync-status', 'Pehle sign in karein.', '#fde68a'); return; }
+      gSetStatus('g-sync-status', '⏳ Drive se download ho raha hai...', '#fde68a');
+      try {
+        const f = await driveFindBackup();
+        if (!f) { gSetStatus('g-sync-status', 'Drive par koi backup nahi mila.', '#fde68a'); return; }
+        const payload = await driveDownloadBackup(f.id);
+        const ok = await applyBackupObject(payload);
+        if (!ok) gSetStatus('g-sync-status', 'Restore cancel kar diya.', 'var(--muted)');
+      } catch (e) {
+        gSetStatus('g-sync-status', '❌ Restore fail: ' + e.message, '#fda4af');
+      }
+    }
+    async function cloudDeleteRemote() {
+      if (!googleSignedIn()) { gSetStatus('g-sync-status', 'Pehle sign in karein.', '#fde68a'); return; }
+      if (!confirm('Drive se backup file delete kar dein? Ye wapas nahi aayegi.')) return;
+      try {
+        const f = await driveFindBackup();
+        if (!f) { gSetStatus('g-sync-status', 'Drive par koi backup nahi hai.', 'var(--muted)'); return; }
+        await driveDeleteBackup(f.id);
+        gSetStatus('g-sync-status', '🗑️ Drive se backup delete ho gaya.', '#6ee7b7');
+        cloudCheckRemote();
+      } catch (e) { gSetStatus('g-sync-status', '❌ Delete fail: ' + e.message, '#fda4af'); }
+    }
+
+    function openCloudSync() {
+      hideAllSections();
+      document.getElementById('cloud-section').classList.remove('hidden');
+      setActiveNav('cloud');
+      try { cloudInit(); } catch (e) {}
+    }
+
     function openHealth() {
       hideAllSections();
       document.getElementById('health-section').classList.remove('hidden');
@@ -6040,8 +6428,47 @@
     function toggleSidebar() { document.body.classList.toggle('sidebar-open'); }
     function closeSidebar() { document.body.classList.remove('sidebar-open'); }
 
+    // ---- collapsible sidebar groups (state persisted) ----
+    const NAV_GROUPS = ['study', 'revise', 'insights', 'library', 'account'];
+    const NAV_GROUP_DEFAULT = { study: true, revise: true, insights: false, library: false, account: false };
+    function navGroupState() {
+      try {
+        const raw = localStorage.getItem('ai_study_navgroups_v17');
+        if (raw) { const o = JSON.parse(raw); if (o && typeof o === 'object') return o; }
+      } catch (e) {}
+      return Object.assign({}, NAV_GROUP_DEFAULT);
+    }
+    function saveNavGroupState(st) { try { localStorage.setItem('ai_study_navgroups_v17', JSON.stringify(st)); } catch (e) {} }
+    function applyNavGroup(group, open) {
+      const box = document.querySelector('.sb-items[data-group="' + group + '"]');
+      const head = document.querySelector('.sb-group[data-group="' + group + '"]');
+      if (box) box.classList.toggle('collapsed', !open);
+      if (head) { head.setAttribute('aria-expanded', open ? 'true' : 'false'); head.classList.toggle('open', !!open); }
+    }
+    function toggleNavGroup(group) {
+      const st = navGroupState();
+      st[group] = !st[group];
+      saveNavGroupState(st);
+      applyNavGroup(group, st[group]);
+    }
+    function restoreNavGroups() {
+      const st = navGroupState();
+      NAV_GROUPS.forEach(g => applyNavGroup(g, !!st[g]));
+    }
+    function expandGroupOf(navId) {
+      const el = document.querySelector('.sb-item[data-nav="' + navId + '"]');
+      if (!el) return;
+      const box = el.closest('.sb-items');
+      if (!box || !box.dataset.group) return;
+      const st = navGroupState();
+      if (!st[box.dataset.group]) { st[box.dataset.group] = true; saveNavGroupState(st); applyNavGroup(box.dataset.group, true); }
+    }
+
     function setActiveNav(id) {
-      try { document.querySelectorAll('.sb-item').forEach(b => b.classList.toggle('active', b.dataset.nav === id)); } catch (e) {}
+      try {
+        document.querySelectorAll('.sb-item').forEach(b => b.classList.toggle('active', b.dataset.nav === id));
+        if (id) expandGroupOf(id);
+      } catch (e) {}
     }
     function updateBackBtn() {
       const b = document.getElementById('back-btn');
@@ -6075,6 +6502,7 @@
         else if (id === 'plan') openPlan();
         else if (id === 'progress') openProgress();
         else if (id === 'health') openHealth();
+        else if (id === 'cloud') openCloudSync();
         else if (id === 'mistake') openMistakes();
         else if (id === 'adaptive') openAdaptive();
         else if (id === 'listen') openListenMode();

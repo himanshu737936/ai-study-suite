@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v17.0** · Single-file app · No build step · No backend · Bring your own API key
+> **v18.0** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -97,6 +97,38 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **🗓️ Revision Plan** — exam countdown + today's plan (due SRS cards, weakest topics, streak).
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **🧪 Self-Test & Data** — 16-point health check, **API usage meter**, and **Backup / Restore** (all your data in one JSON file).
+
+### v18 — a tidier app, and your data in your own Google Drive
+
+**Information architecture cleanup.** The app had grown to 21 sections across 7 flat groups. The sidebar is now five collapsible groups, with the two you use most open by default:
+
+| Group | Contains |
+|---|---|
+| ⚙️ **Setup** | the API key + upload + generate flow |
+| 📚 **Study** *(open)* | Quiz, Flashcards (SRS), Mind Map, Cheat Sheet, Results |
+| 🔁 **Revise & Practice** *(open)* | Mistake Notebook, Adaptive Practice, Listen Mode, Exam-Day Sprint, Mains Evaluator, Active Recall, Teach-Back |
+| 📈 **Insights** | Progress, Weakness Heatmap, Visual Tools, Doubt History |
+| 🗃️ **Library & Plan** | My Sets, PDF Library, Revision Plan |
+| ☁️ **Account & Data** | Cloud Sync, Self-Test & Backup |
+
+- Group open/closed state is remembered, and navigating to an item automatically opens its group.
+- The four **demo** buttons moved out of the navigation into a compact chip row at the bottom — they are a helper, not a destination.
+- Group headers are keyboard-operable with correct `aria-expanded`.
+
+**☁️ Cloud Sync — your data stays in your own Google Drive**
+
+Optional, off by default, and there is still no server of ours anywhere.
+
+- **Sign in with Google** in the browser via Google Identity Services. The app requests **only** the `drive.appdata` scope.
+- Backups are written to your Drive's hidden **`appDataFolder`** — visible only to this app, not even in the Drive UI. No one else can read it, and the app cannot see any of your other Drive files.
+- **Backup / Restore / Delete** from Drive, plus an optional **auto-sync every 10 minutes**.
+- **You bring your own OAuth client ID.** The app shows a 5-step setup card; the client ID is stored locally. This is what keeps the data inside *your* Google project rather than someone else's.
+- **Sign out** revokes the token immediately.
+- The file backup/restore still works exactly as before, and now shares one payload builder with the Drive path.
+
+*Known limitation:* Google does not publish a stable SRI hash for the Identity Services script, so that one script cannot be integrity-pinned. It is reported separately in the self-test rather than counted as a gap. It is also loaded on demand — not at startup.
+
+**Self-test is now 27 checks.**
 
 ### v17 — faster, safer, and better at teaching
 
