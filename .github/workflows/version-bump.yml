@@ -1,0 +1,74 @@
+name: Auto version bump
+
+# Bumps the patch version on every push to main, so the app version always
+# reflects the latest change. The version has ONE source of truth —
+# <meta name="app-version"> in index.html — and this also syncs sw.js so the
+# service-worker cache name changes with it (which is what makes updates appear).
+#
+# The commit it creates is tagged [skip version] so the job never loops.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'sw.js'
+      - '_headers'
+      - 'manifest.json'
+      - 'README.md'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: version-bump
+  cancel-in-progress: false
+
+jobs:
+  bump:
+    if: ${{ !contains(github.event.head_commit.message, '[skip version]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Bump patch version
+        run: |
+          python3 - <<'PY'
+          import re, pathlib
+          idx = pathlib.Path('index.html')
+          s = idx.read_text(encoding='utf-8')
+          m = re.search(r'<meta name="app-version" content="(\d+)\.(\d+)\.(\d+)">', s)
+          if not m:
+              raise SystemExit('app-version meta tag not found in index.html')
+          major, minor, patch = int(m.group(1)), int(m.group(2)), int(m.group(3)) + 1
+          ver = f'{major}.{minor}.{patch}'
+          s = re.sub(r'<meta name="app-version" content="\d+\.\d+\.\d+">',
+                     f'<meta name="app-version" content="{ver}">', s, count=1)
+          idx.write_text(s, encoding='utf-8')
+          sw = pathlib.Path('sw.js')
+          t = sw.read_text(encoding='utf-8')
+          t = re.sub(r"const VERSION = '[^']*';", f"const VERSION = 'v{ver}';", t, count=1)
+          sw.write_text(t, encoding='utf-8')
+          rm = pathlib.Path('README.md')
+          if rm.exists():
+              r = rm.read_text(encoding='utf-8')
+              r = re.sub(r'> \*\*v\d+\.\d+\.\d+\*\* · Single-file app',
+                         f'> **v{major}.{minor}.{patch}** · Single-file app', r, count=1)
+              rm.write_text(r, encoding='utf-8')
+          pathlib.Path('version.txt').write_text(ver, encoding='utf-8')
+          print(f'new version: {ver}')
+          PY
+
+      - name: Commit and push
+        run: |
+          VER="$(cat version.txt)"; rm -f version.txt
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html sw.js README.md
+          if git diff --cached --quiet; then echo "nothing to bump"; exit 0; fi
+          git commit -m "chore: auto-bump version to v${VER} [skip version]"
+          git push
