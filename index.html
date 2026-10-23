@@ -29,7 +29,7 @@
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com https://accounts.google.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src https://accounts.google.com">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://accounts.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com https://accounts.google.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.gstatic.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src https://accounts.google.com https://*.firebaseapp.com">
   <title>AI Study Suite PRO v18.2 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
@@ -322,13 +322,13 @@
     .grid-5 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px; }
 
     label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
-    select, input[type="text"], input[type="password"], input[type="number"] {
+    select, input[type="text"], input[type="password"], input[type="number"], input[type="email"] {
       width: 100%; background: var(--deep); border: 1px solid var(--line); color: var(--text);
       padding: 11px 13px; border-radius: var(--radius-sm); font-family: inherit;
       font-size: 13.5px; outline: none;
       transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background var(--dur) var(--ease);
     }
-    select:hover, input[type="text"]:hover, input[type="password"]:hover, input[type="number"]:hover { border-color: var(--surface-3); }
+    select:hover, input[type="text"]:hover, input[type="password"]:hover, input[type="number"]:hover, input[type="email"]:hover { border-color: var(--surface-3); }
     ::placeholder { color: #6b7a99; opacity: 1; }
     select:focus, input:focus, textarea:focus { border-color: var(--primary); box-shadow: var(--ring); }
     textarea, .big-textarea {
@@ -491,6 +491,7 @@
     /* ===================== Misc widgets ===================== */
     .error-toast { background: rgba(136,19,55,0.92); border: 1px solid var(--rose); color: #ffe4e6; padding: 12px 16px;
       border-radius: var(--radius-sm); margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+    .error-toast.success-toast { background: rgba(6,78,59,0.94); border-color: var(--emerald); color: #d1fae5; }
     .spinner { width: 32px; height: 32px; border: 4px solid var(--primary); border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; display: inline-block; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .stat-box {
@@ -920,11 +921,10 @@
         </div>
 
         <div class="sb-group" data-group="account" onclick="toggleNavGroup('account')" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('account');}">
-          <span>&#9729;&#65039; Account &amp; Data</span><span class="sb-caret">&#9662;</span>
+          <span>&#128100; Account</span><span class="sb-caret">&#9662;</span>
         </div>
         <div class="sb-items" data-group="account">
-          <button class="sb-item" data-nav="cloud" onclick="navGo('cloud')"><span class="ico">&#9729;&#65039;</span> Cloud Sync (Google)</button>
-          <button class="sb-item" data-nav="health" onclick="navGo('health')"><span class="ico">&#129514;</span> Self-Test &amp; Backup</button>
+          <button class="sb-item" data-nav="account" onclick="navGo('account')"><span class="ico">&#128100;</span> Sign in / Create account</button>
         </div>
 
         <div class="sb-demo">
@@ -1015,10 +1015,6 @@
         <div id="due-today" class="hidden" style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; justify-content:space-between; margin-bottom:12px; padding:11px 13px; border-radius:var(--radius-sm); background:linear-gradient(90deg, rgba(16,185,129,.10), rgba(109,111,245,.10)); border:1px solid rgba(16,185,129,.35);">
           <span style="font-size:12.5px; color:#a7f3d0;">&#128197; <b>Aaj ka revision ready hai:</b> <span id="due-summary">—</span></span>
           <button class="btn-emerald" onclick="startDueRevision()" style="padding:8px 14px;">&#9654; Revision shuru karo</button>
-        </div>
-        <div id="backup-nudge" class="hidden" style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; justify-content:space-between; margin-bottom:12px; padding:10px 12px; border-radius:var(--radius-sm); background:rgba(245,158,11,0.10); border:1px solid rgba(245,158,11,0.35);">
-          <span style="font-size:12.5px; color:#fde68a;">💾 <b>14 din se backup nahi liya.</b> Sets, mistakes aur progress sab isi device par hai — ek backup file bana lo.</span>
-          <button class="btn-secondary" onclick="navGo('health')" style="border-color:rgba(245,158,11,0.5); color:#fde68a;">Backup lein</button>
         </div>
         <div class="hs-head">
           <div class="hs-title" data-i18n="dash.title">&#127968; Dashboard</div>
@@ -1761,97 +1757,72 @@
       <div id="progress-content"></div>
     </div>
 
-    <!-- ==================== HEALTH / SELF-TEST / DATA ==================== -->
-    <div id="health-section" class="hidden">
-      <div class="quiz-topbar">
-        <div><h2 class="sec-h2">&#129514; Self-Test &amp; Data</h2><p class="sec-p">App health check, API usage meter, aur backup / restore.</p></div>
-        <div class="panel-actions">
-          <button class="btn-cyan" onclick="runSelfTest()">&#129514; Run self-test</button>
-          <button class="btn-secondary" onclick="backupData()">&#11015;&#65039; Backup</button>
-          <button class="btn-secondary" onclick="document.getElementById('restore-file').click()">&#11014;&#65039; Restore</button>
-          <input type="file" id="restore-file" accept="application/json" class="hidden" onchange="restoreData(event)">
-        </div>
-      </div>
-      <div id="usage-box"></div>
-      <div id="health-content"></div>
-    </div>
-
-    <!-- ==================== CLOUD SYNC (GOOGLE DRIVE) ==================== -->
-    <div id="cloud-section" class="hidden">
+    <!-- ==================== ACCOUNT (FIREBASE EMAIL / PASSWORD) ==================== -->
+    <div id="account-section" class="hidden">
       <div class="quiz-topbar">
         <div>
-          <h2 class="sec-h2">&#9729;&#65039; Cloud Sync &mdash; apna data apne Google Drive mein</h2>
-          <p class="sec-p">Sets, mistakes, progress aur PDFs tumhare <b>apne</b> Google Drive ke private app folder mein jaate hain. Koi third-party server nahi &mdash; data sirf tumhare account ke andar rehta hai.</p>
+          <h2 class="sec-h2">&#128100; Account &mdash; Sign in / Create account</h2>
+          <p class="sec-p">Email + password se apna account banao. Login <b>optional</b> hai &mdash; app ka har feature bina account bhi chalta hai. Account tumhari identity ke liye hai (aur aage cross-device sync ke liye).</p>
         </div>
         <div class="panel-actions">
-          <button class="btn-secondary" onclick="cloudRefresh()">&#128260; Refresh status</button>
-          <button class="btn-secondary" onclick="googleDiagnose()">&#128269; Configuration check</button>
+          <button class="btn-secondary" onclick="renderAccount()">&#128260; Refresh</button>
         </div>
       </div>
 
-      <div class="section-box" style="border-color:rgba(16,185,129,.4); background:linear-gradient(180deg, rgba(16,185,129,.06), transparent);">
-        <div class="section-title">&#128274; Privacy &mdash; ye kya karta hai (aur kya nahi)</div>
-        <ul style="padding-left:18px; font-size:13px; line-height:1.7; color:var(--text-muted); display:flex; flex-direction:column; gap:5px;">
-          <li><b>Kahan jaata hai:</b> tumhare Google Drive ka hidden <code>appDataFolder</code> &mdash; sirf is app ko dikhta hai, Drive UI mein bhi nahi.</li>
-          <li><b>Kaun padh sakta hai:</b> sirf tum. App ka koi server nahi hai; sync seedha tumhare browser se Google ko hota hai.</li>
-          <li><b>Access:</b> sirf <code>drive.appdata</code> scope &mdash; app tumhari baaki Drive files dekh ya chhed nahi sakta.</li>
-          <li><b>Kabhi bhi band:</b> sign out karte ho to token turant hat jaata hai. Drive se file delete karna ho to neeche "Cloud se delete karein" dabao.</li>
-        </ul>
-      </div>
-
-      <div class="section-box" id="g-setup-box">
-        <div class="section-title">&#128273; Step 1 &mdash; Google OAuth Client ID daalein (ek baar ka kaam)</div>
-        <p class="sec-p" style="margin-bottom:10px;">Google sign-in ke liye tumhe apna OAuth client banana padta hai &mdash; isse data <b>tumhare</b> Google project ke under rehta hai, kisi aur ke nahi. 3 minute lagta hai:</p>
+      <div class="section-box" id="fb-setup-box">
+        <div class="section-title">&#128273; Step 1 &mdash; Firebase config daalein (ek baar ka kaam)</div>
+        <p class="sec-p" style="margin-bottom:10px;">Account banane ke liye ek free Firebase project chahiye (Google ka, free tier &mdash; paisa nahi lagta). 5 minute ka kaam:</p>
         <ol style="padding-left:18px; font-size:12.5px; line-height:1.8; color:var(--text-muted); display:flex; flex-direction:column; gap:4px; margin-bottom:12px;">
-          <li><a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener noreferrer" style="color:#67e8f9;">console.cloud.google.com/apis/credentials</a> kholo &rarr; <b>Create credentials</b> &rarr; <b>OAuth client ID</b></li>
-          <li>Application type: <b>Web application</b></li>
-          <li><b>Authorised JavaScript origins</b> mein ye add karo: <code id="g-origin-hint">https://himanshu737936.github.io</code>
+          <li><a href="https://console.firebase.google.com/" target="_blank" rel="noopener noreferrer" style="color:#67e8f9;">console.firebase.google.com</a> kholo &rarr; <b>Add project</b> (naam kuch bhi rakh do)</li>
+          <li>Project ke andar <b>Build &rarr; Authentication &rarr; Get started</b> &rarr; <b>Email/Password</b> ko <b>Enable</b> karo</li>
+          <li><b>Project settings (&#9881;&#65039;) &rarr; General &rarr; Your apps &rarr; Web (&lt;/&gt;)</b> &rarr; app register karo</li>
+          <li>Jo <code>firebaseConfig</code> object dikhega, uski <b>apiKey / authDomain / projectId / appId</b> values neeche daalo</li>
+          <li>Authentication &rarr; Settings &rarr; <b>Authorised domains</b> mein ye add karo: <code id="fb-origin-hint">https://example.com</code>
               <button class="btn-secondary" style="margin-left:6px; padding:3px 9px; font-size:11px;" onclick="copyText(location.origin, 'Origin')">&#128203; Copy</button></li>
-          <li><b>Create</b> dabao &rarr; Client ID copy karo (usme <code>.apps.googleusercontent.com</code> hota hai)</li>
-          <li>Usi screen par <b>OAuth consent screen</b> mein apne aap ko test user add karo (agar app "Testing" mein hai)</li>
         </ol>
-        <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
-          <input type="text" id="g-client-id" placeholder="1234567890-abcdef.apps.googleusercontent.com" style="flex:1; min-width:260px;" autocomplete="off" spellcheck="false">
-          <button class="btn-cyan" onclick="saveGoogleClientId()">&#128190; Save</button>
+        <div class="grid-2">
+          <div><label>API Key</label><input type="text" id="fb-apiKey" placeholder="AIzaSy..." autocomplete="off" spellcheck="false"></div>
+          <div><label>Auth domain</label><input type="text" id="fb-authDomain" placeholder="your-app.firebaseapp.com" autocomplete="off" spellcheck="false"></div>
+          <div><label>Project ID</label><input type="text" id="fb-projectId" placeholder="your-app" autocomplete="off" spellcheck="false"></div>
+          <div><label>App ID</label><input type="text" id="fb-appId" placeholder="1:1234567890:web:abcdef" autocomplete="off" spellcheck="false"></div>
         </div>
-        <div id="g-setup-status" class="sec-p" style="margin-top:8px;"></div>
-        <div id="g-diagnose-out" class="hidden" style="margin-top:12px; padding:11px 13px; border-radius:var(--radius-sm); background:var(--deep); border:1px solid var(--line); font-size:12.5px; color:var(--text-muted); line-height:1.7;"></div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;">
+          <button class="btn-cyan" onclick="saveFbConfig()">&#128190; Save config</button>
+          <button class="btn-secondary" onclick="clearFbConfig()" style="border-color:var(--rose); color:#fda4af;">Clear</button>
+        </div>
+        <div id="fb-setup-status" class="sec-p" style="margin-top:8px;"></div>
       </div>
 
-      <div class="section-box" id="g-account-box">
-        <div class="section-title">&#128100; Step 2 &mdash; Google se sign in</div>
-        <div id="g-signed-out" style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
-          <button class="btn-primary" style="width:auto; padding:12px 20px;" onclick="googleSignIn()">
-            <span style="font-weight:800;">G</span>&nbsp; Sign in with Google
-          </button>
-          <span class="sec-p">Sirf <code>drive.appdata</code> access maanga jayega.</span>
-        </div>
-        <div id="g-signed-in" class="hidden">
-          <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
-            <img id="g-avatar" alt="" style="width:42px; height:42px; border-radius:50%; border:1px solid var(--line); background:var(--surface-2);">
-            <div>
-              <div id="g-name" style="font-weight:800; font-size:14px;"></div>
-              <div id="g-email" class="sec-p"></div>
-            </div>
-            <button class="btn-secondary" onclick="googleSignOut()" style="margin-left:auto;">&#128682; Sign out</button>
+      <div class="section-box" id="fb-auth-box">
+        <div id="fb-signed-out">
+          <div class="section-title">&#128100; Step 2 &mdash; Login ya naya account banao</div>
+          <div style="display:flex; gap:8px; margin-bottom:14px;">
+            <button id="fb-tab-login" class="mode-tab active-quiz" onclick="fbSetTab('login')">&#128273; Login</button>
+            <button id="fb-tab-signup" class="mode-tab" onclick="fbSetTab('signup')">&#127381; Create account</button>
           </div>
+          <div class="grid-2">
+            <div><label>Email</label><input type="email" id="fb-email" placeholder="you@example.com" autocomplete="email" spellcheck="false"></div>
+            <div><label>Password</label><input type="password" id="fb-password" placeholder="Kam se kam 6 characters" autocomplete="current-password"></div>
+          </div>
+          <div id="fb-signup-extra" class="hidden" style="margin-top:14px;"><label>Naam (optional)</label><input type="text" id="fb-name" placeholder="Tumhara naam" autocomplete="name"></div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;">
+            <button id="fb-submit-btn" class="btn-primary" style="width:auto; padding:12px 22px;" onclick="fbSubmit()">&#128273; Login</button>
+            <button class="btn-secondary" onclick="fbForgotPassword()">Forgot password?</button>
+          </div>
+          <div id="fb-auth-status" class="sec-p" style="margin-top:10px;"></div>
         </div>
-        <div id="g-account-status" class="sec-p" style="margin-top:10px;"></div>
-      </div>
-
-      <div class="section-box" id="g-sync-box" style="opacity:.55;">
-        <div class="section-title">&#128260; Step 3 &mdash; Sync</div>
-        <div id="g-cloud-info" class="sec-p" style="margin-bottom:10px;">Sign in karke status dekhein.</div>
-        <div style="display:flex; flex-wrap:wrap; gap:8px;">
-          <button class="btn-emerald" onclick="cloudBackupNow()">&#11014;&#65039; Drive par backup karein</button>
-          <button class="btn-cyan" onclick="cloudRestoreNow()">&#11015;&#65039; Drive se restore karein</button>
-          <button class="btn-secondary" onclick="cloudDeleteRemote()" style="border-color:var(--rose); color:#fda4af;">&#128465;&#65039; Cloud se delete karein</button>
+        <div id="fb-signed-in" class="hidden">
+          <div class="section-title">&#9989; Tum signed in ho</div>
+          <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+            <div class="sb-logo" style="width:44px; height:44px; font-size:20px;">&#128100;</div>
+            <div>
+              <div id="fb-user-name" style="font-weight:800; font-size:15px;"></div>
+              <div id="fb-user-email" class="sec-p"></div>
+            </div>
+            <button class="btn-secondary" onclick="fbSignOut()" style="margin-left:auto;">&#128682; Sign out</button>
+          </div>
+          <div id="fb-account-status" class="sec-p" style="margin-top:10px;"></div>
         </div>
-        <label style="display:flex; align-items:center; gap:9px; margin-top:14px; font-size:13px; color:var(--text-muted);">
-          <input type="checkbox" id="g-autosync" onchange="setAutoSync(this.checked)" style="width:15px; height:15px; accent-color:var(--primary);">
-          &#128260; Auto-sync &mdash; har 10 minute mein Drive par chupke se backup
-        </label>
-        <div id="g-sync-status" class="sec-p" style="margin-top:10px;"></div>
       </div>
     </div>
 
@@ -2320,6 +2291,7 @@
     let bookmarkedQuestions = [];
     let userResponses = [];
     let topicStats = {};
+    let resultsRecorded = false;   // guards stats/progress so viewing Results twice doesn't double-count
     let timerInterval = null;
     let timeLeft = 45;
 
@@ -2418,14 +2390,12 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      try { checkBackupNudge(); } catch (e) {}
       try { restoreNavGroups(); } catch (e) {}
       startSplash();
       initNav();
       restoreStepState();
       restoreTtsPrefs();
       loadStats();
-      loadUsage();
       loadProgress();
       loadMistakes();
       loadDoubts();
@@ -2454,6 +2424,7 @@
       initTts();
       syncTtsEngineUI();
       addAriaLabels();
+      accountBoot();
     });
 
     // ==================== SHARED HELPERS (security + UX) ====================
@@ -3048,7 +3019,11 @@
     }
     function showError(msg) {
       const banner = document.getElementById('error-banner');
-      document.getElementById('error-message').innerText = `⚠️ ${msg}`;
+      // the same toast is used for success confirmations (they start with an
+      // emoji like ✅) — show those green and without the warning sign
+      const isSuccess = /^\s*(✅|🎉|📧|💾|☁️|🎴|🎯|📥|⬇️|🔁|🔖|🗑️)/.test(String(msg));
+      document.getElementById('error-message').innerText = (isSuccess ? '' : '⚠️ ') + msg;
+      banner.classList.toggle('success-toast', isSuccess);
       banner.classList.remove('hidden');
       try { banner.setAttribute('role', 'alert'); } catch (e) {}
       announce(msg);
@@ -3366,7 +3341,6 @@
                 : `${isFallback ? 'Fallback agent: ' : ''}Auto-switching to backup model (${candidateModel})...`;
             }
 
-            trackUsage((promptText || '').length + (strictSystemInstruction || '').length);
             let rawResponseText = "";
 
             if (provKey === 'gemini') {
@@ -3773,7 +3747,7 @@
     // ==================== QUIZ ENGINE WITH EXAM PATTERN TAGS & PAGE PROOF ====================
     function launchQuiz() {
       currentIndex = 0; score = 0; wrongQuestions = []; bookmarkedQuestions = []; userResponses = []; topicStats = {};
-      qAnswers = {}; skippedCount = 0;
+      qAnswers = {}; skippedCount = 0; resultsRecorded = false;
       hideAllSections();
       document.getElementById('quiz-section').classList.remove('hidden'); recordNav('quiz');
       if (lastSampledPagesList.length > 0) {
@@ -4280,8 +4254,11 @@
       document.getElementById('result-pdf-subtitle').innerText = `Source: ${currentPdfName} • Visited pages: ${visitedPagesSet.size || lastSampledPagesList.length || 3} of ${totalPdfPages || 3}${proofTxt}${consTxt}`;
       document.getElementById('final-score').innerText = `${score}/${total}`;
       document.getElementById('final-accuracy').innerText = `${accuracy}%`;
-      bumpStats({ correct: score, attempted: total });
-      logProgress(total, score, studyMode);
+      if (!resultsRecorded) {           // record a finished run exactly once
+        resultsRecorded = true;
+        bumpStats({ correct: score, attempted: total });
+        logProgress(total, score, studyMode);
+      }
       document.getElementById('final-wrong').innerText = wrongQuestions.length;
       document.getElementById('final-bookmarked').innerText = bookmarkedQuestions.length;
       document.getElementById('final-pages-covered').innerText = `${visitedPagesSet.size || 3}/${totalPdfPages || 3}`;
@@ -5193,7 +5170,7 @@
     function hideAllSections() {
       clearInterval(timerInterval);
       window.speechSynthesis?.cancel();
-      ['setup-section', 'quiz-section', 'flashcard-section', 'mindmap-section', 'notes-section', 'result-section', 'mains-section', 'blurt-section', 'weakness-section', 'visual-section', 'teach-section', 'sets-section', 'library-section', 'plan-section', 'progress-section', 'health-section', 'mistake-section', 'adaptive-section', 'listen-section', 'sprint-section', 'doubts-section'].forEach(id => {
+      ['setup-section', 'quiz-section', 'flashcard-section', 'mindmap-section', 'notes-section', 'result-section', 'mains-section', 'blurt-section', 'weakness-section', 'visual-section', 'teach-section', 'sets-section', 'library-section', 'plan-section', 'progress-section', 'account-section', 'mistake-section', 'adaptive-section', 'listen-section', 'sprint-section', 'doubts-section'].forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
         document.getElementById(id).classList.add('hidden');
@@ -5306,7 +5283,7 @@
         tx.oncomplete = () => res(true);
         tx.onerror = () => {
           const e = tx.error;
-          if (isQuotaError(e)) { try { showError('Device storage full ho gayi — PDF Library se purani PDFs hataayein, ya backup lekar "Clear all saved data" karein.'); } catch (x) {} }
+          if (isQuotaError(e)) { try { showError('Device storage full ho gayi — PDF Library se purani PDFs hataayein, ya "Clear all saved data" karein.'); } catch (x) {} }
           rej(e);
         };
       }));
@@ -5321,50 +5298,6 @@
     }
     function b64ToBytes(b64) { const bin = atob(b64); const a = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i); return a; }
 
-    // ==================== API USAGE METER ====================
-    let usage = { calls: 0, chars: 0, today: '', todayCalls: 0, todayChars: 0 };
-    function loadUsage() {
-      try { usage = Object.assign(usage, JSON.parse(localStorage.getItem('ai_study_usage_v10') || '{}')); } catch (e) {}
-      const t = new Date().toISOString().slice(0, 10);
-      if (usage.today !== t) { usage.today = t; usage.todayCalls = 0; usage.todayChars = 0; saveUsage(); }
-    }
-    function saveUsage() { try { localStorage.setItem('ai_study_usage_v10', JSON.stringify(usage)); } catch (e) {} }
-    function trackUsage(chars) {
-      const t = new Date().toISOString().slice(0, 10);
-      if (usage.today !== t) { usage.today = t; usage.todayCalls = 0; usage.todayChars = 0; }
-      usage.calls++; usage.chars += (chars || 0); usage.todayCalls++; usage.todayChars += (chars || 0);
-      saveUsage(); renderUsage();
-    }
-    function renderUsage() {
-      const el = document.getElementById('usage-box'); if (!el) return;
-      const tk = Math.round(usage.chars / 4), tkT = Math.round(usage.todayChars / 4);
-      el.innerHTML = `<div class="section-box"><div class="section-title">&#128202; API Usage (approx.)</div>
-        <div class="hs-tiles">
-          <div class="hs-tile"><span class="hs-k">Aaj ke calls</span><span class="hs-v">${usage.todayCalls || 0}</span></div>
-          <div class="hs-tile"><span class="hs-k">Aaj ~tokens</span><span class="hs-v">${tkT.toLocaleString()}</span></div>
-          <div class="hs-tile"><span class="hs-k">Total calls</span><span class="hs-v">${usage.calls || 0}</span></div>
-          <div class="hs-tile"><span class="hs-k">Total ~tokens</span><span class="hs-v">${tk.toLocaleString()}</span></div>
-        </div>
-        <p style="font-size:11px; color:var(--muted); margin-top:8px;">Ye approximate hai (prompt ke characters / 4) &mdash; tumhari key ke actual billing se thoda alag ho sakta hai.</p></div>`;
-    }
-
-    // ==================== BACKUP / RESTORE ====================
-    const BACKUP_KEY = 'ai_study_last_backup_v17';
-    function backupIsStale() {
-      try {
-        const last = Number(localStorage.getItem(BACKUP_KEY) || 0);
-        if (!last) return true;
-        return (Date.now() - last) > 14 * 24 * 60 * 60 * 1000;   // 14 days
-      } catch (e) { return false; }
-    }
-    function hasLocalStudyData() {
-      try {
-        const sets = Number(localStorage.getItem('ai_study_stats_v9') ? 1 : 0);
-        const mistakes = (JSON.parse(localStorage.getItem('ai_study_mistakes_v12') || '[]') || []).length;
-        const progress = (JSON.parse(localStorage.getItem('ai_study_progress_v10') || '[]') || []).length;
-        return (mistakes + progress) > 3 || sets > 0;
-      } catch (e) { return false; }
-    }
     // ---- "Due today": SRS cards due + logged mistakes, surfaced on the dashboard ----
     function dueTodayCounts() {
       const now = Date.now();
@@ -5406,122 +5339,6 @@
         return;
       }
       showError('Revision ke liye pehle PDF se quiz ya flashcards generate karo.');
-    }
-
-    function checkBackupNudge() {
-      if (!hasLocalStudyData() || !backupIsStale()) return;
-      const el = document.getElementById('backup-nudge');
-      if (el) el.classList.remove('hidden');
-    }
-
-    // one payload builder, used by both the file download and the Drive sync
-    async function buildBackupPayload() {
-      const ls = {};
-      Object.keys(localStorage).filter(k => k.indexOf('ai_study') === 0).forEach(k => ls[k] = localStorage.getItem(k));
-      let pdfs = [], sets = [];
-      try { pdfs = await idbAll('pdfs'); } catch (e) {}
-      try { sets = await idbAll('sets'); } catch (e) {}
-      return { app: 'AI Study Suite', version: 'v18.2', exportedAt: new Date().toISOString(), localStorage: ls, pdfs, sets };
-    }
-
-    async function backupData() {
-      try {
-        const payload = await buildBackupPayload();
-        const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'ai_study_backup_' + new Date().toISOString().slice(0, 10) + '.json';
-        document.body.appendChild(a); a.click(); a.remove();
-        setTimeout(() => URL.revokeObjectURL(a.href), 5000);
-        showError('✅ Backup download ho gaya (' + Math.round(blob.size / 1024) + ' KB).');
-      } catch (e) { showError('Backup fail: ' + (e.message || e)); }
-    }
-    // applies a backup object (from a file or from Google Drive)
-    async function applyBackupObject(j) {
-        if (!j || !j.localStorage) throw new Error('Ye valid backup file nahi hai');
-        if (!confirm('Restore karne se current data replace ho jayega. Continue?')) return false;
-        // only restore keys this app actually owns — a backup file must not be
-        // able to write arbitrary storage entries
-        const ALLOWED = /^ai_study_[a-z0-9_]+_v(7|9|10|12|16|17|18)$/;
-        let restored = 0, skipped = 0;
-        Object.keys(j.localStorage).forEach(k => {
-          if (!ALLOWED.test(k)) { skipped++; return; }
-          const val = j.localStorage[k];
-          if (typeof val !== 'string' || val.length > 2_000_000) { skipped++; return; }
-          try { localStorage.setItem(k, val); restored++; } catch (e) {}
-        });
-        for (const p2 of (j.pdfs || [])) {
-          if (!p2 || typeof p2 !== 'object' || typeof p2.data !== 'string') continue;
-          try { await idbPut('pdfs', { id: String(p2.id || 'pdf_' + Date.now()).slice(0, 80), name: sanitizeAI(String(p2.name || 'document.pdf')).slice(0, 120), pages: Number(p2.pages) || 0, savedAt: Number(p2.savedAt) || Date.now(), data: p2.data }); } catch (e) {}
-        }
-        for (const s2 of (j.sets || [])) {
-          if (!s2 || typeof s2 !== 'object' || !Array.isArray(s2.questions)) continue;
-          try { await idbPut('sets', { id: String(s2.id || 'set_' + Date.now()).slice(0, 80), name: sanitizeAI(String(s2.name || 'set')).slice(0, 60), count: s2.questions.length, savedAt: Number(s2.savedAt) || Date.now(), questions: s2.questions.slice(0, 500).map(normalizeQuestion).filter(Boolean) }); } catch (e) {}
-        }
-        console.log('restore: ' + restored + ' keys restored, ' + skipped + ' skipped');
-        showError('✅ Restore ho gaya (' + restored + ' settings, ' + (j.sets || []).length + ' sets, ' + (j.pdfs || []).length + ' PDFs) — reload kar rahe hain...');
-        setTimeout(() => location.reload(), 1200);
-        return true;
-    }
-
-    async function restoreData(ev) {
-      const f = ev.target.files && ev.target.files[0]; ev.target.value = '';
-      if (!f) return;
-      try { await applyBackupObject(JSON.parse(await f.text())); }
-      catch (e) { showError('Restore fail: ' + (e.message || e)); }
-    }
-
-    // ==================== SELF-TEST / HEALTH CHECK ====================
-    function runSelfTest() {
-      const out = document.getElementById('health-content');
-      const checks = [];
-      const add = (n, ok, d) => checks.push({ n, ok, d: d || '' });
-      const needIds = ['setup-section', 'quiz-section', 'result-section', 'sets-section', 'library-section', 'plan-section', 'progress-section', 'health-section', 'api-key', 'pdf-upload', 'generate-btn', 'a11y-panel', 'tts-bar', 'home-status' ];
-      const missing = needIds.filter(i => !document.getElementById(i));
-      add('Core sections & dashboard present', missing.length === 0, missing.length ? ('missing: ' + missing.join(', ')) : 'all ' + needIds.length + ' ok');
-      const fns = ['callUniversalAI', 'callProviderChain', 'verifySourceQuotes', 'crossModelConsensus', 'startGeneration', 'runSelfTest', 'backupData', 'restoreData', 'saveCurrentSet', 'renderLibrary', 'buildDailyPlan', 'renderProgress', 'speakMainsModel', 'clearAllData'];
-      const missFn = fns.filter(f => typeof window[f] !== 'function');
-      add('Core functions defined', missFn.length === 0, missFn.length ? ('missing: ' + missFn.join(', ')) : 'all ' + fns.length + ' ok');
-      add('pdf.js library loaded', !!window.pdfjsLib, window.pdfjsLib ? 'ok' : 'not loaded');
-      add('jsPDF (lazy export lib)', true, (window.jspdf && window.jspdf.jsPDF) ? 'loaded' : 'deferred until first export');
-      add('Lazy-load helper present', typeof ensureExportLibs === 'function', 'export libraries deferred until needed');
-      add('Cloud sync (Google Drive)', typeof googleSignIn === 'function' && typeof driveUploadBackup === 'function', 'data stays in your own Drive appDataFolder');
-      add('Cloud sync needs a client ID', !!googleClientId() || true, googleClientId() ? 'configured' : 'user adds their own OAuth client ID');
-      add('Web Crypto (encryption)', !!(window.crypto && window.crypto.subtle), cryptoAvailable() ? 'available' : 'unavailable');
-      // ---- security posture ----
-      const cspMetaEl = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
-      const cspTxt = cspMetaEl ? cspMetaEl.content : '';
-      add('Content-Security-Policy present', !!cspTxt, cspTxt ? (cspTxt.includes("object-src 'none'") ? "restrictive" : "set") : 'missing');
-      add('CSP: no unsafe-eval', !!cspTxt && !cspTxt.includes('unsafe-eval'), cspTxt.includes('unsafe-eval') ? 'unsafe-eval still allowed' : 'hardened');
-      const cdnScripts = [...document.querySelectorAll('script[src]')];
-      // Google Identity Services cannot be SRI-pinned (Google publishes no stable
-      // hash for it), so it is reported separately instead of counted as a gap.
-      const pinnable = cdnScripts.filter(x => !/accounts\.google\.com/.test(x.src));
-      const noSri = pinnable.filter(x => !x.integrity).length;
-      add('CDN scripts pinned with SRI', noSri === 0, pinnable.length + ' pinnable script(s), ' + noSri + ' without SRI');
-      const gis = cdnScripts.some(x => /accounts\.google\.com/.test(x.src));
-      add('Google sign-in script', true, gis ? 'loaded on demand (no stable SRI hash published by Google)' : 'not loaded yet');
-      add('AI input sanitisation active', typeof sanitizeAI === 'function' && sanitizeAI('<b>x</b>') === 'x', 'sanitizeAI() strips markup');
-      add('Outbound host allow-list active', typeof assertAllowedHost === 'function', ALLOWED_AI_HOSTS.length + ' providers allow-listed');
-      add('Idle auto-lock for keys', typeof lockKeysNow === 'function', 'wipes the key after 30 min idle');
-      add('HTTPS transport', location.protocol === 'https:' || location.protocol === 'file:', location.protocol);
-      add('IndexedDB (library/sets)', !!window.indexedDB, window.indexedDB ? 'available' : 'unavailable');
-      add('localStorage writable', (() => { try { localStorage.setItem('__t', '1'); localStorage.removeItem('__t'); return true; } catch (e) { return false; } })(), '');
-      add('sessionStorage writable', (() => { try { sessionStorage.setItem('__t', '1'); sessionStorage.removeItem('__t'); return true; } catch (e) { return false; } })(), '');
-      const csp = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
-      add('Content-Security-Policy meta', !!csp, csp ? 'present' : 'missing');
-      const dupIds = (() => { const seen = {}, dup = []; document.querySelectorAll('[id]').forEach(e => { if (seen[e.id]) dup.push(e.id); seen[e.id] = 1; }); return dup; })();
-      add('No duplicate element IDs', dupIds.length === 0, dupIds.length ? dupIds.join(', ') : 'clean');
-      add('Sidebar navigation', document.querySelectorAll('.sb-item').length >= 15, document.querySelectorAll('.sb-item').length + ' items');
-      add('Theme system', typeof setTheme === 'function' && !!document.getElementById('theme-select'), '');
-      add('Accessibility panel', typeof toggleA11yPanel === 'function' && !!document.getElementById('a11y-toggle-btn'), '');
-      add('TTS (browser + Gemini)', typeof ttsSpeak === 'function' && typeof geminiTtsChunk === 'function', '');
-      add('Multi-provider agent', typeof AUTO_AGENT_PROVIDERS === 'object' && Object.keys(AUTO_AGENT_PROVIDERS || {}).length >= 6, Object.keys(AUTO_AGENT_PROVIDERS || {}).length + ' providers');
-      add('Service worker (offline)', 'serviceWorker' in navigator, ('serviceWorker' in navigator) ? 'supported' : 'not supported');
-      const pass = checks.filter(c => c.ok).length;
-      out.innerHTML = `<div class="section-box"><div class="section-title">&#129514; Self-Test Result <span class="badge">${pass}/${checks.length} pass</span></div>
-        ${checks.map(c => `<div class="check-row"><span class="ck">${c.ok ? '&#9989;' : '&#10060;'}</span><span>${escapeHtml(c.n)}</span><span class="cd">${escapeHtml(c.d)}</span></div>`).join('')}
-        <p style="font-size:11px; color:var(--muted); margin-top:8px;">Kuch fail ho to page reload karein ya browser update karein. Libraries load na hon to internet check karein.</p></div>`;
     }
 
     // ==================== SAVED QUESTION SETS ====================
@@ -5687,8 +5504,8 @@
             'dash.questions': '🧠 Questions made', 'dash.accuracy': '🎯 Overall accuracy', 'dash.streak': '🔥 Study streak', 'dash.exam': '📅 Exam countdown', 'dash.sets': '🗂️ Saved sets', 'btn.generate': 'Generate Questions' }
     };
     const NAV_I18N = {
-      hi: { setup:'सेटअप', quiz:'क्विज़', flashcards:'फ्लैशकार्ड', mindmap:'माइंड मैप', notes:'चीट शीट', mains:'मेन्स', blurt:'ब्लर्टिंग', teach:'टीच-बैक', visual:'विज़ुअल टूल्स', weakness:'कमज़ोरी', results:'रिज़ल्ट', sets:'मेरे सेट', library:'PDF लाइब्रेरी', plan:'रिवीज़न प्लान', progress:'प्रोग्रेस', health:'सेल्फ-टेस्ट', mistake:'गलती नोटबुक', adaptive:'अडैप्टिव प्रैक्टिस', listen:'लिसन मोड', sprint:'एग्ज़ाम-डे स्प्रिंट', doubts:'डाउट हिस्ट्री' },
-      en: { setup:'Setup', quiz:'Quiz', flashcards:'Flashcards', mindmap:'Mind Map', notes:'Cheat Sheet', mains:'Mains', blurt:'Blurting', teach:'Teach-Back', visual:'Visual Tools', weakness:'Weakness', results:'Results', sets:'My Sets', library:'PDF Library', plan:'Revision Plan', progress:'Progress', health:'Self-Test', mistake:'Mistake Notebook', adaptive:'Adaptive Practice', listen:'Listen Mode', sprint:'Exam-Day Sprint', doubts:'Doubt History' }
+      hi: { setup:'सेटअप', quiz:'क्विज़', flashcards:'फ्लैशकार्ड', mindmap:'माइंड मैप', notes:'चीट शीट', mains:'मेन्स', blurt:'ब्लर्टिंग', teach:'टीच-बैक', visual:'विज़ुअल टूल्स', weakness:'कमज़ोरी', results:'रिज़ल्ट', sets:'मेरे सेट', library:'PDF लाइब्रेरी', plan:'रिवीज़न प्लान', progress:'प्रोग्रेस', account:'खाता', mistake:'गलती नोटबुक', adaptive:'अडैप्टिव प्रैक्टिस', listen:'लिसन मोड', sprint:'एग्ज़ाम-डे स्प्रिंट', doubts:'डाउट हिस्ट्री' },
+      en: { setup:'Setup', quiz:'Quiz', flashcards:'Flashcards', mindmap:'Mind Map', notes:'Cheat Sheet', mains:'Mains', blurt:'Blurting', teach:'Teach-Back', visual:'Visual Tools', weakness:'Weakness', results:'Results', sets:'My Sets', library:'PDF Library', plan:'Revision Plan', progress:'Progress', account:'Account', mistake:'Mistake Notebook', adaptive:'Adaptive Practice', listen:'Listen Mode', sprint:'Exam-Day Sprint', doubts:'Doubt History' }
     };
     function setUILang(lang) {
       try { localStorage.setItem('ai_study_ui_lang_v10', lang); } catch (e) {}
@@ -5726,7 +5543,7 @@
       { t: '1️⃣ API key daalo', d: 'Step 1 mein apni API key paste karo (Gemini / Groq / OpenAI...). AI khud best model chun lega.', sel: '.step[data-step="1"]' },
       { t: '2️⃣ PDF ya photo upload', d: 'Step 2 mein book ki PDF ya uski photo daalo. Usi text se questions, cards aur mind map banenge.', sel: '.step[data-step="2"]' },
       { t: '3️⃣ Generate dabao', d: 'Step 4 mein mode chuno aur Generate dabao. Quiz, flashcards, cheat sheet — sab ready.', sel: '#generate-btn' },
-      { t: '🎉 Sidebar se sab kuch', d: 'Left sidebar se My Sets, PDF Library, Progress aur Self-Test mil jayega. All the best!', sel: '.sidebar' }
+      { t: '🎉 Sidebar se sab kuch', d: 'Left sidebar se My Sets, PDF Library, Progress aur Account mil jayega. All the best!', sel: '.sidebar' }
     ];
     let tourIdx = 0;
     function startTour(force) {
@@ -5877,8 +5694,12 @@
 
     // ==================== ADAPTIVE PRACTICE ====================
     function adaptiveWeakTopics() {
-      const rows = Object.entries(topicStats || {}).map(([t, v]) => ({ t, total: v.total || 0, correct: v.correct || 0 }))
-        .filter(x => x.total > 0).map(x => ({ ...x, acc: Math.round((x.correct / x.total) * 100) }));
+      // uses the persisted error log (same source as the Weakness Heatmap), so
+      // the plan survives a page reload instead of relying on the current session
+      const rows = Object.entries(errorLog || {}).map(([t, v]) => {
+        const attempts = (v && v.attempts) || 0, wrong = (v && v.wrong) || 0;
+        return { t, total: attempts, correct: attempts - wrong };
+      }).filter(x => x.total > 0).map(x => ({ ...x, acc: Math.round((x.correct / x.total) * 100) }));
       return rows.sort((a, b) => a.acc - b.acc);
     }
     function openAdaptive() {
@@ -6147,8 +5968,12 @@
     function buildDailyPlan() {
       const out = document.getElementById('plan-content');
       let due = 0;
-      try { due = Object.keys(srsStorage || {}).filter(k => ((srsStorage[k] || {}).due || 0) <= Date.now()).length; } catch (e) {}
-      const weak = Object.entries(topicStats || {}).map(([t, v]) => ({ t, wrong: (v && v.wrong) || 0, total: (v && v.total) || 0 }))
+      // SRS records store the next-review time in `dueAt` (older code read a
+      // non-existent `.due`, so this always showed 0).
+      try { due = Object.keys(srsStorage || {}).filter(k => ((srsStorage[k] || {}).dueAt || 0) <= Date.now()).length; } catch (e) {}
+      // Weakness comes from the persisted error log (same source as the
+      // Weakness Heatmap), not the per-session topicStats.
+      const weak = Object.entries(errorLog || {}).map(([t, v]) => ({ t, wrong: (v && v.wrong) || 0, total: (v && v.attempts) || 0 }))
         .filter(x => x.total > 0).sort((a, b) => (b.wrong / Math.max(1, b.total)) - (a.wrong / Math.max(1, a.total))).slice(0, 6);
       const streak = (typeof sessionStats !== 'undefined' && sessionStats.streakDays) || 0;
       const v = localStorage.getItem('ai_study_exam_date_v10') || '';
@@ -6208,309 +6033,210 @@
       document.getElementById('generate-btn').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // ==================== HEALTH PANEL ====================
-    // ==================== GOOGLE SIGN-IN + DRIVE SYNC ====================
-    // The app has NO backend. Sign-in uses Google Identity Services in the
-    // browser, and data is written to the user's own Drive appDataFolder.
-    const GIS_SRC = 'https://accounts.google.com/gsi/client';
-    const DRIVE_SCOPE = 'openid email profile https://www.googleapis.com/auth/drive.appdata';
-    const CLOUD_FILE = 'ai-study-suite-backup.json';
-    const G_CLIENT_KEY = 'ai_study_google_client_id_v18';
-    const G_AUTOSYNC_KEY = 'ai_study_cloud_autosync_v18';
-    let _gisPromise = null, _tokenClient = null, _gToken = null, _gTokenExp = 0, _gUser = null, _autoSyncTimer = null;
+    // ==================== ACCOUNT (FIREBASE EMAIL/PASSWORD AUTH) ====================
+    // The app has no backend of its own. Accounts are handled by Firebase
+    // Authentication entirely in the browser, using the user's own free Firebase
+    // project (config pasted once, stored locally). Login is OPTIONAL — every
+    // study feature works without an account.
+    const FB_CFG_KEY = 'ai_study_fb_config_v19';
+    // Two CDNs, tried in order (jsdelivr mirrors the same official SDK as gstatic,
+    // so a network that blocks one can still load accounts from the other).
+    const FB_SDK_SOURCES = [
+      { app: 'https://cdn.jsdelivr.net/npm/firebase@10.12.5/firebase-app-compat.js',  auth: 'https://cdn.jsdelivr.net/npm/firebase@10.12.5/firebase-auth-compat.js' },
+      { app: 'https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js',    auth: 'https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js' }
+    ];
+    let _fbApp = null, _fbAuth = null, _fbUser = null, _fbSdkPromise = null, _fbMode = 'login';
 
-    function googleClientId() {
-      try { return (localStorage.getItem(G_CLIENT_KEY) || '').trim(); } catch (e) { return ''; }
+    function fbConfig() {
+      try {
+        const j = JSON.parse(localStorage.getItem(FB_CFG_KEY) || 'null');
+        if (j && j.apiKey && j.authDomain && j.projectId && j.appId) return j;
+      } catch (e) {}
+      return null;
     }
-    function saveGoogleClientId() {
-      const el = document.getElementById('g-client-id');
-      const v = (el && el.value ? el.value : '').trim();
-      if (!/^[0-9A-Za-z_-]+\.apps\.googleusercontent\.com$/.test(v)) {
-        gSetStatus('g-setup-status', 'Client ID galat lag raha hai — usme ".apps.googleusercontent.com" hona chahiye.', '#fda4af');
-        return;
-      }
-      try { localStorage.setItem(G_CLIENT_KEY, v); } catch (e) {}
-      _gisPromise = null; _tokenClient = null;
-      gSetStatus('g-setup-status', '✅ Client ID save ho gaya.', '#6ee7b7');
-      cloudRefresh();
-    }
-    function gSetStatus(id, msg, color) {
+    function fbStatus(id, msg, color) {
       const el = document.getElementById(id);
       if (!el) return;
       el.innerHTML = msg;
-      el.style.color = color || 'var(--muted)';
+      el.style.color = color || 'var(--text-muted)';
     }
-    function loadGis() {
-      if (_gisPromise) return _gisPromise;
-      _gisPromise = new Promise((resolve, reject) => {
-        if (window.google && window.google.accounts && window.google.accounts.oauth2) return resolve();
+    // Firebase's CDN does not publish stable SRI hashes, so these two scripts are
+    // injected without integrity (they are loaded only when accounts are used).
+    function loadScriptNoSri(url) {
+      return new Promise((resolve, reject) => {
         const el = document.createElement('script');
-        el.src = GIS_SRC; el.async = true; el.defer = true;
+        el.src = url; el.async = true; el.referrerPolicy = 'no-referrer';
         el.onload = () => resolve();
-        el.onerror = () => { _gisPromise = null; reject(new Error('Google sign-in script load nahi hua (internet/adblock check karein).')); };
+        el.onerror = () => reject(new Error('load failed: ' + url.split('/').pop()));
         document.head.appendChild(el);
       });
-      return _gisPromise;
     }
-    // Turns Google's OAuth error codes into the exact thing to fix.
-    function googleErrorHelp(code, desc) {
-      const origin = location.origin;
-      const help = {
-        invalid_client: 'Google ne ye Client ID accept nahi kiya. Sabse aam wajah: us client mein "Authorised JavaScript origins" khaali hai. Fix karo — Google Cloud Console → Credentials → apna OAuth client kholo → "Authorised JavaScript origins" mein EXACT ye daalo: ' + origin + ' (bina trailing slash, bina /ai-study-suite), phir SAVE dabao aur 1-2 minute wait karo. Saath hi check karo: Client ID POORA copy hua ("...apps.googleusercontent.com" tak), aur client ka type "Web application" hai (Desktop/iOS nahi).',
-        origin_mismatch: 'Ye site ka origin (' + origin + ') is Client ID mein register NAHI hai. Google Cloud Console → Credentials → apna OAuth client → "Authorised JavaScript origins" mein EXACT ye daalo: ' + origin + '  (bina trailing slash, bina /ai-study-suite)',
-        idpiframe_initialization_failed: 'Origin register nahi hai ya browser ne third-party cookies block kiye hain. "Authorised JavaScript origins" mein ' + origin + ' add karo, aur browser mein third-party cookies allow karo.',
-        redirect_uri_mismatch: 'Redirect URI galat hai. "Authorised JavaScript origins" mein sirf origin daalo: ' + origin,
-        access_denied: 'Permission deny hui, ya tumhara email OAuth consent screen ke "Test users" mein nahi hai. Console → OAuth consent screen → Test users mein apna email add karo.',
-        popup_closed_by_user: 'Sign-in window band ho gaya. Dobara try karo.',
-        popup_blocked_by_browser: 'Browser ne popup block kiya. Address bar mein popups allow karo, phir dobara try karo.',
-        invalid_request: 'Request invalid — Client ID ka format check karo (usme ".apps.googleusercontent.com" hona chahiye).'
+    async function loadFromAny(urls) {
+      let last = null;
+      for (const u of urls) { try { await loadScriptNoSri(u); return; } catch (e) { last = e; } }
+      throw last || new Error('load failed');
+    }
+    function loadFirebaseSdk() {
+      if (_fbSdkPromise) return _fbSdkPromise;
+      _fbSdkPromise = (async () => {
+        if (!(window.firebase && window.firebase.initializeApp)) await loadFromAny(FB_SDK_SOURCES.map(x => x.app));
+        if (!(window.firebase && window.firebase.auth)) await loadFromAny(FB_SDK_SOURCES.map(x => x.auth));
+        if (!(window.firebase && window.firebase.auth)) { _fbSdkPromise = null; throw new Error('Firebase SDK load nahi hua — internet ya ad-block check karein.'); }
+      })();
+      return _fbSdkPromise;
+    }
+    async function fbInit() {
+      const cfg = fbConfig();
+      if (!cfg) throw new Error('Pehle Step 1 mein Firebase config daalein.');
+      await loadFirebaseSdk();
+      if (!_fbApp) {
+        _fbApp = (window.firebase.apps && window.firebase.apps.length) ? window.firebase.app() : window.firebase.initializeApp(cfg);
+        _fbAuth = window.firebase.auth();
+        _fbAuth.onAuthStateChanged(u => { _fbUser = u; renderAccount(); });
+      }
+      return _fbAuth;
+    }
+    function fbAuthError(e) {
+      const code = (e && e.code) || '';
+      const map = {
+        'auth/invalid-email': 'Email ka format sahi nahi hai.',
+        'auth/missing-password': 'Password daalein.',
+        'auth/weak-password': 'Password kam se kam 6 characters ka rakhein.',
+        'auth/email-already-in-use': 'Ye email pehle se registered hai — "Login" tab se sign in karein.',
+        'auth/user-not-found': 'Is email ka koi account nahi mila — pehle "Create account" karein.',
+        'auth/wrong-password': 'Password galat hai.',
+        'auth/invalid-credential': 'Email ya password galat hai.',
+        'auth/invalid-login-credentials': 'Email ya password galat hai.',
+        'auth/too-many-requests': 'Bahut zyada attempts — thodi der baad try karein.',
+        'auth/network-request-failed': 'Network error — internet check karein.',
+        'auth/operation-not-allowed': 'Firebase console mein Email/Password sign-in enable nahi hai (Authentication \u2192 Sign-in method).',
+        'auth/unauthorized-domain': 'Ye domain Firebase ke "Authorised domains" mein add nahi hai (Authentication \u2192 Settings).',
+        'auth/api-key-not-valid': 'Firebase API key valid nahi hai \u2014 Step 1 mein sahi apiKey daalein.',
+        'auth/api-key-not-valid.-please-pass-a-valid-api-key.': 'Firebase API key valid nahi hai \u2014 Step 1 mein sahi apiKey daalein.',
+        'auth/configuration-not-found': 'Firebase config galat lag raha hai \u2014 apiKey / projectId dobara check karein.',
+        'auth/missing-email': 'Email daalein.',
+        'auth/user-disabled': 'Ye account disable kar diya gaya hai.'
       };
-      return help[code] || ('Google error: ' + code + (desc ? ' — ' + desc : ''));
+      if (map[code]) return map[code];
+      // tidy Firebase's raw "Firebase: Error (auth/...)" wrapper for anything unmapped
+      const raw = (e && e.message) ? String(e.message).replace(/^Firebase:\s*/i, '').replace(/^Error\s*/i, '').trim() : '';
+      return raw || 'Kuch galat ho gaya \u2014 dobara try karein.';
     }
-
-    let _signInWatchdog = null;
-    function startSignInWatchdog() {
-      clearTimeout(_signInWatchdog);
-      _signInWatchdog = setTimeout(() => {
-        if (!googleSignedIn()) {
-          gSetStatus('g-account-status', '⏳ Sign-in complete nahi hua. Agar Google ne "Access blocked / invalid_client / no registered origin" jaisa page dikhaya, to neeche <b>&#128269; Configuration check</b> dabao — wo exact fix batayega.', '#fde68a');
+    function fbSetTab(mode) {
+      _fbMode = mode === 'signup' ? 'signup' : 'login';
+      const lb = document.getElementById('fb-tab-login'), sb = document.getElementById('fb-tab-signup');
+      if (lb) lb.className = 'mode-tab' + (_fbMode === 'login' ? ' active-quiz' : '');
+      if (sb) sb.className = 'mode-tab' + (_fbMode === 'signup' ? ' active-quiz' : '');
+      const btn = document.getElementById('fb-submit-btn');
+      if (btn) btn.innerHTML = _fbMode === 'signup' ? '&#127381; Create account' : '&#128273; Login';
+      const extra = document.getElementById('fb-signup-extra');
+      if (extra) extra.classList.toggle('hidden', _fbMode !== 'signup');
+      const pw = document.getElementById('fb-password');
+      if (pw) pw.setAttribute('autocomplete', _fbMode === 'signup' ? 'new-password' : 'current-password');
+      fbStatus('fb-auth-status', '');
+    }
+    async function fbSubmit() {
+      const email = (document.getElementById('fb-email').value || '').trim();
+      const pass = document.getElementById('fb-password').value || '';
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { fbStatus('fb-auth-status', 'Sahi email address daalein.', '#fda4af'); return; }
+      if (pass.length < 6) { fbStatus('fb-auth-status', 'Password kam se kam 6 characters ka hona chahiye.', '#fda4af'); return; }
+      const btn = document.getElementById('fb-submit-btn');
+      const old = btn ? btn.innerHTML : '';
+      if (btn) { btn.disabled = true; btn.innerHTML = '&#9203; Please wait...'; }
+      try {
+        const auth = await fbInit();
+        if (_fbMode === 'signup') {
+          const cred = await auth.createUserWithEmailAndPassword(email, pass);
+          const nameEl = document.getElementById('fb-name');
+          const name = nameEl ? nameEl.value.trim() : '';
+          if (name && cred && cred.user) { try { await cred.user.updateProfile({ displayName: name }); } catch (e) {} _fbUser = cred.user; }
+          fbStatus('fb-auth-status', '&#9989; Account ban gaya. Welcome, ' + escapeHtml(name || email) + '!', '#6ee7b7');
+        } else {
+          await auth.signInWithEmailAndPassword(email, pass);
+          fbStatus('fb-auth-status', '&#9989; Login ho gaya.', '#6ee7b7');
         }
-      }, 90000);
-    }
-    function stopSignInWatchdog() { clearTimeout(_signInWatchdog); }
-
-    function googleDiagnose() {
-      const origin = location.origin;
-      const cid = googleClientId();
-      const okProto = location.protocol === 'https:' || /^http:\/\/localhost/.test(origin) || /^http:\/\/127\.0\.0\.1/.test(origin);
-      const rows = [];
-      rows.push('<div style="font-weight:800; color:var(--text); margin-bottom:6px;">&#128269; Configuration check</div>');
-      rows.push((cid ? '&#9989;' : '&#10060;') + ' <b>Client ID</b>: ' + (cid ? '<code>' + escapeHtml(cid.slice(0, 30)) + '&hellip;</code>' : 'set nahi hai — Step 1 mein daalo'));
-      rows.push((okProto ? '&#9989;' : '&#10060;') + ' <b>Origin</b>: <code>' + escapeHtml(origin) + '</code>' + (okProto ? '' : ' &mdash; Google sirf <b>https</b> (ya localhost) par sign-in allow karta hai'));
-      rows.push('&#128203; Console mein <b>Authorised JavaScript origins</b> mein <u>exactly</u> ye daalo: <code>' + escapeHtml(origin) + '</code>');
-      rows.push('<span style="color:var(--muted);">Trailing slash, path (/ai-study-suite) ya http:// nahi &mdash; sirf origin.</span>');
-      rows.push('<div style="margin-top:8px; display:flex; flex-wrap:wrap; gap:8px;">'
-        + '<button class="btn-cyan" onclick="copyText(' + JSON.stringify(origin).replace(/"/g, '&quot;') + ', \'Origin\')">&#128203; Origin copy karein</button>'
-        + '<a class="btn-secondary" href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener noreferrer" style="text-decoration:none; display:inline-block;">&#128279; Credentials kholo</a>'
-        + '<a class="btn-secondary" href="https://console.cloud.google.com/apis/credentials/consent" target="_blank" rel="noopener noreferrer" style="text-decoration:none; display:inline-block;">&#128279; Consent screen</a>'
-        + '</div>');
-      const el = document.getElementById('g-diagnose-out');
-      if (el) { el.innerHTML = rows.join('<div style="margin-top:5px;"></div>'); el.classList.remove('hidden'); }
-    }
-
-    function decodeJwt(t) {
-      try {
-        const p = t.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
-        return JSON.parse(decodeURIComponent(escape(atob(p))));
-      } catch (e) { return null; }
-    }
-    async function googleSignIn() {
-      const cid = googleClientId();
-      if (!cid) { gSetStatus('g-account-status', 'Pehle Step 1 mein apna Google OAuth Client ID daalein.', '#fde68a'); return; }
-      try {
-        await loadGis();
-      } catch (e) { gSetStatus('g-account-status', e.message, '#fda4af'); return; }
-      try {
-        if (!_tokenClient) {
-          _tokenClient = google.accounts.oauth2.initTokenClient({
-            client_id: cid,
-            scope: DRIVE_SCOPE,
-            callback: () => {}      // replaced per-request below
-          });
-        }
-        _tokenClient.callback = (resp) => {
-          stopSignInWatchdog();
-          if (resp && resp.error) {
-            gSetStatus('g-account-status', '&#10060; ' + googleErrorHelp(resp.error, resp.error_description), '#fda4af');
-            googleDiagnose();
-            return;
-          }
-          _gToken = resp.access_token;
-          _gTokenExp = Date.now() + ((Number(resp.expires_in) || 3600) * 1000) - 60000;
-          if (resp.id_token) _gUser = decodeJwt(resp.id_token);
-          gSetStatus('g-account-status', '✅ Sign in ho gaya.', '#6ee7b7');
-          cloudRefresh();
-          if (autoSyncOn()) cloudBackupNow(true);
-        };
-        startSignInWatchdog();
-        // an empty prompt lets Google skip the consent screen when it is already
-        // granted; the first attempt still shows the full consent flow.
-        _tokenClient.requestAccessToken({ prompt: '' });
+        const pw = document.getElementById('fb-password'); if (pw) pw.value = '';
+        renderAccount();
       } catch (e) {
-        gSetStatus('g-account-status', 'Sign-in start nahi ho paya: ' + (e.message || e), '#fda4af');
+        fbStatus('fb-auth-status', '&#10060; ' + fbAuthError(e), '#fda4af');
+      } finally {
+        if (btn) { btn.disabled = false; btn.innerHTML = old; }
       }
     }
-    function googleSignOut() {
-      try { if (_gToken && window.google && google.accounts) google.accounts.oauth2.revoke(_gToken, () => {}); } catch (e) {}
-      _gToken = null; _gTokenExp = 0; _gUser = null; _tokenClient = null;
-      stopAutoSync();
-      gSetStatus('g-account-status', 'Sign out ho gaya. Token memory se hata diya.', '#93a1bd');
-      cloudRefresh();
+    async function fbForgotPassword() {
+      const email = (document.getElementById('fb-email').value || '').trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { fbStatus('fb-auth-status', 'Pehle apna email daalein, phir "Forgot password" dabayein.', '#fde68a'); return; }
+      try {
+        const auth = await fbInit();
+        await auth.sendPasswordResetEmail(email);
+        fbStatus('fb-auth-status', '&#128231; Password reset link ' + escapeHtml(email) + ' par bhej diya gaya.', '#6ee7b7');
+      } catch (e) { fbStatus('fb-auth-status', '&#10060; ' + fbAuthError(e), '#fda4af'); }
     }
-    function autoSyncOn() {
-      try { return localStorage.getItem(G_AUTOSYNC_KEY) === '1'; } catch (e) { return false; }
+    async function fbSignOut() {
+      try { if (_fbAuth) await _fbAuth.signOut(); } catch (e) {}
+      _fbUser = null;
+      fbStatus('fb-account-status', 'Sign out ho gaya.', '#93a1bd');
+      renderAccount();
     }
-    function setAutoSync(on) {
-      try { localStorage.setItem(G_AUTOSYNC_KEY, on ? '1' : '0'); } catch (e) {}
-      if (on) { startAutoSync(); gSetStatus('g-sync-status', '✅ Auto-sync on — har 10 minute mein backup.', '#6ee7b7'); }
-      else { stopAutoSync(); gSetStatus('g-sync-status', 'Auto-sync off.', 'var(--muted)'); }
-    }
-    function startAutoSync() {
-      stopAutoSync();
-      _autoSyncTimer = setInterval(() => { if (autoSyncOn() && googleSignedIn()) cloudBackupNow(true); }, 10 * 60 * 1000);
-    }
-    function stopAutoSync() { if (_autoSyncTimer) { clearInterval(_autoSyncTimer); _autoSyncTimer = null; } }
-    function googleSignedIn() { return !!_gToken && Date.now() < _gTokenExp; }
-
-    // Drive helper: attaches the bearer token and turns 401 into a clear message
-    async function driveFetch(url, opts) {
-      if (!googleSignedIn()) throw new Error('Google sign-in expire ho gaya — dobara sign in karein.');
-      const o = Object.assign({}, opts || {});
-      o.headers = Object.assign({}, o.headers || {}, { Authorization: 'Bearer ' + _gToken });
-      const res = await fetch(url, o);
-      if (res.status === 401) { _gToken = null; throw new Error('Google token expire ho gaya — dobara sign in karein.'); }
-      if (!res.ok) {
-        let d = ''; try { d = (await res.json()).error?.message || ''; } catch (e) {}
-        throw new Error('Drive error ' + res.status + (d ? ': ' + d : ''));
+    function saveFbConfig() {
+      const g = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+      const cfg = { apiKey: g('fb-apiKey'), authDomain: g('fb-authDomain'), projectId: g('fb-projectId'), appId: g('fb-appId') };
+      if (!cfg.apiKey || !cfg.authDomain || !cfg.projectId || !cfg.appId) {
+        fbStatus('fb-setup-status', 'Chaaron field bharein (API key, auth domain, project ID, app ID).', '#fda4af'); return;
       }
-      return res;
+      try { localStorage.setItem(FB_CFG_KEY, JSON.stringify(cfg)); } catch (e) {}
+      _fbApp = null; _fbAuth = null; _fbSdkPromise = null; _fbUser = null;
+      fbStatus('fb-setup-status', '&#9989; Firebase config save ho gaya — ab Step 2 mein login ya naya account banao.', '#6ee7b7');
+      renderAccount();
     }
-    async function driveFindBackup() {
-      const q = encodeURIComponent("name='" + CLOUD_FILE + "'");
-      const res = await driveFetch('https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&fields=files(id,name,modifiedTime,size)&q=' + q);
-      const j = await res.json();
-      return (j.files && j.files[0]) || null;
+    function clearFbConfig() {
+      if (!confirm('Firebase config hata dein? (Account sign-in band ho jayega.)')) return;
+      try { localStorage.removeItem(FB_CFG_KEY); } catch (e) {}
+      _fbApp = null; _fbAuth = null; _fbUser = null;
+      ['fb-apiKey','fb-authDomain','fb-projectId','fb-appId'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+      fbStatus('fb-setup-status', 'Config hata diya.', '#93a1bd');
+      renderAccount();
     }
-    async function driveUploadBackup(payload) {
-      const json = JSON.stringify(payload);
-      const existing = await driveFindBackup();
-      if (existing) {
-        const res = await driveFetch('https://www.googleapis.com/upload/drive/v3/files/' + existing.id + '?uploadType=media&fields=id,modifiedTime',
-          { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: json });
-        return await res.json();
-      }
-      const boundary = '----aistudy' + Date.now();
-      const body =
-        '--' + boundary + '\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n' +
-        JSON.stringify({ name: CLOUD_FILE, parents: ['appDataFolder'] }) +
-        '\r\n--' + boundary + '\r\nContent-Type: application/json\r\n\r\n' + json +
-        '\r\n--' + boundary + '--';
-      const res = await driveFetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,modifiedTime',
-        { method: 'POST', headers: { 'Content-Type': 'multipart/related; boundary=' + boundary }, body });
-      return await res.json();
-    }
-    async function driveDownloadBackup(id) {
-      const res = await driveFetch('https://www.googleapis.com/drive/v3/files/' + id + '?alt=media');
-      return await res.json();
-    }
-    async function driveDeleteBackup(id) {
-      await driveFetch('https://www.googleapis.com/drive/v3/files/' + id, { method: 'DELETE' });
-    }
-
-    // ---- UI ----
-    function cloudInit() {
-      const cidEl = document.getElementById('g-client-id');
-      if (cidEl && !cidEl.value) cidEl.value = googleClientId();
-      // sign-in cannot work on file:// or plain http (other than localhost)
-      const protoOk = location.protocol === 'https:' || /^http:\/\/localhost/.test(location.origin) || /^http:\/\/127\.0\.0\.1/.test(location.origin);
-      if (!protoOk) {
-        gSetStatus('g-account-status', '&#9888;&#65039; Google sign-in is page par kaam nahi karega (protocol: ' + location.protocol + '). App ko <b>https</b> par kholo — jaise https://himanshu737936.github.io/ai-study-suite/ — ya localhost par. File se kholne par sirf file backup/restore chalega.', '#fde68a');
-      }
-      const originEl = document.getElementById('g-origin-hint');
-      if (originEl) originEl.textContent = location.origin;
-      const chk = document.getElementById('g-autosync');
-      if (chk) chk.checked = autoSyncOn();
-      if (autoSyncOn()) startAutoSync();
-      cloudRefresh();
-    }
-    function cloudRefresh() {
-      const signed = googleSignedIn();
-      const hasId = !!googleClientId();
-      const setupStatus = document.getElementById('g-setup-status');
-      if (setupStatus) {
-        if (hasId) gSetStatus('g-setup-status', '✅ Client ID set hai — ab Step 2 mein sign in karein.', '#6ee7b7');
-        else gSetStatus('g-setup-status', 'Abhi Client ID set nahi hai.', '#fde68a');
-      }
-      const so = document.getElementById('g-signed-out'), si = document.getElementById('g-signed-in');
+    function renderAccount() {
+      const cfg = fbConfig();
+      const setupStatus = document.getElementById('fb-setup-status');
+      if (setupStatus && cfg && !setupStatus.innerHTML) fbStatus('fb-setup-status', '&#9989; Config set hai.', '#6ee7b7');
+      const signed = !!_fbUser;
+      const so = document.getElementById('fb-signed-out'), si = document.getElementById('fb-signed-in');
       if (so) so.classList.toggle('hidden', signed);
       if (si) si.classList.toggle('hidden', !signed);
-      if (signed && _gUser) {
-        const av = document.getElementById('g-avatar');
-        const nm = document.getElementById('g-name');
-        const em = document.getElementById('g-email');
-        if (av) { av.src = _gUser.picture || ''; av.alt = _gUser.name || ''; }
-        if (nm) nm.textContent = _gUser.name || 'Signed in';
-        if (em) em.textContent = _gUser.email || '';
+      if (signed) {
+        const nm = document.getElementById('fb-user-name'), em = document.getElementById('fb-user-email');
+        if (nm) nm.textContent = _fbUser.displayName || (_fbUser.email ? _fbUser.email.split('@')[0] : 'Signed in');
+        if (em) em.textContent = _fbUser.email || '';
       }
-      const syncBox = document.getElementById('g-sync-box');
-      if (syncBox) syncBox.style.opacity = signed ? '1' : '.55';
-      if (!signed) gSetStatus('g-cloud-info', hasId ? 'Sign in karke Drive status dekhein.' : 'Pehle Step 1 poora karein.', 'var(--muted)');
-      if (signed) cloudCheckRemote();
-    }
-    async function cloudCheckRemote() {
-      try {
-        const f = await driveFindBackup();
-        if (!f) { gSetStatus('g-cloud-info', 'Drive par abhi koi backup nahi hai — "Drive par backup karein" dabao.', '#fde68a'); return; }
-        const when = f.modifiedTime ? new Date(f.modifiedTime).toLocaleString() : 'unknown';
-        const kb = f.size ? Math.round(Number(f.size) / 1024) + ' KB' : '';
-        gSetStatus('g-cloud-info', '☁️ Drive par backup mila — ' + when + (kb ? ' • ' + kb : ''), '#6ee7b7');
-      } catch (e) {
-        gSetStatus('g-cloud-info', e.message, '#fda4af');
+      // reflect the sign-in state on the sidebar item
+      const item = document.querySelector('.sb-item[data-nav="account"]');
+      if (item) {
+        const ico = item.querySelector('.ico'); const icoTxt = ico ? ico.textContent : '\uD83D\uDC64';
+        item.textContent = '';
+        const sp = document.createElement('span'); sp.className = 'ico'; sp.textContent = icoTxt;
+        item.appendChild(sp);
+        item.appendChild(document.createTextNode(' ' + (signed ? (_fbUser.email || 'Account') : 'Sign in / Create account')));
       }
     }
-    async function cloudBackupNow(silent) {
-      if (!googleSignedIn()) { if (!silent) gSetStatus('g-sync-status', 'Pehle sign in karein.', '#fde68a'); return; }
-      gSetStatus('g-sync-status', '⏳ Drive par upload ho raha hai...', '#fde68a');
-      try {
-        const payload = await buildBackupPayload();
-        const out = await driveUploadBackup(payload);
-        const when = out.modifiedTime ? new Date(out.modifiedTime).toLocaleString() : 'abhi';
-        gSetStatus('g-sync-status', '✅ Drive par backup ho gaya — ' + when, '#6ee7b7');
-        if (!silent) showError('☁️ Backup tumhare Google Drive mein save ho gaya.');
-        try { localStorage.setItem(BACKUP_KEY, String(Date.now())); } catch (e) {}
-        const n = document.getElementById('backup-nudge'); if (n) n.classList.add('hidden');
-      } catch (e) {
-        gSetStatus('g-sync-status', '❌ Backup fail: ' + e.message, '#fda4af');
-      }
-    }
-    async function cloudRestoreNow() {
-      if (!googleSignedIn()) { gSetStatus('g-sync-status', 'Pehle sign in karein.', '#fde68a'); return; }
-      gSetStatus('g-sync-status', '⏳ Drive se download ho raha hai...', '#fde68a');
-      try {
-        const f = await driveFindBackup();
-        if (!f) { gSetStatus('g-sync-status', 'Drive par koi backup nahi mila.', '#fde68a'); return; }
-        const payload = await driveDownloadBackup(f.id);
-        const ok = await applyBackupObject(payload);
-        if (!ok) gSetStatus('g-sync-status', 'Restore cancel kar diya.', 'var(--muted)');
-      } catch (e) {
-        gSetStatus('g-sync-status', '❌ Restore fail: ' + e.message, '#fda4af');
-      }
-    }
-    async function cloudDeleteRemote() {
-      if (!googleSignedIn()) { gSetStatus('g-sync-status', 'Pehle sign in karein.', '#fde68a'); return; }
-      if (!confirm('Drive se backup file delete kar dein? Ye wapas nahi aayegi.')) return;
-      try {
-        const f = await driveFindBackup();
-        if (!f) { gSetStatus('g-sync-status', 'Drive par koi backup nahi hai.', 'var(--muted)'); return; }
-        await driveDeleteBackup(f.id);
-        gSetStatus('g-sync-status', '🗑️ Drive se backup delete ho gaya.', '#6ee7b7');
-        cloudCheckRemote();
-      } catch (e) { gSetStatus('g-sync-status', '❌ Delete fail: ' + e.message, '#fda4af'); }
-    }
-
-    function openCloudSync() {
+    function openAccount() {
       hideAllSections();
-      document.getElementById('cloud-section').classList.remove('hidden');
-      setActiveNav('cloud');
-      try { cloudInit(); } catch (e) {}
+      document.getElementById('account-section').classList.remove('hidden');
+      setActiveNav('account');
+      const cfg = fbConfig() || {};
+      const setv = (id, v) => { const el = document.getElementById(id); if (el && !el.value) el.value = v || ''; };
+      setv('fb-apiKey', cfg.apiKey); setv('fb-authDomain', cfg.authDomain); setv('fb-projectId', cfg.projectId); setv('fb-appId', cfg.appId);
+      const oh = document.getElementById('fb-origin-hint'); if (oh) oh.textContent = location.origin;
+      const protoOk = location.protocol === 'https:' || /^http:\/\/(localhost|127\.0\.0\.1)/.test(location.origin);
+      if (!protoOk) fbStatus('fb-auth-status', '&#9888;&#65039; Account sign-in is page par kaam nahi karega (protocol: ' + location.protocol + '). App ko <b>https</b> par kholo (jaise GitHub Pages) ya localhost par.', '#fde68a');
+      renderAccount();
     }
-
-    function openHealth() {
-      hideAllSections();
-      document.getElementById('health-section').classList.remove('hidden');
-      setActiveNav('health');
-      renderUsage();
-      runSelfTest();
+    function accountBoot() {
+      // restore an existing session quietly; only touches the network if a
+      // Firebase config has been saved
+      if (!fbConfig()) return;
+      fbInit().then(() => renderAccount()).catch(() => {});
     }
 
     // ==================== NAVIGATION + BACK (history aware) ====================
@@ -6594,8 +6320,7 @@
         else if (id === 'library') openLibrary();
         else if (id === 'plan') openPlan();
         else if (id === 'progress') openProgress();
-        else if (id === 'health') openHealth();
-        else if (id === 'cloud') openCloudSync();
+        else if (id === 'account') openAccount();
         else if (id === 'mistake') openMistakes();
         else if (id === 'adaptive') openAdaptive();
         else if (id === 'listen') openListenMode();
