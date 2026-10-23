@@ -30,7 +30,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com https://accounts.google.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src https://accounts.google.com">
-  <title>AI Study Suite PRO v18.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.1 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -215,8 +215,13 @@
 
     @media (max-width: 1000px) {
       .app-shell { grid-template-columns: minmax(0, 1fr); }
-      .sidebar { position: fixed; left: calc(-1 * var(--sidebar-w) - 12px); transition: left 0.28s ease; box-shadow: var(--shadow); }
-      body.sidebar-open .sidebar { left: 0; }
+          .sidebar {
+      position: fixed; left: 0; top: 0; width: var(--sidebar-w);
+      transform: translateX(calc(-100% - 20px));
+      transition: transform 0.28s var(--ease);
+      box-shadow: var(--shadow);
+    }
+      body.sidebar-open .sidebar { left: 0; transform: translateX(0); }
       body.sidebar-open .sb-overlay { display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 110; }
       .hamburger { display: inline-flex; align-items: center; justify-content: center; }
     }
@@ -697,6 +702,11 @@
        ===================================================================== */
     ::selection { background: rgba(109, 111, 245, 0.38); color: #fff; }
 
+    /* moving focus to a section heading is for screen readers only —
+       it must not paint a focus ring that looks like a text selection */
+    h1:focus, h2:focus, h3:focus, .sec-h2:focus, .section-title:focus,
+    main[tabindex="-1"]:focus, [data-section-title]:focus { outline: none !important; }
+
     /* screen-reader only */
     .sr-only {
       position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -783,6 +793,30 @@
       }
     }
 
+    /* compact mobile header — it used to consume ~25% of a phone screen */
+    @media (max-width: 780px) {
+      .app-header { padding: 8px 10px; gap: 6px; }
+      .brand-box { gap: 8px; align-items: center; }
+      .brand-icon { font-size: 20px; width: 34px; height: 34px; flex: none; }
+      .brand-title { font-size: 14px; gap: 5px; line-height: 1.2; }
+      .pro-badge { font-size: 9px; padding: 2px 6px; }
+      .exam-pill { font-size: 9px; padding: 2px 6px; }
+      .brand-sub { display: none; }
+      .header-controls { gap: 5px; }
+      .pomo-pill { padding: 3px 8px; font-size: 11px; gap: 4px; }
+      .pomo-time { font-size: 11.5px; }
+      .icon-btn { width: 22px; height: 22px; font-size: 11px; }
+      .theme-select, .theme-btn { font-size: 10.5px; padding: 3px 6px; }
+      .demo-group { padding: 2px 4px !important; }
+      .hamburger { width: 34px; height: 34px; font-size: 15px; }
+      #back-btn { padding: 5px 9px !important; font-size: 11px !important; }
+    }
+    @media (max-width: 480px) {
+      /* the exam list is already shown on the dashboard + splash */
+      .exam-pill { display: none; }
+      .brand-title { font-size: 13.5px; }
+    }
+
     /* mobile / touch polish */
     @media (max-width: 820px) {
       .main-card { padding: 16px; }
@@ -796,7 +830,7 @@
     }
   </style>
 </head>
-\1
+<body>
   <a href="#main-content" class="skip-link">Seedha content par jayein (skip to content)</a>
   <div id="sr-live" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
 
@@ -818,7 +852,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.1</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -836,7 +870,7 @@
         <div class="sb-logo">&#129504;</div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.1 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -914,7 +948,7 @@
       <div class="brand-icon">🧠</div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.1 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -1005,7 +1039,7 @@
         </div>
         <div class="hs-cta">
           <button class="btn-primary" style="width:auto; padding:11px 20px;" onclick="document.getElementById('generate-btn').scrollIntoView({behavior:'smooth',block:'center'})">&#128640; Go to Generate</button>
-          <span style="font-size:11.5px; color:var(--muted); align-self:center;">Baaki sab features left sidebar mein hain &rarr;</span>
+          <span style="font-size:11.5px; color:var(--muted); align-self:center;">Baaki sab features menu (&#9776;) se khulte hain &rarr;</span>
         </div>
       </div>
       <section class="step" data-step="1">
@@ -1918,7 +1952,7 @@
       <span class="credit-heart">&#10084;&#65039;</span>
       <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
       <span class="credit-dot"></span>
-      <span class="credit-tag">AI Study Suite PRO v18.0</span>
+      <span class="credit-tag">AI Study Suite PRO v18.1</span>
     </div>
   </footer>
 
@@ -4575,7 +4609,7 @@
       doc.rect(0, 0, 210, 28, 'F');
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(15);
-      doc.text("AI Study Suite v18.0 - UPSC / UPPCS / SSC Scorecard", 14, 13);
+      doc.text("AI Study Suite v18.1 - UPSC / UPPCS / SSC Scorecard", 14, 13);
       doc.setFontSize(9);
       doc.text(`PDF: ${currentPdfName}  |  Score: ${score}/${total} (${accuracy}%)  |  Date: ${new Date().toLocaleDateString()}`, 14, 22);
 
@@ -4598,7 +4632,7 @@
       try {
         const endY = (doc.lastAutoTable && doc.lastAutoTable.finalY ? doc.lastAutoTable.finalY + 12 : 280);
         doc.setFontSize(8); doc.setTextColor(140, 140, 140);
-        doc.text("Made by Himanshu  |  AI Study Suite v18.0", 14, Math.min(endY, 290));
+        doc.text("Made by Himanshu  |  AI Study Suite v18.1", 14, Math.min(endY, 290));
       } catch (e) {}
       doc.save(`UPSC_UPPCS_SSC_Scorecard_${Date.now()}.pdf`);
     }
@@ -4616,7 +4650,7 @@
       try {
         const endY = (doc.lastAutoTable && doc.lastAutoTable.finalY ? doc.lastAutoTable.finalY + 12 : 280);
         doc.setFontSize(8); doc.setTextColor(140, 140, 140);
-        doc.text("Made by Himanshu  |  AI Study Suite v18.0", 14, Math.min(endY, 290));
+        doc.text("Made by Himanshu  |  AI Study Suite v18.1", 14, Math.min(endY, 290));
       } catch (e) {}
       doc.save(`Exam_Cheat_Sheet_${Date.now()}.pdf`);
     }
@@ -5384,7 +5418,7 @@
       let pdfs = [], sets = [];
       try { pdfs = await idbAll('pdfs'); } catch (e) {}
       try { sets = await idbAll('sets'); } catch (e) {}
-      return { app: 'AI Study Suite', version: 'v18.0', exportedAt: new Date().toISOString(), localStorage: ls, pdfs, sets };
+      return { app: 'AI Study Suite', version: 'v18.1', exportedAt: new Date().toISOString(), localStorage: ls, pdfs, sets };
     }
 
     async function backupData() {
@@ -5537,7 +5571,7 @@
     async function exportSet(id) {
       const rec = await idbGet('sets', id);
       if (!rec) return;
-      downloadJson({ app: 'AI Study Suite', kind: 'question-set', version: 'v18.0', name: rec.name, count: rec.count, questions: rec.questions }, (rec.name || 'set').replace(/[^a-z0-9]+/gi, '_').slice(0, 40) + '.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'question-set', version: 'v18.1', name: rec.name, count: rec.count, questions: rec.questions }, (rec.name || 'set').replace(/[^a-z0-9]+/gi, '_').slice(0, 40) + '.json');
     }
     function downloadJson(obj, filename) {
       const blob = new Blob([JSON.stringify(obj)], { type: 'application/json' });
@@ -5834,7 +5868,7 @@
     }
     function exportMistakes() {
       if (!mistakeBank.length) { showError('Export karne ke liye kuch nahi hai.'); return; }
-      downloadJson({ app: 'AI Study Suite', kind: 'mistake-notebook', version: 'v18.0', exportedAt: new Date().toISOString(), mistakes: mistakeBank }, 'mistake_notebook.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'mistake-notebook', version: 'v18.1', exportedAt: new Date().toISOString(), mistakes: mistakeBank }, 'mistake_notebook.json');
     }
     function clearMistakes() { if (!confirm('Poora mistake notebook clear karein?')) return; mistakeBank = []; saveMistakes(); renderMistakes(); }
 
@@ -6038,7 +6072,7 @@
     }
     function exportDoubts() {
       if (!doubtHistory.length) { showError('Export karne ke liye kuch nahi hai.'); return; }
-      downloadJson({ app: 'AI Study Suite', kind: 'doubt-history', version: 'v18.0', exportedAt: new Date().toISOString(), doubts: doubtHistory }, 'doubt_history.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'doubt-history', version: 'v18.1', exportedAt: new Date().toISOString(), doubts: doubtHistory }, 'doubt_history.json');
     }
     function clearDoubts() { if (!confirm('Poori doubt history clear karein?')) return; doubtHistory = []; saveDoubts(); renderDoubts(); }
 

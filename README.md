@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v18.0** · Single-file app · No build step · No backend · Bring your own API key
+> **v18.1** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -97,6 +97,20 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **🗓️ Revision Plan** — exam countdown + today's plan (due SRS cards, weakest topics, streak).
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **🧪 Self-Test & Data** — 16-point health check, **API usage meter**, and **Backup / Restore** (all your data in one JSON file).
+
+### v18.1 — screen bug fixes
+
+Five real UI defects, found by auditing every section at desktop / tablet / phone widths:
+
+| Bug | Cause | Fix |
+|---|---|---|
+| **Stray text at the very top of the page** | The `<body>` tag had been lost and replaced by a literal `\1`, so browsers invented an implicit body and rendered that text above the header | `<body>` restored |
+| **An 18px sliver of the sidebar was always visible on phones** | The mobile drawer was positioned with `left: calc(-1 * var(--sidebar-w) - 12px)`, but a fixed element with no explicit `width` shrink-wraps — it rendered 288px wide, not 258px | drawer now uses `transform: translateX(calc(-100% - 20px))`, which is measured from its real width |
+| **The phone header ate 212px of an 844px screen (25%)** | brand title wrapped to 3 lines; controls to 2 rows | compacted to **125px** (−41%): smaller icon, tighter badges, the exam pill hidden below 480px, smaller pills |
+| **Section headings showed a cyan "selection box"** | moving focus to a heading for screen readers tripped a `:focus-visible { outline: … !important }` rule | the outline is suppressed for programmatically focused headings only — keyboard focus rings are untouched |
+| **Copy said "left sidebar" on phones** | the sidebar is a drawer there | now reads "menu (☰) se khulte hain" |
+
+Verified after the fixes: all 22 sections clean at 390 / 768 / 1340 px with **zero horizontal overflow**, the drawer opens and closes correctly, and the self-test is still 27/27.
 
 ### v18 — a tidier app, and your data in your own Google Drive
 
