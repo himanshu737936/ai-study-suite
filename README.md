@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v13.0** · Single-file app · No build step · No backend · Bring your own API key
+> **v14.0** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -98,7 +98,14 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **🧪 Self-Test & Data** — 16-point health check, **API usage meter**, and **Backup / Restore** (all your data in one JSON file).
 
-### Advanced UI (new in v13)
+### v14 — smoother, smarter, tidier
+- **Splash screen re-engineered for performance** — the particle field now uses pre-rendered glow sprites instead of per-particle canvas shadows, a spatial-hash grid for the connection lines (linear instead of quadratic), a frame-rate gate, and adaptive quality tiers (lite / medium / full) that step down automatically if frames get slow. The heavy animated `background-clip: text` gradients and drop-shadow filters on the splash were removed. Measured canvas cost: **~0.27 ms per frame**.
+- **Quiz navigation** — new **← Pichla** (previous) and **Skip →** buttons, plus keyboard support (`←` previous, `→` next, `S` skip). Going back re-opens a question in review mode with the correct answer marked, without scoring it twice.
+- **Auto theme** — a new *Auto (system)* option follows your OS light/dark setting and switches live when the system does.
+- **Copy buttons** — one tap to copy the cheat sheet or the mind map to the clipboard.
+- **Cleaner config** — the TTS engine setting now lives in one place (Step 3) instead of two, the security headers live only in `_headers`, and an unrelated auto-generated workflow was removed.
+
+### Advanced UI (v13)
 - **Refined design system** — a full token pass: layered elevation, hairline highlights, a consistent spacing scale, and a proper type stack with tabular numerals for every stat.
 - **Upgraded components** — gradient buttons with hover lift, shimmer and press states; glass header with `backdrop-filter`; cards, tiles and option buttons with hover elevation and focus rings.
 - **Sidebar** — active-item accent bar with a gradient highlight, smoother hover motion, and divider lines on group headers.
@@ -273,4 +280,4 @@ If this helped your preparation, a ⭐ on the repo means a lot.
 
 ---
 
-<p align="center"><em>AI Study Suite PRO v13.0 — study smarter, not longer.</em></p>
+<p align="center"><em>AI Study Suite PRO v14.0 — study smarter, not longer.</em></p>

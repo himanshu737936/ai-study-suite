@@ -30,7 +30,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'">
-  <title>AI Study Suite PRO v13.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v14.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -586,8 +586,11 @@
       background: radial-gradient(circle, rgba(109,111,245,.6), rgba(34,211,238,.18) 55%, transparent 72%); filter: blur(10px);
       animation: glowPulse 2.6s ease-in-out infinite; }
     @keyframes glowPulse { 0%,100% { transform: scale(.9); opacity: .72; } 50% { transform: scale(1.1); opacity: 1; } }
-    .logo3d { position: absolute; left: 50%; top: 50%; width: 84px; height: 84px; margin: -42px 0 0 -42px;
-      transform-style: preserve-3d; animation: spin3d 8s linear infinite; }
+    .logo3d {
+      position: absolute; left: 50%; top: 50%; width: 84px; height: 84px; margin: -42px 0 0 -42px;
+      transform-style: preserve-3d; animation: spin3d 8s linear infinite;
+      will-change: transform; backface-visibility: hidden;
+    }
     @keyframes spin3d { 0% { transform: rotateX(-22deg) rotateY(0deg); } 100% { transform: rotateX(-22deg) rotateY(360deg); } }
     .face { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 34px;
       border-radius: 16px; border: 2px solid rgba(255,255,255,.35);
@@ -599,21 +602,30 @@
     .f-left   { transform: rotateY(-90deg) translateZ(42px); }
     .f-top    { transform: rotateX(90deg) translateZ(42px); }
     .f-bottom { transform: rotateX(-90deg) translateZ(42px); }
-    .logo-progress { position: absolute; left: 50%; top: 50%; width: 214px; height: 214px; margin: -107px 0 0 -107px; border-radius: 50%;
+    .logo-progress {
+      position: absolute; left: 50%; top: 50%; width: 214px; height: 214px; margin: -107px 0 0 -107px; border-radius: 50%;
       background: conic-gradient(from -90deg, var(--cyan) 0 calc(var(--pct,0) * 1%), rgba(255,255,255,.07) calc(var(--pct,0) * 1%) 100%);
       -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
       mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
-      filter: drop-shadow(0 0 10px rgba(34,211,238,.55)); }
-    .logo-orbit { position: absolute; left: 50%; top: 50%; width: 150px; height: 150px; margin: -75px 0 0 -75px; border-radius: 50%;
-      border: 2px solid rgba(34,211,238,.45); border-top-color: transparent; transform: rotateX(74deg); animation: orbitSpin 5s linear infinite; }
+      opacity: .95;
+    }
+    .logo-orbit {
+      position: absolute; left: 50%; top: 50%; width: 150px; height: 150px; margin: -75px 0 0 -75px;
+      border-radius: 50%; border: 2px solid rgba(34,211,238,.45); border-top-color: transparent;
+      transform: rotateX(74deg); animation: spin3d 6s linear infinite;
+      will-change: transform;
+    }
     .logo-orbit.o2 { width: 192px; height: 192px; margin: -96px 0 0 -96px; border-color: rgba(139,92,246,.4); border-bottom-color: transparent;
       transform: rotateX(74deg) rotateY(30deg); animation-duration: 7.5s; animation-direction: reverse; }
     @keyframes orbitSpin { to { transform: rotateX(74deg) rotateZ(360deg); } }
 
     /* --- text + progress --- */
-    .splash-title { font-size: 27px; font-weight: 900; margin-top: 14px; letter-spacing: .3px;
-      background: linear-gradient(90deg,#ffffff 20%, #67e8f9 40%, #a5b4fc 60%, #ffffff 80%); background-size: 220% auto;
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 3.2s linear infinite; }
+    .splash-title {
+      font-size: 27px; font-weight: 900; margin-top: 14px; letter-spacing: .3px;
+      background: linear-gradient(90deg, #ffffff 10%, #67e8f9 45%, #a5b4fc 75%, #ffffff 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      text-shadow: none; will-change: transform;
+    }
     @keyframes shimmer { to { background-position: 220% center; } }
     .splash-pro { font-size: 12px; background: rgba(16,185,129,.2); color: #6ee7b7; border: 1px solid rgba(16,185,129,.45);
       padding: 3px 10px; border-radius: 20px; vertical-align: middle; margin-left: 6px; -webkit-text-fill-color: #6ee7b7; }
@@ -648,18 +660,25 @@
     .progress-thin { height: 6px; border-radius: 6px; background: var(--surface-2); overflow: hidden; }
     .progress-thin > i { display: block; height: 100%; background: linear-gradient(90deg, var(--primary), var(--cyan)); }
     .app-footer { width: 100%; max-width: 1180px; text-align: center; padding: 20px 10px 12px; color: var(--muted); font-size: 12.5px; }
-    .credit { display: inline-flex; align-items: center; gap: 9px; padding: 9px 18px; border-radius: 30px;
-      background: linear-gradient(90deg, rgba(109,111,245,.16), rgba(34,211,238,.12), rgba(109,111,245,.16));
-      background-size: 200% auto; border: 1px solid var(--line); transition: .3s; animation: creditGlow 6s linear infinite; }
+    .credit {
+      display: inline-flex; align-items: center; gap: 9px; padding: 9px 18px; border-radius: 30px;
+      background: linear-gradient(90deg, rgba(109,111,245,.16), rgba(34,211,238,.12));
+      border: 1px solid var(--line); transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    }
     @keyframes creditGlow { to { background-position: 200% center; } }
     .credit:hover { border-color: var(--primary); box-shadow: 0 0 26px rgba(109,111,245,.4); transform: translateY(-2px); }
     .credit-made { font-size: 12.5px; color: var(--muted); letter-spacing: .3px; }
-    .credit-heart { font-size: 16px; display: inline-block; animation: heartBeat 1.5s ease-in-out infinite;
-      filter: drop-shadow(0 0 9px rgba(244,63,94,.8)); }
+    .credit-heart {
+      font-size: 16px; display: inline-block; transform-origin: center;
+      animation: heartBeat 1.6s ease-in-out infinite; will-change: transform;
+    }
     @keyframes heartBeat { 0%,100%{ transform: scale(1);} 12%{ transform: scale(1.3);} 24%{ transform: scale(1);} 36%{ transform: scale(1.16);} 48%{ transform: scale(1);} }
     .credit-by { font-size: 13.5px; color: var(--text); font-weight: 600; }
-    .credit-name { font-weight: 900; letter-spacing: .5px; background: linear-gradient(90deg,#a5b4fc,#67e8f9,#f0abfc,#a5b4fc);
-      background-size: 220% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 3.4s linear infinite; }
+    .credit-name {
+      font-weight: 900; letter-spacing: .5px;
+      background: linear-gradient(90deg, #a5b4fc, #67e8f9, #f0abfc);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
     .credit-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--line); }
     .credit-tag { font-size: 11px; color: var(--muted); }
     @media (prefers-reduced-motion: reduce) { .credit, .credit-heart, .credit-name { animation: none !important; } }
@@ -753,7 +772,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v13.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v14.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -771,7 +790,7 @@
         <div class="sb-logo">&#129504;</div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v13.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v14.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -818,7 +837,7 @@
       <div class="brand-icon">🧠</div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v13.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v14.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -852,6 +871,7 @@
           <option value="light">☀️ Light</option>
           <option value="sepia">🟤 Sepia</option>
           <option value="dark">⚫ True Dark</option>
+          <option value="auto">🖥️ Auto (system)</option>
         </select>
       </div>
       <div class="demo-group" style="padding:3px 6px;">
@@ -1297,7 +1317,9 @@
           Live Score: <b id="live-score" style="color:var(--emerald); font-size:16px;">0</b>
           <span id="sampled-pages-info" style="margin-left:10px; font-size:11px; color:#67e8f9;">(Keys 1-4 or Voice Mic to Answer)</span>
         </div>
-        <div style="display:flex; gap:10px;">
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button id="prev-btn" onclick="prevQuestion()" class="btn-secondary" title="Pichla sawaal (←)">← Pichla</button>
+          <button id="skip-btn" onclick="skipQuestion()" class="btn-secondary" title="Skip karo (S)">Skip →</button>
           <button id="next-btn" onclick="nextQuestion()" class="btn-emerald hidden" style="background:var(--primary);">Next Question →</button>
         </div>
       </div>
@@ -1383,6 +1405,7 @@
         <div style="display:flex; flex-wrap:wrap; gap:8px;">
           <button onclick="toggleAllMindMapNodes(true)" class="btn-secondary">➕ Expand All</button>
           <button onclick="toggleAllMindMapNodes(false)" class="btn-secondary">➖ Collapse All</button>
+            <button onclick="copyMindMap()" class="btn-secondary" title="Mind map clipboard par copy karein">📋 Copy</button>
           <button onclick="startGeneration(true)" class="btn-cyan">🔁 Map Next PDF Pages</button>
         </div>
       </div>
@@ -1400,6 +1423,7 @@
         <div style="display:flex; flex-wrap:wrap; gap:8px;">
           <button onclick="startGeneration(true)" class="btn-cyan">🔁 Summarize Next Pages</button>
           <button onclick="speakNotes()" class="btn-secondary">🔊 Play Audio</button>
+          <button onclick="copyCheatSheet()" class="btn-secondary" title="Cheat sheet clipboard par copy karein">📋 Copy</button>
           <button onclick="downloadNotesPdf()" class="btn-emerald">📥 Notes PDF</button>
           <button onclick="exportNotesDocx()" class="btn-secondary">📄 Export Word (.docx)</button>
         </div>
@@ -1732,7 +1756,7 @@
       <span class="credit-heart">&#10084;&#65039;</span>
       <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
       <span class="credit-dot"></span>
-      <span class="credit-tag">AI Study Suite PRO v13.0</span>
+      <span class="credit-tag">AI Study Suite PRO v14.0</span>
     </div>
   </footer>
 
@@ -1766,7 +1790,6 @@
     <input id="tts-speed" class="tts-speed" type="range" min="0.75" max="1.5" step="0.05" value="1" oninput="ttsSetSpeed(this.value)" style="width:90px;">
     <span id="tts-speed-val" style="font-size:11px; color:var(--text-muted);">1.0x</span>
     <span id="tts-now" style="font-size:11px; color:#94a3b8; max-width:260px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"></span>
-    <button onclick="cycleTtsEngine()" id="tts-engine-btn" style="font-size:11px;" title="Switch TTS engine">🔈 Browser</button>
     <button onclick="ttsCycleLang()" id="tts-lang-btn" style="font-size:11px;">🌐 Auto</button>
     <button onclick="ttsStop(); document.getElementById('tts-bar').classList.add('hidden')" style="font-size:11px;">✕</button>
   </div>
@@ -1781,14 +1804,31 @@
       const splash = document.getElementById('splash');
       if (!splash) return;
       const canvas = document.getElementById('splash-canvas');
-      const ctx = (canvas && canvas.getContext) ? canvas.getContext('2d') : null;
+      const ctx = (canvas && canvas.getContext) ? canvas.getContext('2d', { alpha: true }) : null;
       const fill = document.getElementById('splash-fill');
       const ring = document.getElementById('logo-progress');
       const stageEl = document.getElementById('splash-stage-text');
       const pctEl = document.getElementById('splash-pct');
       let raf = null, finished = false;
 
-      // ---- advanced loading system: ~6s, real milestones + staged messages ----
+      // ---- adaptive quality: lite / medium / full -------------------------
+      const cores = navigator.hardwareConcurrency;
+      const mem = navigator.deviceMemory;              // Chrome only; undefined elsewhere
+      const reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+      const smallScreen = Math.min(window.innerWidth, window.innerHeight) < 400;
+      const knownLowCores = typeof cores === 'number' && cores <= 2;
+      const knownLowMem = typeof mem === 'number' && mem <= 2;
+      const knownMidCores = typeof cores === 'number' && cores <= 4;
+      const knownMidMem = typeof mem === 'number' && mem <= 4;
+      let tier = (reduceMotion || knownLowCores || knownLowMem) ? 0
+               : (knownMidCores || knownMidMem || smallScreen) ? 1 : 2;
+      const Q = [
+        { n: 26, streaks: 0, dpr: 1.0,  frame: 66, links: false },  // 0 lite
+        { n: 46, streaks: 1, dpr: 1.25, frame: 40, links: true  },  // 1 medium
+        { n: 70, streaks: 3, dpr: 1.5,  frame: 33, links: true  }   // 2 full
+      ];
+
+      // ---- loading milestones (~6s) ----
       const MIN_MS = 6000, MAX_MS = 11000;
       const STAGES = [
         { at: 4,   label: 'Booting AI engine\u2026' },
@@ -1813,8 +1853,7 @@
         }
       }
       const t0 = performance.now();
-      // fills smoothly to ~88% across the whole 6s window
-      const tickMs = 120, target = 88, ticks = MIN_MS / tickMs;
+      const tickMs = 150, target = 88, ticks = MIN_MS / tickMs;
       const tick = setInterval(() => { if (pct < target) setPct(pct + (target / ticks) * (0.55 + Math.random() * 0.95)); }, tickMs);
       const cleanups = [];
       const hide = () => {
@@ -1829,17 +1868,34 @@
         const elapsed = performance.now() - t0;
         const libsReady = !!(window.pdfjsLib && window.jspdf);
         if ((libsReady && elapsed >= MIN_MS) || elapsed >= MAX_MS) { setPct(100); setTimeout(hide, 500); }
-        else setTimeout(checkReady, 120);
+        else setTimeout(checkReady, 150);
       }
       checkReady();
 
-      // ---- cinematic particle field: 3 depth layers, glow, parallax, streaks ----
+      // ---- particle field (sprite glow, grid-hashed links, frame-gated) ----
       if (ctx) {
         let W = 0, H = 0, mx = 0, my = 0;
-        const DPR = Math.min(2, window.devicePixelRatio || 1);
+        let DPR = Math.min(Q[tier].dpr, window.devicePixelRatio || 1);
         const parts = [], streaks = [];
+
+        // pre-rendered radial-gradient sprites — far cheaper than ctx.shadowBlur
+        function makeSprite(rgb) {
+          const S = 32, c = document.createElement('canvas');
+          c.width = c.height = S;
+          const g = c.getContext('2d');
+          const grd = g.createRadialGradient(S / 2, S / 2, 0, S / 2, S / 2, S / 2);
+          grd.addColorStop(0, 'rgba(' + rgb + ',1)');
+          grd.addColorStop(0.35, 'rgba(' + rgb + ',0.55)');
+          grd.addColorStop(1, 'rgba(' + rgb + ',0)');
+          g.fillStyle = grd; g.fillRect(0, 0, S, S);
+          return c;
+        }
+        const SPR_CYAN = makeSprite('103,232,249');
+        const SPR_VIOLET = makeSprite('165,180,252');
+
         const resize = () => {
           W = window.innerWidth; H = window.innerHeight;
+          DPR = Math.min(Q[tier].dpr, window.devicePixelRatio || 1);
           canvas.width = Math.floor(W * DPR); canvas.height = Math.floor(H * DPR);
           canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
           ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
@@ -1851,54 +1907,125 @@
         cleanups.push(() => window.removeEventListener('resize', resize));
         cleanups.push(() => window.removeEventListener('mousemove', onMove));
 
-        const N = Math.max(60, Math.min(150, Math.floor((W * H) / 11000)));
-        for (let i = 0; i < N; i++) {
-          const z = Math.random() * 0.85 + 0.15;
-          parts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.5 * z, vy: (Math.random() - 0.5) * 0.5 * z,
-            r: (Math.random() * 2.2 + 0.6) * z, z, cyan: Math.random() < 0.4, ph: Math.random() * Math.PI * 2 });
+        function seed() {
+          parts.length = 0; streaks.length = 0;
+          const q = Q[tier];
+          for (let i = 0; i < q.n; i++) {
+            const z = Math.random() * 0.85 + 0.15;
+            parts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.5 * z, vy: (Math.random() - 0.5) * 0.5 * z,
+              r: (Math.random() * 2.2 + 0.9) * z, z, cyan: Math.random() < 0.4, ph: Math.random() * Math.PI * 2 });
+          }
+          for (let i = 0; i < q.streaks; i++) {
+            const len = 90 + Math.random() * 130;
+            streaks.push({ x: Math.random() * W, y: Math.random() * H * 0.5, len, sp: 5 + Math.random() * 6,
+              a: 0.45 + Math.random() * 0.4, delay: Math.random() * 3000, grad: null });
+          }
         }
-        for (let i = 0; i < 3; i++) streaks.push({ x: Math.random() * W, y: Math.random() * H * 0.5, len: 90 + Math.random() * 130, sp: 5 + Math.random() * 6, a: 0.45 + Math.random() * 0.4, delay: Math.random() * 3500 });
-        const start = performance.now();
+        seed();
+
+        const LINK2 = 17000, CELL = 150;
+        const grid = new Map();
+        let lastFrame = 0, slowFrames = 0, downgraded = false;
+
         const frame = (now) => {
           if (!ctx || finished) return;
-          const t = (now - start) / 1000;
+          raf = requestAnimationFrame(frame);
+          if (document.hidden) return;
+          const q = Q[tier];
+          if (now - lastFrame < q.frame) return;   // frame-rate gate
+          const dt = Math.min(48, now - lastFrame) / 16.67;
+          lastFrame = now;
+
+          // adaptive quality: if frames are consistently slow, step one tier down
+          if (!downgraded) {
+            frame._sum = (frame._sum || 0) + (now - lastFrame);
+            frame._count = (frame._count || 0) + 1;
+            if (frame._count >= 24) {
+              const avg = frame._sum / frame._count;
+              frame._sum = 0; frame._count = 0;
+              if (avg > 46 && tier > 0) { tier -= 1; downgraded = true; seed(); }
+              else if (avg <= 30) { downgraded = true; }
+            }
+          }
+          const t = (now - t0) / 1000;
           ctx.clearRect(0, 0, W, H);
-          const ox = mx * 30, oy = my * 30;
+          const ox = mx * 26, oy = my * 26;
+
           for (const p of parts) {
-            p.x += p.vx; p.y += p.vy;
+            p.x += p.vx * dt; p.y += p.vy * dt;
             if (p.x < -30) p.x = W + 30; else if (p.x > W + 30) p.x = -30;
             if (p.y < -30) p.y = H + 30; else if (p.y > H + 30) p.y = -30;
           }
-          for (let i = 0; i < parts.length; i++) {
-            const a = parts[i], ax = a.x + ox * a.z, ay = a.y + oy * a.z;
-            for (let j = i + 1; j < parts.length; j++) {
-              const b = parts[j], bx = b.x + ox * b.z, by = b.y + oy * b.z;
-              const dx = ax - bx, dy = ay - by, d2 = dx * dx + dy * dy;
-              if (d2 < 17000) {
-                ctx.strokeStyle = 'rgba(109,111,245,' + (0.26 * (1 - d2 / 17000) * Math.min(a.z, b.z)).toFixed(3) + ')';
-                ctx.lineWidth = 1;
-                ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
+
+          // ---- links: spatial hash grid, batched into 3 alpha buckets ----
+          if (q.links) {
+            grid.clear();
+            for (let i = 0; i < parts.length; i++) {
+              const p = parts[i];
+              const key = ((p.x / CELL) | 0) + ':' + ((p.y / CELL) | 0);
+              let bucket = grid.get(key);
+              if (!bucket) { bucket = []; grid.set(key, bucket); }
+              bucket.push(i);
+            }
+            const buckets = [[], [], []];
+            for (let i = 0; i < parts.length; i++) {
+              const a = parts[i];
+              const cx = (a.x / CELL) | 0, cy = (a.y / CELL) | 0;
+              for (let gx = cx - 1; gx <= cx + 1; gx++) {
+                for (let gy = cy - 1; gy <= cy + 1; gy++) {
+                  const bucket = grid.get(gx + ':' + gy);
+                  if (!bucket) continue;
+                  for (const j of bucket) {
+                    if (j <= i) continue;
+                    const b = parts[j];
+                    const dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy;
+                    if (d2 < LINK2) {
+                      const k = d2 < 5600 ? 0 : d2 < 11300 ? 1 : 2;
+                      buckets[k].push([a.x + ox * a.z, a.y + oy * a.z, b.x + ox * b.z, b.y + oy * b.z]);
+                    }
+                  }
+                }
               }
             }
+            const alphas = [0.26, 0.16, 0.09];
+            ctx.lineWidth = 1;
+            for (let k = 0; k < 3; k++) {
+              const arr = buckets[k];
+              if (!arr.length) continue;
+              ctx.strokeStyle = 'rgba(109,111,245,' + alphas[k] + ')';
+              ctx.beginPath();
+              for (const seg of arr) { ctx.moveTo(seg[0], seg[1]); ctx.lineTo(seg[2], seg[3]); }
+              ctx.stroke();
+            }
           }
+
+          // ---- nodes: drawImage sprites (no shadowBlur) ----
           for (const p of parts) {
-            const pulse = 0.55 + 0.45 * Math.sin(t * 2 + p.ph);
-            ctx.beginPath(); ctx.arc(p.x + ox * p.z, p.y + oy * p.z, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = p.cyan ? 'rgba(103,232,249,' + (0.9 * pulse).toFixed(2) + ')' : 'rgba(165,180,252,' + (0.9 * pulse).toFixed(2) + ')';
-            ctx.shadowBlur = 12 * p.z; ctx.shadowColor = p.cyan ? 'rgba(34,211,238,.9)' : 'rgba(109,111,245,.9)';
-            ctx.fill(); ctx.shadowBlur = 0;
+            const pulse = 0.6 + 0.4 * Math.sin(t * 2 + p.ph);
+            const sz = p.r * 7 * pulse;
+            ctx.globalAlpha = (0.55 + 0.45 * pulse) * (0.5 + 0.5 * p.z);
+            ctx.drawImage(p.cyan ? SPR_CYAN : SPR_VIOLET,
+              p.x + ox * p.z - sz / 2, p.y + oy * p.z - sz / 2, sz, sz);
           }
+          ctx.globalAlpha = 1;
+
+          // ---- streaks: gradient built once, then reused ----
           for (const sk of streaks) {
-            if (now - start < sk.delay) continue;
-            sk.x += sk.sp; sk.y += sk.sp * 0.35;
+            if (now - t0 < sk.delay) continue;
+            sk.x += sk.sp * dt; sk.y += sk.sp * 0.35 * dt;
             if (sk.x > W + 220) { sk.x = -220; sk.y = Math.random() * H * 0.6; }
-            const g = ctx.createLinearGradient(sk.x, sk.y, sk.x - sk.len, sk.y - sk.len * 0.35);
-            g.addColorStop(0, 'rgba(165,243,252,' + sk.a + ')');
-            g.addColorStop(1, 'rgba(165,243,252,0)');
-            ctx.strokeStyle = g; ctx.lineWidth = 2;
-            ctx.beginPath(); ctx.moveTo(sk.x, sk.y); ctx.lineTo(sk.x - sk.len, sk.y - sk.len * 0.35); ctx.stroke();
+            if (!sk.grad) {
+              const g = ctx.createLinearGradient(0, 0, -sk.len, -sk.len * 0.35);
+              g.addColorStop(0, 'rgba(165,243,252,' + sk.a + ')');
+              g.addColorStop(1, 'rgba(165,243,252,0)');
+              sk.grad = g;
+            }
+            ctx.save();
+            ctx.translate(sk.x, sk.y);
+            ctx.strokeStyle = sk.grad; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(-sk.len, -sk.len * 0.35); ctx.stroke();
+            ctx.restore();
           }
-          raf = requestAnimationFrame(frame);
         };
         raf = requestAnimationFrame(frame);
       }
@@ -1989,6 +2116,8 @@
     let score = 0;
     let isQuestionAnswered = false;
     let wrongQuestions = [];
+    let qAnswers = {};        // questionIndex -> chosen option index (for Prev / review)
+    let skippedCount = 0;     // questions skipped with the Skip button
     let bookmarkedQuestions = [];
     let userResponses = [];
     let topicStats = {};
@@ -3224,6 +3353,7 @@
     // ==================== QUIZ ENGINE WITH EXAM PATTERN TAGS & PAGE PROOF ====================
     function launchQuiz() {
       currentIndex = 0; score = 0; wrongQuestions = []; bookmarkedQuestions = []; userResponses = []; topicStats = {};
+      qAnswers = {}; skippedCount = 0;
       hideAllSections();
       document.getElementById('quiz-section').classList.remove('hidden'); recordNav('quiz');
       if (lastSampledPagesList.length > 0) {
@@ -3339,6 +3469,7 @@
 
       const correctIdx = Number(q.correctIndex) || 0;
       const isCorrect = selectedIndex === correctIdx;
+      qAnswers[currentIndex] = selectedIndex;
       const expBox = document.getElementById('explanation-box');
       const feedbackTitle = document.getElementById('feedback-title');
 
@@ -3404,6 +3535,47 @@
       currentIndex++;
       if (currentIndex < quizData.length) renderQuestion();
       else showResults();
+    }
+
+    // ---- NEW: previous / skip / review (v14) ----
+    function prevQuestion() {
+      if (currentIndex <= 0) { showError('Yahi pehla sawaal hai — peeche kuch nahi.'); return; }
+      currentIndex--;
+      renderQuestion();
+      const chosen = qAnswers[currentIndex];
+      if (chosen !== undefined) reviewAnswered(currentIndex, chosen);
+    }
+
+    function skipQuestion() {
+      if (!quizData.length) return;
+      if (!isQuestionAnswered) skippedCount++;
+      currentIndex++;
+      if (currentIndex < quizData.length) renderQuestion();
+      else showResults();
+    }
+
+    // re-show an already answered question without scoring it again
+    function reviewAnswered(idx, chosen) {
+      const q = quizData[idx];
+      if (!q) return;
+      isQuestionAnswered = true;
+      clearInterval(timerInterval);
+      const btns = document.getElementById('options-container').children;
+      for (const b of btns) b.onclick = null;
+      const correct = Number(q.correctIndex) || 0;
+      if (btns[correct]) btns[correct].classList.add('option-correct');
+      if (chosen !== correct && btns[chosen]) btns[chosen].classList.add('option-wrong');
+      const expBox = document.getElementById('explanation-box');
+      if (expBox) {
+        expBox.classList.remove('hidden');
+        expBox.className = 'explanation-card ' + (chosen === correct ? 'exp-correct' : 'exp-wrong');
+      }
+      const ft = document.getElementById('feedback-title');
+      if (ft) ft.innerHTML = chosen === correct
+        ? '<span style="color:var(--emerald);">\u2705 (review) Ye sahi tha</span>'
+        : '<span style="color:var(--rose);">\u274c (review) Ye galat tha</span>';
+      const nb = document.getElementById('next-btn'); if (nb) nb.classList.remove('hidden');
+      const sb = document.getElementById('skip-btn'); if (sb) sb.classList.add('hidden');
     }
 
     function toggleBookmarkCurrent() {
@@ -4019,7 +4191,7 @@
       doc.rect(0, 0, 210, 28, 'F');
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(15);
-      doc.text("AI Study Suite v13.0 - UPSC / UPPCS / SSC Scorecard", 14, 13);
+      doc.text("AI Study Suite v14.0 - UPSC / UPPCS / SSC Scorecard", 14, 13);
       doc.setFontSize(9);
       doc.text(`PDF: ${currentPdfName}  |  Score: ${score}/${total} (${accuracy}%)  |  Date: ${new Date().toLocaleDateString()}`, 14, 22);
 
@@ -4042,7 +4214,7 @@
       try {
         const endY = (doc.lastAutoTable && doc.lastAutoTable.finalY ? doc.lastAutoTable.finalY + 12 : 280);
         doc.setFontSize(8); doc.setTextColor(140, 140, 140);
-        doc.text("Made by Himanshu  |  AI Study Suite v13.0", 14, Math.min(endY, 290));
+        doc.text("Made by Himanshu  |  AI Study Suite v14.0", 14, Math.min(endY, 290));
       } catch (e) {}
       doc.save(`UPSC_UPPCS_SSC_Scorecard_${Date.now()}.pdf`);
     }
@@ -4059,7 +4231,7 @@
       try {
         const endY = (doc.lastAutoTable && doc.lastAutoTable.finalY ? doc.lastAutoTable.finalY + 12 : 280);
         doc.setFontSize(8); doc.setTextColor(140, 140, 140);
-        doc.text("Made by Himanshu  |  AI Study Suite v13.0", 14, Math.min(endY, 290));
+        doc.text("Made by Himanshu  |  AI Study Suite v14.0", 14, Math.min(endY, 290));
       } catch (e) {}
       doc.save(`Exam_Cheat_Sheet_${Date.now()}.pdf`);
     }
@@ -4078,14 +4250,29 @@
 
     // ==================== THEMES ====================
     const THEMES = ['midnight', 'ocean', 'forest', 'sunset', 'rose', 'light', 'sepia', 'dark'];
-    function setTheme(name) {
-      if (THEMES.indexOf(name) === -1) name = 'midnight';
-      document.body.dataset.theme = name;
-      document.body.classList.toggle('reading-sepia', name === 'sepia');
-      document.body.classList.toggle('reading-dark', name === 'dark');
-      try { localStorage.setItem('ai_study_theme_v9', name); } catch (e) {}
-      const sel = document.getElementById('theme-select'); if (sel && sel.value !== name) sel.value = name;
+    let themePref = 'midnight';
+    function systemTheme() {
+      try { return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'midnight'; }
+      catch (e) { return 'midnight'; }
     }
+    function setTheme(name) {
+      themePref = name || 'midnight';
+      let applied = (themePref === 'auto') ? systemTheme() : themePref;
+      if (THEMES.indexOf(applied) === -1) applied = 'midnight';
+      document.body.dataset.theme = applied;
+      document.body.classList.toggle('reading-sepia', applied === 'sepia');
+      document.body.classList.toggle('reading-dark', applied === 'dark');
+      try { localStorage.setItem('ai_study_theme_v9', themePref); } catch (e) {}
+      const sel = document.getElementById('theme-select'); if (sel && sel.value !== themePref) sel.value = themePref;
+    }
+    // follow the OS light/dark setting while "Auto" is selected
+    (function watchSystemTheme() {
+      try {
+        const mq = window.matchMedia('(prefers-color-scheme: light)');
+        const onChange = () => { if (themePref === 'auto') setTheme('auto'); };
+        if (mq.addEventListener) mq.addEventListener('change', onChange); else mq.addListener(onChange);
+      } catch (e) {}
+    })();
     function restoreTheme() {
       let t = 'midnight';
       try { t = localStorage.getItem('ai_study_theme_v9') || localStorage.getItem('ai_study_theme_v7') || 'midnight'; } catch (e) {}
@@ -4145,18 +4332,10 @@
       saveTtsPrefs();
       syncTtsEngineUI();
     }
-    function cycleTtsEngine() {
-      ttsEngine = ttsEngine === 'gemini' ? 'browser' : 'gemini';
-      const sel = document.getElementById('tts-engine'); if (sel) sel.value = ttsEngine;
-      saveTtsPrefs();
-      syncTtsEngineUI();
-    }
     function syncTtsEngineUI() {
       const badge = document.getElementById('tts-engine-badge');
-      const btn = document.getElementById('tts-engine-btn');
       const isG = ttsEngine === 'gemini';
       if (badge) { badge.innerText = isG ? '✨ Gemini TTS' : '🔈 Browser Voice'; badge.style.color = isG ? '#fde68a' : '#a5b4fc'; }
-      if (btn) btn.innerText = isG ? '✨ Gemini' : '🔈 Browser';
       const sel = document.getElementById('tts-engine'); if (sel && sel.value !== ttsEngine) sel.value = ttsEngine;
     }
     function saveTtsPrefs() {
@@ -4369,6 +4548,31 @@
       ttsLangMode = order[(order.indexOf(ttsLangMode) + 1) % order.length];
       document.getElementById('tts-lang-btn').innerText = ttsLangMode === 'auto' ? '🌐 Auto' : (ttsLangMode === 'hi-IN' ? '🇮🇳 हिंदी' : '🇬🇧 EN');
     }
+    // ---- NEW: copy to clipboard (v14) ----
+    async function copyText(text, label) {
+      if (!text || !text.trim()) { showError('Copy karne ke liye pehle content banao.'); return; }
+      try {
+        await navigator.clipboard.writeText(text);
+        showError('\ud83d\udccb ' + label + ' copy ho gaya!');
+      } catch (e) {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select();
+          document.execCommand('copy'); ta.remove();
+          showError('\ud83d\udccb ' + label + ' copy ho gaya!');
+        } catch (e2) { showError('Copy nahi hua — text manually select karke copy karein.'); }
+      }
+    }
+    function copyCheatSheet() {
+      const el = document.getElementById('notes-content');
+      copyText(el ? el.innerText : '', 'Cheat sheet');
+    }
+    function copyMindMap() {
+      const el = document.getElementById('mindmap-container');
+      copyText(el ? el.innerText : '', 'Mind map');
+    }
+
     function speakNotes() {
       if (!notesData) { showError("Pehle cheat sheet generate karein."); return; }
       const parts = [notesData.title || '', notesData.executiveSummary || ''];
@@ -4541,6 +4745,9 @@
             const btns = document.getElementById('options-container').children;
             if (btns[map[k]]) selectAnswer(map[k], btns[map[k]]);
           } else if (e.key === 'Enter' && isQuestionAnswered) nextQuestion();
+          else if (e.key === 'ArrowRight' && isQuestionAnswered) nextQuestion();
+          else if (e.key === 'ArrowLeft') prevQuestion();
+          else if (k === 's' && !isQuestionAnswered) skipQuestion();
         }
         if (!document.getElementById('flashcard-section').classList.contains('hidden')) {
           if (e.code === 'Space') { e.preventDefault(); flipFlashcard(); }
@@ -4701,7 +4908,7 @@
         let pdfs = [], sets = [];
         try { pdfs = await idbAll('pdfs'); } catch (e) {}
         try { sets = await idbAll('sets'); } catch (e) {}
-        const payload = { app: 'AI Study Suite', version: 'v13.0', exportedAt: new Date().toISOString(), localStorage: ls, pdfs, sets };
+        const payload = { app: 'AI Study Suite', version: 'v14.0', exportedAt: new Date().toISOString(), localStorage: ls, pdfs, sets };
         const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
@@ -4809,7 +5016,7 @@
     async function exportSet(id) {
       const rec = await idbGet('sets', id);
       if (!rec) return;
-      downloadJson({ app: 'AI Study Suite', kind: 'question-set', version: 'v13.0', name: rec.name, count: rec.count, questions: rec.questions }, (rec.name || 'set').replace(/[^a-z0-9]+/gi, '_').slice(0, 40) + '.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'question-set', version: 'v14.0', name: rec.name, count: rec.count, questions: rec.questions }, (rec.name || 'set').replace(/[^a-z0-9]+/gi, '_').slice(0, 40) + '.json');
     }
     function downloadJson(obj, filename) {
       const blob = new Blob([JSON.stringify(obj)], { type: 'application/json' });
@@ -5069,7 +5276,7 @@
     }
     function exportMistakes() {
       if (!mistakeBank.length) { showError('Export karne ke liye kuch nahi hai.'); return; }
-      downloadJson({ app: 'AI Study Suite', kind: 'mistake-notebook', version: 'v13.0', exportedAt: new Date().toISOString(), mistakes: mistakeBank }, 'mistake_notebook.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'mistake-notebook', version: 'v14.0', exportedAt: new Date().toISOString(), mistakes: mistakeBank }, 'mistake_notebook.json');
     }
     function clearMistakes() { if (!confirm('Poora mistake notebook clear karein?')) return; mistakeBank = []; saveMistakes(); renderMistakes(); }
 
@@ -5273,7 +5480,7 @@
     }
     function exportDoubts() {
       if (!doubtHistory.length) { showError('Export karne ke liye kuch nahi hai.'); return; }
-      downloadJson({ app: 'AI Study Suite', kind: 'doubt-history', version: 'v13.0', exportedAt: new Date().toISOString(), doubts: doubtHistory }, 'doubt_history.json');
+      downloadJson({ app: 'AI Study Suite', kind: 'doubt-history', version: 'v14.0', exportedAt: new Date().toISOString(), doubts: doubtHistory }, 'doubt_history.json');
     }
     function clearDoubts() { if (!confirm('Poori doubt history clear karein?')) return; doubtHistory = []; saveDoubts(); renderDoubts(); }
 

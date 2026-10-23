@@ -2,18 +2,10 @@
 #
 # The app is a single self-contained index.html with no build step,
 # so we publish the repository root as-is.
+#
+# Security + caching headers live in the `_headers` file (the canonical
+# place for Netlify/Cloudflare Pages) — not duplicated here.
 
 [build]
   publish = "."
   command = ""
-
-# Make sure the service worker is never served stale.
-[[headers]]
-  for = "/sw.js"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-
-[[headers]]
-  for = "/index.html"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
