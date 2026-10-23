@@ -29,7 +29,7 @@
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://accounts.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com https://accounts.google.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.gstatic.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src https://accounts.google.com https://*.firebaseapp.com">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com https://accounts.google.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src https://accounts.google.com">
   <title>AI Study Suite PRO v18.2 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
@@ -1757,75 +1757,67 @@
       <div id="progress-content"></div>
     </div>
 
-    <!-- ==================== ACCOUNT (FIREBASE EMAIL / PASSWORD) ==================== -->
+    <!-- ==================== ACCOUNT (LOCAL / ON-DEVICE) ==================== -->
     <div id="account-section" class="hidden">
       <div class="quiz-topbar">
         <div>
-          <h2 class="sec-h2">&#128100; Account &mdash; Sign in / Create account</h2>
-          <p class="sec-p">Email + password se apna account banao. Login <b>optional</b> hai &mdash; app ka har feature bina account bhi chalta hai. Account tumhari identity ke liye hai (aur aage cross-device sync ke liye).</p>
+          <h2 class="sec-h2">&#128100; Account &mdash; local sign in</h2>
+          <p class="sec-p">Ek <b>temporary local account</b> &mdash; naam + password, sirf isi device par save hota hai. Koi internet, koi email, koi server nahi. Login <b>optional</b> hai: app ka har feature bina account bhi chalta hai.</p>
         </div>
         <div class="panel-actions">
           <button class="btn-secondary" onclick="renderAccount()">&#128260; Refresh</button>
         </div>
       </div>
 
-      <div class="section-box" id="fb-setup-box">
-        <div class="section-title">&#128273; Step 1 &mdash; Firebase config daalein (ek baar ka kaam)</div>
-        <p class="sec-p" style="margin-bottom:10px;">Account banane ke liye ek free Firebase project chahiye (Google ka, free tier &mdash; paisa nahi lagta). 5 minute ka kaam:</p>
-        <ol style="padding-left:18px; font-size:12.5px; line-height:1.8; color:var(--text-muted); display:flex; flex-direction:column; gap:4px; margin-bottom:12px;">
-          <li><a href="https://console.firebase.google.com/" target="_blank" rel="noopener noreferrer" style="color:#67e8f9;">console.firebase.google.com</a> kholo &rarr; <b>Add project</b> (naam kuch bhi rakh do)</li>
-          <li>Project ke andar <b>Build &rarr; Authentication &rarr; Get started</b> &rarr; <b>Email/Password</b> ko <b>Enable</b> karo</li>
-          <li><b>Project settings (&#9881;&#65039;) &rarr; General &rarr; Your apps &rarr; Web (&lt;/&gt;)</b> &rarr; app register karo</li>
-          <li>Jo <code>firebaseConfig</code> object dikhega, uski <b>apiKey / authDomain / projectId / appId</b> values neeche daalo</li>
-          <li>Authentication &rarr; Settings &rarr; <b>Authorised domains</b> mein ye add karo: <code id="fb-origin-hint">https://example.com</code>
-              <button class="btn-secondary" style="margin-left:6px; padding:3px 9px; font-size:11px;" onclick="copyText(location.origin, 'Origin')">&#128203; Copy</button></li>
-        </ol>
+      <div class="section-box hidden" id="acct-create">
+        <div class="section-title">&#127381; Naya account banao</div>
         <div class="grid-2">
-          <div><label>API Key</label><input type="text" id="fb-apiKey" placeholder="AIzaSy..." autocomplete="off" spellcheck="false"></div>
-          <div><label>Auth domain</label><input type="text" id="fb-authDomain" placeholder="your-app.firebaseapp.com" autocomplete="off" spellcheck="false"></div>
-          <div><label>Project ID</label><input type="text" id="fb-projectId" placeholder="your-app" autocomplete="off" spellcheck="false"></div>
-          <div><label>App ID</label><input type="text" id="fb-appId" placeholder="1:1234567890:web:abcdef" autocomplete="off" spellcheck="false"></div>
+          <div><label>Naam</label><input type="text" id="acct-name" placeholder="Tumhara naam" autocomplete="username" spellcheck="false"></div>
+          <div><label>Password</label><input type="password" id="acct-pass" placeholder="Kam se kam 4 characters" autocomplete="new-password"></div>
         </div>
-        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;">
-          <button class="btn-cyan" onclick="saveFbConfig()">&#128190; Save config</button>
-          <button class="btn-secondary" onclick="clearFbConfig()" style="border-color:var(--rose); color:#fda4af;">Clear</button>
+        <div class="grid-2" style="margin-top:14px;">
+          <div><label>Password dobara</label><input type="password" id="acct-pass2" placeholder="Wahi password dobara" autocomplete="new-password"></div>
         </div>
-        <div id="fb-setup-status" class="sec-p" style="margin-top:8px;"></div>
+        <div style="margin-top:14px;"><button id="acct-create-btn" class="btn-primary" style="width:auto; padding:12px 22px;" onclick="acctCreate()">&#127381; Create account</button></div>
       </div>
 
-      <div class="section-box" id="fb-auth-box">
-        <div id="fb-signed-out">
-          <div class="section-title">&#128100; Step 2 &mdash; Login ya naya account banao</div>
-          <div style="display:flex; gap:8px; margin-bottom:14px;">
-            <button id="fb-tab-login" class="mode-tab active-quiz" onclick="fbSetTab('login')">&#128273; Login</button>
-            <button id="fb-tab-signup" class="mode-tab" onclick="fbSetTab('signup')">&#127381; Create account</button>
-          </div>
-          <div class="grid-2">
-            <div><label>Email</label><input type="email" id="fb-email" placeholder="you@example.com" autocomplete="email" spellcheck="false"></div>
-            <div><label>Password</label><input type="password" id="fb-password" placeholder="Kam se kam 6 characters" autocomplete="current-password"></div>
-          </div>
-          <div id="fb-signup-extra" class="hidden" style="margin-top:14px;"><label>Naam (optional)</label><input type="text" id="fb-name" placeholder="Tumhara naam" autocomplete="name"></div>
-          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;">
-            <button id="fb-submit-btn" class="btn-primary" style="width:auto; padding:12px 22px;" onclick="fbSubmit()">&#128273; Login</button>
-            <button class="btn-secondary" onclick="fbForgotPassword()">Forgot password?</button>
-          </div>
-          <div id="fb-auth-status" class="sec-p" style="margin-top:10px;"></div>
+      <div class="section-box hidden" id="acct-login">
+        <div class="section-title">&#128273; Login</div>
+        <p class="sec-p" id="acct-who" style="margin-bottom:10px;"></p>
+        <div class="grid-2">
+          <div><label>Naam</label><input type="text" id="acct-login-name" placeholder="Naam" autocomplete="username" spellcheck="false"></div>
+          <div><label>Password</label><input type="password" id="acct-login-pass" placeholder="Password" autocomplete="current-password"></div>
         </div>
-        <div id="fb-signed-in" class="hidden">
-          <div class="section-title">&#9989; Tum signed in ho</div>
-          <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
-            <div class="sb-logo" style="width:44px; height:44px; font-size:20px;">&#128100;</div>
-            <div>
-              <div id="fb-user-name" style="font-weight:800; font-size:15px;"></div>
-              <div id="fb-user-email" class="sec-p"></div>
-            </div>
-            <button class="btn-secondary" onclick="fbSignOut()" style="margin-left:auto;">&#128682; Sign out</button>
-          </div>
-          <div id="fb-account-status" class="sec-p" style="margin-top:10px;"></div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;">
+          <button id="acct-login-btn" class="btn-primary" style="width:auto; padding:12px 22px;" onclick="acctLogin()">&#128273; Login</button>
+          <button class="btn-secondary" onclick="acctDelete()" style="border-color:var(--rose); color:#fda4af;">&#128465;&#65039; Delete account</button>
         </div>
+      </div>
+
+      <div class="section-box hidden" id="acct-signedin">
+        <div class="section-title">&#9989; Tum signed in ho</div>
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+          <div class="sb-logo" style="width:44px; height:44px; font-size:20px;">&#128100;</div>
+          <div>
+            <div id="acct-me" style="font-weight:800; font-size:15px;"></div>
+            <div class="sec-p">Local account &bull; sirf is device par</div>
+          </div>
+          <button class="btn-secondary" onclick="acctSignOut()" style="margin-left:auto;">&#128682; Sign out</button>
+        </div>
+      </div>
+
+      <div id="acct-status" class="sec-p" style="margin-top:10px;"></div>
+
+      <div class="section-box">
+        <div class="section-title">&#128274; Ye kaise kaam karta hai</div>
+        <ul style="padding-left:18px; font-size:13px; line-height:1.7; color:var(--text-muted); display:flex; flex-direction:column; gap:5px;">
+          <li><b>Kahan rehta hai:</b> sirf tumhare browser ke <code>localStorage</code> mein &mdash; koi server nahi, koi internet nahi, koi email nahi.</li>
+          <li><b>Password:</b> device par salted hash (PBKDF2) ke roop mein save hota hai, plain text mein nahi.</li>
+          <li><b>Delete:</b> "Delete account" se kabhi bhi poora account hata sakte ho.</li>
+          <li><b>Note:</b> ye ek local gate hai (bank-level security nahi) &mdash; ek hi device par simple login ke liye.</li>
+        </ul>
       </div>
     </div>
-
     <!-- ==================== MISTAKE NOTEBOOK ==================== -->
     <div id="mistake-section" class="hidden">
       <div class="quiz-topbar">
@@ -6033,182 +6025,124 @@
       document.getElementById('generate-btn').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // ==================== ACCOUNT (FIREBASE EMAIL/PASSWORD AUTH) ====================
-    // The app has no backend of its own. Accounts are handled by Firebase
-    // Authentication entirely in the browser, using the user's own free Firebase
-    // project (config pasted once, stored locally). Login is OPTIONAL — every
-    // study feature works without an account.
-    const FB_CFG_KEY = 'ai_study_fb_config_v19';
-    // Two CDNs, tried in order (jsdelivr mirrors the same official SDK as gstatic,
-    // so a network that blocks one can still load accounts from the other).
-    const FB_SDK_SOURCES = [
-      { app: 'https://cdn.jsdelivr.net/npm/firebase@10.12.5/firebase-app-compat.js',  auth: 'https://cdn.jsdelivr.net/npm/firebase@10.12.5/firebase-auth-compat.js' },
-      { app: 'https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js',    auth: 'https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js' }
-    ];
-    let _fbApp = null, _fbAuth = null, _fbUser = null, _fbSdkPromise = null, _fbMode = 'login';
+    // ==================== ACCOUNT (LOCAL / ON-DEVICE) ====================
+    // A "temporary" local account: created and verified entirely in the browser.
+    // No server, no internet, no email — the account lives in localStorage and
+    // the password is stored only as a salted PBKDF2 hash. Login is OPTIONAL;
+    // every study feature works without an account.
+    const ACCT_KEY = 'ai_study_local_account_v20';
+    const ACCT_SESSION_KEY = 'ai_study_local_session_v20';
+    let _acctUser = null;   // { name } while signed in
 
-    function fbConfig() {
+    function localAccount() {
       try {
-        const j = JSON.parse(localStorage.getItem(FB_CFG_KEY) || 'null');
-        if (j && j.apiKey && j.authDomain && j.projectId && j.appId) return j;
-      } catch (e) {}
-      return null;
+        const j = JSON.parse(localStorage.getItem(ACCT_KEY) || 'null');
+        return (j && j.name && j.hash && j.salt) ? j : null;
+      } catch (e) { return null; }
     }
-    function fbStatus(id, msg, color) {
-      const el = document.getElementById(id);
+    function acctStatus(msg, color) {
+      const el = document.getElementById('acct-status');
       if (!el) return;
-      el.innerHTML = msg;
+      el.innerHTML = msg || '';
       el.style.color = color || 'var(--text-muted)';
     }
-    // Firebase's CDN does not publish stable SRI hashes, so these two scripts are
-    // injected without integrity (they are loaded only when accounts are used).
-    function loadScriptNoSri(url) {
-      return new Promise((resolve, reject) => {
-        const el = document.createElement('script');
-        el.src = url; el.async = true; el.referrerPolicy = 'no-referrer';
-        el.onload = () => resolve();
-        el.onerror = () => reject(new Error('load failed: ' + url.split('/').pop()));
-        document.head.appendChild(el);
-      });
+    function _randSaltB64() {
+      const a = new Uint8Array(16);
+      if (window.crypto && crypto.getRandomValues) crypto.getRandomValues(a);
+      else for (let i = 0; i < a.length; i++) a[i] = Math.floor(Math.random() * 256);
+      return bufToB64(a);
     }
-    async function loadFromAny(urls) {
-      let last = null;
-      for (const u of urls) { try { await loadScriptNoSri(u); return; } catch (e) { last = e; } }
-      throw last || new Error('load failed');
-    }
-    function loadFirebaseSdk() {
-      if (_fbSdkPromise) return _fbSdkPromise;
-      _fbSdkPromise = (async () => {
-        if (!(window.firebase && window.firebase.initializeApp)) await loadFromAny(FB_SDK_SOURCES.map(x => x.app));
-        if (!(window.firebase && window.firebase.auth)) await loadFromAny(FB_SDK_SOURCES.map(x => x.auth));
-        if (!(window.firebase && window.firebase.auth)) { _fbSdkPromise = null; throw new Error('Firebase SDK load nahi hua — internet ya ad-block check karein.'); }
-      })();
-      return _fbSdkPromise;
-    }
-    async function fbInit() {
-      const cfg = fbConfig();
-      if (!cfg) throw new Error('Pehle Step 1 mein Firebase config daalein.');
-      await loadFirebaseSdk();
-      if (!_fbApp) {
-        _fbApp = (window.firebase.apps && window.firebase.apps.length) ? window.firebase.app() : window.firebase.initializeApp(cfg);
-        _fbAuth = window.firebase.auth();
-        _fbAuth.onAuthStateChanged(u => { _fbUser = u; renderAccount(); });
+    // Salted password hash. PBKDF2-SHA256 (150k) when Web Crypto is available;
+    // a clearly-weaker salted hash otherwise (e.g. file:// in some browsers).
+    async function hashPassword(password, saltB64, iterations, algo) {
+      if (algo !== 'fallback' && cryptoAvailable()) {
+        const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), { name: 'PBKDF2' }, false, ['deriveBits']);
+        const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt: _ub64(saltB64), iterations: iterations || 150000, hash: 'SHA-256' }, km, 256);
+        return bufToB64(new Uint8Array(bits));
       }
-      return _fbAuth;
+      let h1 = 0x811c9dc5, h2 = 0x1000193;
+      const s = saltB64 + '\u0000' + password;
+      for (let i = 0; i < s.length; i++) {
+        const c = s.charCodeAt(i);
+        h1 = ((h1 ^ c) * 16777619) >>> 0;
+        h2 = ((h2 + c * 2654435761) ^ (h2 << 5)) >>> 0;
+      }
+      return 'fb$' + h1.toString(16) + h2.toString(16);
     }
-    function fbAuthError(e) {
-      const code = (e && e.code) || '';
-      const map = {
-        'auth/invalid-email': 'Email ka format sahi nahi hai.',
-        'auth/missing-password': 'Password daalein.',
-        'auth/weak-password': 'Password kam se kam 6 characters ka rakhein.',
-        'auth/email-already-in-use': 'Ye email pehle se registered hai — "Login" tab se sign in karein.',
-        'auth/user-not-found': 'Is email ka koi account nahi mila — pehle "Create account" karein.',
-        'auth/wrong-password': 'Password galat hai.',
-        'auth/invalid-credential': 'Email ya password galat hai.',
-        'auth/invalid-login-credentials': 'Email ya password galat hai.',
-        'auth/too-many-requests': 'Bahut zyada attempts — thodi der baad try karein.',
-        'auth/network-request-failed': 'Network error — internet check karein.',
-        'auth/operation-not-allowed': 'Firebase console mein Email/Password sign-in enable nahi hai (Authentication \u2192 Sign-in method).',
-        'auth/unauthorized-domain': 'Ye domain Firebase ke "Authorised domains" mein add nahi hai (Authentication \u2192 Settings).',
-        'auth/api-key-not-valid': 'Firebase API key valid nahi hai \u2014 Step 1 mein sahi apiKey daalein.',
-        'auth/api-key-not-valid.-please-pass-a-valid-api-key.': 'Firebase API key valid nahi hai \u2014 Step 1 mein sahi apiKey daalein.',
-        'auth/configuration-not-found': 'Firebase config galat lag raha hai \u2014 apiKey / projectId dobara check karein.',
-        'auth/missing-email': 'Email daalein.',
-        'auth/user-disabled': 'Ye account disable kar diya gaya hai.'
-      };
-      if (map[code]) return map[code];
-      // tidy Firebase's raw "Firebase: Error (auth/...)" wrapper for anything unmapped
-      const raw = (e && e.message) ? String(e.message).replace(/^Firebase:\s*/i, '').replace(/^Error\s*/i, '').trim() : '';
-      return raw || 'Kuch galat ho gaya \u2014 dobara try karein.';
-    }
-    function fbSetTab(mode) {
-      _fbMode = mode === 'signup' ? 'signup' : 'login';
-      const lb = document.getElementById('fb-tab-login'), sb = document.getElementById('fb-tab-signup');
-      if (lb) lb.className = 'mode-tab' + (_fbMode === 'login' ? ' active-quiz' : '');
-      if (sb) sb.className = 'mode-tab' + (_fbMode === 'signup' ? ' active-quiz' : '');
-      const btn = document.getElementById('fb-submit-btn');
-      if (btn) btn.innerHTML = _fbMode === 'signup' ? '&#127381; Create account' : '&#128273; Login';
-      const extra = document.getElementById('fb-signup-extra');
-      if (extra) extra.classList.toggle('hidden', _fbMode !== 'signup');
-      const pw = document.getElementById('fb-password');
-      if (pw) pw.setAttribute('autocomplete', _fbMode === 'signup' ? 'new-password' : 'current-password');
-      fbStatus('fb-auth-status', '');
-    }
-    async function fbSubmit() {
-      const email = (document.getElementById('fb-email').value || '').trim();
-      const pass = document.getElementById('fb-password').value || '';
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { fbStatus('fb-auth-status', 'Sahi email address daalein.', '#fda4af'); return; }
-      if (pass.length < 6) { fbStatus('fb-auth-status', 'Password kam se kam 6 characters ka hona chahiye.', '#fda4af'); return; }
-      const btn = document.getElementById('fb-submit-btn');
-      const old = btn ? btn.innerHTML : '';
-      if (btn) { btn.disabled = true; btn.innerHTML = '&#9203; Please wait...'; }
+    async function acctCreate() {
+      const name = (document.getElementById('acct-name').value || '').trim();
+      const p1 = document.getElementById('acct-pass').value || '';
+      const p2 = document.getElementById('acct-pass2').value || '';
+      if (name.length < 2) { acctStatus('Naam kam se kam 2 characters ka ho.', '#fda4af'); return; }
+      if (p1.length < 4) { acctStatus('Password kam se kam 4 characters ka ho.', '#fda4af'); return; }
+      if (p1 !== p2) { acctStatus('Dono password match nahi kar rahe.', '#fda4af'); return; }
+      if (localAccount()) { acctStatus('Is device par pehle se ek account hai — pehle usse delete karein.', '#fde68a'); return; }
+      const btn = document.getElementById('acct-create-btn'); const old = btn ? btn.innerHTML : '';
+      if (btn) { btn.disabled = true; btn.innerHTML = '&#9203; Bana rahe hain...'; }
       try {
-        const auth = await fbInit();
-        if (_fbMode === 'signup') {
-          const cred = await auth.createUserWithEmailAndPassword(email, pass);
-          const nameEl = document.getElementById('fb-name');
-          const name = nameEl ? nameEl.value.trim() : '';
-          if (name && cred && cred.user) { try { await cred.user.updateProfile({ displayName: name }); } catch (e) {} _fbUser = cred.user; }
-          fbStatus('fb-auth-status', '&#9989; Account ban gaya. Welcome, ' + escapeHtml(name || email) + '!', '#6ee7b7');
-        } else {
-          await auth.signInWithEmailAndPassword(email, pass);
-          fbStatus('fb-auth-status', '&#9989; Login ho gaya.', '#6ee7b7');
-        }
-        const pw = document.getElementById('fb-password'); if (pw) pw.value = '';
+        const salt = _randSaltB64();
+        const algo = cryptoAvailable() ? 'pbkdf2' : 'fallback';
+        const iter = 150000;
+        const hash = await hashPassword(p1, salt, iter, algo);
+        localStorage.setItem(ACCT_KEY, JSON.stringify({ name, salt, hash, algo, iter, createdAt: Date.now() }));
+        _acctUser = { name };
+        try { localStorage.setItem(ACCT_SESSION_KEY, name); } catch (e) {}
+        document.getElementById('acct-pass').value = ''; document.getElementById('acct-pass2').value = '';
+        acctStatus('');
         renderAccount();
+        showError('✅ Account ban gaya — welcome, ' + escapeHtml(name) + '!');
       } catch (e) {
-        fbStatus('fb-auth-status', '&#10060; ' + fbAuthError(e), '#fda4af');
-      } finally {
-        if (btn) { btn.disabled = false; btn.innerHTML = old; }
-      }
+        acctStatus('Account nahi ban paya: ' + (e.message || e), '#fda4af');
+      } finally { if (btn) { btn.disabled = false; btn.innerHTML = old; } }
     }
-    async function fbForgotPassword() {
-      const email = (document.getElementById('fb-email').value || '').trim();
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { fbStatus('fb-auth-status', 'Pehle apna email daalein, phir "Forgot password" dabayein.', '#fde68a'); return; }
+    async function acctLogin() {
+      const acc = localAccount();
+      if (!acc) { acctStatus('Is device par koi account nahi hai — pehle banao.', '#fde68a'); return; }
+      const name = (document.getElementById('acct-login-name').value || '').trim();
+      const pass = document.getElementById('acct-login-pass').value || '';
+      if (name && name.toLowerCase() !== acc.name.toLowerCase()) { acctStatus('Naam match nahi kar raha.', '#fda4af'); return; }
+      const btn = document.getElementById('acct-login-btn'); const old = btn ? btn.innerHTML : '';
+      if (btn) { btn.disabled = true; btn.innerHTML = '&#9203; Check kar rahe hain...'; }
       try {
-        const auth = await fbInit();
-        await auth.sendPasswordResetEmail(email);
-        fbStatus('fb-auth-status', '&#128231; Password reset link ' + escapeHtml(email) + ' par bhej diya gaya.', '#6ee7b7');
-      } catch (e) { fbStatus('fb-auth-status', '&#10060; ' + fbAuthError(e), '#fda4af'); }
+        const h = await hashPassword(pass, acc.salt, acc.iter, acc.algo);
+        if (h !== acc.hash) { acctStatus('&#10060; Password galat hai.', '#fda4af'); return; }
+        _acctUser = { name: acc.name };
+        try { localStorage.setItem(ACCT_SESSION_KEY, acc.name); } catch (e) {}
+        document.getElementById('acct-login-pass').value = '';
+        acctStatus('');
+        renderAccount();
+        showError('✅ Login ho gaya — welcome back, ' + escapeHtml(acc.name) + '!');
+      } catch (e) {
+        acctStatus('Login fail: ' + (e.message || e), '#fda4af');
+      } finally { if (btn) { btn.disabled = false; btn.innerHTML = old; } }
     }
-    async function fbSignOut() {
-      try { if (_fbAuth) await _fbAuth.signOut(); } catch (e) {}
-      _fbUser = null;
-      fbStatus('fb-account-status', 'Sign out ho gaya.', '#93a1bd');
+    function acctSignOut() {
+      _acctUser = null;
+      try { localStorage.removeItem(ACCT_SESSION_KEY); } catch (e) {}
       renderAccount();
+      acctStatus('Sign out ho gaya — account device par safe hai, dobara login kar sakte ho.', '#93a1bd');
     }
-    function saveFbConfig() {
-      const g = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
-      const cfg = { apiKey: g('fb-apiKey'), authDomain: g('fb-authDomain'), projectId: g('fb-projectId'), appId: g('fb-appId') };
-      if (!cfg.apiKey || !cfg.authDomain || !cfg.projectId || !cfg.appId) {
-        fbStatus('fb-setup-status', 'Chaaron field bharein (API key, auth domain, project ID, app ID).', '#fda4af'); return;
-      }
-      try { localStorage.setItem(FB_CFG_KEY, JSON.stringify(cfg)); } catch (e) {}
-      _fbApp = null; _fbAuth = null; _fbSdkPromise = null; _fbUser = null;
-      fbStatus('fb-setup-status', '&#9989; Firebase config save ho gaya — ab Step 2 mein login ya naya account banao.', '#6ee7b7');
+    function acctDelete() {
+      if (!confirm('Is device se account delete kar dein? Ye undo nahi hoga.')) return;
+      try { localStorage.removeItem(ACCT_KEY); localStorage.removeItem(ACCT_SESSION_KEY); } catch (e) {}
+      _acctUser = null;
       renderAccount();
-    }
-    function clearFbConfig() {
-      if (!confirm('Firebase config hata dein? (Account sign-in band ho jayega.)')) return;
-      try { localStorage.removeItem(FB_CFG_KEY); } catch (e) {}
-      _fbApp = null; _fbAuth = null; _fbUser = null;
-      ['fb-apiKey','fb-authDomain','fb-projectId','fb-appId'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-      fbStatus('fb-setup-status', 'Config hata diya.', '#93a1bd');
-      renderAccount();
+      acctStatus('Account delete ho gaya.', '#93a1bd');
     }
     function renderAccount() {
-      const cfg = fbConfig();
-      const setupStatus = document.getElementById('fb-setup-status');
-      if (setupStatus && cfg && !setupStatus.innerHTML) fbStatus('fb-setup-status', '&#9989; Config set hai.', '#6ee7b7');
-      const signed = !!_fbUser;
-      const so = document.getElementById('fb-signed-out'), si = document.getElementById('fb-signed-in');
-      if (so) so.classList.toggle('hidden', signed);
-      if (si) si.classList.toggle('hidden', !signed);
-      if (signed) {
-        const nm = document.getElementById('fb-user-name'), em = document.getElementById('fb-user-email');
-        if (nm) nm.textContent = _fbUser.displayName || (_fbUser.email ? _fbUser.email.split('@')[0] : 'Signed in');
-        if (em) em.textContent = _fbUser.email || '';
+      const acc = localAccount();
+      const signedIn = !!_acctUser;
+      const show = (id, on) => { const el = document.getElementById(id); if (el) el.classList.toggle('hidden', !on); };
+      show('acct-create', !acc && !signedIn);
+      show('acct-login', !!acc && !signedIn);
+      show('acct-signedin', signedIn);
+      if (acc && !signedIn) {
+        const nm = document.getElementById('acct-login-name'); if (nm && !nm.value) nm.value = acc.name;
+        const who = document.getElementById('acct-who'); if (who) who.innerHTML = 'Is device ka account: <b>' + escapeHtml(acc.name) + '</b>';
+      }
+      if (signedIn) {
+        const el = document.getElementById('acct-me');
+        if (el) el.innerHTML = escapeHtml((_acctUser && _acctUser.name) || (acc && acc.name) || 'User');
       }
       // reflect the sign-in state on the sidebar item
       const item = document.querySelector('.sb-item[data-nav="account"]');
@@ -6217,26 +6151,23 @@
         item.textContent = '';
         const sp = document.createElement('span'); sp.className = 'ico'; sp.textContent = icoTxt;
         item.appendChild(sp);
-        item.appendChild(document.createTextNode(' ' + (signed ? (_fbUser.email || 'Account') : 'Sign in / Create account')));
+        item.appendChild(document.createTextNode(' ' + (signedIn ? ((_acctUser && _acctUser.name) || 'Account') : 'Sign in / Create account')));
       }
     }
     function openAccount() {
       hideAllSections();
       document.getElementById('account-section').classList.remove('hidden');
       setActiveNav('account');
-      const cfg = fbConfig() || {};
-      const setv = (id, v) => { const el = document.getElementById(id); if (el && !el.value) el.value = v || ''; };
-      setv('fb-apiKey', cfg.apiKey); setv('fb-authDomain', cfg.authDomain); setv('fb-projectId', cfg.projectId); setv('fb-appId', cfg.appId);
-      const oh = document.getElementById('fb-origin-hint'); if (oh) oh.textContent = location.origin;
-      const protoOk = location.protocol === 'https:' || /^http:\/\/(localhost|127\.0\.0\.1)/.test(location.origin);
-      if (!protoOk) fbStatus('fb-auth-status', '&#9888;&#65039; Account sign-in is page par kaam nahi karega (protocol: ' + location.protocol + '). App ko <b>https</b> par kholo (jaise GitHub Pages) ya localhost par.', '#fde68a');
       renderAccount();
     }
     function accountBoot() {
-      // restore an existing session quietly; only touches the network if a
-      // Firebase config has been saved
-      if (!fbConfig()) return;
-      fbInit().then(() => renderAccount()).catch(() => {});
+      // restore a local session — no network involved at all
+      try {
+        const n = localStorage.getItem(ACCT_SESSION_KEY);
+        const acc = localAccount();
+        if (n && acc && n.toLowerCase() === acc.name.toLowerCase()) _acctUser = { name: acc.name };
+      } catch (e) {}
+      renderAccount();
     }
 
     // ==================== NAVIGATION + BACK (history aware) ====================
