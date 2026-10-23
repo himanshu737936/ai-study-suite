@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#6d6ff5">
-  <meta name="app-version" content="18.4.1">
+  <meta name="app-version" content="18.5.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -31,7 +31,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src 'none'">
-  <title>AI Study Suite PRO v18.4.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.5.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -65,11 +65,11 @@
       --text: #eef2ff;
       --muted: #93a1bd;
       --deep: #070b15;
-      --panel: rgba(18, 27, 48, 0.6);
+      --panel: rgba(18, 27, 48, 0.42);
       --header-bg: rgba(13, 20, 36, 0.82);
-      --card-bg: rgba(11, 17, 31, 0.72);
-      --side-a: rgba(13, 20, 36, 0.96);
-      --side-b: rgba(8, 12, 22, 0.96);
+      --card-bg: rgba(11, 17, 31, 0.56);
+      --side-a: rgba(13, 20, 36, 0.70);
+      --side-b: rgba(8, 12, 22, 0.70);
       --glow-1: #1b2452;
       --glow-2: #06313a;
       /* ---- shape ---- */
@@ -105,7 +105,7 @@
     body[data-theme="forest"] { --bg:#050f0a; --bg-soft:#0a1a12; --surface:#0c2118; --surface-2:#103021; --surface-3:#17462f; --line:#1d5a3c; --line-soft:#14472f; --deep:#04100a; --primary:#10b981; --primary-2:#84cc16; --primary-glow:rgba(16,185,129,0.35); --cyan:#5eead4; --glow-1:#0d3b28; --glow-2:#0a2f1c; }
     body[data-theme="sunset"] { --bg:#140806; --bg-soft:#1f0d08; --surface:#26110b; --surface-2:#331811; --surface-3:#4a2418; --line:#5e2f1e; --line-soft:#4a2517; --deep:#120705; --primary:#f97316; --primary-2:#f43f5e; --primary-glow:rgba(249,115,22,0.35); --cyan:#fdba74; --glow-1:#4a1f10; --glow-2:#3b1414; }
     body[data-theme="rose"] { --bg:#100512; --bg-soft:#1b0a1f; --surface:#230d29; --surface-2:#2f1236; --surface-3:#431b4d; --line:#552364; --line-soft:#431b4d; --deep:#0f0511; --primary:#d946ef; --primary-2:#8b5cf6; --primary-glow:rgba(217,70,239,0.35); --cyan:#f0abfc; --glow-1:#3c1046; --glow-2:#2a0f3a; }
-    body[data-theme="light"] { --panel: rgba(255,255,255,0.9); --header-bg: rgba(255,255,255,0.9); --card-bg: rgba(255,255,255,0.92); --side-a: rgba(255,255,255,0.97); --side-b: rgba(244,246,251,0.97); --bg:#f4f6fb; --bg-soft:#eaeef7; --surface:#ffffff; --surface-2:#eef1f8; --surface-3:#e2e7f2; --line:#c7d0e2; --line-soft:#dde3ef; --deep:#ffffff; --text:#0e1526; --muted:#56628a; --primary:#4f46e5; --primary-2:#7c3aed; --primary-glow:rgba(79,70,229,0.25); --cyan:#0891b2; --glow-1:#dfe6fb; --glow-2:#d8f1f7; --shadow:0 16px 40px rgba(20,30,60,0.14); --shadow-sm:0 8px 20px rgba(20,30,60,0.10); }
+    body[data-theme="light"] { --panel: rgba(255,255,255,0.72); --header-bg: rgba(255,255,255,0.82); --card-bg: rgba(255,255,255,0.74); --side-a: rgba(255,255,255,0.86); --side-b: rgba(244,246,251,0.86); --bg:#f4f6fb; --bg-soft:#eaeef7; --surface:#ffffff; --surface-2:#eef1f8; --surface-3:#e2e7f2; --line:#c7d0e2; --line-soft:#dde3ef; --deep:#ffffff; --text:#0e1526; --muted:#56628a; --primary:#4f46e5; --primary-2:#7c3aed; --primary-glow:rgba(79,70,229,0.25); --cyan:#0891b2; --glow-1:#dfe6fb; --glow-2:#d8f1f7; --shadow:0 16px 40px rgba(20,30,60,0.14); --shadow-sm:0 8px 20px rgba(20,30,60,0.10); }
     body[data-theme="light"] [style*="color:#fff"], body[data-theme="light"] [style*="color:#e2e8f0"],
     body[data-theme="light"] [style*="color:#cbd5e1"], body[data-theme="light"] [style*="color:#eef2ff"] { color:#0e1526 !important; }
     body[data-theme="light"] [style*="background:var(--deep)"], body[data-theme="light"] [style*="background:var(--deep)"],
@@ -117,7 +117,7 @@
     body[data-theme="light"] .drop-zone, body[data-theme="light"] .mindmap-wrapper, body[data-theme="light"] .srs-box,
     body[data-theme="light"] .stat-box, body[data-theme="light"] .mm-subnode, body[data-theme="light"] .home-status,
     body[data-theme="light"] .mode-tab:hover, body[data-theme="light"] .demo-btn:hover { background: var(--surface-2) !important; }
-    body[data-theme="light"] .app-header, body[data-theme="light"] .main-card, body[data-theme="light"] .sidebar { background: rgba(255,255,255,0.9) !important; }
+    body[data-theme="light"] .app-header, body[data-theme="light"] .main-card, body[data-theme="light"] .sidebar { background: rgba(255,255,255,0.84) !important; }
     body[data-theme="light"] .sb-item { color:#3c4868; }
     body[data-theme="light"] .sb-item:hover { color:#0e1526; }
     body[data-theme="light"] .mm-root-node, body[data-theme="light"] .btn-primary { color:#fff !important; }
@@ -830,6 +830,8 @@
       .hs-tiles { grid-template-columns: repeat(auto-fit, minmax(116px, 1fr)); }
       .quiz-topbar { padding: 12px 13px; }
     }
+    /* ===================== Live galaxy background ===================== */
+    #galaxy-bg { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: -1; pointer-events: none; }
     .undo-toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 9999; display: flex; align-items: center; gap: 14px;
       background: rgba(15,23,42,0.97); border: 1px solid var(--line); color: var(--text); padding: 11px 15px; border-radius: 12px;
       font-size: 13px; box-shadow: 0 10px 30px rgba(0,0,0,0.45); max-width: min(92vw, 520px); }
@@ -841,6 +843,7 @@
   </style>
 </head>
 <body>
+  <canvas id="galaxy-bg" aria-hidden="true"></canvas>
   <a href="#main-content" class="skip-link">Seedha content par jayein (skip to content)</a>
   <div id="sr-live" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
 
@@ -862,7 +865,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.4.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.5.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -880,7 +883,7 @@
         <div class="sb-logo">&#129504;</div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.4.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.5.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -957,7 +960,7 @@
       <div class="brand-icon">🧠</div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.4.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.5.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -1939,7 +1942,7 @@
       <span class="credit-heart">&#10084;&#65039;</span>
       <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
       <span class="credit-dot"></span>
-      <span class="credit-tag">AI Study Suite PRO v18.4.0</span>
+      <span class="credit-tag">AI Study Suite PRO v18.5.0</span>
     </div>
   </footer>
 
@@ -2423,9 +2426,188 @@
       });
     }
 
+    // ==================== LIVE GALAXY BACKGROUND ====================
+    // A lightweight animated starfield + nebula behind the whole app. It tints
+    // itself to the current theme, pauses when the tab is hidden, and falls back
+    // to a single static frame when the OS (or the in-app a11y switch) asks for
+    // reduced motion.
+    function initGalaxy() {
+      const cv = document.getElementById('galaxy-bg');
+      if (!cv || !cv.getContext) return;
+      const ctx = cv.getContext('2d', { alpha: false });
+      const reduceMQ = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+
+      let W = 0, H = 0, DPR = 1, cxp = 0, cyp = 0;
+      let stars = [], nebula = [], shots = [];
+      let raf = null, last = 0, acc = 0, tsec = 0, resizeT = null;
+      let colA = '#6d6ff5', colB = '#22d3ee', colC = '#8b5cf6', base = '#05070f';
+      let lightMode = false;
+      const starSpr = makeStarSprite('255,255,255');
+      const starSprDark = makeStarSprite('46,60,110');
+
+      function hexA(hex, a) {
+        const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(String(hex || '').trim());
+        if (!m) return 'rgba(255,255,255,' + a + ')';
+        return 'rgba(' + parseInt(m[1], 16) + ',' + parseInt(m[2], 16) + ',' + parseInt(m[3], 16) + ',' + a + ')';
+      }
+      function glowSprite(hex, peak) {
+        const s = document.createElement('canvas'); s.width = s.height = 128;
+        const c = s.getContext('2d');
+        const g = c.createRadialGradient(64, 64, 0, 64, 64, 64);
+        g.addColorStop(0, hexA(hex, peak));
+        g.addColorStop(0.4, hexA(hex, peak * 0.32));
+        g.addColorStop(1, hexA(hex, 0));
+        c.fillStyle = g; c.fillRect(0, 0, 128, 128);
+        return s;
+      }
+      function makeStarSprite(rgb) {
+        const s = document.createElement('canvas'); s.width = s.height = 32;
+        const c = s.getContext('2d');
+        const g = c.createRadialGradient(16, 16, 0, 16, 16, 16);
+        g.addColorStop(0, 'rgba(' + rgb + ',1)');
+        g.addColorStop(0.3, 'rgba(' + rgb + ',0.5)');
+        g.addColorStop(1, 'rgba(' + rgb + ',0)');
+        c.fillStyle = g; c.fillRect(0, 0, 32, 32);
+        return s;
+      }
+      function readTheme() {
+        try {
+          const cs = getComputedStyle(document.body);
+          colA = (cs.getPropertyValue('--primary') || '').trim() || colA;
+          colB = (cs.getPropertyValue('--cyan') || '').trim() || colB;
+          colC = (cs.getPropertyValue('--violet') || '').trim() || colC;
+          base = (cs.getPropertyValue('--bg') || '').trim() || base;
+          const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(base);
+          lightMode = !!m && (parseInt(m[1], 16) * 0.299 + parseInt(m[2], 16) * 0.587 + parseInt(m[3], 16) * 0.114) > 150;
+        } catch (e) {}
+      }
+      function seedStars() {
+        stars = [];
+        const n = Math.round(Math.min(320, Math.max(90, (W * H) / 11000)));
+        for (let i = 0; i < n; i++) {
+          const d = Math.random();                                   // depth 0..1 (0 = far)
+          stars.push({
+            a: Math.random() * Math.PI * 2,
+            r: Math.pow(Math.random(), 0.55),
+            d: d,
+            sz: (0.7 + d * 2.0) * (0.8 + Math.random() * 0.7),
+            tw: Math.random() * Math.PI * 2,
+            sp: (0.006 + 0.05 * (1 - d)) * (Math.random() < 0.5 ? -1 : 1)
+          });
+        }
+      }
+      function seedNebula() {
+        const cols = [colA, colB, colC];
+        nebula = [];
+        for (let i = 0; i < 6; i++) {
+          const col = cols[i % cols.length];
+          nebula.push({
+            x: Math.random(), y: Math.random(),
+            vx: (Math.random() - 0.5) * 0.006, vy: (Math.random() - 0.5) * 0.006,
+            rad: 0.34 + Math.random() * 0.44,
+            sprite: glowSprite(col, lightMode ? 0.32 : 0.55),
+            ph: Math.random() * Math.PI * 2
+          });
+        }
+      }
+      function isReduced() {
+        return (reduceMQ && reduceMQ.matches) || document.body.classList.contains('a11y-reduce');
+      }
+      function draw(dt) {
+        if (dt > 0.1) dt = 0.1;
+        tsec += dt;
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = base;
+        ctx.fillRect(0, 0, W, H);
+
+        ctx.globalCompositeOperation = lightMode ? 'source-over' : 'lighter';
+        for (const nb of nebula) {
+          nb.x += nb.vx * dt; nb.y += nb.vy * dt;
+          if (nb.x < -0.3) nb.x = 1.3; else if (nb.x > 1.3) nb.x = -0.3;
+          if (nb.y < -0.3) nb.y = 1.3; else if (nb.y > 1.3) nb.y = -0.3;
+          const s = nb.rad * Math.max(W, H) * 2.2 * (1 + 0.12 * Math.sin(tsec * 0.4 + nb.ph));
+          ctx.globalAlpha = lightMode ? 0.5 : 0.62;
+          ctx.drawImage(nb.sprite, nb.x * W - s / 2, nb.y * H - s / 2, s, s);
+        }
+        const spr = lightMode ? starSprDark : starSpr;
+        for (const st of stars) {
+          st.a += st.sp * dt * 0.5;
+          const rr = st.r * Math.hypot(W, H) * 0.56;
+          const x = cxp + Math.cos(st.a) * rr;
+          const y = cyp + Math.sin(st.a) * rr * 0.62;
+          const tw = 0.45 + 0.55 * Math.abs(Math.sin(tsec * 1.6 + st.tw));
+          const sz = st.sz * 2.7;
+          ctx.globalAlpha = (lightMode ? 0.75 : 1) * tw * (0.42 + 0.78 * st.d);
+          ctx.drawImage(spr, x - sz / 2, y - sz / 2, sz, sz);
+        }
+        ctx.globalAlpha = 1;
+        if (shots.length && !lightMode) {
+          for (let i = shots.length - 1; i >= 0; i--) {
+            const s = shots[i];
+            s.x += s.vx * dt; s.y += s.vy * dt; s.life -= dt * 0.9;
+            if (s.life <= 0 || s.x > W + 320 || s.y > H + 320) { shots.splice(i, 1); continue; }
+            const tailX = s.x - s.len, tailY = s.y - s.len * (s.vy / s.vx);
+            const g = ctx.createLinearGradient(s.x, s.y, tailX, tailY);
+            g.addColorStop(0, hexA(colB, 0.9 * s.life));
+            g.addColorStop(1, hexA(colB, 0));
+            ctx.strokeStyle = g; ctx.lineWidth = 2; ctx.lineCap = 'round';
+            ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(tailX, tailY); ctx.stroke();
+          }
+        }
+        ctx.globalCompositeOperation = 'source-over';
+      }
+      function spawnShot() {
+        shots.push({
+          x: Math.random() * W * 0.8, y: Math.random() * H * 0.4,
+          vx: 260 + Math.random() * 260, vy: 90 + Math.random() * 120,
+          life: 1.0, len: 120 + Math.random() * 160
+        });
+      }
+      function frame(now) {
+        raf = requestAnimationFrame(frame);
+        if (document.hidden) { last = now; return; }
+        if (isReduced()) { stop(); draw(0.001); return; }
+        if (!last) last = now;
+        const dt = (now - last) / 1000; last = now;
+        acc += dt;
+        if (acc < 1 / 40) return;        // cap ~40fps to save battery
+        const step = acc; acc = 0;
+        if (!lightMode && shots.length < 3 && Math.random() < 0.0025) spawnShot();
+        draw(step);
+      }
+      function start() { if (raf || isReduced()) return; last = 0; acc = 0; raf = requestAnimationFrame(frame); }
+      function stop() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
+      function resize() {
+        DPR = Math.min(2, window.devicePixelRatio || 1);
+        W = Math.max(1, Math.floor(window.innerWidth));
+        H = Math.max(1, Math.floor(window.innerHeight));
+        cv.width = Math.floor(W * DPR); cv.height = Math.floor(H * DPR);
+        cv.style.width = W + 'px'; cv.style.height = H + 'px';
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        cxp = W * 0.5; cyp = H * 0.52;
+        seedStars(); seedNebula();
+        draw(0.001);
+      }
+      function sync() { if (isReduced()) { stop(); draw(0.001); } else start(); }
+
+      readTheme();
+      resize();
+      sync();
+
+      window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(resize, 150); });
+      document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else sync(); });
+      if (reduceMQ && reduceMQ.addEventListener) reduceMQ.addEventListener('change', sync);
+      try {
+        const mo = new MutationObserver(() => { readTheme(); seedNebula(); sync(); });
+        mo.observe(document.body, { attributes: true, attributeFilter: ['data-theme', 'class'] });
+      } catch (e) {}
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       try { restoreNavGroups(); } catch (e) {}
       startSplash();
+      initGalaxy();
       initNav();
       restoreStepState();
       try { if (localStorage.getItem('ai_study_quickstart_v20') === '1') { const q = document.getElementById('quickstart-card'); if (q) q.classList.add('hidden'); } } catch (e) {}
