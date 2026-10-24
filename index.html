@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#6d6ff5">
-  <meta name="app-version" content="18.9.1">
+  <meta name="app-version" content="18.10.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
   <link rel="canonical" href="https://himanshu737936.github.io/ai-study-suite/">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
   <!-- Open Graph / WhatsApp / Facebook / LinkedIn preview -->
   <meta property="og:type" content="website">
@@ -31,7 +32,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-  <title>AI Study Suite PRO v18.9.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.10.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -876,8 +877,34 @@
       *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
     }
   </style>
+  <!-- Structured data for search engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "AI Study Suite PRO",
+    "alternateName": "AI Study Suite",
+    "url": "https://himanshu737936.github.io/ai-study-suite/",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any modern web browser",
+    "inLanguage": "en-IN",
+    "description": "Turn any PDF or a photo of a book page into AI-generated UPSC / UPPCS / SSC quizzes, spaced-repetition flashcards, mind maps and one-page cheat sheets - every answer grounded in the source page with a proof quote.",
+    "image": "https://himanshu737936.github.io/ai-study-suite/og-image.png",
+    "author": { "@type": "Person", "name": "Himanshu" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
 </head>
 <body>
+  <h1 class="sr-only">AI Study Suite PRO — PDF &amp; photo to AI quiz, flashcards, mind maps and cheat sheets for UPSC, UPPCS and SSC</h1>
+  <noscript>
+    <div style="max-width:760px;margin:40px auto;padding:24px;font-family:system-ui,-apple-system,sans-serif;color:#eef2ff;background:#0d1424;border-radius:16px;line-height:1.6;">
+      <h2 style="margin-top:0;">AI Study Suite PRO</h2>
+      <p>AI Study Suite PRO turns any PDF — or a photo of a book page — into exam-ready practice material for <b>UPSC CSE, UPPCS, SSC CGL/GD and State PSC</b>: multiple-choice quizzes, spaced-repetition (SRS) flashcards, mind maps and one-page cheat sheets.</p>
+      <p>Everything is generated strictly from your own uploaded content, with the source page number and an exact proof quote for every answer. PDF parsing and OCR run on your device; the app is a single HTML file with no backend, and you bring your own AI API key.</p>
+      <p>Please enable JavaScript to use the app.</p>
+    </div>
+  </noscript>
   <canvas id="galaxy-bg" aria-hidden="true"></canvas>
   <div id="scroll-progress" aria-hidden="true"></div>
   <a href="#main-content" class="skip-link">Seedha content par jayein (skip to content)</a>
@@ -901,7 +928,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.9.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.10.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -919,7 +946,7 @@
         <div class="sb-logo">&#129504;</div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.9.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.10.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -996,7 +1023,7 @@
       <div class="brand-icon">🧠</div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.9.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.10.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -1996,7 +2023,7 @@
       <span class="credit-heart">&#10084;&#65039;</span>
       <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
       <span class="credit-dot"></span>
-      <span class="credit-tag">AI Study Suite PRO v18.9.0</span>
+      <span class="credit-tag">AI Study Suite PRO v18.10.0</span>
     </div>
   </footer>
 
