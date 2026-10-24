@@ -2,10 +2,10 @@ name: Auto version bump
 
 # Bumps the patch version on every push to main, so the app version always
 # reflects the latest change. The version has ONE source of truth —
-# <meta name="app-version"> in index.html — and this also syncs sw.js so the
-# service-worker cache name changes with it (which is what makes updates appear).
-#
-# The commit it creates is tagged [skip version] so the job never loops.
+# <meta name="app-version"> in index.html — and this also syncs sw.js and the
+# README badge. The commit it creates is tagged [skip version] so the job never
+# loops. If several commits land at once, it re-reads the latest main and retries
+# instead of failing on a non-fast-forward push.
 
 on:
   push:
@@ -35,40 +35,45 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - name: Bump patch version
+      - name: Bump patch version and push (with retry)
         run: |
-          python3 - <<'PY'
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            VER=$(python3 - <<'PY'
           import re, pathlib
           idx = pathlib.Path('index.html')
           s = idx.read_text(encoding='utf-8')
           m = re.search(r'<meta name="app-version" content="(\d+)\.(\d+)\.(\d+)">', s)
           if not m:
               raise SystemExit('app-version meta tag not found in index.html')
-          major, minor, patch = int(m.group(1)), int(m.group(2)), int(m.group(3)) + 1
-          ver = f'{major}.{minor}.{patch}'
+          ver = f'{m.group(1)}.{m.group(2)}.{int(m.group(3)) + 1}'
           s = re.sub(r'<meta name="app-version" content="\d+\.\d+\.\d+">',
                      f'<meta name="app-version" content="{ver}">', s, count=1)
           idx.write_text(s, encoding='utf-8')
           sw = pathlib.Path('sw.js')
           t = sw.read_text(encoding='utf-8')
-          t = re.sub(r"const VERSION = '[^']*';", f"const VERSION = 'v{ver}';", t, count=1)
-          sw.write_text(t, encoding='utf-8')
+          sw.write_text(re.sub(r"const VERSION = '[^']*';", f"const VERSION = 'v{ver}';", t, count=1), encoding='utf-8')
           rm = pathlib.Path('README.md')
           if rm.exists():
               r = rm.read_text(encoding='utf-8')
               r = re.sub(r'> \*\*v\d+\.\d+\.\d+\*\* · Single-file app',
-                         f'> **v{major}.{minor}.{patch}** · Single-file app', r, count=1)
+                         f'> **v{ver}** · Single-file app', r, count=1)
               rm.write_text(r, encoding='utf-8')
-          pathlib.Path('version.txt').write_text(ver, encoding='utf-8')
-          print(f'new version: {ver}')
+          print(ver)
           PY
-
-      - name: Commit and push
-        run: |
-          VER="$(cat version.txt)"; rm -f version.txt
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html sw.js README.md
-          if git diff --cached --quiet; then echo "nothing to bump"; exit 0; fi
-          git commit -m "chore: auto-bump version to v${VER} [skip version]"
-          git push
+          )
+            git add index.html sw.js README.md
+            if git diff --cached --quiet; then
+              echo "nothing to bump"; exit 0
+            fi
+            git commit -q -m "chore: auto-bump version to v${VER} [skip version]"
+            if git push -q origin main; then
+              echo "pushed v${VER}"; exit 0
+            fi
+            echo "push race on attempt ${attempt} — retrying"
+            sleep 5
+          done
+          echo "could not push after retries"; exit 1
