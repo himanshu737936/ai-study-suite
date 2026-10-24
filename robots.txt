@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ai-study-suite.netlify.app/sitemap.xml
+Sitemap: https://himanshu737936.github.io/ai-study-suite/sitemap.xml
