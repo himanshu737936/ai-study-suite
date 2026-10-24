@@ -100,7 +100,7 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 
 ### v18.10 — search-engine (SEO) fixes
 
-- **Fixed a real SEO bug:** `robots.txt` and `sitemap.xml` pointed at the **Netlify** address (`ai-study-suite.netlify.app`) while the page's canonical URL is the **GitHub Pages** one — so search engines were being sent to the wrong (and currently failing) host. Both now point at the canonical URL.
+- **Fixed a real SEO bug:** `robots.txt` and `sitemap.xml` pointed at a different host than the page's canonical URL, so search engines were being sent to the wrong (and currently failing) address. Both now point at the canonical GitHub Pages URL.
 - Added an explicit **`robots` meta tag** (`index, follow, max-image-preview:large`).
 - Added **JSON-LD structured data** (`WebApplication`) so search engines can build a richer result.
 - Added a real **`<h1>`** — the app previously had none — as a screen-reader-only heading, plus a **`<noscript>`** description so crawlers that do not run JavaScript still see meaningful text.
@@ -392,9 +392,16 @@ The service worker caches the app shell and CDN libraries so the interface opens
 ```
 .
 ├── index.html          # The entire application (HTML + CSS + JS, single file)
+├── guide.html          # SEO guide + FAQ page
+├── privacy.html        # Privacy Policy
+├── terms.html          # Terms of Use
+├── disclaimer.html     # Disclaimer
+├── about.html          # About & Contact
 ├── manifest.json       # PWA manifest
 ├── sw.js               # Service worker (offline shell)
-├── _headers            # Netlify security headers
+├── robots.txt          # Search-engine rules
+├── sitemap.xml         # Sitemap
+├── _headers            # Security headers (Cloudflare Pages)
 ├── icon-192.png        # PWA icon
 └── icon-512.png        # PWA icon
 ```
@@ -418,20 +425,11 @@ Everything lives in `index.html`. The rest are progressive enhancements for the 
 
 ## 🌐 Deployment
 
-### Netlify (from GitHub)
+The site is served straight from this repository — there is no build step.
 
-1. Push this repository to GitHub.
-2. In Netlify: **Add new site → Import an existing project → GitHub** → pick this repo.
-3. Settings:
-   - **Build command:** *(leave empty)*
-   - **Publish directory:** `/` (the repository root)
-4. Deploy. `index.html` is served at the site root, and `_headers` applies the security headers automatically.
-
-Every push to the main branch redeploys automatically.
-
-### Any other static host
-
-Just serve the repository root as static files — GitHub Pages, Cloudflare Pages, Vercel, S3, or a plain nginx box all work identically.
+- **GitHub Pages** publishes the repository root automatically (source: `main`, folder `/`).
+- **Cloudflare Pages** is deployed on every push to `main` by `.github/workflows/deploy-cloudflare.yml`, which stages the site files and uploads them. `_headers` applies the security headers.
+- **Any other static host** works the same way: serve the repository root as static files.
 
 > **Note:** a service worker needs **HTTPS** (or `localhost`). On plain `file://` the app still runs fully — only installability/offline shell are unavailable.
 
