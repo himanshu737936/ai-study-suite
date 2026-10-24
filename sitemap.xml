@@ -12,4 +12,28 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://himanshu737936.github.io/ai-study-suite/about.html</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://himanshu737936.github.io/ai-study-suite/privacy.html</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://himanshu737936.github.io/ai-study-suite/terms.html</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://himanshu737936.github.io/ai-study-suite/disclaimer.html</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
 </urlset>
