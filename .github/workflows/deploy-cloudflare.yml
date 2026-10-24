@@ -53,6 +53,9 @@ jobs:
             [ -f "$f" ] && cp "$f" dist/ && echo "staged $f"
           done
           [ -f .well-known/assetlinks.json ] && cp .well-known/assetlinks.json dist/.well-known/ && echo "staged .well-known/assetlinks.json"
+          shopt -s nullglob
+          for g in google*.html; do cp "$g" dist/ && echo "staged $g"; done
+          shopt -u nullglob
           echo "--- dist ---"; ls -la dist
 
       - name: Deploy to Cloudflare Pages
