@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v18.9** · Single-file app · No build step · No backend · Bring your own API key
+> **v18.10** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -97,6 +97,13 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **🗓️ Revision Plan** — exam countdown + today's plan (due SRS cards, weakest topics, streak).
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **👤 Account** — optional **local** sign-in: create an account with just a **name + password**, stored only on your device (no internet, no email, no server).
+
+### v18.10 — search-engine (SEO) fixes
+
+- **Fixed a real SEO bug:** `robots.txt` and `sitemap.xml` pointed at the **Netlify** address (`ai-study-suite.netlify.app`) while the page's canonical URL is the **GitHub Pages** one — so search engines were being sent to the wrong (and currently failing) host. Both now point at the canonical URL.
+- Added an explicit **`robots` meta tag** (`index, follow, max-image-preview:large`).
+- Added **JSON-LD structured data** (`WebApplication`) so search engines can build a richer result.
+- Added a real **`<h1>`** — the app previously had none — as a screen-reader-only heading, plus a **`<noscript>`** description so crawlers that do not run JavaScript still see meaningful text.
 
 ### v18.9 — bug fixes (messages that stuck around)
 
