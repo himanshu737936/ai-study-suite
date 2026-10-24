@@ -1,0 +1,6 @@
+# Security contact for AI Study Suite PRO
+Contact: mailto:himanshuprajapati7379pc@gmail.com
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en, hi
+Canonical: https://himanshu737936.github.io/ai-study-suite/.well-known/security.txt
+Policy: https://github.com/himanshu737936/ai-study-suite/blob/main/README.md
