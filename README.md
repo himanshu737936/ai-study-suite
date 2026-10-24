@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v18.6** · Single-file app · No build step · No backend · Bring your own API key
+> **v18.7** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -97,6 +97,20 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **🗓️ Revision Plan** — exam countdown + today's plan (due SRS cards, weakest topics, streak).
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **👤 Account** — optional **local** sign-in: create an account with just a **name + password**, stored only on your device (no internet, no email, no server).
+
+### v18.7 — security hardening & UI polish
+
+**Security**
+- **Prompt-injection hardening:** all untrusted PDF/OCR text is now wrapped in explicit `<<<UNTRUSTED_SOURCE>>> … <<<END_UNTRUSTED_SOURCE>>>` markers, and the system prompt states that anything between them is data, never instructions.
+- **One-tap key lock:** a 🔒 button in the header wipes the API keys from memory instantly (also runs automatically on sign-out).
+- **CSP hardened** with `upgrade-insecure-requests` and `manifest-src 'self'`; `_headers` also gains `Cross-Origin-Resource-Policy: same-origin`.
+- Added a `.well-known/security.txt` contact file.
+
+**UI**
+- **Animated score ring** on the results screen (gradient stroke that sweeps to your accuracy, with a counting percentage).
+- Cards get a modern hairline highlight and a hover lift; dashboard tiles gained an accent bar and lift.
+- Custom themed scrollbars, refined focus rings.
+- Removed the now-meaningless “Auto (system)” theme option (there is no light theme to switch to).
 
 ### v18.6 — per-theme galaxy, animated credits & polish
 
