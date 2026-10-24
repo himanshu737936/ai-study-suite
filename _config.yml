@@ -10,7 +10,6 @@
 exclude:
   - signing.keystore
   - twa-manifest.json
-  - netlify.toml
   - README.md
   - LICENSE
   - manifest-checksum.txt
