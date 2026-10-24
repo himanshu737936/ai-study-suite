@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v18.7** · Single-file app · No build step · No backend · Bring your own API key
+> **v18.8** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -97,6 +97,20 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **🗓️ Revision Plan** — exam countdown + today's plan (due SRS cards, weakest topics, streak).
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **👤 Account** — optional **local** sign-in: create an account with just a **name + password**, stored only on your device (no internet, no email, no server).
+
+### v18.8 — high-accuracy AI agent & more UI polish
+
+**Accuracy (the headline)**
+- **High-accuracy mode is now ON by default.** After a quiz is generated, every question is re-checked **blind** — the marked answer is hidden — by **two independent samples**: one from your primary provider and one from your fallback provider when set, giving a genuine **cross-model** check.
+- **Self-consistency voting.** Where the blind consensus disagrees with the marked answer, the question is **re-decided strictly from the source text and auto-corrected**, and its proof quote is refreshed.
+- **Per-question confidence badges:** 🎯 High confidence · 🟡 Medium confidence · 🔧 Auto-corrected · ⚠️ Low confidence.
+- The results screen now shows a **🎯 AI Verified X/Y** stat.
+- *Honest note:* no LLM can be guaranteed 100 % correct, but grounding + independent cross-checking + source-anchored auto-repair removes the large majority of answer-key errors.
+
+**UI**
+- A thin animated **reading-progress bar** across the top of the app.
+- Quiz options gained gradient **letter badges** (green = correct, red = wrong) and a stronger hover lift.
+- Section headings now carry an accent bar, and the active sidebar item glows.
 
 ### v18.7 — security hardening & UI polish
 
