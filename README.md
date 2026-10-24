@@ -6,7 +6,7 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v18.8** · Single-file app · No build step · No backend · Bring your own API key
+> **v18.9** · Single-file app · No build step · No backend · Bring your own API key
 
 ---
 
@@ -97,6 +97,13 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **🗓️ Revision Plan** — exam countdown + today's plan (due SRS cards, weakest topics, streak).
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **👤 Account** — optional **local** sign-in: create an account with just a **name + password**, stored only on your device (no internet, no email, no server).
+
+### v18.9 — bug fixes (messages that stuck around)
+
+- **The message banner now auto-dismisses.** It used to stay on screen until you closed it manually, and because it sits outside the section containers it appeared above *every* section. It now slides in and hides itself — about **4 s for success** messages and **8 s for errors** — and the ✕ still works.
+- **No more page jump.** The app only scrolls to the top when the message would otherwise be off-screen.
+- **The accessibility panel closes on an outside click** (Escape already worked).
+- Cleaned up the audit: no broken handlers or missing elements remain.
 
 ### v18.8 — high-accuracy AI agent & more UI polish
 
