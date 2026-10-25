@@ -7,7 +7,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.15.1">
+  <meta name="app-version" content="18.16.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -35,7 +35,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-  <title>AI Study Suite PRO v18.15.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.16.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -954,7 +954,79 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
     }
-  </style>
+  
+    /* ============ MODERN / 3D POLISH LAYER (all features) ============ */
+    .section-box, .quiz-topbar, .mains-card, .stat-box, .hs-tile, .feat {
+      position: relative;
+      border-radius: 18px;
+      box-shadow: 0 1px 0 rgba(255,255,255,.05) inset, 0 10px 30px rgba(0,0,0,.28);
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+    }
+    .section-box::before, .quiz-topbar::before {
+      content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+      background: linear-gradient(140deg, rgba(124,124,255,.16), transparent 42%, rgba(34,211,238,.12));
+      opacity: .85;
+    }
+    @media (hover: hover) {
+      .section-box:hover, .mains-card:hover {
+        transform: perspective(900px) translateY(-3px) rotateX(1.2deg);
+        box-shadow: 0 1px 0 rgba(255,255,255,.07) inset, 0 22px 48px rgba(0,0,0,.42);
+        border-color: rgba(124,124,255,.5);
+      }
+      .stat-box:hover, .hs-tile:hover { transform: perspective(700px) translateY(-4px) scale(1.02); border-color: rgba(34,211,238,.55); }
+    }
+    .stat-box, .hs-tile { transform-style: preserve-3d; }
+
+    /* buttons — depth + press */
+    .btn-primary, .btn-cyan, .btn-secondary, .mains-eval, .mains-newq, .yt-watch, .yt-sub, .ft-share-btn, .ft-wa {
+      position: relative; overflow: hidden; border-radius: 13px; letter-spacing: .2px;
+      transition: transform .15s var(--ease), box-shadow .2s var(--ease), filter .15s var(--ease);
+    }
+    .btn-primary, .btn-cyan {
+      background: linear-gradient(135deg, var(--primary), var(--cyan)) !important;
+      color: #05070f !important; border: none !important;
+      box-shadow: 0 8px 22px rgba(109,111,245,.34), 0 1px 0 rgba(255,255,255,.35) inset;
+    }
+    .btn-primary:hover, .btn-cyan:hover, .mains-eval:hover, .yt-watch:hover, .ft-share-btn:hover { transform: translateY(-2px); filter: brightness(1.06); box-shadow: 0 14px 32px rgba(109,111,245,.45); }
+    .btn-primary:active, .btn-cyan:active, .mains-eval:active, .btn-secondary:active, .option-btn:active { transform: translateY(1px) scale(.985); }
+    .btn-secondary, .mains-newq { background: var(--surface-2) !important; border: 1px solid var(--line) !important; color: var(--text) !important; }
+    .btn-secondary:hover, .mains-newq:hover { border-color: var(--primary) !important; transform: translateY(-2px); }
+
+    /* option buttons — 3D lift */
+    .option-btn {
+      border-radius: 14px; transition: transform .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease);
+    }
+    @media (hover: hover) { .option-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(0,0,0,.3); border-color: rgba(124,124,255,.55); } }
+
+    /* inputs — modern focus glow */
+    input[type="text"], input[type="password"], input[type="number"], input[type="url"], textarea, select, .big-textarea {
+      border-radius: 13px !important;
+      transition: border-color .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease);
+    }
+    input:focus, textarea:focus, select:focus, .big-textarea:focus {
+      outline: none !important;
+      border-color: var(--primary) !important;
+      box-shadow: 0 0 0 4px rgba(109,111,245,.18), 0 6px 20px rgba(0,0,0,.25) !important;
+    }
+
+    /* sidebar items */
+    .sb-item { border-radius: 12px; transition: transform .16s var(--ease), background .16s var(--ease), color .16s var(--ease); }
+    .sb-item:hover { transform: translateX(3px); }
+    .sb-item.active { background: linear-gradient(135deg, rgba(109,111,245,.28), rgba(34,211,238,.16)) !important; box-shadow: 0 0 0 1px rgba(124,124,255,.45) inset; }
+
+    /* chips / pills */
+    .mains-chip, .splash-pro, .pill { box-shadow: 0 2px 10px rgba(0,0,0,.25); }
+
+    /* smooth scrollbars */
+    * { scrollbar-width: thin; scrollbar-color: rgba(124,124,255,.55) transparent; }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--primary), var(--cyan)); border-radius: 20px; border: 2px solid transparent; background-clip: content-box; }
+    ::-webkit-scrollbar-track { background: transparent; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .section-box, .mains-card, .stat-box, .hs-tile, .btn-primary, .btn-cyan, .option-btn, .sb-item { transition: none !important; transform: none !important; }
+    }
+</style>
   <!-- Structured data for search engines -->
   <script type="application/ld+json">
   {
@@ -1006,7 +1078,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.15.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.16.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -1024,7 +1096,7 @@
         <div class="sb-logo"><svg class="logo-star" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M256 84L318 194L428 256L318 318L256 428L194 318L84 256L194 194Z" fill="#ffffff"/></svg></div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.15.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.16.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -1103,7 +1175,7 @@
       <div class="brand-icon">🧠</div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.15.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.16.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -2182,7 +2254,7 @@
         <span class="credit-heart">&#10084;&#65039;</span>
         <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
         <span class="credit-dot"></span>
-        <span class="credit-tag">AI Study Suite PRO v18.15.0</span>
+        <span class="credit-tag">AI Study Suite PRO v18.16.0</span>
       </div>
       <div class="ft-share">
         <button class="ft-share-btn" onclick="shareApp()">&#128228; Share app</button>
