@@ -7,7 +7,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.15.1">
+  <meta name="app-version" content="18.15.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -851,6 +851,37 @@
     @media (max-width: 560px) { .ft-cols { grid-template-columns: repeat(2, 1fr); } }
     .logo-img { width: 100%; height: 100%; display: block; border-radius: inherit; object-fit: contain; }
     .logo-star{width:74%;height:74%;display:block;margin:auto}
+    /* ---- Mains evaluator (modern) ---- */
+    .mains-hero { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; border-radius: 18px; padding: 18px 20px;
+      background: linear-gradient(135deg, rgba(109,111,245,.20), rgba(34,211,238,.10)); border: 1px solid var(--line); }
+    .mains-hero-icon { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; font-size: 26px;
+      background: linear-gradient(135deg, var(--primary), var(--cyan)); flex: none; box-shadow: 0 10px 26px var(--primary-glow); }
+    .mains-hero-txt { flex: 1; min-width: 190px; }
+    .mains-hero-txt h2 { font-size: 18px; font-weight: 900; margin: 0 0 5px; color: #fff; letter-spacing: -.2px; }
+    .mains-hero-txt p { font-size: 12.5px; color: var(--text-muted); margin: 0; line-height: 1.6; }
+    .mains-newq { background: var(--surface-2); color: var(--text); border: 1px solid var(--line); border-radius: 12px; padding: 11px 16px;
+      font-weight: 800; font-size: 13px; cursor: pointer; font-family: inherit; white-space: nowrap;
+      transition: transform .15s var(--ease), border-color .15s var(--ease); }
+    .mains-newq:hover { transform: translateY(-2px); border-color: var(--primary); }
+    .mains-card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; margin-top: 16px; }
+    .mains-chip { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase;
+      color: var(--cyan); background: rgba(34,211,238,.12); border: 1px solid rgba(34,211,238,.3); padding: 4px 11px; border-radius: 20px; }
+    .mains-q { font-size: 14.5px; line-height: 1.65; color: #e8eeff; margin-top: 10px; }
+    .mains-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .mains-count { font-size: 11.5px; color: var(--text-muted); font-weight: 700; }
+    .mains-drop { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; cursor: pointer;
+      padding: 22px 16px; border: 1.5px dashed var(--line); border-radius: 14px; background: rgba(109,111,245,.06); margin-bottom: 12px;
+      transition: border-color .2s var(--ease), background .2s var(--ease); }
+    .mains-drop:hover, .mains-drop.over { border-color: var(--primary); background: rgba(109,111,245,.14); }
+    .mains-drop-ico { font-size: 26px; }
+    .mains-drop-t { font-weight: 800; font-size: 13.5px; color: #fff; }
+    .mains-drop-s { font-size: 11.5px; color: var(--text-muted); max-width: 40ch; line-height: 1.5; }
+    .mains-ta { min-height: 170px; }
+    .mains-eval { width: 100%; margin-top: 14px; padding: 15px 22px; border: none; border-radius: 14px; font-weight: 900; font-size: 15px;
+      cursor: pointer; font-family: inherit; background: linear-gradient(135deg, var(--primary), var(--cyan)); color: #05070f;
+      box-shadow: 0 10px 26px rgba(109,111,245,.32); transition: transform .15s var(--ease), filter .15s var(--ease); }
+    .mains-eval:hover { transform: translateY(-2px); filter: brightness(1.07); }
+    @media (max-width: 560px) { .mains-hero { padding: 16px; } .mains-card { padding: 16px; } .mains-hero-txt h2 { font-size: 16.5px; } }
     .link-btn { background: none; border: none; padding: 0; font: inherit; cursor: pointer; }
     .yt-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;
       transition: transform .2s var(--ease), border-color .2s var(--ease), box-shadow .2s var(--ease); }
@@ -1755,29 +1786,41 @@
 
     <!-- ==================== MAINS ANSWER WRITING EVALUATOR ==================== -->
     <div id="mains-section" class="hidden">
-      <div class="quiz-topbar">
-        <div>
-          <h2 style="font-size:18px; font-weight:800; color:#fff;">✍️ UPSC Mains Answer Writing Evaluator</h2>
-          <p style="font-size:12px; color:var(--text-muted);">Apna subjective answer likhein — AI UPSC parameters par grade karega (Intro, Body, Governance linkage, Conclusion).</p>
+      <div class="mains-hero">
+        <div class="mains-hero-icon" aria-hidden="true">&#9997;&#65039;</div>
+        <div class="mains-hero-txt">
+          <h2>UPSC Mains Answer Evaluator</h2>
+          <p>Answer likho &mdash; ya notes copy par likhkar uski photo upload karo. AI UPSC parameters par grade karega: Intro, Body, Governance linkage, Conclusion.</p>
         </div>
-        <div style="display:flex; flex-wrap:wrap; gap:8px;">
-          <button onclick="generateMainsQuestion()" class="btn-cyan">🔁 New Mains Question from PDF</button>
-        </div>
+        <button onclick="generateMainsQuestion()" class="mains-newq">&#128260; New question</button>
       </div>
-      <div class="section-box">
-        <label>Mains Question</label>
-        <div id="mains-question" class="question-heading" style="margin-top:0;">Click "New Mains Question from PDF" to load a question.</div>
-        <label style="margin-top:14px;">Your Answer (150–250 words recommended)</label>
-        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:10px 0 8px;">
-          <label class="btn-secondary" style="cursor:pointer; display:inline-block; margin:0;">
-            &#128247; Copy par likha answer upload karo
-            <input type="file" accept="image/*" onchange="mainsOcrUpload(this)" style="display:none;">
-          </label>
-          <span style="font-size:12px; color:var(--text-muted);">Notes copy par likho &rarr; photo lo &rarr; yahan upload karo. AI khud padhkar evaluate karega (ya neeche type bhi kar sakte ho).</span>
-        </div>
-        <textarea id="mains-answer" class="big-textarea" placeholder="Photo upload karo, ya apna answer yahan likhein... (Intro → Body → Way forward)"></textarea>
-        <button id="mains-eval-btn" onclick="evaluateMainsAnswer()" class="btn-primary" style="width:auto; padding:12px 22px; margin-top:12px;">🎯 Evaluate My Answer</button>
+
+      <div class="mains-card">
+        <div class="mains-chip">&#128204; Mains question</div>
+        <div id="mains-question" class="mains-q">Click &ldquo;New question&rdquo; to load a question from your PDF.</div>
       </div>
+
+      <div class="mains-card">
+        <div class="mains-row">
+          <div class="mains-chip">&#9997;&#65039; Your answer</div>
+          <div id="mains-count" class="mains-count">0 words</div>
+        </div>
+
+        <label class="mains-drop" for="mains-file"
+               ondragover="event.preventDefault(); this.classList.add('over');"
+               ondragleave="this.classList.remove('over');"
+               ondrop="event.preventDefault(); this.classList.remove('over'); mainsOcrFile(event.dataTransfer.files[0]);">
+          <input type="file" id="mains-file" accept="image/*" onchange="mainsOcrUpload(this)" style="display:none;">
+          <span class="mains-drop-ico" aria-hidden="true">&#128247;</span>
+          <span class="mains-drop-t">Copy par likha answer upload karo</span>
+          <span class="mains-drop-s">Photo lo &rarr; yahan tap ya drag karo. AI khud padh lega. (Ya neeche type karo.)</span>
+        </label>
+
+        <textarea id="mains-answer" class="big-textarea mains-ta" oninput="mainsUpdateCount()" placeholder="Ya apna answer yahan likhein... (Intro &rarr; Body &rarr; Way forward)"></textarea>
+
+        <button id="mains-eval-btn" onclick="evaluateMainsAnswer()" class="mains-eval">&#127919; Evaluate My Answer</button>
+      </div>
+
       <div id="mains-result" class="section-box hidden"></div>
     </div>
 
@@ -3665,19 +3708,31 @@
     }
 
     // Mains: read a photo of the student's handwritten answer and drop it into the box
-    async function mainsOcrUpload(input) {
-      const f = input.files && input.files[0];
+    function mainsUpdateCount() {
+      const ta = document.getElementById('mains-answer');
+      const el = document.getElementById('mains-count');
+      if (!ta || !el) return;
+      const w = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0;
+      el.textContent = w + (w === 1 ? ' word' : ' words');
+    }
+    async function mainsOcrFile(f) {
       if (!f) return;
+      if (!/^image\//.test(f.type || '')) { showError('❌ Sirf image file upload karo (JPG / PNG).'); return; }
       const ta = document.getElementById('mains-answer');
       try {
         showError('📷 Photo padh raha hoon… thoda time lagega.');
         const text = await ocrImageFile(f);
         if (!text || !text.trim()) { showError('❌ Photo se text nahi mila — saaf aur seedhi photo try karo.'); return; }
         ta.value = (ta.value.trim() ? ta.value.trim() + '\n\n' : '') + text.trim();
+        mainsUpdateCount();
         showError('✅ Answer padh liya — ab "🎯 Evaluate My Answer" dabao.');
       } catch (e) {
         showError('❌ Photo padhne mein dikkat: ' + ((e && e.message) || e));
-      } finally { input.value = ''; }
+      }
+    }
+    function mainsOcrUpload(input) {
+      const f = input.files && input.files[0];
+      mainsOcrFile(f).finally(() => { input.value = ''; });
     }
 
     async function ocrImageFile(file) {
@@ -4910,6 +4965,7 @@
       hideAllSections();
       document.getElementById('mains-section').classList.remove('hidden'); recordNav('mains');
       document.getElementById('mains-result').classList.add('hidden');
+      mainsUpdateCount();
     }
     function openBlurtCanvas() {
       hideAllSections();
