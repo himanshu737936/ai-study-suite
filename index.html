@@ -7,7 +7,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.13.1">
+  <meta name="app-version" content="18.15.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -35,7 +35,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-  <title>AI Study Suite PRO v18.13.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.15.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -580,7 +580,7 @@
     @keyframes splashIn { from { opacity: 0; transform: translateY(20px) scale(.95); } to { opacity: 1; transform: none; } }
 
     /* --- 3D animated logo --- */
-    .logo3d-scene { perspective: 900px; width: 170px; height: 170px; margin: 0 auto; position: relative; }
+    .logo3d-scene { perspective: 900px; width: 170px; height: 170px; margin: 0 auto 30px; position: relative; }
     .logo-glow { position: absolute; left: 50%; top: 50%; width: 150px; height: 150px; margin: -75px 0 0 -75px; border-radius: 50%;
       background: radial-gradient(circle, rgba(109,111,245,.6), rgba(34,211,238,.18) 55%, transparent 72%); filter: blur(10px);
       animation: glowPulse 2.6s ease-in-out infinite; }
@@ -975,7 +975,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.13.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.15.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -993,7 +993,7 @@
         <div class="sb-logo"><svg class="logo-star" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M256 84L318 194L428 256L318 318L256 428L194 318L84 256L194 194Z" fill="#ffffff"/></svg></div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.13.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.15.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -1072,7 +1072,7 @@
       <div class="brand-icon">🧠</div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.13.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.15.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -1768,7 +1768,14 @@
         <label>Mains Question</label>
         <div id="mains-question" class="question-heading" style="margin-top:0;">Click "New Mains Question from PDF" to load a question.</div>
         <label style="margin-top:14px;">Your Answer (150–250 words recommended)</label>
-        <textarea id="mains-answer" class="big-textarea" placeholder="Apna answer yahan likhein... (Intro → Body → Way forward)"></textarea>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:10px 0 8px;">
+          <label class="btn-secondary" style="cursor:pointer; display:inline-block; margin:0;">
+            &#128247; Copy par likha answer upload karo
+            <input type="file" accept="image/*" onchange="mainsOcrUpload(this)" style="display:none;">
+          </label>
+          <span style="font-size:12px; color:var(--text-muted);">Notes copy par likho &rarr; photo lo &rarr; yahan upload karo. AI khud padhkar evaluate karega (ya neeche type bhi kar sakte ho).</span>
+        </div>
+        <textarea id="mains-answer" class="big-textarea" placeholder="Photo upload karo, ya apna answer yahan likhein... (Intro → Body → Way forward)"></textarea>
         <button id="mains-eval-btn" onclick="evaluateMainsAnswer()" class="btn-primary" style="width:auto; padding:12px 22px; margin-top:12px;">🎯 Evaluate My Answer</button>
       </div>
       <div id="mains-result" class="section-box hidden"></div>
@@ -2132,7 +2139,7 @@
         <span class="credit-heart">&#10084;&#65039;</span>
         <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
         <span class="credit-dot"></span>
-        <span class="credit-tag">AI Study Suite PRO v18.13.0</span>
+        <span class="credit-tag">AI Study Suite PRO v18.15.0</span>
       </div>
       <div class="ft-share">
         <button class="ft-share-btn" onclick="shareApp()">&#128228; Share app</button>
@@ -2232,7 +2239,7 @@
       ];
 
       // ---- loading milestones (~6s) ----
-      const MIN_MS = 6000, MAX_MS = 11000;
+      const MIN_MS = 1200, MAX_MS = 4000;
       const STAGES = [
         { at: 4,   label: 'Booting AI engine\u2026' },
         { at: 22,  label: 'Loading PDF & export libraries\u2026' },
@@ -3655,6 +3662,22 @@
       } catch (e) {
         showError("Photo OCR fail hua: " + (e && e.message ? e.message : e));
       }
+    }
+
+    // Mains: read a photo of the student's handwritten answer and drop it into the box
+    async function mainsOcrUpload(input) {
+      const f = input.files && input.files[0];
+      if (!f) return;
+      const ta = document.getElementById('mains-answer');
+      try {
+        showError('📷 Photo padh raha hoon… thoda time lagega.');
+        const text = await ocrImageFile(f);
+        if (!text || !text.trim()) { showError('❌ Photo se text nahi mila — saaf aur seedhi photo try karo.'); return; }
+        ta.value = (ta.value.trim() ? ta.value.trim() + '\n\n' : '') + text.trim();
+        showError('✅ Answer padh liya — ab "🎯 Evaluate My Answer" dabao.');
+      } catch (e) {
+        showError('❌ Photo padhne mein dikkat: ' + ((e && e.message) || e));
+      } finally { input.value = ''; }
     }
 
     async function ocrImageFile(file) {
