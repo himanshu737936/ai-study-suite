@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#6d6ff5">
-  <meta name="app-version" content="18.13.1">
+  <meta name="app-version" content="18.13.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -612,8 +612,7 @@
       will-change: transform;
     }
     .logo-orbit.o2 { width: 192px; height: 192px; margin: -96px 0 0 -96px; border-color: rgba(139,92,246,.4); border-bottom-color: transparent;
-      transform: rotateX(74deg) rotateY(30deg); animation-duration: 7.5s; animation-direction: reverse; }
-    @keyframes orbitSpin { to { transform: rotateX(74deg) rotateZ(360deg); } }
+      transform: rotateX(74deg) rotateY(30deg); animation-duration: 7.5s; animation-direction: reverse; } }
 
     /* --- text + progress --- */
     .splash-title {
@@ -825,6 +824,7 @@
     /* ===================== Live galaxy background ===================== */
     #galaxy-bg { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: -1; pointer-events: none; }
     /* ---- YouTube channel cards ---- */
+    .link-btn { background: none; border: none; padding: 0; font: inherit; cursor: pointer; }
     .yt-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;
       transition: transform .2s var(--ease), border-color .2s var(--ease), box-shadow .2s var(--ease); }
     .yt-card:hover { transform: translateY(-3px); border-color: var(--primary); box-shadow: 0 14px 34px rgba(0,0,0,.35); }
@@ -2079,6 +2079,8 @@
       <a href="privacy.html" style="color:var(--muted); text-decoration:none;">Privacy</a>
       <a href="terms.html" style="color:var(--muted); text-decoration:none;">Terms</a>
       <a href="disclaimer.html" style="color:var(--muted); text-decoration:none;">Disclaimer</a>
+      <button onclick="shareApp()" class="link-btn" style="color:#6ee7b7; font-weight:700;">&#128228; Share</button>
+      <a href="https://wa.me/?text=AI%20Study%20Suite%20PRO%20%E2%80%94%20PDF%20ya%20book%20ki%20photo%20se%20AI%20quiz%2C%20flashcards%2C%20mind%20map%20aur%20cheat%20sheet%20(UPSC%20%2F%20UPPCS%20%2F%20SSC)%3A%20https%3A%2F%2Fhimanshu737936.github.io%2Fai-study-suite%2F" target="_blank" rel="noopener noreferrer" style="color:#25D366; font-weight:700; text-decoration:none;">&#128172; WhatsApp</a>
     </nav>
   </footer>
 
@@ -6669,6 +6671,17 @@
       }).join('');
       box.dataset.done = '1';
     }
+    // Share the app — native share sheet where available, else copy the link.
+    async function shareApp() {
+      const url = 'https://himanshu737936.github.io/ai-study-suite/';
+      const text = 'AI Study Suite PRO — PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet (UPSC / UPPCS / SSC).';
+      try {
+        if (navigator.share) { await navigator.share({ title: 'AI Study Suite PRO', text: text, url: url }); return; }
+      } catch (e) { if (e && e.name === 'AbortError') return; }
+      try { await navigator.clipboard.writeText(url); showError('✅ Link copy ho gaya — kisi ko bhi bhej do!'); }
+      catch (e) { window.open('https://wa.me/?text=' + encodeURIComponent(text + ' ' + url), '_blank', 'noopener'); }
+    }
+
     function openVideos() {
       hideAllSections();
       document.getElementById('videos-section').classList.remove('hidden');
