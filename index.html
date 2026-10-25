@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#6d6ff5">
-  <meta name="app-version" content="18.12.2">
+  <meta name="app-version" content="18.12.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -31,7 +31,7 @@
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src https://www.youtube.com; manifest-src 'self'; upgrade-insecure-requests">
   <title>AI Study Suite PRO v18.12.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
@@ -995,6 +995,8 @@
           <button class="sb-item" data-nav="plan" onclick="navGo('plan')"><span class="ico">&#128197;</span> Revision Plan</button>
         </div>
 
+        <button class="sb-item" data-nav="videos" onclick="navGo('videos')"><span class="ico">&#127916;</span> Videos</button>
+
         <div class="sb-group" data-group="account" onclick="toggleNavGroup('account')" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('account');}">
           <span>&#128100; Account</span><span class="sb-caret">&#9662;</span>
         </div>
@@ -1862,6 +1864,38 @@
       <div id="progress-content"></div>
     </div>
 
+    <!-- ==================== YOUTUBE VIDEOS ==================== -->
+    <div id="videos-section" class="hidden">
+      <div class="quiz-topbar">
+        <div>
+          <h2 class="sec-h2">&#127916; Videos &mdash; Me With Cariad</h2>
+          <p class="sec-p">Study vlogs aur tips, seedha YouTube se. Yahan se play karne par <b>views channel ko count hote hain</b> &mdash; support karne ka sabse aasan tarika.</p>
+        </div>
+        <div class="panel-actions">
+          <a class="btn-secondary" href="https://www.youtube.com/@mewithcariad?sub_confirmation=1" target="_blank" rel="noopener noreferrer" style="text-decoration:none; white-space:nowrap;">&#128276; Subscribe</a>
+        </div>
+      </div>
+
+      <div class="section-box">
+        <div id="yt-facade" role="button" tabindex="0" aria-label="Latest video chalao"
+             onclick="ytPlay()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();ytPlay();}"
+             style="position:relative; aspect-ratio:16/9; border-radius:14px; overflow:hidden; cursor:pointer; background:#000; border:1px solid var(--line);">
+          <img id="yt-thumb" src="https://i.ytimg.com/vi/EUgP1Ta1XJc/maxresdefault.jpg" alt="Me With Cariad — latest video" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">
+          <div style="position:absolute; inset:0; display:grid; place-items:center; background:linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.55));">
+            <span style="width:74px; height:74px; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--cyan)); display:grid; place-items:center; font-size:28px; box-shadow:0 10px 30px rgba(0,0,0,.5);">&#9654;&#65039;</span>
+          </div>
+        </div>
+        <div id="yt-frame-wrap" class="hidden" style="aspect-ratio:16/9; border-radius:14px; overflow:hidden; border:1px solid var(--line); background:#000;"></div>
+        <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between;">
+          <div>
+            <div style="font-weight:800; font-size:15px;">&#127916; Latest video &mdash; Me With Cariad</div>
+            <div style="font-size:12.5px; color:var(--text-muted);">Play dabao &mdash; naye video apne aap yahan aa jaate hain.</div>
+          </div>
+          <a class="btn-secondary" href="https://www.youtube.com/@mewithcariad" target="_blank" rel="noopener noreferrer" style="text-decoration:none; white-space:nowrap;">YouTube par dekho &#8599;</a>
+        </div>
+      </div>
+    </div>
+
     <!-- ==================== ACCOUNT (LOCAL / ON-DEVICE) ==================== -->
     <div id="account-section" class="hidden">
       <div class="quiz-topbar">
@@ -2018,6 +2052,14 @@
   </main>
 
   <footer class="app-footer">
+    <div class="section-box" style="width:100%; display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-bottom:14px;">
+      <img src="https://i.ytimg.com/vi/EUgP1Ta1XJc/mqdefault.jpg" alt="Latest video on Me With Cariad" loading="lazy" style="width:118px; height:66px; object-fit:cover; border-radius:10px; border:1px solid var(--line);">
+      <div style="flex:1; min-width:190px;">
+        <div style="font-weight:800; font-size:14px;">&#127916; Latest on YouTube &mdash; Me With Cariad</div>
+        <div style="font-size:12.5px; color:var(--text-muted);">Study vlogs &amp; tips. Yahan se play karne par channel ko support milta hai.</div>
+      </div>
+      <button class="btn-cyan" onclick="navGo('videos')">&#9654;&#65039; Dekho</button>
+    </div>
     <div class="credit" title="Crafted with love">
       <span class="credit-made">Crafted with</span>
       <span class="credit-heart">&#10084;&#65039;</span>
@@ -5661,7 +5703,7 @@
     function hideAllSections() {
       clearInterval(timerInterval);
       window.speechSynthesis?.cancel();
-      ['setup-section', 'quiz-section', 'flashcard-section', 'mindmap-section', 'notes-section', 'result-section', 'mains-section', 'blurt-section', 'weakness-section', 'visual-section', 'teach-section', 'sets-section', 'library-section', 'plan-section', 'progress-section', 'account-section', 'mistake-section', 'adaptive-section', 'listen-section', 'sprint-section', 'doubts-section'].forEach(id => {
+      ['setup-section', 'quiz-section', 'flashcard-section', 'mindmap-section', 'notes-section', 'result-section', 'mains-section', 'blurt-section', 'weakness-section', 'visual-section', 'teach-section', 'sets-section', 'library-section', 'plan-section', 'progress-section', 'account-section', 'mistake-section', 'adaptive-section', 'listen-section', 'sprint-section', 'doubts-section', 'videos-section'].forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
         document.getElementById(id).classList.add('hidden');
@@ -6586,6 +6628,34 @@
       document.getElementById('generate-btn').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
+    // ==================== YOUTUBE VIDEOS ====================
+    // The channel's uploads playlist (channel UC-... -> uploads UU-...). Playing
+    // here counts as a normal YouTube view; the playlist always starts with the
+    // latest upload, so new videos appear automatically with no updates needed.
+    const YT_UPLOADS_PLAYLIST = 'UU-Mjx_Jg_p7mFp7GCLvcy-w';
+    function openVideos() {
+      hideAllSections();
+      document.getElementById('videos-section').classList.remove('hidden');
+      setActiveNav('videos');
+    }
+    function ytPlay() {
+      const wrap = document.getElementById('yt-frame-wrap');
+      const fac = document.getElementById('yt-facade');
+      if (!wrap) return;
+      if (!wrap.dataset.loaded) {
+        const f = document.createElement('iframe');
+        f.src = 'https://www.youtube.com/embed/videoseries?list=' + YT_UPLOADS_PLAYLIST + '&autoplay=1&rel=0';
+        f.title = 'Me With Cariad — videos';
+        f.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+        f.setAttribute('allowfullscreen', '');
+        f.style.cssText = 'width:100%; height:100%; border:0; display:block;';
+        wrap.appendChild(f);
+        wrap.dataset.loaded = '1';
+      }
+      if (fac) fac.classList.add('hidden');
+      wrap.classList.remove('hidden');
+    }
+
     // ==================== ACCOUNT (LOCAL / ON-DEVICE) ====================
     // A "temporary" local account: created and verified entirely in the browser.
     // No server, no internet, no email — the account lives in localStorage and
@@ -6814,6 +6884,7 @@
         else if (id === 'plan') openPlan();
         else if (id === 'progress') openProgress();
         else if (id === 'account') openAccount();
+        else if (id === 'videos') openVideos();
         else if (id === 'mistake') openMistakes();
         else if (id === 'adaptive') openAdaptive();
         else if (id === 'listen') openListenMode();
