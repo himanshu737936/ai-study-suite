@@ -7,7 +7,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.17.1">
+  <meta name="app-version" content="18.18.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -35,7 +35,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-  <title>AI Study Suite PRO v18.17.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.18.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -1098,7 +1098,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.17.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.18.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -1116,7 +1116,7 @@
         <div class="sb-logo"><svg class="logo-star" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M256 84L318 194L428 256L318 318L256 428L194 318L84 256L194 194Z" fill="#ffffff"/></svg></div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.17.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.18.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -1195,7 +1195,7 @@
       <div class="brand-icon">🧠</div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.17.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.18.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -2276,7 +2276,7 @@
         <span class="credit-heart">&#10084;&#65039;</span>
         <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
         <span class="credit-dot"></span>
-        <span class="credit-tag">AI Study Suite PRO v18.17.0</span>
+        <span class="credit-tag">AI Study Suite PRO v18.18.0</span>
       </div>
       <div class="ft-share">
         <button class="ft-share-btn" onclick="shareApp()">&#128228; Share app</button>
@@ -2805,6 +2805,8 @@
       };
       const starSpr = makeStarSprite('255,255,255');
       const starSprDark = makeStarSprite('46,60,110');
+      const starSprCool = makeStarSprite('205,228,255');   // blue-white hot stars
+      const starSprWarm = makeStarSprite('255,232,198');   // amber giants
 
       function hexA(hex, a) {
         const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(String(hex || '').trim());
@@ -2856,6 +2858,7 @@
             r: Math.pow(Math.random(), 0.55),
             d: d,
             sz: (0.7 + d * 2.0) * (0.8 + Math.random() * 0.7),
+            tone: Math.random(),
             tw: Math.random() * Math.PI * 2,
             sp: (0.006 + 0.05 * (1 - d)) * (Math.random() < 0.5 ? -1 : 1)
           });
@@ -2875,6 +2878,36 @@
           });
         }
       }
+      // A soft diagonal Milky-Way band with dark dust lanes — the thing that
+      // makes it read as a real galaxy rather than a plain starfield.
+      function drawMilkyWay() {
+        if (lightMode) return;
+        ctx.save();
+        ctx.translate(W * 0.5, H * 0.5);
+        ctx.rotate(-0.42);
+        const band = H * 0.72;
+        ctx.globalCompositeOperation = 'lighter';
+        const g = ctx.createLinearGradient(0, -band / 2, 0, band / 2);
+        g.addColorStop(0.00, hexA(colA, 0));
+        g.addColorStop(0.32, hexA(colA, 0.085 * bright));
+        g.addColorStop(0.50, hexA(colB, 0.15 * bright));
+        g.addColorStop(0.68, hexA(colC, 0.085 * bright));
+        g.addColorStop(1.00, hexA(colC, 0));
+        ctx.fillStyle = g;
+        ctx.fillRect(-W * 1.3, -band / 2, W * 2.6, band);
+        ctx.globalCompositeOperation = 'source-over';
+        for (let i = 0; i < 4; i++) {
+          const dy = (i - 1.5) * band * 0.15 + Math.sin(tsec * 0.15 + i) * 6;
+          const h = 34 + i * 10;
+          const dg = ctx.createLinearGradient(0, dy - h, 0, dy + h);
+          dg.addColorStop(0, 'rgba(0,0,0,0)');
+          dg.addColorStop(0.5, 'rgba(0,0,0,' + (0.30 * bright).toFixed(3) + ')');
+          dg.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = dg;
+          ctx.fillRect(-W * 1.3, dy - h, W * 2.6, h * 2);
+        }
+        ctx.restore();
+      }
       function isReduced() {
         return (reduceMQ && reduceMQ.matches) || document.body.classList.contains('a11y-reduce');
       }
@@ -2885,6 +2918,7 @@
         ctx.globalAlpha = 1;
         ctx.fillStyle = base;
         ctx.fillRect(0, 0, W, H);
+        drawMilkyWay();
 
         ctx.globalCompositeOperation = lightMode ? 'source-over' : 'lighter';
         for (const nb of nebula) {
@@ -2904,7 +2938,15 @@
           const tw = 0.45 + 0.55 * Math.abs(Math.sin(tsec * 1.6 + st.tw));
           const sz = st.sz * 2.7;
           ctx.globalAlpha = (lightMode ? 0.75 : 1) * bright * tw * (0.42 + 0.78 * st.d);
-          ctx.drawImage(spr, x - sz / 2, y - sz / 2, sz, sz);
+          const s2 = lightMode ? spr : (st.tone > 0.72 ? starSprWarm : (st.tone < 0.34 ? starSprCool : spr));
+          ctx.drawImage(s2, x - sz / 2, y - sz / 2, sz, sz);
+          if (!lightMode && st.d > 0.70) {
+            ctx.globalAlpha = 0.40 * tw * bright;
+            ctx.strokeStyle = 'rgba(255,255,255,.78)'; ctx.lineWidth = 1;
+            const L = sz * 2.6;
+            ctx.beginPath(); ctx.moveTo(x - L, y); ctx.lineTo(x + L, y);
+            ctx.moveTo(x, y - L); ctx.lineTo(x, y + L); ctx.stroke();
+          }
         }
         ctx.globalAlpha = 1;
         if (shots.length && !lightMode) {
