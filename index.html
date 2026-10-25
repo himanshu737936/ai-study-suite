@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#6d6ff5">
-  <meta name="app-version" content="18.13.1">
+  <meta name="app-version" content="18.13.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -824,6 +824,29 @@
     /* ===================== Live galaxy background ===================== */
     #galaxy-bg { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: -1; pointer-events: none; }
     /* ---- YouTube channel cards ---- */
+    /* ---- modern footer ---- */
+    .app-footer { width: 100%; max-width: 1180px; margin: 26px auto 0; padding: 22px 20px 30px; border-top: 1px solid var(--line-soft); }
+    .ft-grid { display: grid; grid-template-columns: minmax(220px, 1.35fr) minmax(0, 2fr); gap: 24px; align-items: start; }
+    .ft-brand { display: flex; gap: 12px; align-items: flex-start; }
+    .ft-logo { width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; font-size: 22px; background: linear-gradient(135deg, var(--primary), var(--cyan)); flex: none; }
+    .ft-name { font-weight: 900; font-size: 15.5px; letter-spacing: -.2px; }
+    .ft-tag { font-size: 12.5px; color: var(--text-muted); margin-top: 4px; max-width: 36ch; }
+    .ft-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .ft-h { font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); font-weight: 800; margin-bottom: 8px; }
+    .ft-col a { display: block; color: #c7d2fe; text-decoration: none; font-size: 13px; padding: 3px 0; transition: color .15s var(--ease), transform .15s var(--ease); }
+    .ft-col a:hover { color: var(--cyan); transform: translateX(2px); }
+    .ft-bottom { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line-soft); }
+    .ft-share { display: flex; gap: 9px; flex-wrap: wrap; }
+    .ft-share-btn, .ft-wa { text-decoration: none; font-weight: 800; font-size: 12.5px; padding: 10px 16px; border-radius: 11px; cursor: pointer; border: 1px solid transparent;
+      transition: transform .15s var(--ease), filter .15s var(--ease); }
+    .ft-share-btn { background: linear-gradient(135deg, var(--primary), var(--cyan)); color: #05070f; border: none; font-family: inherit; }
+    .ft-wa { background: rgba(37,211,102,.14); color: #4ade80; border-color: rgba(37,211,102,.4); }
+    .ft-share-btn:hover, .ft-wa:hover { transform: translateY(-2px); filter: brightness(1.08); }
+    .yt-share { flex: 1; min-width: 118px; text-align: center; font-weight: 800; font-size: 13.5px; padding: 11px 14px; border-radius: 11px; cursor: pointer; font-family: inherit;
+      background: var(--surface-2); color: var(--text); border: 1px solid var(--line); transition: transform .15s var(--ease), border-color .15s var(--ease); }
+    .yt-share:hover { transform: translateY(-2px); border-color: var(--primary); }
+    @media (max-width: 720px) { .ft-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) { .ft-cols { grid-template-columns: repeat(2, 1fr); } }
     .link-btn { background: none; border: none; padding: 0; font: inherit; cursor: pointer; }
     .yt-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;
       transition: transform .2s var(--ease), border-color .2s var(--ease), box-shadow .2s var(--ease); }
@@ -2058,30 +2081,60 @@
   </main>
 
   <footer class="app-footer">
-    <div class="section-box" style="width:100%; display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-bottom:14px;">
+    <div class="section-box" style="width:100%; display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-bottom:22px;">
       <img src="https://i.ytimg.com/vi/EUgP1Ta1XJc/mqdefault.jpg" alt="Latest video on Me With Cariad" loading="lazy" style="width:118px; height:66px; object-fit:cover; border-radius:10px; border:1px solid var(--line);">
       <div style="flex:1; min-width:190px;">
         <div style="font-weight:800; font-size:14px;">&#127916; Latest on YouTube &mdash; our channels</div>
-        <div style="font-size:12.5px; color:var(--text-muted);">Study vlogs &amp; tips. Yahan se play karne par channels ko support milta hai.</div>
+        <div style="font-size:12.5px; color:var(--text-muted);">Study vlogs &amp; tips. Watch ya Subscribe karne par channels ko support milta hai.</div>
       </div>
       <button class="btn-cyan" onclick="navGo('videos')">&#9654;&#65039; Dekho</button>
     </div>
-    <div class="credit" title="Crafted with love">
-      <span class="credit-made">Crafted with</span>
-      <span class="credit-heart">&#10084;&#65039;</span>
-      <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
-      <span class="credit-dot"></span>
-      <span class="credit-tag">AI Study Suite PRO v18.13.0</span>
+
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <div class="ft-logo" aria-hidden="true">&#129504;</div>
+        <div>
+          <div class="ft-name">AI Study Suite PRO</div>
+          <div class="ft-tag">Turn any PDF &mdash; or a photo of a book page &mdash; into AI quizzes, SRS flashcards, mind maps and cheat sheets for UPSC, UPPCS and SSC.</div>
+        </div>
+      </div>
+      <div class="ft-cols">
+        <div class="ft-col">
+          <div class="ft-h">App</div>
+          <a href="#" onclick="navGo('setup');return false;">Study</a>
+          <a href="#" onclick="navGo('sets');return false;">My Sets</a>
+          <a href="#" onclick="navGo('progress');return false;">Progress</a>
+          <a href="#" onclick="navGo('videos');return false;">Videos</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">More</div>
+          <a href="guide.html">Guide</a>
+          <a href="about.html">About</a>
+          <a href="https://github.com/himanshu737936/ai-study-suite" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.youtube.com/@mewithcariad" target="_blank" rel="noopener noreferrer">YouTube</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">Legal</div>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
     </div>
-    <nav style="margin-top:12px; font-size:12.5px; display:flex; flex-wrap:wrap; gap:9px 16px; justify-content:center;">
-      <a href="guide.html" style="color:var(--cyan); text-decoration:none; font-weight:600;">&#128214; Guide</a>
-      <a href="about.html" style="color:var(--cyan); text-decoration:none; font-weight:600;">About &amp; Contact</a>
-      <a href="privacy.html" style="color:var(--muted); text-decoration:none;">Privacy</a>
-      <a href="terms.html" style="color:var(--muted); text-decoration:none;">Terms</a>
-      <a href="disclaimer.html" style="color:var(--muted); text-decoration:none;">Disclaimer</a>
-      <button onclick="shareApp()" class="link-btn" style="color:#6ee7b7; font-weight:700;">&#128228; Share</button>
-      <a href="https://wa.me/?text=AI%20Study%20Suite%20PRO%20%E2%80%94%20PDF%20ya%20book%20ki%20photo%20se%20AI%20quiz%2C%20flashcards%2C%20mind%20map%20aur%20cheat%20sheet%20(UPSC%20%2F%20UPPCS%20%2F%20SSC)%3A%20https%3A%2F%2Fhimanshu737936.github.io%2Fai-study-suite%2F" target="_blank" rel="noopener noreferrer" style="color:#25D366; font-weight:700; text-decoration:none;">&#128172; WhatsApp</a>
-    </nav>
+
+    <div class="ft-bottom">
+      <div class="credit" title="Crafted with love">
+        <span class="credit-made">Crafted with</span>
+        <span class="credit-heart">&#10084;&#65039;</span>
+        <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
+        <span class="credit-dot"></span>
+        <span class="credit-tag">AI Study Suite PRO v18.13.0</span>
+      </div>
+      <div class="ft-share">
+        <button class="ft-share-btn" onclick="shareApp()">&#128228; Share app</button>
+        <a class="ft-wa" href="https://wa.me/?text=AI%20Study%20Suite%20PRO%20%E2%80%94%20PDF%20ya%20book%20ki%20photo%20se%20AI%20quiz%2C%20flashcards%2C%20mind%20map%20aur%20cheat%20sheet%20(UPSC%20%2F%20UPPCS%20%2F%20SSC)%3A%20https%3A%2F%2Fhimanshu737936.github.io%2Fai-study-suite%2F" target="_blank" rel="noopener noreferrer">&#128172; WhatsApp</a>
+      </div>
+    </div>
   </footer>
 
     </div><!-- /app-main -->
@@ -6655,7 +6708,7 @@
     function renderYtChannels() {
       const box = document.getElementById('yt-channels');
       if (!box || box.dataset.done) return;
-      box.innerHTML = YT_CHANNELS.map(c => {
+      box.innerHTML = YT_CHANNELS.map((c, i) => {
         const n = escapeHtml(c.name), h = escapeHtml(c.handle);
         return '<div class="yt-card">' +
           '<a class="yt-thumb" href="' + c.watch + '" target="_blank" rel="noopener noreferrer" aria-label="Watch ' + n + ' on YouTube">' +
@@ -6667,6 +6720,7 @@
           '<div class="yt-actions">' +
             '<a class="yt-watch" href="' + c.watch + '" target="_blank" rel="noopener noreferrer">&#9654; Watch</a>' +
             '<a class="yt-sub" href="' + c.sub + '" target="_blank" rel="noopener noreferrer">&#128276; Subscribe</a>' +
+            '<button class="yt-share" onclick="shareChannel(' + i + ')" aria-label="Share ' + n + '">&#128228; Share</button>' +
           '</div></div>';
       }).join('');
       box.dataset.done = '1';
@@ -6682,6 +6736,14 @@
       catch (e) { window.open('https://wa.me/?text=' + encodeURIComponent(text + ' ' + url), '_blank', 'noopener'); }
     }
 
+    async function shareChannel(i) {
+      const c = YT_CHANNELS[i]; if (!c) return;
+      const text = c.name + ' — YouTube channel';
+      try { if (navigator.share) { await navigator.share({ title: c.name, text: text, url: c.watch }); return; } }
+      catch (e) { if (e && e.name === 'AbortError') return; }
+      try { await navigator.clipboard.writeText(c.watch); showError('✅ ' + c.name + ' ka link copy ho gaya!'); }
+      catch (e) { window.open(c.watch, '_blank', 'noopener'); }
+    }
     function openVideos() {
       hideAllSections();
       document.getElementById('videos-section').classList.remove('hidden');
