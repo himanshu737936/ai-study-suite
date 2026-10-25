@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#6d6ff5">
-  <meta name="app-version" content="18.13.1">
+  <meta name="app-version" content="18.13.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -1868,32 +1868,20 @@
     <div id="videos-section" class="hidden">
       <div class="quiz-topbar">
         <div>
-          <h2 class="sec-h2">&#127916; Videos &mdash; Me With Cariad</h2>
+          <h2 class="sec-h2">&#127916; Videos &mdash; our channels</h2>
           <p class="sec-p">Study vlogs aur tips, seedha YouTube se. Yahan se play karne par <b>views channel ko count hote hain</b> &mdash; support karne ka sabse aasan tarika.</p>
         </div>
         <div class="panel-actions">
-          <a class="btn-secondary" href="https://www.youtube.com/@mewithcariad?sub_confirmation=1" target="_blank" rel="noopener noreferrer" style="text-decoration:none; white-space:nowrap;">&#128276; Subscribe</a>
+          <a class="btn-secondary" href="https://www.youtube.com/@mewithcariad" target="_blank" rel="noopener noreferrer" style="text-decoration:none; white-space:nowrap;">&#128276; Subscribe</a>
         </div>
       </div>
 
       <div class="section-box">
-        <div id="yt-facade" role="button" tabindex="0" aria-label="Latest video chalao"
-             onclick="ytPlay()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();ytPlay();}"
-             style="position:relative; aspect-ratio:16/9; border-radius:14px; overflow:hidden; cursor:pointer; background:#000; border:1px solid var(--line);">
-          <img id="yt-thumb" src="https://i.ytimg.com/vi/EUgP1Ta1XJc/maxresdefault.jpg" alt="Me With Cariad — latest video" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">
-          <div style="position:absolute; inset:0; display:grid; place-items:center; background:linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.55));">
-            <span style="width:74px; height:74px; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--cyan)); display:grid; place-items:center; font-size:28px; box-shadow:0 10px 30px rgba(0,0,0,.5);">&#9654;&#65039;</span>
-          </div>
-        </div>
-        <div id="yt-frame-wrap" class="hidden" style="aspect-ratio:16/9; border-radius:14px; overflow:hidden; border:1px solid var(--line); background:#000;"></div>
-        <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between;">
-          <div>
-            <div style="font-weight:800; font-size:15px;">&#127916; Latest video &mdash; Me With Cariad</div>
-            <div style="font-size:12.5px; color:var(--text-muted);">Play dabao &mdash; naye video apne aap yahan aa jaate hain.</div>
-          </div>
-          <a class="btn-secondary" href="https://www.youtube.com/@mewithcariad" target="_blank" rel="noopener noreferrer" style="text-decoration:none; white-space:nowrap;">YouTube par dekho &#8599;</a>
-        </div>
-      </div>
+        <div id="yt-player-wrap" class="hidden" style="aspect-ratio:16/9; border-radius:14px; overflow:hidden; border:1px solid var(--line); background:#000; margin-bottom:14px;"></div>
+        <div id="yt-now-playing" style="font-weight:800; font-size:14px; margin-bottom:10px; color:var(--cyan);"></div>
+        <div class="grid-2" id="yt-channels"></div>
+        <div style="margin-top:12px; font-size:12.5px; color:var(--text-muted);">Thumbnail par tap karo &mdash; player khul jayega. Yahan se play karne par views channel ko count hote hain.</div>
+</div>
     </div>
 
     <!-- ==================== ACCOUNT (LOCAL / ON-DEVICE) ==================== -->
@@ -2055,8 +2043,8 @@
     <div class="section-box" style="width:100%; display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-bottom:14px;">
       <img src="https://i.ytimg.com/vi/EUgP1Ta1XJc/mqdefault.jpg" alt="Latest video on Me With Cariad" loading="lazy" style="width:118px; height:66px; object-fit:cover; border-radius:10px; border:1px solid var(--line);">
       <div style="flex:1; min-width:190px;">
-        <div style="font-weight:800; font-size:14px;">&#127916; Latest on YouTube &mdash; Me With Cariad</div>
-        <div style="font-size:12.5px; color:var(--text-muted);">Study vlogs &amp; tips. Yahan se play karne par channel ko support milta hai.</div>
+        <div style="font-weight:800; font-size:14px;">&#127916; Latest on YouTube &mdash; our channels</div>
+        <div style="font-size:12.5px; color:var(--text-muted);">Study vlogs &amp; tips. Yahan se play karne par channels ko support milta hai.</div>
       </div>
       <button class="btn-cyan" onclick="navGo('videos')">&#9654;&#65039; Dekho</button>
     </div>
@@ -6632,29 +6620,49 @@
     // The channel's uploads playlist (channel UC-... -> uploads UU-...). Playing
     // here counts as a normal YouTube view; the playlist always starts with the
     // latest upload, so new videos appear automatically with no updates needed.
-    const YT_UPLOADS_PLAYLIST = 'UU-Mjx_Jg_p7mFp7GCLvcy-w';
+    const YT_CHANNELS = [
+      { name: 'Me With Cariad', handle: '@mewithcariad', playlist: 'UU-Mjx_Jg_p7mFp7GCLvcy-w',
+        img: 'https://i.ytimg.com/vi/EUgP1Ta1XJc/hqdefault.jpg' },
+      { name: 'Nikki with Cariad', handle: '@nikitabiswal-x9w', playlist: 'UUunZy7xTqBpHsnbVdDedupg',
+        img: 'https://yt3.googleusercontent.com/rDswSCg_0gQMs8varANvNHB2ZWxJ3a67DwkncMzgPJd1Wg1yJXbHaTA2LE9_9trWqtsEsxhC=s900-c-k-c0x00ffffff-no-rj' }
+    ];
     function openVideos() {
       hideAllSections();
       document.getElementById('videos-section').classList.remove('hidden');
       setActiveNav('videos');
+      renderYtChannels();
     }
-    function ytPlay() {
-      const wrap = document.getElementById('yt-frame-wrap');
-      const fac = document.getElementById('yt-facade');
+    function renderYtChannels() {
+      const box = document.getElementById('yt-channels');
+      if (!box || box.dataset.done) return;
+      box.innerHTML = YT_CHANNELS.map((c, i) =>
+        '<div role="button" tabindex="0" aria-label="Play ' + escapeHtml(c.name) + '" onclick="ytPlayIdx(' + i + ')"' +
+        ' onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();ytPlayIdx(' + i + ');}"' +
+        ' style="position:relative; aspect-ratio:16/9; border-radius:14px; overflow:hidden; cursor:pointer; background:#000; border:1px solid var(--line);">' +
+        '<img src="' + c.img + '" alt="' + escapeHtml(c.name) + '" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">' +
+        '<div style="position:absolute; inset:0; display:grid; place-items:center; background:linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.62));">' +
+        '<span style="width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--cyan)); display:grid; place-items:center; font-size:24px; box-shadow:0 10px 30px rgba(0,0,0,.5);">&#9654;&#65039;</span></div>' +
+        '<div style="position:absolute; left:0; right:0; bottom:0; padding:10px 12px; font-weight:800; font-size:13.5px; color:#fff; text-shadow:0 1px 6px rgba(0,0,0,.8);">&#127916; ' + escapeHtml(c.name) + '</div></div>'
+      ).join('');
+      box.dataset.done = '1';
+    }
+    function ytPlayIdx(i) {
+      const c = YT_CHANNELS[i]; if (!c) return;
+      const wrap = document.getElementById('yt-player-wrap');
       if (!wrap) return;
-      if (!wrap.dataset.loaded) {
-        const f = document.createElement('iframe');
-        f.src = 'https://www.youtube.com/embed/videoseries?list=' + YT_UPLOADS_PLAYLIST + '&rel=0&playsinline=1&autoplay=1';
-        f.title = 'Me With Cariad — videos';
-        f.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-        f.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-        f.setAttribute('allowfullscreen', '');
-        f.style.cssText = 'width:100%; height:100%; border:0; display:block;';
-        wrap.appendChild(f);
-        wrap.dataset.loaded = '1';
-      }
-      if (fac) fac.classList.add('hidden');
+      wrap.innerHTML = '';
+      const f = document.createElement('iframe');
+      f.src = 'https://www.youtube.com/embed/videoseries?list=' + c.playlist + '&rel=0&playsinline=1&autoplay=1';
+      f.title = c.name + ' — videos';
+      f.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+      f.setAttribute('allowfullscreen', '');
+      f.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+      f.style.cssText = 'width:100%; height:100%; border:0; display:block;';
+      wrap.appendChild(f);
       wrap.classList.remove('hidden');
+      const np = document.getElementById('yt-now-playing');
+      if (np) np.textContent = '\uD83C\uDFAC Now playing: ' + c.name;
+      try { wrap.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
     }
 
     // ==================== ACCOUNT (LOCAL / ON-DEVICE) ====================
