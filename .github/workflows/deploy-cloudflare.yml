@@ -49,7 +49,7 @@ jobs:
         if: steps.check.outputs.skip == 'false'
         run: |
           mkdir -p dist/.well-known
-          for f in index.html guide.html privacy.html terms.html disclaimer.html about.html manifest.json sw.js icon-192.png icon-512.png og-image.png robots.txt sitemap.xml _headers; do
+          for f in index.html guide.html privacy.html terms.html disclaimer.html about.html logo.svg favicon.svg manifest.json sw.js icon-192.png icon-512.png og-image.png robots.txt sitemap.xml _headers; do
             [ -f "$f" ] && cp "$f" dist/ && echo "staged $f"
           done
           [ -f .well-known/assetlinks.json ] && cp .well-known/assetlinks.json dist/.well-known/ && echo "staged .well-known/assetlinks.json"
