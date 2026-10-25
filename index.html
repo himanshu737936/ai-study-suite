@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#6d6ff5">
-  <meta name="app-version" content="18.13.1">
+  <meta name="app-version" content="18.13.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -6622,9 +6622,9 @@
     // latest upload, so new videos appear automatically with no updates needed.
     const YT_CHANNELS = [
       { name: 'Me With Cariad', handle: '@mewithcariad', playlist: 'UU-Mjx_Jg_p7mFp7GCLvcy-w',
-        img: 'https://i.ytimg.com/vi/EUgP1Ta1XJc/hqdefault.jpg' },
+        video: 'EUgP1Ta1XJc', img: 'https://i.ytimg.com/vi/EUgP1Ta1XJc/hqdefault.jpg' },
       { name: 'Nikki with Cariad', handle: '@nikitabiswal-x9w', playlist: 'UUunZy7xTqBpHsnbVdDedupg',
-        img: 'https://yt3.googleusercontent.com/rDswSCg_0gQMs8varANvNHB2ZWxJ3a67DwkncMzgPJd1Wg1yJXbHaTA2LE9_9trWqtsEsxhC=s900-c-k-c0x00ffffff-no-rj' }
+        video: '', img: 'https://yt3.googleusercontent.com/rDswSCg_0gQMs8varANvNHB2ZWxJ3a67DwkncMzgPJd1Wg1yJXbHaTA2LE9_9trWqtsEsxhC=s900-c-k-c0x00ffffff-no-rj' }
     ];
     function openVideos() {
       hideAllSections();
@@ -6652,7 +6652,10 @@
       if (!wrap) return;
       wrap.innerHTML = '';
       const f = document.createElement('iframe');
-      f.src = 'https://www.youtube.com/embed/videoseries?list=' + c.playlist + '&rel=0&playsinline=1&autoplay=1';
+      const base = c.video
+        ? 'https://www.youtube.com/embed/' + c.video
+        : 'https://www.youtube.com/embed/videoseries?list=' + c.playlist;
+      f.src = base + '?rel=0&playsinline=1&autoplay=1';
       f.title = c.name + ' — videos';
       f.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
       f.setAttribute('allowfullscreen', '');
