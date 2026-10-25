@@ -7,7 +7,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.16.1">
+  <meta name="app-version" content="18.17.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -35,7 +35,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-  <title>AI Study Suite PRO v18.16.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.17.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -108,6 +108,8 @@
     body[data-theme="ocean"] { --bg:#04121a; --bg-soft:#06202c; --surface:#082633; --surface-2:#0c3346; --surface-3:#124a63; --line:#1b5871; --line-soft:#12455c; --deep:#041019; --primary:#0ea5e9; --primary-2:#22d3ee; --primary-glow:rgba(14,165,233,0.35); --cyan:#67e8f9; --glow-1:#0b3a52; --glow-2:#052b33; }
     body[data-theme="forest"] { --bg:#050f0a; --bg-soft:#0a1a12; --surface:#0c2118; --surface-2:#103021; --surface-3:#17462f; --line:#1d5a3c; --line-soft:#14472f; --deep:#04100a; --primary:#10b981; --primary-2:#84cc16; --primary-glow:rgba(16,185,129,0.35); --cyan:#5eead4; --glow-1:#0d3b28; --glow-2:#0a2f1c; }
     body[data-theme="sunset"] { --bg:#140806; --bg-soft:#1f0d08; --surface:#26110b; --surface-2:#331811; --surface-3:#4a2418; --line:#5e2f1e; --line-soft:#4a2517; --deep:#120705; --primary:#f97316; --primary-2:#f43f5e; --primary-glow:rgba(249,115,22,0.35); --cyan:#fdba74; --glow-1:#4a1f10; --glow-2:#3b1414; }
+    body[data-theme="crystal"] { --bg:#050a18; --bg-soft:#0a1226; --surface:#0d1830; --surface-2:#12203d; --surface-3:#1a2c50; --line:#24406b; --line-soft:#1a3054; --deep:#040813; --primary:#7dd3fc; --primary-2:#a5b4fc; --primary-glow:rgba(125,211,252,0.38); --cyan:#e0f2fe; --glow-1:#0e2a4d; --glow-2:#0a1c38; }
+    body[data-theme="glass"] { --bg:#0a0b12; --bg-soft:#12141f; --surface:#171a26; --surface-2:#1f2432; --surface-3:#2a3040; --line:#384054; --line-soft:#2a3040; --deep:#070810; --primary:#c4b5fd; --primary-2:#67e8f9; --primary-glow:rgba(196,181,253,0.35); --cyan:#e9d5ff; --glow-1:#1b2036; --glow-2:#141a2e; }
     body[data-theme="rose"] { --bg:#100512; --bg-soft:#1b0a1f; --surface:#230d29; --surface-2:#2f1236; --surface-3:#431b4d; --line:#552364; --line-soft:#431b4d; --deep:#0f0511; --primary:#d946ef; --primary-2:#8b5cf6; --primary-glow:rgba(217,70,239,0.35); --cyan:#f0abfc; --glow-1:#3c1046; --glow-2:#2a0f3a; }
 
     /* ===================== ACCESSIBILITY ===================== */
@@ -1026,6 +1028,24 @@
     @media (prefers-reduced-motion: reduce) {
       .section-box, .mains-card, .stat-box, .hs-tile, .btn-primary, .btn-cyan, .option-btn, .sb-item { transition: none !important; transform: none !important; }
     }
+
+    /* ===== Liquid Crystal & Liquid Glass signature surfaces ===== */
+    body[data-theme="crystal"] .section-box, body[data-theme="crystal"] .quiz-topbar,
+    body[data-theme="crystal"] .mains-card, body[data-theme="crystal"] .stat-box, body[data-theme="crystal"] .hs-tile {
+      background-image: linear-gradient(155deg, rgba(125,211,252,.13), rgba(255,255,255,.02) 42%, rgba(165,180,252,.13));
+      border-color: rgba(125,211,252,.30);
+    }
+    body[data-theme="crystal"] .btn-primary, body[data-theme="crystal"] .btn-cyan {
+      background: linear-gradient(135deg, #7dd3fc, #a5b4fc) !important; box-shadow: 0 8px 24px rgba(125,211,252,.38);
+    }
+    body[data-theme="glass"] .section-box, body[data-theme="glass"] .quiz-topbar,
+    body[data-theme="glass"] .mains-card, body[data-theme="glass"] .stat-box,
+    body[data-theme="glass"] .hs-tile, body[data-theme="glass"] .yt-card {
+      background: rgba(255,255,255,.055) !important; border-color: rgba(255,255,255,.16) !important;
+      -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%);
+      box-shadow: 0 1px 0 rgba(255,255,255,.16) inset, 0 18px 44px rgba(0,0,0,.42);
+    }
+    body[data-theme="glass"] .sb-item.active { background: rgba(255,255,255,.14) !important; }
 </style>
   <!-- Structured data for search engines -->
   <script type="application/ld+json">
@@ -1078,7 +1098,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.16.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.17.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -1096,7 +1116,7 @@
         <div class="sb-logo"><svg class="logo-star" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M256 84L318 194L428 256L318 318L256 428L194 318L84 256L194 194Z" fill="#ffffff"/></svg></div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.16.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.17.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -1175,7 +1195,7 @@
       <div class="brand-icon">🧠</div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.16.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.17.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -1207,6 +1227,8 @@
           <option value="forest">🌲 Forest</option>
           <option value="sunset">🌅 Sunset</option>
           <option value="rose">🌸 Rose</option>
+          <option value="crystal">&#128142; Liquid Crystal</option>
+          <option value="glass">&#129705; Liquid Glass</option>
           <option value="sepia">🟤 Sepia</option>
           <option value="dark">⚫ True Dark</option>
         </select>
@@ -2254,7 +2276,7 @@
         <span class="credit-heart">&#10084;&#65039;</span>
         <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
         <span class="credit-dot"></span>
-        <span class="credit-tag">AI Study Suite PRO v18.16.0</span>
+        <span class="credit-tag">AI Study Suite PRO v18.17.0</span>
       </div>
       <div class="ft-share">
         <button class="ft-share-btn" onclick="shareApp()">&#128228; Share app</button>
@@ -2777,7 +2799,9 @@
         forest:   { cols: ['#10b981', '#84cc16', '#5eead4'], base: '#050f0a', bright: 0.92 },
         sunset:   { cols: ['#f97316', '#f43f5e', '#fdba74'], base: '#140806', bright: 1.00 },
         rose:     { cols: ['#d946ef', '#8b5cf6', '#f0abfc'], base: '#100512', bright: 1.00 },
-        sepia:    { cols: ['#c98a3a', '#e0b26a', '#f0c987'], base: '#17100a', bright: 0.86 }
+        sepia:    { cols: ['#c98a3a', '#e0b26a', '#f0c987'], base: '#17100a', bright: 0.86 },
+        crystal:  { cols: ['#7dd3fc', '#a5b4fc', '#e0f2fe'], base: '#050a18', bright: 1.04 },
+        glass:    { cols: ['#c4b5fd', '#67e8f9', '#e9d5ff'], base: '#0a0b12', bright: 1.02 }
       };
       const starSpr = makeStarSprite('255,255,255');
       const starSprDark = makeStarSprite('46,60,110');
@@ -5401,7 +5425,7 @@
     });
 
     // ==================== THEMES ====================
-    const THEMES = ['midnight', 'ocean', 'forest', 'sunset', 'rose', 'sepia', 'dark'];
+    const THEMES = ['midnight', 'ocean', 'forest', 'sunset', 'rose', 'sepia', 'dark', 'crystal', 'glass'];
     let themePref = 'midnight';
     function systemTheme() {
       return 'midnight';   // light theme removed — the app is always dark
