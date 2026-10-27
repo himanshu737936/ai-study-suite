@@ -5,9 +5,9 @@
     ],
     "target": {
       "namespace": "android_app",
-      "package_name": "app.aistudysuite.pro",
+      "package_name": "io.github.himanshu737936.twa",
       "sha256_cert_fingerprints": [
-        "84:EF:16:70:8D:C1:49:C2:9A:20:1C:22:C1:A8:55:C7:02:1D:0F:6F:51:D8:FB:C1:17:33:4F:C8:48:93:73:A9"
+        "4A:92:E2:41:E4:4A:68:16:7A:3F:FD:2C:B4:50:A0:8C:C7:5E:34:6E:F1:A8:5F:24:97:AD:13:A5:D3:67:E8:14"
       ]
     }
   }
