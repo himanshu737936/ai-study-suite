@@ -7,9 +7,9 @@
  *   • static assets       → cache-first with a background refresh.
  *   • AI provider calls   → never intercepted, always straight to the network.
  */
-const VERSION = 'v18.53.2';
+const VERSION = 'v18.54.0';
 const CACHE = 'ai-study-' + VERSION;
-const SHELL = ['./', './index.html', './app.js', './app-core.js', './manifest.json', './logo.svg', './favicon.svg', './icon-192.png', './icon-512.png', './og-image.png'];
+const SHELL = ['./', './index.html', './app.js', './app-core.js', './app-features.js', './manifest.json', './logo.svg', './favicon.svg', './icon-192.png', './icon-512.png', './og-image.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
