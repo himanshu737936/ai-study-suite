@@ -9,7 +9,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.45.2">
+  <meta name="app-version" content="18.46.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -37,7 +37,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-  <title>AI Study Suite PRO v18.45.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.46.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -1235,6 +1235,30 @@
     @keyframes ivOrb { 0%,100% { transform: scale(1); } 50% { transform: scale(1.07); } }
     .iv-status { text-align: center; font-size: 12px; letter-spacing: 1.4px; text-transform: uppercase; color: #67e8f9; font-weight: 800; margin-bottom: 10px; }
     @media (prefers-reduced-motion: reduce) { .iv-orb { animation: none !important; } }
+
+    /* ---- modern JARVIS HUD ---- */
+    .iv-hud { text-align: center; padding: 10px 0 6px; }
+    .iv-orb { position: relative; width: 118px; height: 118px; margin: 0 auto 8px; }
+    .iv-core { position: absolute; inset: 30px; border-radius: 50%;
+      background: radial-gradient(circle at 50% 40%, #e0f7ff 0%, #67e8f9 22%, #22d3ee 48%, #0b3a52 78%, transparent 82%);
+      box-shadow: 0 0 40px rgba(34,211,238,.65), 0 0 96px rgba(34,211,238,.32);
+      animation: ivPulse 2.6s ease-in-out infinite; }
+    .iv-ring { position: absolute; border-radius: 50%; }
+    .iv-ring.r2 { inset: 0; border: 1px solid rgba(34,211,238,.28); }
+    .iv-ring.r3 { inset: 8px; border: 1.6px solid transparent; border-top-color: #67e8f9; border-right-color: rgba(103,232,249,.35); animation: ivSpin 3.4s linear infinite; }
+    .iv-ring.r4 { inset: 16px; border: 1.6px solid transparent; border-bottom-color: #fbbf24; animation: ivSpin 5.2s linear infinite reverse; }
+    @keyframes ivSpin { to { transform: rotate(360deg); } }
+    @keyframes ivPulse { 0%,100% { transform: scale(1); opacity: .94; } 50% { transform: scale(1.07); opacity: 1; } }
+    .iv-bars { display: flex; gap: 4px; justify-content: center; align-items: flex-end; height: 26px; margin: 4px 0 6px; }
+    .iv-bars span { width: 4px; height: 6px; border-radius: 3px; background: linear-gradient(180deg, #67e8f9, #22d3ee); opacity: .4; }
+    .iv-hud.listening .iv-bars span { opacity: 1; animation: ivBar .85s ease-in-out infinite; }
+    .iv-hud.speaking .iv-bars span { opacity: .9; animation: ivBar 1.15s ease-in-out infinite; background: linear-gradient(180deg, #fbbf24, #22d3ee); }
+    .iv-bars span:nth-child(2) { animation-delay: .08s; } .iv-bars span:nth-child(3) { animation-delay: .16s; }
+    .iv-bars span:nth-child(4) { animation-delay: .24s; } .iv-bars span:nth-child(5) { animation-delay: .32s; }
+    .iv-bars span:nth-child(6) { animation-delay: .40s; } .iv-bars span:nth-child(7) { animation-delay: .48s; }
+    @keyframes ivBar { 0%,100% { height: 6px; } 50% { height: 24px; } }
+    .iv-heard { font-size: 12px; color: #9fb0d4; min-height: 16px; margin-top: 4px; font-style: italic; }
+    @media (prefers-reduced-motion: reduce) { .iv-core, .iv-ring.r3, .iv-ring.r4, .iv-bars span { animation: none !important; } }
 </style>
   <!-- Structured data for search engines -->
   <script type="application/ld+json">
@@ -1287,7 +1311,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.45.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.46.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -1305,7 +1329,7 @@
         <div class="sb-logo"><span class="logo-mark" aria-hidden="true"></span></div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.45.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.46.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -1386,7 +1410,7 @@
       <div class="brand-icon"><span class="logo-mark brand-mark" aria-hidden="true"></span></div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.45.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.46.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -2275,9 +2299,16 @@
       
 
       <div class="section-box">
-        <div id="iv-hud" class="hidden">
-          <div class="iv-orb" id="iv-orb"></div>
+        <div id="iv-hud" class="iv-hud hidden">
+          <div class="iv-orb" id="iv-orb">
+            <div class="iv-ring r2"></div>
+            <div class="iv-ring r3"></div>
+            <div class="iv-ring r4"></div>
+            <div class="iv-core"></div>
+          </div>
+          <div class="iv-bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
           <div class="iv-status" id="iv-status">JARVIS &middot; standby</div>
+          <div class="iv-heard" id="iv-heard"></div>
         </div>
         <div id="interview-log" class="iv-log"></div>
         <div id="interview-input-wrap" class="hidden" style="margin-top:14px;">
@@ -2545,7 +2576,7 @@
         <span class="credit-heart">&#10084;&#65039;</span>
         <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
         <span class="credit-dot"></span>
-        <span class="credit-tag">AI Study Suite PRO v18.45.0</span>
+        <span class="credit-tag">AI Study Suite PRO v18.46.0</span>
       </div>
       <div class="ft-share">
         <button class="ft-share-btn" onclick="shareApp()">&#128228; Share app</button>
@@ -7540,6 +7571,8 @@
           else interim += t;
         }
         if (ta) ta.value = (finalText + (interim ? ' ' + interim : '')).trim();
+        const hv = document.getElementById('iv-heard');
+        if (hv) hv.textContent = (finalText + (interim ? ' ' + interim : '')).trim() ? '\u201C' + (finalText + (interim ? ' ' + interim : '')).trim().slice(-70) + '\u201D' : '';
       };
       ivRec.onerror = (e) => {
         const code = (e && e.error) || 'unknown';
@@ -7573,9 +7606,10 @@
     try { jarvisMode = localStorage.getItem('ai_study_jarvis_v20') === '1'; } catch (e) {}
     function ivStatus(t) { const e = document.getElementById('iv-status'); if (e) e.textContent = 'JARVIS \u00B7 ' + t; }
     function ivOrb(state) {
-      const o = document.getElementById('iv-orb'); if (!o) return;
-      o.classList.remove('listening', 'speaking');
-      if (state) o.classList.add(state);
+      const o = document.getElementById('iv-orb');
+      const hud = document.getElementById('iv-hud');
+      if (o) { o.classList.remove('listening', 'speaking'); if (state) o.classList.add(state); }
+      if (hud) { hud.classList.remove('listening', 'speaking'); if (state) hud.classList.add(state); }
     }
     function ivSyncJarvis() {
       const b = document.getElementById('iv-jarvis-btn');
@@ -7641,6 +7675,7 @@
         if (r && r.done) { await endInterview(); return; }
         const q = (r && r.question) ? String(r.question) : 'Tell me about yourself.';
         ivLog.push({ role: 'q', text: q }); ivRender();
+        const _hv = document.getElementById('iv-heard'); if (_hv) _hv.textContent = '';
         if (jarvisMode) { ivStatus('speaking'); ivOrb('speaking'); }
         ivSpeak(q);
         if (jarvisMode) setTimeout(ivAutoMic, ivJarvisDelay(q));
