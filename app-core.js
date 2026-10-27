@@ -764,15 +764,39 @@
 
 
 
-/* ---- data-act dispatcher (Phase 3: replaces inline onclick) ---- */
-document.addEventListener('click', function (e) {
-  var el = e.target && e.target.closest ? e.target.closest('[data-act]') : null;
-  if (!el) return;
-  if (el.tagName === 'A' && el.getAttribute('href') === '#') e.preventDefault();
+/* ---- data-act dispatcher (Phase 3: replaces inline handlers) ---- */
+function _actRun(el, ev, e) {
   var fn = window[el.dataset.act];
   if (typeof fn !== 'function') return;
   var args = [];
   try { args = JSON.parse(el.dataset.args || '[]'); } catch (_) {}
   args = args.map(function (a) { return a === '__THIS__' ? el : a === '__EVENT__' ? e : a; });
   try { fn.apply(el, args); } catch (err) { console.error('data-act', el.dataset.act, err); }
+}
+['click', 'change', 'input'].forEach(function (evName) {
+  document.addEventListener(evName, function (e) {
+    var el = e.target && e.target.closest ? e.target.closest('[data-act]') : null;
+    if (!el) return;
+    var allowed = (el.dataset.ev || 'click').split(',');
+    if (allowed.indexOf(evName) === -1) return;
+    if (evName === 'click' && el.tagName === 'A' && el.getAttribute('href') === '#') e.preventDefault();
+    _actRun(el, evName, e);
+  }, true);
+});
+document.addEventListener('keydown', function (e) {
+  var el = e.target && e.target.closest ? e.target.closest('[data-keyact]') : null;
+  if (!el) return;
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  e.preventDefault();
+  var fn = window[el.dataset.keyact];
+  if (typeof fn !== 'function') return;
+  var args = [];
+  try { args = JSON.parse(el.dataset.kargs || '[]'); } catch (_) {}
+  try { fn.apply(el, args); } catch (err) { console.error('keyact', el.dataset.keyact, err); }
 }, true);
+
+/* ---- helpers used by the converted handlers ---- */
+function clickById(id) { var e = document.getElementById(id); if (e) e.click(); }
+function scrollToEl(id) { var e = document.getElementById(id); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+function stopAndSimplify(e) { if (e && e.stopPropagation) e.stopPropagation(); try { simplifyFlashcard(); } catch (_) {} }
+function closeTtsBar() { try { ttsStop(); } catch (_) {} var b = document.getElementById('tts-bar'); if (b) b.classList.add('hidden'); }
