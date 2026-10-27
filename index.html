@@ -9,7 +9,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.38.1">
+  <meta name="app-version" content="18.39.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -37,7 +37,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-  <title>AI Study Suite PRO v18.38.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.39.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -1257,7 +1257,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.38.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.39.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -1275,7 +1275,7 @@
         <div class="sb-logo"><span class="logo-mark" aria-hidden="true"></span></div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.38.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.39.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -1356,7 +1356,7 @@
       <div class="brand-icon"><span class="logo-mark brand-mark" aria-hidden="true"></span></div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.38.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.39.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -2262,6 +2262,11 @@
           <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
             <button id="iv-mic-btn" class="btn-cyan" onclick="ivMic()" style="flex:1; min-width:150px;">&#127908; Bol ke jawab do</button>
             <button id="iv-voice-btn" class="btn-secondary" onclick="ivToggleVoice()">&#128266; Voice: ON</button>
+            <select onchange="ivSetLang(this.value)" class="theme-select" style="max-width:120px;" aria-label="Mic language">
+              <option value="en-IN">EN-IN</option>
+              <option value="hi-IN">HI-IN</option>
+              <option value="en-US">EN-US</option>
+            </select>
           </div>
           <button class="btn-primary" onclick="submitInterviewAnswer()" style="width:100%; margin-top:10px;">&#10145;&#65039; Answer bhejo</button>
         </div>
@@ -2517,7 +2522,7 @@
         <span class="credit-heart">&#10084;&#65039;</span>
         <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
         <span class="credit-dot"></span>
-        <span class="credit-tag">AI Study Suite PRO v18.38.0</span>
+        <span class="credit-tag">AI Study Suite PRO v18.39.0</span>
       </div>
       <div class="ft-share">
         <button class="ft-share-btn" onclick="shareApp()">&#128228; Share app</button>
@@ -7467,36 +7472,74 @@
       if (!ivVoiceMode || !text) return;
       try { ttsSpeak(text); } catch (e) {}
     }
+    let ivLang = 'en-IN';
+    try { ivLang = localStorage.getItem('ai_study_iv_lang_v20') || 'en-IN'; } catch (e) {}
+    function ivSetLang(v) {
+      ivLang = v;
+      try { localStorage.setItem('ai_study_iv_lang_v20', v); } catch (e) {}
+      showError('🎤 Mic language: ' + v);
+    }
+    function ivStopMic() {
+      if (ivRec) { try { ivRec.onend = null; ivRec.stop(); } catch (e) {} ivRec = null; }
+      const btn = document.getElementById('iv-mic-btn');
+      if (btn) btn.innerHTML = '&#127908; Bol ke jawab do';
+    }
     function ivMic() {
       const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       const btn = document.getElementById('iv-mic-btn');
       if (!SR) { showError('❌ Is browser mein voice support nahi hai — Chrome use karo.'); return; }
-      if (ivRec) { try { ivRec.stop(); } catch (e) {} ivRec = null; if (btn) btn.innerHTML = '&#127908; Bol ke jawab do'; return; }
+      // already listening -> stop and send
+      if (ivRec) {
+        try { ivRec.stop(); } catch (e) {}
+        return;
+      }
+      // free the mic: stop TTS and any other recogniser first
       try { ttsStop(); } catch (e) {}
-      ivRec = new SR();
-      ivRec.lang = 'en-IN';
-      ivRec.interimResults = true;
-      ivRec.continuous = false;
+      try { if (typeof speechRec !== 'undefined' && speechRec) { speechRec.onend = null; speechRec.stop(); } } catch (e) {}
+      setTimeout(() => ivStartRec(SR, btn), 400);
+    }
+    function ivStartRec(SR, btn) {
+      const ta = document.getElementById('interview-answer');
+      try {
+        ivRec = new SR();
+        ivRec.lang = ivLang;
+        ivRec.continuous = true;          // keep listening through pauses
+        ivRec.interimResults = true;      // show words as they are spoken
+        ivRec.maxAlternatives = 1;
+      } catch (e) { showError('❌ Mic start nahi hua: ' + e.message); ivRec = null; return; }
+      let finalText = (ta && ta.value) ? ta.value.trim() : '';
+      ivRec.onstart = () => { if (btn) btn.innerHTML = '&#9209; Sun raha hoon… (band karne ke liye dabao)'; };
       ivRec.onresult = (e) => {
-        let t = '';
-        for (let i = e.resultIndex; i < e.results.length; i++) t += e.results[i][0].transcript;
-        const ta = document.getElementById('interview-answer');
-        if (ta) ta.value = t.trim();
+        let interim = '';
+        for (let i = e.resultIndex; i < e.results.length; i++) {
+          const t = e.results[i][0].transcript;
+          if (e.results[i].isFinal) finalText = (finalText + ' ' + t).trim();
+          else interim += t;
+        }
+        if (ta) ta.value = (finalText + (interim ? ' ' + interim : '')).trim();
       };
       ivRec.onerror = (e) => {
+        const code = (e && e.error) || 'unknown';
         ivRec = null;
         if (btn) btn.innerHTML = '&#127908; Bol ke jawab do';
-        if (e && e.error !== 'no-speech' && e.error !== 'aborted') showError('❌ Mic: ' + e.error);
+        if (code === 'not-allowed' || code === 'service-not-allowed')
+          showError('❌ Mic permission band hai — browser settings mein mic allow karo.');
+        else if (code === 'no-speech')
+          showError('🎤 Kuch sunaai nahi diya — thoda paas se, zor se bolo.');
+        else if (code === 'network')
+          showError('❌ Voice ke liye internet chahiye (Chrome ka speech service).');
+        else if (code !== 'aborted')
+          showError('❌ Mic error: ' + code);
       };
       ivRec.onend = () => {
         ivRec = null;
         if (btn) btn.innerHTML = '&#127908; Bol ke jawab do';
-        const ta = document.getElementById('interview-answer');
-        if (ta && ta.value.trim()) submitInterviewAnswer();   // auto-send when you stop talking
+        const val = ta ? ta.value.trim() : '';
+        if (val) { try { submitInterviewAnswer(); } catch (e) {} }
+        else showError('🎤 Kuch nahi suna — dobara try karo ya type karo.');
       };
-      btn.innerHTML = '&#9209; Bolna band karo';
-      try { ivRec.start(); showError('🎤 Bolna shuru karo… rukne par apne aap bhej diya jayega.'); }
-      catch (e) { ivRec = null; if (btn) btn.innerHTML = '&#127908; Bol ke jawab do'; }
+      try { ivRec.start(); showError('🎤 Bolna shuru karo… rukne par "⏹" dabao.'); }
+      catch (e) { ivRec = null; if (btn) btn.innerHTML = '&#127908; Bol ke jawab do'; showError('❌ ' + e.message); }
     }
 
     function openKeys() {
