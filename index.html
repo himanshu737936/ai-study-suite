@@ -9,7 +9,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.36.2">
+  <meta name="app-version" content="18.37.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -37,7 +37,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-  <title>AI Study Suite PRO v18.36.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.37.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -1257,7 +1257,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.36.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.37.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -1275,7 +1275,7 @@
         <div class="sb-logo"><span class="logo-mark" aria-hidden="true"></span></div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.36.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.37.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -1324,6 +1324,7 @@
           <button class="sb-item" data-nav="plan" onclick="navGo('plan')"><span class="ico">&#128197;</span> Revision Plan</button>
         </div>
 
+        <button class="sb-item" data-nav="keys" onclick="navGo('keys')"><span class="ico">&#128273;</span> API Keys</button>
         <button class="sb-item" data-nav="interview" onclick="navGo('interview')"><span class="ico">&#128101;</span> Interview Practice</button>
         <button class="sb-item" data-nav="videos" onclick="navGo('videos')"><span class="ico">&#127916;</span> Videos</button>
 
@@ -1355,7 +1356,7 @@
       <div class="brand-icon"><span class="logo-mark brand-mark" aria-hidden="true"></span></div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.36.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.37.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -1465,76 +1466,7 @@
         </button>
         <div class="step-body" id="step-body-1">
 <!-- Universal Single API Key Box (No Model/Provider Dropdowns!) -->
-      <div class="section-box">
-        <div class="section-title">
-          <span>&#128273; Universal API Key &amp; Persona</span>
-          <span id="agent-status-badge" class="badge" style="background:rgba(6,182,212,0.15); color:#67e8f9; border-color:#06b6d4;">
-            ⚡ Waiting for API Key...
-          </span>
-        </div>
-
-        <div class="grid-2" style="align-items: end;">
-          <div>
-            <label>Universal API Key (Supports Gemini, Groq, OpenAI, OpenRouter, DeepSeek, Mistral)</label>
-            <div style="display:flex; gap:8px;">
-              <input type="password" id="api-key" oninput="onUniversalKeyInput()" placeholder="Paste your API Key here (AIzaSy... / gsk_... / sk-or-... / sk-...)">
-              <button type="button" onclick="toggleKeyVisibility()" class="btn-secondary" style="padding:0 12px;" title="Show/Hide Key">👁️</button>
-              <button type="button" onclick="autoVerifyAndConfigureAgent(true)" class="btn-cyan" style="padding:0 14px; white-space:nowrap;">⚡ Verify Agent</button>
-            </div>
-            <label style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:11.5px; color:var(--text-muted); cursor:pointer;">
-              <input checked type="checkbox" id="remember-key" style="width:15px; height:15px; accent-color:var(--primary);"> 🔐 Remember key on this device (localStorage)
-            </label>
-            <label style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:11.5px; color:var(--text-muted); cursor:pointer;">
-              <input type="checkbox" id="encrypt-keys" onchange="onEncryptToggle()" style="width:15px; height:15px; accent-color:var(--primary);"> 🔒 Encrypt saved keys with a passphrase (AES-GCM)
-            </label>
-            <div id="passphrase-box" class="hidden" style="margin-top:8px;">
-              <label>Vault passphrase (yaad rakhein — recover nahi ho sakti)</label>
-              <input type="password" id="vault-pass" placeholder="Passphrase..." oninput="onVaultPassInput()" autocomplete="new-password">
-            </div>
-            <div style="font-size:11px; color:#fde68a; margin-top:8px;">&#128272; Tip: "Remember key" on hai to vault (encryption) bhi on rakho &mdash; warna key localStorage mein plain text mein rehti hai.</div>
-            <p style="font-size:11px; color:var(--text-muted); margin-top:10px; line-height:1.5;">
-              🔐 <b>Privacy:</b> Tumhari PDF / photo <b>device par hi</b> process hoti hai — sirf nikaala gaya text AI provider ko jaata hai. Key browser se seedha provider ko jaati hai, kisi third-party server ko nahi. Key save na karein to tab band hone par mit jaati hai.
-            </p>
-            <button onclick="clearAllData()" class="btn-secondary" style="margin-top:8px; border-color:var(--rose); color:#fda4af;">🗑️ Clear all saved data</button>
-          </div>
-
-          <div>
-            <label>AI Agent Teaching & Exam Persona</label>
-            <select id="agent-persona">
-              <option value="Strict PDF-Only Examiner: Generate questions 100% strictly from the provided PDF text with exact page number & quote proof." selected>🔒 100% Strict PDF-Only Examiner (Zero Outside Info)</option>
-              <option value="Strict Competitive Exam Setter (UPSC/UPPCS/SSC style traps & deep concepts strictly from the uploaded PDF)">🎯 UPSC / UPPCS / SSC Exam Setter</option>
-              <option value="Feynman Simplifier (Explains complex PDF concepts in super simple everyday analogies)">💡 Feynman Concept Simplifier</option>
-              <option value="Rapid Revision Coach (High-speed memory triggers, dates, articles, and direct facts from the PDF)">⚡ Rapid Revision & Memory Coach</option>
-            </select>
-          </div>
-        </div>
-
-        <div style="margin-top:14px; padding-top:12px; border-top:1px dashed var(--border);">
-          <div class="grid-2" style="align-items:end;">
-            <div>
-              <label>🛟 Fallback AI Agent — API Key (optional; alag provider best)</label>
-              <div style="display:flex; gap:8px;">
-                <input type="password" id="fallback-key" oninput="onFallbackKeyInput()" placeholder="2nd API key (Groq / OpenRouter / OpenAI / Gemini...)">
-                <button type="button" onclick="verifyFallbackAgent(true)" class="btn-secondary" style="padding:0 14px; white-space:nowrap;">Verify</button>
-              </div>
-            </div>
-            <div>
-              <label>Fallback Agent Status</label>
-              <div><span id="fallback-status-badge" class="badge">— none —</span></div>
-            </div>
-          </div>
-          <p style="font-size:11px; color:var(--text-muted); margin-top:6px;">Primary agent (ya uske saare models) fail hone par app automatically is fallback agent par switch kar dega. Best: primary Gemini ho to fallback Groq rakhein (aur vice-versa).</p>
-        </div>
-
-        <div class="quick-key-links">
-          <span>Free API Keys:</span>
-          <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer">Google Gemini Key ↗</a>
-          <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">Groq Cloud Key ↗</a>
-          <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer">OpenRouter Key ↗</a>
-          <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer">OpenAI Key ↗</a>
-        </div>
-        <p style="font-size:11px; color:#fde68a; margin-top:8px;">ℹ️ Note: OpenAI browser se CORS block karta hai — Gemini / Groq / OpenRouter / DeepSeek / Mistral browser mein best chalte hain. Keys ab URL ke bajaye secure header se bheji jaati hain.</p>
-      </div>
+      
 
             </div>
       </section>
@@ -2215,6 +2147,99 @@
       <div id="progress-content"></div>
     </div>
 
+
+    <!-- ==================== API KEYS (all in one place) ==================== -->
+    <div id="keys-section" class="hidden">
+      <div class="quiz-topbar">
+        <div>
+          <h2 class="sec-h2">&#128273; API Keys</h2>
+          <p class="sec-p">Saari keys ek hi jagah. Ye tumhare device par rehti hain aur seedha AI provider ko jaati hain &mdash; kisi third-party server ko nahi.</p>
+        </div>
+        <div class="panel-actions">
+          <button class="btn-secondary" onclick="autoVerifyAndConfigureAgent(true)">&#9889; Verify</button>
+        </div>
+      </div>
+<div class="section-box">
+        <div class="section-title">
+          <span>&#128273; Universal API Key &amp; Persona</span>
+          <span id="agent-status-badge" class="badge" style="background:rgba(6,182,212,0.15); color:#67e8f9; border-color:#06b6d4;">
+            ⚡ Waiting for API Key...
+          </span>
+        </div>
+
+        <div class="grid-2" style="align-items: end;">
+          <div>
+            <label>Universal API Key (Supports Gemini, Groq, OpenAI, OpenRouter, DeepSeek, Mistral)</label>
+            <div style="display:flex; gap:8px;">
+              <input type="password" id="api-key" oninput="onUniversalKeyInput()" placeholder="Paste your API Key here (AIzaSy... / gsk_... / sk-or-... / sk-...)">
+              <button type="button" onclick="toggleKeyVisibility()" class="btn-secondary" style="padding:0 12px;" title="Show/Hide Key">👁️</button>
+              <button type="button" onclick="autoVerifyAndConfigureAgent(true)" class="btn-cyan" style="padding:0 14px; white-space:nowrap;">⚡ Verify Agent</button>
+            </div>
+            <label style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:11.5px; color:var(--text-muted); cursor:pointer;">
+              <input checked type="checkbox" id="remember-key" style="width:15px; height:15px; accent-color:var(--primary);"> 🔐 Remember key on this device (localStorage)
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:11.5px; color:var(--text-muted); cursor:pointer;">
+              <input type="checkbox" id="encrypt-keys" onchange="onEncryptToggle()" style="width:15px; height:15px; accent-color:var(--primary);"> 🔒 Encrypt saved keys with a passphrase (AES-GCM)
+            </label>
+            <div id="passphrase-box" class="hidden" style="margin-top:8px;">
+              <label>Vault passphrase (yaad rakhein — recover nahi ho sakti)</label>
+              <input type="password" id="vault-pass" placeholder="Passphrase..." oninput="onVaultPassInput()" autocomplete="new-password">
+            </div>
+            <div style="font-size:11px; color:#fde68a; margin-top:8px;">&#128272; Tip: "Remember key" on hai to vault (encryption) bhi on rakho &mdash; warna key localStorage mein plain text mein rehti hai.</div>
+            <p style="font-size:11px; color:var(--text-muted); margin-top:10px; line-height:1.5;">
+              🔐 <b>Privacy:</b> Tumhari PDF / photo <b>device par hi</b> process hoti hai — sirf nikaala gaya text AI provider ko jaata hai. Key browser se seedha provider ko jaati hai, kisi third-party server ko nahi. Key save na karein to tab band hone par mit jaati hai.
+            </p>
+            <button onclick="clearAllData()" class="btn-secondary" style="margin-top:8px; border-color:var(--rose); color:#fda4af;">🗑️ Clear all saved data</button>
+          </div>
+
+          <div>
+            <label>AI Agent Teaching & Exam Persona</label>
+            <select id="agent-persona">
+              <option value="Strict PDF-Only Examiner: Generate questions 100% strictly from the provided PDF text with exact page number & quote proof." selected>🔒 100% Strict PDF-Only Examiner (Zero Outside Info)</option>
+              <option value="Strict Competitive Exam Setter (UPSC/UPPCS/SSC style traps & deep concepts strictly from the uploaded PDF)">🎯 UPSC / UPPCS / SSC Exam Setter</option>
+              <option value="Feynman Simplifier (Explains complex PDF concepts in super simple everyday analogies)">💡 Feynman Concept Simplifier</option>
+              <option value="Rapid Revision Coach (High-speed memory triggers, dates, articles, and direct facts from the PDF)">⚡ Rapid Revision & Memory Coach</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-top:14px; padding-top:12px; border-top:1px dashed var(--border);">
+          <div class="grid-2" style="align-items:end;">
+            <div>
+              <label>🛟 Fallback AI Agent — API Key (optional; alag provider best)</label>
+              <div style="display:flex; gap:8px;">
+                <input type="password" id="fallback-key" oninput="onFallbackKeyInput()" placeholder="2nd API key (Groq / OpenRouter / OpenAI / Gemini...)">
+                <button type="button" onclick="verifyFallbackAgent(true)" class="btn-secondary" style="padding:0 14px; white-space:nowrap;">Verify</button>
+              </div>
+            </div>
+            <div>
+              <label>Fallback Agent Status</label>
+              <div><span id="fallback-status-badge" class="badge">— none —</span></div>
+            </div>
+          </div>
+          <p style="font-size:11px; color:var(--text-muted); margin-top:6px;">Primary agent (ya uske saare models) fail hone par app automatically is fallback agent par switch kar dega. Best: primary Gemini ho to fallback Groq rakhein (aur vice-versa).</p>
+        </div>
+
+        <div class="quick-key-links">
+          <span>Free API Keys:</span>
+          <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer">Google Gemini Key ↗</a>
+          <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">Groq Cloud Key ↗</a>
+          <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer">OpenRouter Key ↗</a>
+          <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer">OpenAI Key ↗</a>
+        </div>
+        <p style="font-size:11px; color:#fde68a; margin-top:8px;">ℹ️ Note: OpenAI browser se CORS block karta hai — Gemini / Groq / OpenRouter / DeepSeek / Mistral browser mein best chalte hain. Keys ab URL ke bajaye secure header se bheji jaati hain.</p>
+      </div>
+      <div class="section-box">
+        <div class="section-title">&#128101; Interview key</div>
+        <p class="sec-p" style="margin:6px 0 10px;">Interview practice ke liye alag key (optional). Khaali chhodo to main key chalegi.</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <input type="password" id="interview-key" placeholder="Alag API key (optional)" style="flex:1; min-width:190px;">
+          <button class="btn-secondary" onclick="saveInterviewKey()">&#128190; Save</button>
+        </div>
+        <div id="interview-key-status" class="sec-p" style="margin-top:8px; font-size:12px;"></div>
+      </div>
+    </div>
+
     <!-- ==================== UPSC INTERVIEW PRACTICE ==================== -->
     <div id="interview-section" class="hidden">
       <div class="quiz-topbar">
@@ -2228,15 +2253,7 @@
         </div>
       </div>
 
-      <div class="section-box">
-        <div class="section-title">&#128273; Interview API key (optional)</div>
-        <p class="sec-p" style="margin:6px 0 10px;">Alag key use karni ho to yahan daalo (sirf is device par save hoti hai). Khaali chhodo to main key chalegi.</p>
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <input type="password" id="interview-key" placeholder="Alag API key (optional)" style="flex:1; min-width:190px;">
-          <button class="btn-secondary" onclick="saveInterviewKey()">&#128190; Save</button>
-        </div>
-        <div id="interview-key-status" class="sec-p" style="margin-top:8px; font-size:12px;"></div>
-      </div>
+      
 
       <div class="section-box">
         <div id="interview-log" class="iv-log"></div>
@@ -2496,7 +2513,7 @@
         <span class="credit-heart">&#10084;&#65039;</span>
         <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
         <span class="credit-dot"></span>
-        <span class="credit-tag">AI Study Suite PRO v18.36.0</span>
+        <span class="credit-tag">AI Study Suite PRO v18.37.0</span>
       </div>
       <div class="ft-share">
         <button class="ft-share-btn" onclick="shareApp()">&#128228; Share app</button>
@@ -6231,7 +6248,7 @@
     function hideAllSections() {
       clearInterval(timerInterval);
       window.speechSynthesis?.cancel();
-      ['setup-section', 'quiz-section', 'flashcard-section', 'mindmap-section', 'notes-section', 'result-section', 'mains-section', 'blurt-section', 'weakness-section', 'visual-section', 'teach-section', 'sets-section', 'library-section', 'plan-section', 'progress-section', 'account-section', 'mistake-section', 'adaptive-section', 'listen-section', 'sprint-section', 'doubts-section', 'videos-section', 'interview-section'].forEach(id => {
+      ['setup-section', 'quiz-section', 'flashcard-section', 'mindmap-section', 'notes-section', 'result-section', 'mains-section', 'blurt-section', 'weakness-section', 'visual-section', 'teach-section', 'sets-section', 'library-section', 'plan-section', 'progress-section', 'account-section', 'mistake-section', 'adaptive-section', 'listen-section', 'sprint-section', 'doubts-section', 'videos-section', 'interview-section', 'keys-section'].forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
         document.getElementById(id).classList.add('hidden');
@@ -7426,6 +7443,12 @@
       ).join('');
       box.scrollTop = box.scrollHeight;
     }
+    function openKeys() {
+      hideAllSections();
+      document.getElementById('keys-section').classList.remove('hidden');
+      setActiveNav('keys');
+      if (typeof ivKeyStatus === 'function') ivKeyStatus();
+    }
     function openInterview() {
       hideAllSections();
       document.getElementById('interview-section').classList.remove('hidden');
@@ -7660,6 +7683,7 @@
         else if (id === 'account') openAccount();
         else if (id === 'videos') openVideos();
         else if (id === 'interview') openInterview();
+        else if (id === 'keys') openKeys();
         else if (id === 'mistake') openMistakes();
         else if (id === 'adaptive') openAdaptive();
         else if (id === 'listen') openListenMode();
