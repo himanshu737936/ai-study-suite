@@ -9,7 +9,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.30.4">
+  <meta name="app-version" content="18.31.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -1457,7 +1457,7 @@
               <button type="button" onclick="autoVerifyAndConfigureAgent(true)" class="btn-cyan" style="padding:0 14px; white-space:nowrap;">⚡ Verify Agent</button>
             </div>
             <label style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:11.5px; color:var(--text-muted); cursor:pointer;">
-              <input type="checkbox" id="remember-key" style="width:15px; height:15px; accent-color:var(--primary);"> 🔐 Remember key on this device (localStorage)
+              <input checked type="checkbox" id="remember-key" style="width:15px; height:15px; accent-color:var(--primary);"> 🔐 Remember key on this device (localStorage)
             </label>
             <label style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:11.5px; color:var(--text-muted); cursor:pointer;">
               <input type="checkbox" id="encrypt-keys" onchange="onEncryptToggle()" style="width:15px; height:15px; accent-color:var(--primary);"> 🔒 Encrypt saved keys with a passphrase (AES-GCM)
@@ -3184,7 +3184,7 @@
       refreshSetsCount();
       updateHomeStatus();
       setTimeout(() => startTour(false), 900);
-      const remembered = localStorage.getItem('ai_study_remember_key_v7') === '1';
+      const remembered = localStorage.getItem('ai_study_remember_key_v7') !== '0';   // default ON: keep the key across restarts
       document.getElementById('remember-key').checked = remembered;
       const vaultOn = localStorage.getItem('ai_study_vault_on_v9') === '1';
       const encCb = document.getElementById('encrypt-keys'); if (encCb) encCb.checked = vaultOn;
