@@ -7,7 +7,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.22.1">
+  <meta name="app-version" content="18.23.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -35,7 +35,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-  <title>AI Study Suite PRO v18.22.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.23.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -1051,6 +1051,84 @@
     html { scroll-behavior: smooth; }
     button, .sb-item, .option-btn, .yt-watch, .yt-sub { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    /* ================================================================
+       3D REDESIGN LAYER — depth, glass and real perspective
+       (additive only: no layout restructuring, nothing clipped)
+       ================================================================ */
+    :root { --depth-1: 0 2px 6px rgba(0,0,0,.22); --depth-2: 0 10px 28px rgba(0,0,0,.34);
+            --depth-3: 0 26px 60px rgba(0,0,0,.46); --edge: inset 0 1px 0 rgba(255,255,255,.14); }
+
+    /* --- app surfaces: layered depth + top light edge --- */
+    .section-box, .quiz-topbar, .mains-card, .mains-hero, .yt-card, .stat-box, .hs-tile {
+      box-shadow: var(--edge), var(--depth-2);
+      transform-style: preserve-3d;
+    }
+    .section-box { border-radius: 20px; }
+
+    /* --- 3D hover lift with true perspective --- */
+    @media (hover: hover) {
+      .section-box, .quiz-topbar, .mains-card, .yt-card, .stat-box, .hs-tile {
+        transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s cubic-bezier(.2,.8,.2,1), border-color .3s;
+      }
+      .section-box:hover, .mains-card:hover, .yt-card:hover {
+        transform: perspective(1200px) translateY(-5px) rotateX(1.6deg) rotateY(-.6deg);
+        box-shadow: var(--edge), var(--depth-3);
+      }
+      .stat-box:hover, .hs-tile:hover {
+        transform: perspective(800px) translateY(-6px) scale(1.03) rotateX(3deg);
+        box-shadow: var(--edge), var(--depth-3);
+      }
+    }
+
+    /* --- section headings: 3D icon tile --- */
+    .sec-h2, .quiz-topbar h2 { letter-spacing: -.3px; text-shadow: 0 2px 12px rgba(0,0,0,.45); }
+    .section-title {
+      display: flex; align-items: center; gap: 10px; font-weight: 900;
+      text-shadow: 0 2px 10px rgba(0,0,0,.4);
+    }
+
+    /* --- buttons: real 3D press --- */
+    .btn-primary, .btn-cyan {
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 6px 0 rgba(0,0,0,.28), 0 14px 30px rgba(109,111,245,.38) !important;
+      transform: translateZ(0);
+    }
+    .btn-primary:hover, .btn-cyan:hover { transform: translateY(-2px); }
+    .btn-primary:active, .btn-cyan:active {
+      transform: translateY(3px); box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 2px 0 rgba(0,0,0,.3), 0 6px 16px rgba(109,111,245,.3) !important;
+    }
+
+    /* --- option buttons: card-like 3D --- */
+    .option-btn {
+      box-shadow: var(--edge), var(--depth-1);
+      background-image: linear-gradient(160deg, rgba(255,255,255,.055), rgba(255,255,255,0) 55%);
+    }
+    @media (hover: hover) {
+      .option-btn:hover { transform: perspective(900px) translateY(-3px) rotateX(2deg); box-shadow: var(--edge), var(--depth-2); }
+    }
+
+    /* --- sidebar: floating 3D rail --- */
+    .sidebar { box-shadow: 8px 0 34px rgba(0,0,0,.42); }
+    .sb-logo { box-shadow: 0 8px 22px var(--primary-glow), var(--edge); transform: translateZ(0); }
+    .sb-item.active { transform: translateX(4px); box-shadow: var(--edge), 0 8px 22px rgba(0,0,0,.35); }
+
+    /* --- inputs: inset depth --- */
+    input[type="text"], input[type="password"], input[type="number"], input[type="url"], textarea, select, .big-textarea {
+      box-shadow: inset 0 2px 6px rgba(0,0,0,.30);
+    }
+
+    /* --- header chips / badges: raised pills --- */
+    .theme-btn, .theme-select { box-shadow: var(--edge), var(--depth-1); }
+    .mains-chip, .splash-pro { box-shadow: var(--edge), 0 6px 16px rgba(0,0,0,.30); }
+
+    /* --- splash 3D logo pop --- */
+    .logo3d-scene { filter: drop-shadow(0 22px 44px rgba(0,0,0,.55)); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .section-box, .quiz-topbar, .mains-card, .yt-card, .stat-box, .hs-tile, .option-btn, .btn-primary, .btn-cyan {
+        transform: none !important; transition: none !important;
+      }
+    }
 </style>
   <!-- Structured data for search engines -->
   <script type="application/ld+json">
@@ -1103,7 +1181,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.22.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.23.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -1121,7 +1199,7 @@
         <div class="sb-logo"><svg class="logo-star" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M256 84L318 194L428 256L318 318L256 428L194 318L84 256L194 194Z" fill="#ffffff"/></svg></div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.22.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.23.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -1200,7 +1278,7 @@
       <div class="brand-icon">🧠</div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.22.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.23.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -2294,7 +2372,7 @@
         <span class="credit-heart">&#10084;&#65039;</span>
         <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
         <span class="credit-dot"></span>
-        <span class="credit-tag">AI Study Suite PRO v18.22.0</span>
+        <span class="credit-tag">AI Study Suite PRO v18.23.0</span>
       </div>
       <div class="ft-share">
         <button class="ft-share-btn" onclick="shareApp()">&#128228; Share app</button>
