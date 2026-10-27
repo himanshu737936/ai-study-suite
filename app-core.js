@@ -811,22 +811,23 @@ function closeTtsBar() { try { ttsStop(); } catch (_) {} var b = document.getEle
 /* ---- drag & drop dispatcher ---- */
 function mainsOcrFileDrop(e) {
   try { var el = e.currentTarget || e.target; if (el && el.classList) el.classList.remove('over'); } catch (_) {}
+  if (!e || !e.dataTransfer || !e.dataTransfer.files || !e.dataTransfer.files[0]) return;
   try { mainsOcrFile(e.dataTransfer.files[0]); } catch (err) { console.error('mainsOcrFileDrop', err); }
 }
 ['dragover', 'dragleave', 'drop'].forEach(function (evName) {
   document.addEventListener(evName, function (e) {
     var el = e.target && e.target.closest ? e.target.closest('[data-drag]') : null;
     if (!el) return;
-    var mode = el.dataset.drag;
+    var modes = (el.dataset.drag || '').split(',');
+    var mode = evName === 'dragover' ? 'over' : evName === 'dragleave' ? 'leave' : 'drop';
+    if (modes.indexOf(mode) === -1) return;
     if (mode === 'over') { e.preventDefault(); el.classList.add('over'); return; }
     if (mode === 'leave') { el.classList.remove('over'); return; }
-    if (mode === 'drop') {
-      e.preventDefault();
-      el.classList.remove('over');
-      var fn = window[el.dataset.act];
-      if (typeof fn === 'function') {
-        try { fn.call(el, e); } catch (err) { console.error('drop', el.dataset.act, err); }
-      }
+    e.preventDefault();
+    el.classList.remove('over');
+    var fn = window[el.dataset.dropact || ''];
+    if (typeof fn === 'function') {
+      try { fn.call(el, e); } catch (err) { console.error('drop', el.dataset.dropact, err); }
     }
   }, true);
 });
