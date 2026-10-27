@@ -9,7 +9,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.49.2">
+  <meta name="app-version" content="18.50.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -37,10 +37,9 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-  <title>AI Study Suite PRO v18.49.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.50.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- jsPDF + autoTable are ~350 KB and are only needed for exports, so they are
        fetched on demand by ensureExportLibs() instead of on every page load. -->
 
@@ -1339,7 +1338,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.49.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.50.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -1357,7 +1356,7 @@
         <div class="sb-logo"><span class="logo-mark" aria-hidden="true"></span></div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.49.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.50.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -1438,7 +1437,7 @@
       <div class="brand-icon"><span class="logo-mark brand-mark" aria-hidden="true"></span></div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.49.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.50.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -2219,7 +2218,7 @@
 
 
     <!-- ==================== API KEYS (all in one place) ==================== -->
-    <div id="keys-section" class="hidden">
+    <div id="keys-section" class="hidden" role="region" aria-label="API keys">
       <div class="quiz-topbar">
         <div>
           <h2 class="sec-h2">&#128273; API Keys</h2>
@@ -2303,7 +2302,7 @@
         <div class="section-title">&#128101; Interview key</div>
         <p class="sec-p" style="margin:6px 0 10px;">Interview practice ke liye alag key (optional). Khaali chhodo to main key chalegi.</p>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <input type="password" id="interview-key" placeholder="Alag API key (optional)" style="flex:1; min-width:190px;">
+          <input type="password" id="interview-key" placeholder="Alag API key (optional)" aria-label="Interview API key" style="flex:1; min-width:190px;">
           <button class="btn-secondary" onclick="saveInterviewKey()">&#128190; Save</button>
         </div>
         <div id="interview-key-status" class="sec-p" style="margin-top:8px; font-size:12px;"></div>
@@ -2311,7 +2310,7 @@
     </div>
 
     <!-- ==================== UPSC INTERVIEW PRACTICE ==================== -->
-    <div id="interview-section" class="hidden">
+    <div id="interview-section" class="hidden" role="region" aria-label="UPSC interview practice">
       <div class="quiz-topbar">
         <div>
           <h2 class="sec-h2">&#128101; UPSC Interview Practice</h2>
@@ -2341,7 +2340,7 @@
         </div>
         <div id="interview-log" class="iv-log"></div>
         <div id="interview-input-wrap" class="hidden" style="margin-top:14px;">
-          <textarea id="interview-answer" class="big-textarea" placeholder="Apna jawab likho, ya 🎤 dabakar bolo..." style="min-height:110px;"></textarea>
+          <textarea id="interview-answer" class="big-textarea" aria-label="Your interview answer" placeholder="Apna jawab likho, ya 🎤 dabakar bolo..." style="min-height:110px;"></textarea>
           <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
             <button id="iv-mic-btn" class="btn-cyan" onclick="ivMic()" style="flex:1; min-width:150px;">&#127908; Bol ke jawab do</button>
             <button id="iv-voice-btn" class="btn-secondary" onclick="ivToggleVoice()">&#128266; Voice: ON</button>
@@ -2359,7 +2358,7 @@
     </div>
 
     <!-- ==================== YOUTUBE VIDEOS ==================== -->
-    <div id="videos-section" class="hidden">
+    <div id="videos-section" class="hidden" role="region" aria-label="Videos">
       <div class="quiz-topbar">
         <div>
           <h2 class="sec-h2">&#127916; Our channel</h2>
@@ -2605,7 +2604,7 @@
         <span class="credit-heart">&#10084;&#65039;</span>
         <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
         <span class="credit-dot"></span>
-        <span class="credit-tag">AI Study Suite PRO v18.49.0</span>
+        <span class="credit-tag">AI Study Suite PRO v18.50.0</span>
       </div>
       <div class="ft-share">
         <button class="ft-share-btn" onclick="shareApp()">&#128228; Share app</button>
@@ -2670,6 +2669,24 @@
         };
         walk(document.body);
       } catch (e) {}
+    }
+    // PDF.js is loaded on demand (only when a PDF is actually used) so the app
+    // starts instantly instead of waiting on a 300 KB library.
+    let pdfJsPromise = null;
+    function loadPdfJs() {
+      if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+      if (pdfJsPromise) return pdfJsPromise;
+      pdfJsPromise = new Promise((resolve, reject) => {
+        const sc = document.createElement('script');
+        sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+        sc.integrity = 'sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e';
+        sc.crossOrigin = 'anonymous';
+        sc.referrerPolicy = 'no-referrer';
+        sc.onload = () => resolve(window.pdfjsLib);
+        sc.onerror = () => { pdfJsPromise = null; reject(new Error('PDF library load nahi hui — internet check karo.')); };
+        document.head.appendChild(sc);
+      });
+      return pdfJsPromise;
     }
     if (window.pdfjsLib) {
       pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -2742,7 +2759,7 @@
       };
       function checkReady() {
         const elapsed = performance.now() - t0;
-        const libsReady = !!window.pdfjsLib;   // jsPDF is lazy-loaded on first export
+        const libsReady = true;   // everything heavy (pdf.js, jsPDF, tesseract) loads on demand now
         if ((libsReady && elapsed >= MIN_MS) || elapsed >= MAX_MS) { setPct(100); setTimeout(hide, 500); }
         else setTimeout(checkReady, 150);
       }
@@ -4268,6 +4285,7 @@
         const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
         document.getElementById('file-name').innerText = `⏳ Indexing PDF (${sizeMB} MB)...`;
 
+        await loadPdfJs();
         const loadingTask = pdfjsLib.getDocument({
           url: activeBlobUrl,
           disableAutoFetch: true,
@@ -7712,15 +7730,19 @@
 
     function openKeys() {
       hideAllSections();
-      document.getElementById('keys-section').classList.remove('hidden');
+      const _k = document.getElementById('keys-section');
+      _k.classList.remove('hidden');
       setActiveNav('keys');
       if (typeof ivKeyStatus === 'function') ivKeyStatus();
+      try { _k.setAttribute('tabindex','-1'); _k.focus({ preventScroll: true }); } catch (e) {}
     }
     function openInterview() {
       hideAllSections();
-      document.getElementById('interview-section').classList.remove('hidden');
+      const _iv = document.getElementById('interview-section');
+      _iv.classList.remove('hidden');
       setActiveNav('interview');
       ivKeyStatus(); ivSyncVoiceBtn(); ivSyncJarvis(); ivMetaUpdate();
+      try { _iv.setAttribute('tabindex','-1'); _iv.focus({ preventScroll: true }); } catch (e) {}
     }
     async function startInterview() {
       if (!ivHasKey()) { showError('⚠️ Pehle API key daalo (🔑 API Keys section).'); return; }
