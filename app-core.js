@@ -762,3 +762,17 @@
       accountBoot();
     });
 
+
+
+/* ---- data-act dispatcher (Phase 3: replaces inline onclick) ---- */
+document.addEventListener('click', function (e) {
+  var el = e.target && e.target.closest ? e.target.closest('[data-act]') : null;
+  if (!el) return;
+  if (el.tagName === 'A' && el.getAttribute('href') === '#') e.preventDefault();
+  var fn = window[el.dataset.act];
+  if (typeof fn !== 'function') return;
+  var args = [];
+  try { args = JSON.parse(el.dataset.args || '[]'); } catch (_) {}
+  args = args.map(function (a) { return a === '__THIS__' ? el : a === '__EVENT__' ? e : a; });
+  try { fn.apply(el, args); } catch (err) { console.error('data-act', el.dataset.act, err); }
+}, true);
