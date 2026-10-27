@@ -7,7 +7,7 @@
  *   • static assets       → cache-first with a background refresh.
  *   • AI provider calls   → never intercepted, always straight to the network.
  */
-const VERSION = 'v18.52.0';
+const VERSION = 'v18.52.1';
 const CACHE = 'ai-study-' + VERSION;
 const SHELL = ['./', './index.html', './app.js', './manifest.json', './logo.svg', './favicon.svg', './icon-192.png', './icon-512.png', './og-image.png'];
 
