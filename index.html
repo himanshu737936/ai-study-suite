@@ -9,7 +9,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.35.2">
+  <meta name="app-version" content="18.36.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -37,7 +37,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-  <title>AI Study Suite PRO v18.35.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.36.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -1198,6 +1198,13 @@
     .quiz-topbar { gap: 10px; }
     /* keep 3D depth but never clip content inside cards */
     .section-box, .mains-card, .yt-card { overflow: visible !important; }
+
+    .iv-log { display: flex; flex-direction: column; gap: 10px; max-height: 44vh; overflow-y: auto; }
+    .iv-q { align-self: flex-start; max-width: 88%; background: var(--surface-2); border: 1px solid var(--line);
+      border-radius: 14px 14px 14px 4px; padding: 11px 14px; font-size: 14px; line-height: 1.55; color: #eef2ff; }
+    .iv-a { align-self: flex-end; max-width: 88%; background: linear-gradient(135deg, rgba(109,111,245,.28), rgba(34,211,238,.18));
+      border: 1px solid rgba(124,124,255,.4); border-radius: 14px 14px 4px 14px; padding: 11px 14px; font-size: 14px; line-height: 1.55; }
+    .iv-who { font-size: 10.5px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; opacity: .65; margin-bottom: 3px; }
 </style>
   <!-- Structured data for search engines -->
   <script type="application/ld+json">
@@ -1250,7 +1257,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.35.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.36.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -1268,7 +1275,7 @@
         <div class="sb-logo"><span class="logo-mark" aria-hidden="true"></span></div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.35.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.36.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -1317,6 +1324,7 @@
           <button class="sb-item" data-nav="plan" onclick="navGo('plan')"><span class="ico">&#128197;</span> Revision Plan</button>
         </div>
 
+        <button class="sb-item" data-nav="interview" onclick="navGo('interview')"><span class="ico">&#128101;</span> Interview Practice</button>
         <button class="sb-item" data-nav="videos" onclick="navGo('videos')"><span class="ico">&#127916;</span> Videos</button>
 
         <div class="sb-group" data-group="account" onclick="toggleNavGroup('account')" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('account');}">
@@ -1347,7 +1355,7 @@
       <div class="brand-icon"><span class="logo-mark brand-mark" aria-hidden="true"></span></div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.35.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.36.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -2207,6 +2215,40 @@
       <div id="progress-content"></div>
     </div>
 
+    <!-- ==================== UPSC INTERVIEW PRACTICE ==================== -->
+    <div id="interview-section" class="hidden">
+      <div class="quiz-topbar">
+        <div>
+          <h2 class="sec-h2">&#128101; UPSC Interview Practice</h2>
+          <p class="sec-p">AI ek asli board ki tarah <b>ek-ek karke sawaal</b> poochhega aur tumhare jawab par follow-up bhi karega. Ant mein poora result milega.</p>
+        </div>
+        <div class="panel-actions">
+          <button class="btn-cyan" onclick="startInterview()">&#9654;&#65039; Start</button>
+          <button class="btn-secondary" onclick="endInterview()">&#127937; Result</button>
+        </div>
+      </div>
+
+      <div class="section-box">
+        <div class="section-title">&#128273; Interview API key (optional)</div>
+        <p class="sec-p" style="margin:6px 0 10px;">Alag key use karni ho to yahan daalo (sirf is device par save hoti hai). Khaali chhodo to main key chalegi.</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <input type="password" id="interview-key" placeholder="Alag API key (optional)" style="flex:1; min-width:190px;">
+          <button class="btn-secondary" onclick="saveInterviewKey()">&#128190; Save</button>
+        </div>
+        <div id="interview-key-status" class="sec-p" style="margin-top:8px; font-size:12px;"></div>
+      </div>
+
+      <div class="section-box">
+        <div id="interview-log" class="iv-log"></div>
+        <div id="interview-input-wrap" class="hidden" style="margin-top:14px;">
+          <textarea id="interview-answer" class="big-textarea" placeholder="Apna jawab likho..." style="min-height:110px;"></textarea>
+          <button class="btn-primary" onclick="submitInterviewAnswer()" style="width:100%; margin-top:10px;">&#10145;&#65039; Answer bhejo</button>
+        </div>
+      </div>
+
+      <div id="interview-result" class="section-box hidden"></div>
+    </div>
+
     <!-- ==================== YOUTUBE VIDEOS ==================== -->
     <div id="videos-section" class="hidden">
       <div class="quiz-topbar">
@@ -2454,7 +2496,7 @@
         <span class="credit-heart">&#10084;&#65039;</span>
         <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
         <span class="credit-dot"></span>
-        <span class="credit-tag">AI Study Suite PRO v18.35.0</span>
+        <span class="credit-tag">AI Study Suite PRO v18.36.0</span>
       </div>
       <div class="ft-share">
         <button class="ft-share-btn" onclick="shareApp()">&#128228; Share app</button>
@@ -6189,7 +6231,7 @@
     function hideAllSections() {
       clearInterval(timerInterval);
       window.speechSynthesis?.cancel();
-      ['setup-section', 'quiz-section', 'flashcard-section', 'mindmap-section', 'notes-section', 'result-section', 'mains-section', 'blurt-section', 'weakness-section', 'visual-section', 'teach-section', 'sets-section', 'library-section', 'plan-section', 'progress-section', 'account-section', 'mistake-section', 'adaptive-section', 'listen-section', 'sprint-section', 'doubts-section', 'videos-section'].forEach(id => {
+      ['setup-section', 'quiz-section', 'flashcard-section', 'mindmap-section', 'notes-section', 'result-section', 'mains-section', 'blurt-section', 'weakness-section', 'visual-section', 'teach-section', 'sets-section', 'library-section', 'plan-section', 'progress-section', 'account-section', 'mistake-section', 'adaptive-section', 'listen-section', 'sprint-section', 'doubts-section', 'videos-section', 'interview-section'].forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
         document.getElementById(id).classList.add('hidden');
@@ -7347,6 +7389,115 @@
         item.appendChild(document.createTextNode(' ' + (signedIn ? ((_acctUser && _acctUser.name) || 'Account') : 'Sign in / Create account')));
       }
     }
+
+    // ==================== UPSC INTERVIEW PRACTICE ====================
+    const K_INTERVIEW = 'ai_study_interview_key_v20';
+    let ivLog = [], ivRunning = false;
+
+    function ivKey() { try { return (localStorage.getItem(K_INTERVIEW) || '').trim(); } catch (e) { return ''; } }
+    function saveInterviewKey() {
+      const v = (document.getElementById('interview-key').value || '').trim();
+      try { localStorage.setItem(K_INTERVIEW, v); } catch (e) {}
+      ivKeyStatus();
+      showError(v ? '✅ Interview key save ho gayi (is device par)' : '🗑️ Interview key hata di — ab main key use hogi');
+    }
+    function ivKeyStatus() {
+      const el = document.getElementById('interview-key-status');
+      if (!el) return;
+      const k = ivKey();
+      el.innerHTML = k ? '✅ Alag interview key set hai' : 'ℹ️ Koi alag key nahi — main API key use hogi';
+      const inp = document.getElementById('interview-key');
+      if (inp && k && !inp.value) inp.value = k;
+    }
+    async function ivCall(prompt, json) {
+      const key = ivKey();
+      if (!key) return await callUniversalAI(prompt, json);
+      const prov = detectProviderByPrefix(key);
+      if (!prov) throw new Error('Interview key ka provider pehchana nahi gaya (Gemini/Groq/OpenRouter key daalo)');
+      const models = await probeProvider(prov, key);
+      if (!models || !models.length) throw new Error('Interview key verify nahi hui');
+      return await callProviderChain(prov, models, key, prompt, json, '', true);
+    }
+    function ivRender() {
+      const box = document.getElementById('interview-log');
+      box.innerHTML = ivLog.map(m =>
+        '<div class="' + (m.role === 'q' ? 'iv-q' : 'iv-a') + '"><div class="iv-who">' +
+        (m.role === 'q' ? '&#127963;&#65039; Board' : '&#128100; You') + '</div>' + escapeHtml(m.text) + '</div>'
+      ).join('');
+      box.scrollTop = box.scrollHeight;
+    }
+    function openInterview() {
+      hideAllSections();
+      document.getElementById('interview-section').classList.remove('hidden');
+      setActiveNav('interview');
+      ivKeyStatus();
+    }
+    async function startInterview() {
+      ivLog = []; ivRunning = true;
+      document.getElementById('interview-result').classList.add('hidden');
+      document.getElementById('interview-input-wrap').classList.add('hidden');
+      ivRender();
+      await ivNext();
+    }
+    async function ivNext() {
+      const transcript = ivLog.map(m => (m.role === 'q' ? 'BOARD: ' : 'CANDIDATE: ') + m.text).join('\n');
+      const prompt = 'You are a UPSC Civil Services interview board (3 members) conducting a realistic personality test.\n' +
+        'Ask ONE question at a time, in a natural conversational way. Use the candidate\'s previous answers for follow-ups.\n' +
+        'Cover a mix of: their background, home state, optional subject, current affairs, and a situational/ethical dilemma.\n' +
+        'Ask at most 8 questions in total. Each question must be under 60 words. Be professional and warm, never hostile.\n' +
+        (transcript ? 'TRANSCRIPT SO FAR:\n' + transcript + '\n' : '') +
+        (ivLog.length === 0 ? 'This is the start — ask your first question.' : 'Ask the next question.') + '\n' +
+        'Return ONLY JSON: {"question":"...","done":false} — set "done":true with an empty question when you have asked 8 questions.';
+      try {
+        const r = await ivCall(prompt, true);
+        if (r && r.done) { await endInterview(); return; }
+        const q = (r && r.question) ? String(r.question) : 'Tell me about yourself.';
+        ivLog.push({ role: 'q', text: q }); ivRender();
+        document.getElementById('interview-input-wrap').classList.remove('hidden');
+        document.getElementById('interview-answer').value = '';
+        document.getElementById('interview-answer').focus();
+      } catch (e) { ivRunning = false; showError('❌ ' + ((e && e.message) || e)); }
+    }
+    async function submitInterviewAnswer() {
+      const ta = document.getElementById('interview-answer');
+      const v = (ta.value || '').trim();
+      if (!v) { showError('Pehle apna jawab likho.'); return; }
+      ivLog.push({ role: 'a', text: v }); ivRender();
+      document.getElementById('interview-input-wrap').classList.add('hidden');
+      await ivNext();
+    }
+    async function endInterview() {
+      if (!ivLog.length) { showError('Pehle interview shuru karo.'); return; }
+      ivRunning = false;
+      document.getElementById('interview-input-wrap').classList.add('hidden');
+      const transcript = ivLog.map(m => (m.role === 'q' ? 'BOARD: ' : 'CANDIDATE: ') + m.text).join('\n');
+      const box = document.getElementById('interview-result');
+      box.classList.remove('hidden');
+      box.innerHTML = '<div class="section-title">&#9203; Board tumhara performance assess kar raha hai&hellip;</div>';
+      const prompt = 'You are a UPSC interview board evaluating this candidate. Be honest and specific.\nTRANSCRIPT:\n' + transcript + '\n' +
+        'Return ONLY JSON: {"score":0-100,"verdict":"one line","knowledge":0-10,"communication":0-10,"poise":0-10,"ethics":0-10,' +
+        '"strengths":["..."],"improvements":["..."],"advice":"2-3 sentences of concrete advice"}';
+      try {
+        const r = await ivCall(prompt, true);
+        const bar = (label, val) => '<div style="margin:8px 0;"><div style="display:flex;justify-content:space-between;font-size:12.5px;"><span>' + label +
+          '</span><b>' + val + '/10</b></div><div style="height:7px;border-radius:6px;background:rgba(255,255,255,.1);overflow:hidden;margin-top:4px;">' +
+          '<div style="height:100%;width:' + (Number(val) * 10) + '%;background:linear-gradient(90deg,var(--primary),var(--cyan));"></div></div></div>';
+        box.innerHTML =
+          '<div class="section-title">&#127942; Interview Result</div>' +
+          '<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:12px 0;">' +
+            '<div style="font-size:40px;font-weight:900;background:linear-gradient(135deg,var(--primary),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;">' + (r.score || 0) + '<span style="font-size:16px;">/100</span></div>' +
+            '<div style="font-size:14px;color:#dbe3ff;">' + escapeHtml(r.verdict || '') + '</div>' +
+          '</div>' +
+          bar('Knowledge', r.knowledge || 0) + bar('Communication', r.communication || 0) +
+          bar('Poise &amp; confidence', r.poise || 0) + bar('Ethics', r.ethics || 0) +
+          '<div style="margin-top:14px;"><b style="color:#6ee7b7;">✅ Strengths</b><ul>' + (r.strengths || []).map(x => '<li>' + escapeHtml(x) + '</li>').join('') + '</ul></div>' +
+          '<div style="margin-top:8px;"><b style="color:#fda4af;">🔧 Improve</b><ul>' + (r.improvements || []).map(x => '<li>' + escapeHtml(x) + '</li>').join('') + '</ul></div>' +
+          '<div style="margin-top:10px;padding:12px;border-radius:12px;background:rgba(109,111,245,.14);border:1px solid rgba(124,124,255,.35);"><b>Advice:</b> ' + escapeHtml(r.advice || '') + '</div>';
+      } catch (e) {
+        box.innerHTML = '<div class="section-title">&#9888;&#65039; Result nahi ban paya</div><p class="sec-p">' + escapeHtml((e && e.message) || String(e)) + '</p>';
+      }
+    }
+
     // ==================== BACKUP / RESTORE ====================
     function exportBackup() {
       try {
@@ -7508,6 +7659,7 @@
         else if (id === 'progress') openProgress();
         else if (id === 'account') openAccount();
         else if (id === 'videos') openVideos();
+        else if (id === 'interview') openInterview();
         else if (id === 'mistake') openMistakes();
         else if (id === 'adaptive') openAdaptive();
         else if (id === 'listen') openListenMode();
