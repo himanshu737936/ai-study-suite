@@ -9,7 +9,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.55.2">
+  <meta name="app-version" content="18.56.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -37,7 +37,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-  <title>AI Study Suite PRO v18.55.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.56.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <!-- jsPDF + autoTable are ~350 KB and are only needed for exports, so they are
@@ -1338,7 +1338,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.55.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.56.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -1356,13 +1356,13 @@
         <div class="sb-logo"><span class="logo-mark" aria-hidden="true"></span></div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.55.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.56.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
         <button class="sb-item active" data-nav="setup" data-act="navGo" data-args='["setup"]'><span class="ico">&#9881;&#65039;</span> Setup</button>
 
-        <div class="sb-group" data-group="study" onclick="toggleNavGroup('study')" role="button" tabindex="0" aria-expanded="true" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('study');}">
+        <div class="sb-group" data-group="study" data-act="toggleNavGroup" data-args='["study"]' role="button" tabindex="0" aria-expanded="true" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('study');}">
           <span>&#128218; Study</span><span class="sb-caret">&#9662;</span>
         </div>
         <div class="sb-items" data-group="study">
@@ -1373,7 +1373,7 @@
           <button class="sb-item" data-nav="results" data-act="navGo" data-args='["results"]'><span class="ico">&#127942;</span> Results</button>
         </div>
 
-        <div class="sb-group" data-group="revise" onclick="toggleNavGroup('revise')" role="button" tabindex="0" aria-expanded="true" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('revise');}">
+        <div class="sb-group" data-group="revise" data-act="toggleNavGroup" data-args='["revise"]' role="button" tabindex="0" aria-expanded="true" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('revise');}">
           <span>&#128257; Revise &amp; Practice</span><span class="sb-caret">&#9662;</span>
         </div>
         <div class="sb-items" data-group="revise">
@@ -1386,7 +1386,7 @@
           <button class="sb-item" data-nav="teach" data-act="navGo" data-args='["teach"]'><span class="ico">&#127897;&#65039;</span> Teach-Back</button>
         </div>
 
-        <div class="sb-group" data-group="insights" onclick="toggleNavGroup('insights')" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('insights');}">
+        <div class="sb-group" data-group="insights" data-act="toggleNavGroup" data-args='["insights"]' role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('insights');}">
           <span>&#128200; Insights</span><span class="sb-caret">&#9662;</span>
         </div>
         <div class="sb-items" data-group="insights">
@@ -1396,7 +1396,7 @@
           <button class="sb-item" data-nav="doubts" data-act="navGo" data-args='["doubts"]'><span class="ico">&#128172;</span> Doubt History</button>
         </div>
 
-        <div class="sb-group" data-group="library" onclick="toggleNavGroup('library')" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('library');}">
+        <div class="sb-group" data-group="library" data-act="toggleNavGroup" data-args='["library"]' role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('library');}">
           <span>&#128451;&#65039; Library &amp; Plan</span><span class="sb-caret">&#9662;</span>
         </div>
         <div class="sb-items" data-group="library">
@@ -1409,7 +1409,7 @@
         <button class="sb-item" data-nav="interview" data-act="navGo" data-args='["interview"]'><span class="ico">&#128101;</span> Interview Practice</button>
         <button class="sb-item" data-nav="videos" data-act="navGo" data-args='["videos"]'><span class="ico">&#127916;</span> Videos</button>
 
-        <div class="sb-group" data-group="account" onclick="toggleNavGroup('account')" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('account');}">
+        <div class="sb-group" data-group="account" data-act="toggleNavGroup" data-args='["account"]' role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('account');}">
           <span>&#128100; Account</span><span class="sb-caret">&#9662;</span>
         </div>
         <div class="sb-items" data-group="account">
@@ -1419,16 +1419,16 @@
         <div class="sb-demo">
           <span class="sb-demo-label">Demo dekho</span>
           <div class="sb-demo-row">
-            <button class="sb-chip" onclick="startDemo('quiz')" title="Demo quiz">&#9889; Quiz</button>
-            <button class="sb-chip" onclick="startDemo('flashcards')" title="Demo flashcards">&#128451;&#65039; Cards</button>
-            <button class="sb-chip" onclick="startDemo('mindmap')" title="Demo mind map">&#128506;&#65039; Map</button>
-            <button class="sb-chip" onclick="startDemo('notes')" title="Demo notes">&#128221; Notes</button>
+            <button class="sb-chip" data-act="startDemo" data-args='["quiz"]' title="Demo quiz">&#9889; Quiz</button>
+            <button class="sb-chip" data-act="startDemo" data-args='["flashcards"]' title="Demo flashcards">&#128451;&#65039; Cards</button>
+            <button class="sb-chip" data-act="startDemo" data-args='["mindmap"]' title="Demo mind map">&#128506;&#65039; Map</button>
+            <button class="sb-chip" data-act="startDemo" data-args='["notes"]' title="Demo notes">&#128221; Notes</button>
           </div>
         </div>
       </nav>
       <div class="sb-foot"><span class="sb-credit">Made with <span class="credit-heart">&#10084;&#65039;</span> by <span class="credit-name">Himanshu</span></span></div>
     </aside>
-    <div class="sb-overlay" id="sb-overlay" onclick="closeSidebar()"></div>
+    <div class="sb-overlay" id="sb-overlay" data-act="closeSidebar" data-args='[]'></div>
 
     <div class="app-main">
 
@@ -1437,15 +1437,15 @@
       <div class="brand-icon"><span class="logo-mark brand-mark" aria-hidden="true"></span></div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.55.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.56.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
     </div>
 
     <div class="header-controls">
-      <button id="back-btn" class="btn-secondary hidden" onclick="goBack()" title="Peeche jayein" aria-label="Back" style="padding:8px 13px; white-space:nowrap;">&#8592; Back</button>
-      <button class="hamburger" onclick="toggleSidebar()" aria-label="Open menu">&#9776;</button>
+      <button id="back-btn" class="btn-secondary hidden" data-act="goBack" data-args='[]' title="Peeche jayein" aria-label="Back" style="padding:8px 13px; white-space:nowrap;">&#8592; Back</button>
+      <button class="hamburger" data-act="toggleSidebar" data-args='[]' aria-label="Open menu">&#9776;</button>
       <!-- Active PDF Indicator -->
       <div id="active-pdf-pill" class="pomo-pill hidden" style="border-color:var(--emerald); color:#6ee7b7;">
         <span>📗</span>
@@ -1456,13 +1456,13 @@
       <div class="pomo-pill">
         <span>🍅</span>
         <span id="pomo-display" class="pomo-time">25:00</span>
-        <button onclick="togglePomodoro()" id="pomo-btn" class="icon-btn" title="Start/Pause">▶</button>
-        <button onclick="resetPomodoro()" class="icon-btn" title="Reset">↺</button>
+        <button data-act="togglePomodoro" data-args='[]' id="pomo-btn" class="icon-btn" title="Start/Pause">▶</button>
+        <button data-act="resetPomodoro" data-args='[]' class="icon-btn" title="Reset">↺</button>
       </div>
 
       <!-- Theme picker -->
       <div class="demo-group" style="padding:3px 6px;">
-        <button id="install-btn" class="theme-btn hidden" onclick="promptInstall()" title="App ko phone/desktop par install karein">📲 Install</button>
+        <button id="install-btn" class="theme-btn hidden" data-act="promptInstall" data-args='[]' title="App ko phone/desktop par install karein">📲 Install</button>
         <select id="theme-select" class="theme-select" onchange="setTheme(this.value)" title="Theme">
           <option value="midnight">🌙 Midnight</option>
           <option value="ocean">🌊 Ocean</option>
@@ -1483,8 +1483,8 @@
           <option value="en">🇬🇧 English</option>
         </select>
       </div>
-      <button id="lock-keys-btn" class="theme-btn" onclick="lockKeysNow()" title="Lock API keys now (wipe from memory)" aria-label="Lock API keys">&#128274;</button>
-      <button id="a11y-toggle-btn" class="theme-btn" onclick="toggleA11yPanel()" title="Accessibility (font size, contrast)" aria-label="Accessibility settings" aria-expanded="false">♿</button>
+      <button id="lock-keys-btn" class="theme-btn" data-act="lockKeysNow" data-args='[]' title="Lock API keys now (wipe from memory)" aria-label="Lock API keys">&#128274;</button>
+      <button id="a11y-toggle-btn" class="theme-btn" data-act="toggleA11yPanel" data-args='[]' title="Accessibility (font size, contrast)" aria-label="Accessibility settings" aria-expanded="false">♿</button>
 
     </div>
   </header>
@@ -1495,7 +1495,7 @@
     <!-- Error Toast Banner -->
     <div id="error-banner" class="error-toast hidden">
       <span id="error-message"></span>
-      <button onclick="hideErrorBanner()" class="icon-btn" aria-label="Dismiss">✕</button>
+      <button data-act="hideErrorBanner" data-args='[]' class="icon-btn" aria-label="Dismiss">✕</button>
     </div>
 
     <!-- ==================== STEP 1: ZERO-CONFIG UNIVERSAL API KEY & EXAM SETUP ==================== -->
@@ -1508,7 +1508,7 @@
               1&#65039;&#8419; Step 1 mein apni <b>API key</b> paste karo &nbsp;&bull;&nbsp; 2&#65039;&#8419; Step 2 mein <b>PDF ya photo</b> upload karo &nbsp;&bull;&nbsp; 3&#65039;&#8419; Step 4 mein mode chuno aur <b>Generate</b> dabao.
             </div>
           </div>
-          <button class="icon-btn" onclick="dismissQuickstart()" title="Band karein" aria-label="Dismiss quick start">&#10005;</button>
+          <button class="icon-btn" data-act="dismissQuickstart" data-args='[]' title="Band karein" aria-label="Dismiss quick start">&#10005;</button>
         </div>
       </div>
 
@@ -1516,13 +1516,13 @@
       <div class="home-status" id="home-status">
         <div id="due-today" class="hidden" style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; justify-content:space-between; margin-bottom:12px; padding:11px 13px; border-radius:var(--radius-sm); background:linear-gradient(90deg, rgba(16,185,129,.10), rgba(109,111,245,.10)); border:1px solid rgba(16,185,129,.35);">
           <span style="font-size:12.5px; color:#a7f3d0;">&#128197; <b>Aaj ka revision ready hai:</b> <span id="due-summary">—</span></span>
-          <button class="btn-emerald" onclick="startDueRevision()" style="padding:8px 14px;">&#9654; Revision shuru karo</button>
+          <button class="btn-emerald" data-act="startDueRevision" data-args='[]' style="padding:8px 14px;">&#9654; Revision shuru karo</button>
         </div>
         <div class="hs-head">
           <div class="hs-title" data-i18n="dash.title">&#127968; Dashboard</div>
           <div class="hs-actions">
-            <button class="btn-secondary" onclick="setAllSteps(false)">&#10530; Expand all</button>
-            <button class="btn-secondary" onclick="setAllSteps(true)">&#10531; Collapse all</button>
+            <button class="btn-secondary" data-act="setAllSteps" data-args='[false]'>&#10530; Expand all</button>
+            <button class="btn-secondary" data-act="setAllSteps" data-args='[true]'>&#10531; Collapse all</button>
           </div>
         </div>
         <div class="hs-tiles">
@@ -1540,7 +1540,7 @@
         </div>
       </div>
       <section class="step" data-step="2">
-        <button type="button" class="step-head" onclick="toggleStep(2)" aria-expanded="true">
+        <button type="button" class="step-head" data-act="toggleStep" data-args='[2]' aria-expanded="true">
           <span class="step-num">1</span>
           <div class="step-head-txt"><div class="step-title" data-i18n="step.source">Content Source</div><div class="step-sub">PDF ya book ki photo(s) upload + coverage</div></div>
           <span class="step-chev">&#9662;</span>
@@ -1586,7 +1586,7 @@
             <label>&#128270; Search inside PDF &amp; jump to page</label>
             <div style="display:flex; gap:8px;">
               <input type="text" id="pdf-search" placeholder="e.g. Article 21" onkeydown="if(event.key==='Enter')searchPdfText()">
-              <button class="btn-secondary" onclick="searchPdfText()" style="white-space:nowrap;">Search</button>
+              <button class="btn-secondary" data-act="searchPdfText" data-args='[]' style="white-space:nowrap;">Search</button>
             </div>
             <div id="pdf-search-results" style="margin-top:8px;"></div>
           </div>
@@ -1595,7 +1595,7 @@
             </div>
       </section>
       <section class="step" data-step="3">
-        <button type="button" class="step-head" onclick="toggleStep(3)" aria-expanded="true">
+        <button type="button" class="step-head" data-act="toggleStep" data-args='[3]' aria-expanded="true">
           <span class="step-num">2</span>
           <div class="step-head-txt"><div class="step-title" data-i18n="step.settings">Exam &amp; Audio Settings</div><div class="step-sub">Pattern, question style, language, timer, TTS</div></div>
           <span class="step-chev">&#9662;</span>
@@ -1727,10 +1727,10 @@
           </div>
         </div>
         <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;">
-          <button onclick="speakPdfContent()" class="btn-emerald">🔊 Read Uploaded PDF Aloud</button>
-          <button onclick="speakNotes()" class="btn-secondary">🔊 Read Cheat Sheet</button>
-          <button onclick="speakCurrentFlashcard()" class="btn-secondary">🔊 Read Flashcard</button>
-          <button onclick="ttsSpeak('Hello! Ye Gemini voice ka test hai. Aap isse PDF aur notes padh sakte hain.')" class="btn-secondary">🎧 Test Voice</button>
+          <button data-act="speakPdfContent" data-args='[]' class="btn-emerald">🔊 Read Uploaded PDF Aloud</button>
+          <button data-act="speakNotes" data-args='[]' class="btn-secondary">🔊 Read Cheat Sheet</button>
+          <button data-act="speakCurrentFlashcard" data-args='[]' class="btn-secondary">🔊 Read Flashcard</button>
+          <button data-act="ttsSpeak" data-args='["Hello! Ye Gemini voice ka test hai. Aap isse PDF aur notes padh sakte hain."]' class="btn-secondary">🎧 Test Voice</button>
         </div>
         <p style="font-size:11px; color:var(--text-muted); margin-top:8px;">Gemini TTS natural voice deta hai aur Hindi/Hinglish bhi padh sakta hai (24kHz). Browser voice free hai par robotic lagti hai. Gemini TTS abhi free preview hai (quota limits ke saath).</p>
       </div>
@@ -1738,7 +1738,7 @@
             </div>
       </section>
       <section class="step" data-step="4">
-        <button type="button" class="step-head" onclick="toggleStep(4)" aria-expanded="true">
+        <button type="button" class="step-head" data-act="toggleStep" data-args='[4]' aria-expanded="true">
           <span class="step-num">3</span>
           <div class="step-head-txt"><div class="step-title" data-i18n="step.generate">Study Mode &amp; Generate</div><div class="step-sub">Mode chuno aur quiz / cards / mind-map / notes banao</div></div>
           <span class="step-chev">&#9662;</span>
@@ -1746,15 +1746,15 @@
         <div class="step-body" id="step-body-4">
 <!-- Step 2: 4 Study Modes Selector -->
       <div class="mode-tabs">
-        <button id="mode-quiz-btn" onclick="setStudyMode('quiz')" class="mode-tab active-quiz">📝 UPSC / UPPCS / SSC Quiz</button>
-        <button id="mode-flash-btn" onclick="setStudyMode('flashcards')" class="mode-tab">⏰ SRS 3D Flashcards</button>
-        <button id="mode-mindmap-btn" onclick="setStudyMode('mindmap')" class="mode-tab">🗺️ Visual Mind Map Tree</button>
-        <button id="mode-notes-btn" onclick="setStudyMode('notes')" class="mode-tab">⚡ 1-Page Exam Cheat Sheet</button>
+        <button id="mode-quiz-btn" data-act="setStudyMode" data-args='["quiz"]' class="mode-tab active-quiz">📝 UPSC / UPPCS / SSC Quiz</button>
+        <button id="mode-flash-btn" data-act="setStudyMode" data-args='["flashcards"]' class="mode-tab">⏰ SRS 3D Flashcards</button>
+        <button id="mode-mindmap-btn" data-act="setStudyMode" data-args='["mindmap"]' class="mode-tab">🗺️ Visual Mind Map Tree</button>
+        <button id="mode-notes-btn" data-act="setStudyMode" data-args='["notes"]' class="mode-tab">⚡ 1-Page Exam Cheat Sheet</button>
       </div>
 
 
       <!-- Generate Button -->
-      <button id="generate-btn" onclick="startGeneration(false)" class="btn-primary">
+      <button id="generate-btn" data-act="startGeneration" data-args='[false]' class="btn-primary">
         <span id="generate-btn-text" data-i18n="btn.generate">🚀 Generate UPSC / UPPCS / SSC Pattern Quiz from PDF</span>
       </button>
 
@@ -1791,20 +1791,20 @@
         </div>
 
         <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-          <button onclick="startGeneration(true)" class="btn-cyan" style="padding:6px 12px;" title="Generate fresh questions from next unvisited pages of this PDF">
+          <button data-act="startGeneration" data-args='[true]' class="btn-cyan" style="padding:6px 12px;" title="Generate fresh questions from next unvisited pages of this PDF">
             🔁 New Batch (Same PDF)
           </button>
-          <button onclick="toggleVoiceAnswerMode()" id="voice-mode-btn" class="btn-secondary" title="Say 'Option A/B/C/D', 'Hint', or 'Next'">
+          <button data-act="toggleVoiceAnswerMode" data-args='[]' id="voice-mode-btn" class="btn-secondary" title="Say 'Option A/B/C/D', 'Hint', or 'Next'">
             🎙️ Voice: OFF
           </button>
-          <button onclick="useFiftyFiftyHint()" id="hint-5050-btn" class="btn-secondary" title="Eliminate 2 wrong options & show clue">
+          <button data-act="useFiftyFiftyHint" data-args='[]' id="hint-5050-btn" class="btn-secondary" title="Eliminate 2 wrong options & show clue">
             🪄 50:50 Hint
           </button>
-          <button onclick="crossModelConsensus()" id="consensus-btn" class="btn-secondary" title="Ek dusre model se answers cross-check karein">🔀 Cross-check</button>
-          <button onclick="saveCurrentSet()" class="btn-secondary" title="Is quiz ko save karein">&#128190; Save set</button>
-          <button onclick="fixUnverifiedQuestions()" id="fix-unverified-btn" class="btn-secondary" title="Unverified questions ko dobara check karke fix karein">&#128295; Fix unverified</button>
-          <button onclick="toggleBookmarkCurrent()" id="bookmark-btn" class="btn-secondary">🔖 Save</button>
-          <button onclick="speakCurrentQuestion()" class="btn-secondary">🔊 Listen</button>
+          <button data-act="crossModelConsensus" data-args='[]' id="consensus-btn" class="btn-secondary" title="Ek dusre model se answers cross-check karein">🔀 Cross-check</button>
+          <button data-act="saveCurrentSet" data-args='[]' class="btn-secondary" title="Is quiz ko save karein">&#128190; Save set</button>
+          <button data-act="fixUnverifiedQuestions" data-args='[]' id="fix-unverified-btn" class="btn-secondary" title="Unverified questions ko dobara check karke fix karein">&#128295; Fix unverified</button>
+          <button data-act="toggleBookmarkCurrent" data-args='[]' id="bookmark-btn" class="btn-secondary">🔖 Save</button>
+          <button data-act="speakCurrentQuestion" data-args='[]' class="btn-secondary">🔊 Listen</button>
           <div id="timer-box" class="timer-pill">⏱️ <span id="timer-display">45</span>s</div>
         </div>
       </div>
@@ -1828,10 +1828,10 @@
         <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px;">
           <div id="feedback-title" style="font-weight:800; font-size:15px;"></div>
           <div style="display:flex; flex-wrap:wrap; gap:6px;">
-            <button onclick="speakExplanation()" class="btn-secondary" style="padding:5px 10px;">🔊 Read</button>
-            <button onclick="askAiAgentPower('eli5')" class="btn-secondary" style="padding:5px 10px; border-color:#38bdf8; color:#7dd3fc;">👶 Simplify Concept</button>
-            <button onclick="askAiAgentPower('mnemonic')" class="btn-secondary" style="padding:5px 10px; border-color:#fbbf24; color:#fde68a;">🧠 Exam Mnemonic</button>
-            <button onclick="toggleDoubtBox()" class="btn-emerald" style="padding:5px 12px; background:var(--primary);">💬 Ask PDF Doubt</button>
+            <button data-act="speakExplanation" data-args='[]' class="btn-secondary" style="padding:5px 10px;">🔊 Read</button>
+            <button data-act="askAiAgentPower" data-args='["eli5"]' class="btn-secondary" style="padding:5px 10px; border-color:#38bdf8; color:#7dd3fc;">👶 Simplify Concept</button>
+            <button data-act="askAiAgentPower" data-args='["mnemonic"]' class="btn-secondary" style="padding:5px 10px; border-color:#fbbf24; color:#fde68a;">🧠 Exam Mnemonic</button>
+            <button data-act="toggleDoubtBox" data-args='[]' class="btn-emerald" style="padding:5px 12px; background:var(--primary);">💬 Ask PDF Doubt</button>
           </div>
         </div>
 
@@ -1844,7 +1844,7 @@
         <div id="doubt-drawer" class="hidden" style="margin-top:12px; padding-top:12px; border-top:1px solid var(--border);">
           <div style="display:flex; gap:8px; margin-bottom:8px;">
             <input type="text" id="doubt-input" placeholder="Ask custom doubt (e.g. 'Statement 2 galat kyu hai?', 'Explain trick')...">
-            <button onclick="askAiDoubt()" id="ask-doubt-btn" class="btn-emerald" style="background:var(--primary); white-space:nowrap;">Ask AI →</button>
+            <button data-act="askAiDoubt" data-args='[]' id="ask-doubt-btn" class="btn-emerald" style="background:var(--primary); white-space:nowrap;">Ask AI →</button>
           </div>
         </div>
         <div id="doubt-response" class="section-box hidden" style="margin-top:10px; margin-bottom:0; font-size:13px; color:#c7d2fe;"></div>
@@ -1856,9 +1856,9 @@
           <span id="sampled-pages-info" style="margin-left:10px; font-size:11px; color:#67e8f9;">(Keys 1-4 or Voice Mic to Answer)</span>
         </div>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <button id="prev-btn" onclick="prevQuestion()" class="btn-secondary" title="Pichla sawaal (←)">← Pichla</button>
-          <button id="skip-btn" onclick="skipQuestion()" class="btn-secondary" title="Skip karo (S)">Skip →</button>
-          <button id="next-btn" onclick="nextQuestion()" class="btn-emerald hidden" style="background:var(--primary);">Next Question →</button>
+          <button id="prev-btn" data-act="prevQuestion" data-args='[]' class="btn-secondary" title="Pichla sawaal (←)">← Pichla</button>
+          <button id="skip-btn" data-act="skipQuestion" data-args='[]' class="btn-secondary" title="Skip karo (S)">Skip →</button>
+          <button id="next-btn" data-act="nextQuestion" data-args='[]' class="btn-emerald hidden" style="background:var(--primary);">Next Question →</button>
         </div>
       </div>
     </div>
@@ -1871,7 +1871,7 @@
         <span id="fc-topic-badge" class="page-proof-badge">Topic • Page</span>
         <span id="fc-next-review" style="font-size:12px; color:#fde68a; font-weight:600;">⏳ Status: Unreviewed</span>
         <div style="display:flex; gap:8px;">
-          <button onclick="startGeneration(true)" class="btn-cyan" style="padding:6px 12px;">🔁 New Batch from PDF</button>
+          <button data-act="startGeneration" data-args='[true]' class="btn-cyan" style="padding:6px 12px;">🔁 New Batch from PDF</button>
         </div>
       </div>
 
@@ -1894,7 +1894,7 @@
         </div>
       </div>
 
-      <div class="perspective" onclick="flipFlashcard()">
+      <div class="perspective" data-act="flipFlashcard" data-args='[]'>
         <div id="flashcard-inner" class="flashcard-inner">
           <div class="fc-face fc-front">
             <span style="font-size:12px; text-transform:uppercase; letter-spacing:1px; color:#818cf8; font-weight:700;">📌 Exam Concept / Question (Front)</span>
@@ -1914,21 +1914,21 @@
       </div>
 
       <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-top:14px;">
-        <button onclick="prevFlashcard()" class="btn-secondary">← Prev</button>
+        <button data-act="prevFlashcard" data-args='[]' class="btn-secondary">← Prev</button>
         <div style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center;">
-          <button onclick="rateSrsCard(1, 'Due in 1 min')" class="btn-rose">🔴 Again (1m)</button>
-          <button onclick="rateSrsCard(2, 'Due in 10 mins')" class="btn-amber">🟡 Hard (10m)</button>
-          <button onclick="rateSrsCard(3, 'Due in 1 day')" class="btn-secondary" style="background:#0284c7; color:#fff; border:none;">🔵 Good (1d)</button>
-          <button onclick="rateSrsCard(4, 'Mastered • Due in 4 days')" class="btn-emerald">🟢 Easy (4d)</button>
+          <button data-act="rateSrsCard" data-args='[1,"Due in 1 min"]' class="btn-rose">🔴 Again (1m)</button>
+          <button data-act="rateSrsCard" data-args='[2,"Due in 10 mins"]' class="btn-amber">🟡 Hard (10m)</button>
+          <button data-act="rateSrsCard" data-args='[3,"Due in 1 day"]' class="btn-secondary" style="background:#0284c7; color:#fff; border:none;">🔵 Good (1d)</button>
+          <button data-act="rateSrsCard" data-args='[4,"Mastered \u2022 Due in 4 days"]' class="btn-emerald">🟢 Easy (4d)</button>
         </div>
-        <button onclick="nextFlashcard()" class="btn-secondary">Next →</button>
+        <button data-act="nextFlashcard" data-args='[]' class="btn-secondary">Next →</button>
       </div>
 
       <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:18px; padding-top:14px; border-top:1px solid var(--border);">
-        <button onclick="practiceDueSrsCards()" id="practice-due-btn" class="btn-amber hidden">🔁 Practice Due Cards</button>
-        <button onclick="speakCurrentFlashcard()" class="btn-secondary">🔊 Play Audio</button>
-        <button onclick="exportFlashcardsAnki()" class="btn-secondary">🎴 Export Anki CSV</button>
-        <button onclick="exportFlashcardsPdf()" class="btn-secondary">📥 Flashcards PDF</button>
+        <button data-act="practiceDueSrsCards" data-args='[]' id="practice-due-btn" class="btn-amber hidden">🔁 Practice Due Cards</button>
+        <button data-act="speakCurrentFlashcard" data-args='[]' class="btn-secondary">🔊 Play Audio</button>
+        <button data-act="exportFlashcardsAnki" data-args='[]' class="btn-secondary">🎴 Export Anki CSV</button>
+        <button data-act="exportFlashcardsPdf" data-args='[]' class="btn-secondary">📥 Flashcards PDF</button>
       </div>
     </div>
 
@@ -1941,10 +1941,10 @@
           <p style="font-size:12px; color:var(--text-muted);">Click on any sub-node to expand/collapse concise explanation & exam hook</p>
         </div>
         <div style="display:flex; flex-wrap:wrap; gap:8px;">
-          <button onclick="toggleAllMindMapNodes(true)" class="btn-secondary">➕ Expand All</button>
-          <button onclick="toggleAllMindMapNodes(false)" class="btn-secondary">➖ Collapse All</button>
-            <button onclick="copyMindMap()" class="btn-secondary" title="Mind map clipboard par copy karein">📋 Copy</button>
-          <button onclick="startGeneration(true)" class="btn-cyan">🔁 Map Next PDF Pages</button>
+          <button data-act="toggleAllMindMapNodes" data-args='[true]' class="btn-secondary">➕ Expand All</button>
+          <button data-act="toggleAllMindMapNodes" data-args='[false]' class="btn-secondary">➖ Collapse All</button>
+            <button data-act="copyMindMap" data-args='[]' class="btn-secondary" title="Mind map clipboard par copy karein">📋 Copy</button>
+          <button data-act="startGeneration" data-args='[true]' class="btn-cyan">🔁 Map Next PDF Pages</button>
         </div>
       </div>
       <div id="mindmap-container" class="mindmap-wrapper"></div>
@@ -1959,11 +1959,11 @@
           <p style="font-size:12px; color:var(--text-muted);">High-yield summary, articles/dates, facts & exam mnemonics from PDF</p>
         </div>
         <div style="display:flex; flex-wrap:wrap; gap:8px;">
-          <button onclick="startGeneration(true)" class="btn-cyan">🔁 Summarize Next Pages</button>
-          <button onclick="speakNotes()" class="btn-secondary">🔊 Play Audio</button>
-          <button onclick="copyCheatSheet()" class="btn-secondary" title="Cheat sheet clipboard par copy karein">📋 Copy</button>
-          <button onclick="downloadNotesPdf()" class="btn-emerald">📥 Notes PDF</button>
-          <button onclick="exportNotesDocx()" class="btn-secondary">📄 Export Word (.docx)</button>
+          <button data-act="startGeneration" data-args='[true]' class="btn-cyan">🔁 Summarize Next Pages</button>
+          <button data-act="speakNotes" data-args='[]' class="btn-secondary">🔊 Play Audio</button>
+          <button data-act="copyCheatSheet" data-args='[]' class="btn-secondary" title="Cheat sheet clipboard par copy karein">📋 Copy</button>
+          <button data-act="downloadNotesPdf" data-args='[]' class="btn-emerald">📥 Notes PDF</button>
+          <button data-act="exportNotesDocx" data-args='[]' class="btn-secondary">📄 Export Word (.docx)</button>
         </div>
       </div>
       <div id="notes-content"></div>
@@ -2023,16 +2023,16 @@
       </div>
 
       <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:18px;">
-        <button onclick="startGeneration(true)" class="btn-cyan" style="padding:12px 20px; font-size:13.5px;">
+        <button data-act="startGeneration" data-args='[true]' class="btn-cyan" style="padding:12px 20px; font-size:13.5px;">
           🔁 New Practice Session (Fresh PDF Questions)
         </button>
-        <button onclick="downloadPdfScorecard()" class="btn-emerald" style="padding:12px 18px; font-size:13px;">
+        <button data-act="downloadPdfScorecard" data-args='[]' class="btn-emerald" style="padding:12px 18px; font-size:13px;">
           📥 Download PDF Scorecard & Proof Key
         </button>
-        <button id="retry-wrong-btn" onclick="retryWrongQuestions()" class="btn-amber hidden" style="padding:12px 18px; font-size:13px;">
+        <button id="retry-wrong-btn" data-act="retryWrongQuestions" data-args='[]' class="btn-amber hidden" style="padding:12px 18px; font-size:13px;">
           🔄 Retry Wrong Questions
         </button>
-        <button id="retry-bookmark-btn" onclick="retryBookmarkedQuestions()" class="btn-secondary hidden" style="padding:12px 18px; font-size:13px; border-color:var(--amber); color:#fde68a;">
+        <button id="retry-bookmark-btn" data-act="retryBookmarkedQuestions" data-args='[]' class="btn-secondary hidden" style="padding:12px 18px; font-size:13px; border-color:var(--amber); color:#fde68a;">
           🔖 Practice Bookmarked
         </button>
       </div>
@@ -2047,7 +2047,7 @@
           <h2>UPSC Mains Answer Evaluator</h2>
           <p>Answer likho &mdash; ya notes copy par likhkar uski photo upload karo. AI UPSC parameters par grade karega: Intro, Body, Governance linkage, Conclusion.</p>
         </div>
-        <button onclick="generateMainsQuestion()" class="mains-newq">&#128260; New question</button>
+        <button data-act="generateMainsQuestion" data-args='[]' class="mains-newq">&#128260; New question</button>
       </div>
 
       <div class="mains-card">
@@ -2073,7 +2073,7 @@
 
         <textarea id="mains-answer" class="big-textarea mains-ta" oninput="mainsUpdateCount()" placeholder="Ya apna answer yahan likhein... (Intro &rarr; Body &rarr; Way forward)"></textarea>
 
-        <button id="mains-eval-btn" onclick="evaluateMainsAnswer()" class="mains-eval">&#127919; Evaluate My Answer</button>
+        <button id="mains-eval-btn" data-act="evaluateMainsAnswer" data-args='[]' class="mains-eval">&#127919; Evaluate My Answer</button>
       </div>
 
       <div id="mains-result" class="section-box hidden"></div>
@@ -2088,7 +2088,7 @@
           <p style="font-size:12px; color:var(--text-muted);">PDF dekh kar band karein, aur jo yaad hai sab likh dein. AI batayega kaunse core keywords chhoot gaye.</p>
         </div>
         <div style="display:flex; flex-wrap:wrap; gap:8px;">
-          <button onclick="startGeneration(true)" class="btn-cyan">🔁 Load New Pages</button>
+          <button data-act="startGeneration" data-args='[true]' class="btn-cyan">🔁 Load New Pages</button>
         </div>
       </div>
       <div class="section-box">
@@ -2096,7 +2096,7 @@
         <input type="text" id="blurt-topic" placeholder="e.g. Fundamental Rights, Mughal Empire...">
         <label style="margin-top:12px;">Blurt everything you remember (no looking back!)</label>
         <textarea id="blurt-text" class="big-textarea" placeholder="Jo bhi yaad hai, sab likh dein..."></textarea>
-        <button id="blurt-btn" onclick="evaluateBlurt()" class="btn-primary" style="width:auto; padding:12px 22px; margin-top:12px;">🔍 Check My Recall</button>
+        <button id="blurt-btn" data-act="evaluateBlurt" data-args='[]' class="btn-primary" style="width:auto; padding:12px 22px; margin-top:12px;">🔍 Check My Recall</button>
       </div>
       <div id="blurt-result" class="section-box hidden"></div>
     </div>
@@ -2110,8 +2110,8 @@
           <p style="font-size:12px; color:var(--text-muted);">Topic-wise accuracy from your past quizzes (saved on this device).</p>
         </div>
         <div style="display:flex; flex-wrap:wrap; gap:8px;">
-          <button onclick="generateWeakTopicQuiz()" class="btn-amber">🎯 Targeted Revision Quiz (Weak Topics)</button>
-          <button onclick="clearErrorLog()" class="btn-secondary">🗑️ Clear Log</button>
+          <button data-act="generateWeakTopicQuiz" data-args='[]' class="btn-amber">🎯 Targeted Revision Quiz (Weak Topics)</button>
+          <button data-act="clearErrorLog" data-args='[]' class="btn-secondary">🗑️ Clear Log</button>
         </div>
       </div>
       <div id="weakness-content"></div>
@@ -2125,13 +2125,13 @@
           <p style="font-size:12px; color:var(--text-muted);">PDF ya photo ke content se timeline, comparison table ya flowchart banayein.</p>
         </div>
         <div style="display:flex; flex-wrap:wrap; gap:8px;">
-          <button onclick="startGeneration(true)" class="btn-cyan">🔁 Load New Pages</button>
+          <button data-act="startGeneration" data-args='[true]' class="btn-cyan">🔁 Load New Pages</button>
         </div>
       </div>
       <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;">
-        <button id="vis-tab-timeline" onclick="generateVisual('timeline')" class="btn-secondary">🕰️ Timeline</button>
-        <button id="vis-tab-compare" onclick="generateVisual('compare')" class="btn-secondary">⚖️ Comparison Table</button>
-        <button id="vis-tab-flow" onclick="generateVisual('flow')" class="btn-secondary">🔀 Flowchart</button>
+        <button id="vis-tab-timeline" data-act="generateVisual" data-args='["timeline"]' class="btn-secondary">🕰️ Timeline</button>
+        <button id="vis-tab-compare" data-act="generateVisual" data-args='["compare"]' class="btn-secondary">⚖️ Comparison Table</button>
+        <button id="vis-tab-flow" data-act="generateVisual" data-args='["flow"]' class="btn-secondary">🔀 Flowchart</button>
       </div>
       <div id="visual-content"></div>
     </div>
@@ -2144,18 +2144,18 @@
           <p style="font-size:12px; color:var(--text-muted);">Concept apne shabdon mein samjhayein (bolkar ya likhkar) — AI coverage, clarity aur accuracy score karega.</p>
         </div>
         <div style="display:flex; flex-wrap:wrap; gap:8px;">
-          <button onclick="startGeneration(true)" class="btn-cyan">🔁 Load New Pages</button>
+          <button data-act="startGeneration" data-args='[true]' class="btn-cyan">🔁 Load New Pages</button>
         </div>
       </div>
       <div class="section-box">
         <label>Topic</label>
         <div id="teach-topic" class="question-heading" style="margin-top:0;">"Pick Topic from PDF" dabayein.</div>
-        <button onclick="pickTeachTopic()" class="btn-secondary" style="margin-top:10px;">🎯 Pick Topic from PDF</button>
+        <button data-act="pickTeachTopic" data-args='[]' class="btn-secondary" style="margin-top:10px;">🎯 Pick Topic from PDF</button>
         <label style="margin-top:14px;">Your Explanation</label>
         <textarea id="teach-text" class="big-textarea" placeholder="Concept apne shabdon mein samjhayein... (jaise kisi dost ko)"></textarea>
         <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;">
-          <button id="teach-mic-btn" onclick="toggleTeachMic()" class="btn-secondary">🎙️ Start Speaking</button>
-          <button id="teach-eval-btn" onclick="evaluateTeachBack()" class="btn-primary" style="width:auto; padding:12px 22px;">📝 Score My Explanation</button>
+          <button id="teach-mic-btn" data-act="toggleTeachMic" data-args='[]' class="btn-secondary">🎙️ Start Speaking</button>
+          <button id="teach-eval-btn" data-act="evaluateTeachBack" data-args='[]' class="btn-primary" style="width:auto; padding:12px 22px;">📝 Score My Explanation</button>
         </div>
         <p id="teach-heard" style="font-size:12px; color:#fda4af; margin-top:8px;"></p>
       </div>
@@ -2192,7 +2192,7 @@
       <div class="quiz-topbar">
         <div><h2 class="sec-h2">&#128197; Daily Revision Plan</h2><p class="sec-p">Exam countdown aur aaj ka revision set.</p></div>
         <div class="panel-actions">
-          <button class="btn-cyan" onclick="buildDailyPlan()">&#9889; Build today's plan</button>
+          <button class="btn-cyan" data-act="buildDailyPlan" data-args='[]'>&#9889; Build today's plan</button>
         </div>
       </div>
       <div class="section-box">
@@ -2210,7 +2210,7 @@
       <div class="quiz-topbar">
         <div><h2 class="sec-h2">&#128200; Progress &amp; History</h2><p class="sec-p">Accuracy trend, weekly activity aur overall stats.</p></div>
         <div class="panel-actions">
-          <button class="btn-secondary" onclick="clearProgressHistory()">&#128465;&#65039; Clear history</button>
+          <button class="btn-secondary" data-act="clearProgressHistory" data-args='[]'>&#128465;&#65039; Clear history</button>
         </div>
       </div>
       <div id="progress-content"></div>
@@ -2225,7 +2225,7 @@
           <p class="sec-p">Saari keys ek hi jagah. Ye tumhare device par rehti hain aur seedha AI provider ko jaati hain &mdash; kisi third-party server ko nahi.</p>
         </div>
         <div class="panel-actions">
-          <button class="btn-secondary" onclick="autoVerifyAndConfigureAgent(true)">&#9889; Verify</button>
+          <button class="btn-secondary" data-act="autoVerifyAndConfigureAgent" data-args='[true]'>&#9889; Verify</button>
         </div>
       </div>
 <div class="section-box">
@@ -2241,8 +2241,8 @@
             <label>Universal API Key (Supports Gemini, Groq, OpenAI, OpenRouter, DeepSeek, Mistral)</label>
             <div style="display:flex; gap:8px;">
               <input type="password" id="api-key" oninput="onUniversalKeyInput()" placeholder="Paste your API Key here (AIzaSy... / gsk_... / sk-or-... / sk-...)">
-              <button type="button" onclick="toggleKeyVisibility()" class="btn-secondary" style="padding:0 12px;" title="Show/Hide Key">👁️</button>
-              <button type="button" onclick="autoVerifyAndConfigureAgent(true)" class="btn-cyan" style="padding:0 14px; white-space:nowrap;">⚡ Verify Agent</button>
+              <button type="button" data-act="toggleKeyVisibility" data-args='[]' class="btn-secondary" style="padding:0 12px;" title="Show/Hide Key">👁️</button>
+              <button type="button" data-act="autoVerifyAndConfigureAgent" data-args='[true]' class="btn-cyan" style="padding:0 14px; white-space:nowrap;">⚡ Verify Agent</button>
             </div>
             <label style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:11.5px; color:var(--text-muted); cursor:pointer;">
               <input checked type="checkbox" id="remember-key" style="width:15px; height:15px; accent-color:var(--primary);"> 🔐 Remember key on this device (localStorage)
@@ -2258,7 +2258,7 @@
             <p style="font-size:11px; color:var(--text-muted); margin-top:10px; line-height:1.5;">
               🔐 <b>Privacy:</b> Tumhari PDF / photo <b>device par hi</b> process hoti hai — sirf nikaala gaya text AI provider ko jaata hai. Key browser se seedha provider ko jaati hai, kisi third-party server ko nahi. Key save na karein to tab band hone par mit jaati hai.
             </p>
-            <button onclick="clearAllData()" class="btn-secondary" style="margin-top:8px; border-color:var(--rose); color:#fda4af;">🗑️ Clear all saved data</button>
+            <button data-act="clearAllData" data-args='[]' class="btn-secondary" style="margin-top:8px; border-color:var(--rose); color:#fda4af;">🗑️ Clear all saved data</button>
           </div>
 
           <div>
@@ -2278,7 +2278,7 @@
               <label>🛟 Fallback AI Agent — API Key (optional; alag provider best)</label>
               <div style="display:flex; gap:8px;">
                 <input type="password" id="fallback-key" oninput="onFallbackKeyInput()" placeholder="2nd API key (Groq / OpenRouter / OpenAI / Gemini...)">
-                <button type="button" onclick="verifyFallbackAgent(true)" class="btn-secondary" style="padding:0 14px; white-space:nowrap;">Verify</button>
+                <button type="button" data-act="verifyFallbackAgent" data-args='[true]' class="btn-secondary" style="padding:0 14px; white-space:nowrap;">Verify</button>
               </div>
             </div>
             <div>
@@ -2303,7 +2303,7 @@
         <p class="sec-p" style="margin:6px 0 10px;">Interview practice ke liye alag key (optional). Khaali chhodo to main key chalegi.</p>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
           <input type="password" id="interview-key" placeholder="Alag API key (optional)" aria-label="Interview API key" style="flex:1; min-width:190px;">
-          <button class="btn-secondary" onclick="saveInterviewKey()">&#128190; Save</button>
+          <button class="btn-secondary" data-act="saveInterviewKey" data-args='[]'>&#128190; Save</button>
         </div>
         <div id="interview-key-status" class="sec-p" style="margin-top:8px; font-size:12px;"></div>
       </div>
@@ -2317,9 +2317,9 @@
           <p class="sec-p">AI ek asli board ki tarah <b>ek-ek karke sawaal</b> poochhega aur tumhare jawab par follow-up bhi karega. Ant mein poora result milega.</p>
         </div>
         <div class="panel-actions">
-          <button class="btn-cyan" onclick="startInterview()">&#9654;&#65039; Start</button>
-          <button class="btn-secondary" onclick="endInterview()">&#127937; Result</button>
-          <button id="iv-jarvis-btn" class="btn-secondary" onclick="ivToggleJarvis()">&#129302; Jarvis</button>
+          <button class="btn-cyan" data-act="startInterview" data-args='[]'>&#9654;&#65039; Start</button>
+          <button class="btn-secondary" data-act="endInterview" data-args='[]'>&#127937; Result</button>
+          <button id="iv-jarvis-btn" class="btn-secondary" data-act="ivToggleJarvis" data-args='[]'>&#129302; Jarvis</button>
         </div>
       </div>
 
@@ -2327,7 +2327,7 @@
 
       <div class="section-box">
         <div id="iv-hud" class="iv-hud hidden">
-          <div class="iv-orb" id="iv-orb" role="button" tabindex="0" aria-label="Tap to talk" onclick="ivMic()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();ivMic();}" style="cursor:pointer;">
+          <div class="iv-orb" id="iv-orb" role="button" tabindex="0" aria-label="Tap to talk" data-act="ivMic" data-args='[]' onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();ivMic();}" style="cursor:pointer;">
             <div class="iv-ring r2"></div>
             <div class="iv-ring r3"></div>
             <div class="iv-ring r4"></div>
@@ -2342,15 +2342,15 @@
         <div id="interview-input-wrap" class="hidden" style="margin-top:14px;">
           <textarea id="interview-answer" class="big-textarea" aria-label="Your interview answer" placeholder="Apna jawab likho, ya 🎤 dabakar bolo..." style="min-height:110px;"></textarea>
           <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
-            <button id="iv-mic-btn" class="btn-cyan" onclick="ivMic()" style="flex:1; min-width:150px;">&#127908; Bol ke jawab do</button>
-            <button id="iv-voice-btn" class="btn-secondary" onclick="ivToggleVoice()">&#128266; Voice: ON</button>
+            <button id="iv-mic-btn" class="btn-cyan" data-act="ivMic" data-args='[]' style="flex:1; min-width:150px;">&#127908; Bol ke jawab do</button>
+            <button id="iv-voice-btn" class="btn-secondary" data-act="ivToggleVoice" data-args='[]'>&#128266; Voice: ON</button>
             <select onchange="ivSetLang(this.value)" class="theme-select" style="max-width:120px;" aria-label="Mic language">
               <option value="en-IN">EN-IN</option>
               <option value="hi-IN">HI-IN</option>
               <option value="en-US">EN-US</option>
             </select>
           </div>
-          <button class="btn-primary" onclick="submitInterviewAnswer()" style="width:100%; margin-top:10px;">&#10145;&#65039; Answer bhejo</button>
+          <button class="btn-primary" data-act="submitInterviewAnswer" data-args='[]' style="width:100%; margin-top:10px;">&#10145;&#65039; Answer bhejo</button>
         </div>
       </div>
 
@@ -2383,7 +2383,7 @@
           <p class="sec-p">Ek <b>temporary local account</b> &mdash; naam + password, sirf isi device par save hota hai. Koi internet, koi email, koi server nahi. Login <b>optional</b> hai: app ka har feature bina account bhi chalta hai.</p>
         </div>
         <div class="panel-actions">
-          <button class="btn-secondary" onclick="renderAccount()">&#128260; Refresh</button>
+          <button class="btn-secondary" data-act="renderAccount" data-args='[]'>&#128260; Refresh</button>
         </div>
       </div>
 
@@ -2391,7 +2391,7 @@
         <div class="section-title">&#128190; Backup &amp; restore</div>
         <p class="sec-p" style="margin:6px 0 12px;">Apna poora data (progress, flashcards, mistakes, sets, settings) ek file mein export karo aur doosre device par restore karo. Koi cloud nahi, koi third-party nahi &mdash; file sirf tumhare paas rehti hai.</p>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <button class="btn-primary" onclick="exportBackup()">&#11015;&#65039; Export backup (.json)</button>
+          <button class="btn-primary" data-act="exportBackup" data-args='[]'>&#11015;&#65039; Export backup (.json)</button>
           <label class="btn-secondary" style="cursor:pointer; display:inline-block; margin:0;">
             &#11014;&#65039; Restore backup
             <input type="file" accept="application/json,.json" onchange="importBackup(this)" style="display:none;">
@@ -2404,7 +2404,7 @@
         <div class="section-title">&#128190; Backup &amp; restore</div>
         <p class="sec-p" style="margin:6px 0 12px;">Poora data (progress, flashcards, mistakes, sets, settings) ek file mein export karo aur naye phone par restore karo. <b>Koi cloud nahi</b> &mdash; file sirf tumhare paas rehti hai.</p>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <button class="btn-primary" onclick="exportBackup()">&#11015;&#65039; Export backup</button>
+          <button class="btn-primary" data-act="exportBackup" data-args='[]'>&#11015;&#65039; Export backup</button>
           <label class="btn-secondary" style="cursor:pointer; display:inline-block; margin:0;">
             &#11014;&#65039; Restore backup
             <input type="file" accept="application/json,.json" onchange="importBackup(this)" style="display:none;">
@@ -2422,7 +2422,7 @@
         <div class="grid-2" style="margin-top:14px;">
           <div><label>Password dobara</label><input type="password" id="acct-pass2" placeholder="Wahi password dobara" autocomplete="new-password"></div>
         </div>
-        <div style="margin-top:14px;"><button id="acct-create-btn" class="btn-primary" style="width:auto; padding:12px 22px;" onclick="acctCreate()">&#127381; Create account</button></div>
+        <div style="margin-top:14px;"><button id="acct-create-btn" class="btn-primary" style="width:auto; padding:12px 22px;" data-act="acctCreate" data-args='[]'>&#127381; Create account</button></div>
       </div>
 
       <div class="section-box hidden" id="acct-login">
@@ -2433,8 +2433,8 @@
           <div><label>Password</label><input type="password" id="acct-login-pass" placeholder="Password" autocomplete="current-password"></div>
         </div>
         <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;">
-          <button id="acct-login-btn" class="btn-primary" style="width:auto; padding:12px 22px;" onclick="acctLogin()">&#128273; Login</button>
-          <button class="btn-secondary" onclick="acctDelete()" style="border-color:var(--rose); color:#fda4af;">&#128465;&#65039; Delete account</button>
+          <button id="acct-login-btn" class="btn-primary" style="width:auto; padding:12px 22px;" data-act="acctLogin" data-args='[]'>&#128273; Login</button>
+          <button class="btn-secondary" data-act="acctDelete" data-args='[]' style="border-color:var(--rose); color:#fda4af;">&#128465;&#65039; Delete account</button>
         </div>
       </div>
 
@@ -2446,7 +2446,7 @@
             <div id="acct-me" style="font-weight:800; font-size:15px;"></div>
             <div class="sec-p">Local account &bull; sirf is device par</div>
           </div>
-          <button class="btn-secondary" onclick="acctSignOut()" style="margin-left:auto;">&#128682; Sign out</button>
+          <button class="btn-secondary" data-act="acctSignOut" data-args='[]' style="margin-left:auto;">&#128682; Sign out</button>
         </div>
       </div>
 
@@ -2467,10 +2467,10 @@
       <div class="quiz-topbar">
         <div><h2 class="sec-h2">&#128213; Mistake Notebook</h2><p class="sec-p">Tumhari har galat question yahan automatically jama hoti hai — dobara wahi galti mat karo.</p></div>
         <div class="panel-actions">
-          <button class="btn-cyan" onclick="practiceMistakes()">&#128260; Practice mistakes</button>
-          <button class="btn-secondary" onclick="mistakesToFlashcards()">&#127183; Flashcards banao</button>
-          <button class="btn-secondary" onclick="exportMistakes()">&#11015;&#65039; Export</button>
-          <button class="btn-secondary" onclick="clearMistakes()">&#128465;&#65039; Clear</button>
+          <button class="btn-cyan" data-act="practiceMistakes" data-args='[]'>&#128260; Practice mistakes</button>
+          <button class="btn-secondary" data-act="mistakesToFlashcards" data-args='[]'>&#127183; Flashcards banao</button>
+          <button class="btn-secondary" data-act="exportMistakes" data-args='[]'>&#11015;&#65039; Export</button>
+          <button class="btn-secondary" data-act="clearMistakes" data-args='[]'>&#128465;&#65039; Clear</button>
         </div>
       </div>
       <div id="mistake-stats"></div>
@@ -2482,7 +2482,7 @@
       <div class="quiz-topbar">
         <div><h2 class="sec-h2">&#127898;&#65039; Adaptive Practice</h2><p class="sec-p">App tumhari accuracy dekh kar khud decide karta hai ki kaunse topics par aur mehnat chahiye.</p></div>
         <div class="panel-actions">
-          <button class="btn-cyan" onclick="runAdaptivePractice()">&#127919; Adaptive quiz banao</button>
+          <button class="btn-cyan" data-act="runAdaptivePractice" data-args='[]'>&#127919; Adaptive quiz banao</button>
         </div>
       </div>
       <div id="adaptive-content"></div>
@@ -2493,9 +2493,9 @@
       <div class="quiz-topbar">
         <div><h2 class="sec-h2">&#127911; Listen Mode</h2><p class="sec-p">Hands-free revision — cards apne aap bole jayenge. Chalo, chalte-chalte revision karo.</p></div>
         <div class="panel-actions">
-          <button class="btn-cyan" id="listen-play-btn" onclick="listenToggle()">&#9654; Play</button>
-          <button class="btn-secondary" onclick="listenPrev()">&#9198;&#65039; Pichla</button>
-          <button class="btn-secondary" onclick="listenNext()">&#9197;&#65039; Agla</button>
+          <button class="btn-cyan" id="listen-play-btn" data-act="listenToggle" data-args='[]'>&#9654; Play</button>
+          <button class="btn-secondary" data-act="listenPrev" data-args='[]'>&#9198;&#65039; Pichla</button>
+          <button class="btn-secondary" data-act="listenNext" data-args='[]'>&#9197;&#65039; Agla</button>
         </div>
       </div>
       <div class="section-box">
@@ -2524,7 +2524,7 @@
       <div class="quiz-topbar">
         <div><h2 class="sec-h2">&#9201;&#65039; Exam-Day Sprint</h2><p class="sec-p">Exam se pehle 15 minute ka rapid-fire recap — sirf sabse high-yield points.</p></div>
         <div class="panel-actions">
-          <button class="btn-cyan" id="sprint-start-btn" onclick="sprintToggle()">&#9654; Sprint shuru karo</button>
+          <button class="btn-cyan" id="sprint-start-btn" data-act="sprintToggle" data-args='[]'>&#9654; Sprint shuru karo</button>
         </div>
       </div>
       <div class="section-box">
@@ -2535,9 +2535,9 @@
         <div class="progress-thin" style="margin-bottom:14px;"><i id="sprint-bar" style="width:0%"></i></div>
         <div class="sprint-card" id="sprint-card"><span class="sprint-badge">Ready</span><br>Sprint shuru karne ke liye <b>&#9654; Sprint shuru karo</b> dabayein. Main tumhare saved material se high-yield points nikaal kar ek-ek karke dikhaunga.</div>
         <div style="display:flex; gap:8px; margin-top:14px; flex-wrap:wrap;">
-          <button class="btn-secondary" onclick="sprintNext()">&#9197;&#65039; Agla point</button>
-          <button class="btn-secondary" onclick="sprintPrev()">&#9198;&#65039; Pichla</button>
-          <button class="btn-secondary" onclick="sprintBuild()">&#128260; Dobara build karo</button>
+          <button class="btn-secondary" data-act="sprintNext" data-args='[]'>&#9197;&#65039; Agla point</button>
+          <button class="btn-secondary" data-act="sprintPrev" data-args='[]'>&#9198;&#65039; Pichla</button>
+          <button class="btn-secondary" data-act="sprintBuild" data-args='[]'>&#128260; Dobara build karo</button>
         </div>
       </div>
     </div>
@@ -2547,8 +2547,8 @@
       <div class="quiz-topbar">
         <div><h2 class="sec-h2">&#128172; Doubt History</h2><p class="sec-p">Quiz ke dauraan pooche gaye saare doubts yahan save rehte hain — baad me padh sakte ho.</p></div>
         <div class="panel-actions">
-          <button class="btn-secondary" onclick="exportDoubts()">&#11015;&#65039; Export</button>
-          <button class="btn-secondary" onclick="clearDoubts()">&#128465;&#65039; Clear</button>
+          <button class="btn-secondary" data-act="exportDoubts" data-args='[]'>&#11015;&#65039; Export</button>
+          <button class="btn-secondary" data-act="clearDoubts" data-args='[]'>&#128465;&#65039; Clear</button>
         </div>
       </div>
       <div id="doubts-content"></div>
@@ -2604,10 +2604,10 @@
         <span class="credit-heart">&#10084;&#65039;</span>
         <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
         <span class="credit-dot"></span>
-        <span class="credit-tag">AI Study Suite PRO v18.55.0</span>
+        <span class="credit-tag">AI Study Suite PRO v18.56.0</span>
       </div>
       <div class="ft-share">
-        <button class="ft-share-btn" onclick="shareApp()">&#128228; Share app</button>
+        <button class="ft-share-btn" data-act="shareApp" data-args='[]'>&#128228; Share app</button>
         <a class="ft-wa" href="https://wa.me/?text=AI%20Study%20Suite%20PRO%20%E2%80%94%20PDF%20ya%20book%20ki%20photo%20se%20AI%20quiz%2C%20flashcards%2C%20mind%20map%20aur%20cheat%20sheet%20(UPSC%20%2F%20UPPCS%20%2F%20SSC)%3A%20https%3A%2F%2Fhimanshu737936.github.io%2Fai-study-suite%2F" target="_blank" rel="noopener noreferrer">&#128172; WhatsApp</a>
       </div>
     </div>
@@ -2620,31 +2620,31 @@
   <div id="a11y-panel" class="a11y-panel hidden" role="dialog" aria-label="Accessibility settings">
     <div class="a11y-head">
       <span class="a11y-title">♿ Accessibility</span>
-      <button class="icon-btn" onclick="closeA11yPanel()" aria-label="Close accessibility panel" title="Close">✕</button>
+      <button class="icon-btn" data-act="closeA11yPanel" data-args='[]' aria-label="Close accessibility panel" title="Close">✕</button>
     </div>
     <label>Text size</label>
     <div class="a11y-row">
-      <button data-fs="md" onclick="setA11yFont('md')">A</button>
-      <button data-fs="lg" onclick="setA11yFont('lg')">A+</button>
-      <button data-fs="xl" onclick="setA11yFont('xl')">A++</button>
+      <button data-fs="md" data-act="setA11yFont" data-args='["md"]'>A</button>
+      <button data-fs="lg" data-act="setA11yFont" data-args='["lg"]'>A+</button>
+      <button data-fs="xl" data-act="setA11yFont" data-args='["xl"]'>A++</button>
     </div>
     <label class="a11y-check" style="margin-top:12px;"><input type="checkbox" id="a11y-dyslexic" onchange="toggleA11y('dyslexic', this.checked)"> Dyslexia-friendly font</label>
     <label class="a11y-check"><input type="checkbox" id="a11y-contrast" onchange="toggleA11y('contrast', this.checked)"> High contrast</label>
     <label class="a11y-check"><input type="checkbox" id="a11y-motion" onchange="toggleA11y('reduce', this.checked)"> Reduce motion</label>
     <label class="a11y-check"><input type="checkbox" id="a11y-galaxy" onchange="toggleGalaxy(this.checked)"> Animated galaxy background</label>
-    <button class="btn-secondary" style="width:100%; margin-top:12px;" onclick="resetA11y()">↺ Reset to default</button>
+    <button class="btn-secondary" style="width:100%; margin-top:12px;" data-act="resetA11y" data-args='[]'>↺ Reset to default</button>
   </div>
 
   <!-- ==================== GLOBAL TTS AUDIO PLAYER ==================== -->
   <div id="tts-bar" class="tts-bar hidden">
     <span style="font-size:12px; color:#a5b4fc; font-weight:700;">🔊 Audio</span>
-    <button id="tts-play" onclick="ttsToggle()">▶ Play</button>
-    <button onclick="ttsStop()">⏹ Stop</button>
+    <button id="tts-play" data-act="ttsToggle" data-args='[]'>▶ Play</button>
+    <button data-act="ttsStop" data-args='[]'>⏹ Stop</button>
     <span style="font-size:11px; color:var(--text-muted);">Speed</span>
     <input id="tts-speed" class="tts-speed" type="range" min="0.75" max="1.5" step="0.05" value="1" oninput="ttsSetSpeed(this.value)" style="width:90px;">
     <span id="tts-speed-val" style="font-size:11px; color:var(--text-muted);">1.0x</span>
     <span id="tts-now" style="font-size:11px; color:#94a3b8; max-width:260px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"></span>
-    <button onclick="ttsCycleLang()" id="tts-lang-btn" style="font-size:11px;">🌐 Auto</button>
+    <button data-act="ttsCycleLang" data-args='[]' id="tts-lang-btn" style="font-size:11px;">🌐 Auto</button>
     <button onclick="ttsStop(); document.getElementById('tts-bar').classList.add('hidden')" style="font-size:11px;">✕</button>
   </div>
 
