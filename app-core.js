@@ -770,7 +770,13 @@ function _actRun(el, ev, e) {
   if (typeof fn !== 'function') return;
   var args = [];
   try { args = JSON.parse(el.dataset.args || '[]'); } catch (_) {}
-  args = args.map(function (a) { return a === '__THIS__' ? el : a === '__EVENT__' ? e : a; });
+  args = args.map(function (a) {
+    if (a === '__THIS__') return el;
+    if (a === '__EVENT__') return e;
+    if (a === '__VALUE__') return el.value;
+    if (a === '__CHECKED__') return el.checked;
+    return a;
+  });
   try { fn.apply(el, args); } catch (err) { console.error('data-act', el.dataset.act, err); }
 }
 ['click', 'change', 'input'].forEach(function (evName) {
@@ -800,3 +806,27 @@ function clickById(id) { var e = document.getElementById(id); if (e) e.click(); 
 function scrollToEl(id) { var e = document.getElementById(id); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
 function stopAndSimplify(e) { if (e && e.stopPropagation) e.stopPropagation(); try { simplifyFlashcard(); } catch (_) {} }
 function closeTtsBar() { try { ttsStop(); } catch (_) {} var b = document.getElementById('tts-bar'); if (b) b.classList.add('hidden'); }
+
+
+/* ---- drag & drop dispatcher ---- */
+function mainsOcrFileDrop(e) {
+  try { var el = e.currentTarget || e.target; if (el && el.classList) el.classList.remove('over'); } catch (_) {}
+  try { mainsOcrFile(e.dataTransfer.files[0]); } catch (err) { console.error('mainsOcrFileDrop', err); }
+}
+['dragover', 'dragleave', 'drop'].forEach(function (evName) {
+  document.addEventListener(evName, function (e) {
+    var el = e.target && e.target.closest ? e.target.closest('[data-drag]') : null;
+    if (!el) return;
+    var mode = el.dataset.drag;
+    if (mode === 'over') { e.preventDefault(); el.classList.add('over'); return; }
+    if (mode === 'leave') { el.classList.remove('over'); return; }
+    if (mode === 'drop') {
+      e.preventDefault();
+      el.classList.remove('over');
+      var fn = window[el.dataset.act];
+      if (typeof fn === 'function') {
+        try { fn.call(el, e); } catch (err) { console.error('drop', el.dataset.act, err); }
+      }
+    }
+  }, true);
+});
