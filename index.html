@@ -9,7 +9,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.56.2">
+  <meta name="app-version" content="18.57.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -37,7 +37,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-  <title>AI Study Suite PRO v18.56.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.57.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <!-- jsPDF + autoTable are ~350 KB and are only needed for exports, so they are
@@ -1338,7 +1338,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.56.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.57.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -1356,13 +1356,13 @@
         <div class="sb-logo"><span class="logo-mark" aria-hidden="true"></span></div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.56.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.57.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
         <button class="sb-item active" data-nav="setup" data-act="navGo" data-args='["setup"]'><span class="ico">&#9881;&#65039;</span> Setup</button>
 
-        <div class="sb-group" data-group="study" data-act="toggleNavGroup" data-args='["study"]' role="button" tabindex="0" aria-expanded="true" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('study');}">
+        <div class="sb-group" data-group="study" data-act="toggleNavGroup" data-args='["study"]' role="button" tabindex="0" aria-expanded="true" data-keyact="toggleNavGroup" data-kargs='["study"]'>
           <span>&#128218; Study</span><span class="sb-caret">&#9662;</span>
         </div>
         <div class="sb-items" data-group="study">
@@ -1373,7 +1373,7 @@
           <button class="sb-item" data-nav="results" data-act="navGo" data-args='["results"]'><span class="ico">&#127942;</span> Results</button>
         </div>
 
-        <div class="sb-group" data-group="revise" data-act="toggleNavGroup" data-args='["revise"]' role="button" tabindex="0" aria-expanded="true" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('revise');}">
+        <div class="sb-group" data-group="revise" data-act="toggleNavGroup" data-args='["revise"]' role="button" tabindex="0" aria-expanded="true" data-keyact="toggleNavGroup" data-kargs='["revise"]'>
           <span>&#128257; Revise &amp; Practice</span><span class="sb-caret">&#9662;</span>
         </div>
         <div class="sb-items" data-group="revise">
@@ -1386,7 +1386,7 @@
           <button class="sb-item" data-nav="teach" data-act="navGo" data-args='["teach"]'><span class="ico">&#127897;&#65039;</span> Teach-Back</button>
         </div>
 
-        <div class="sb-group" data-group="insights" data-act="toggleNavGroup" data-args='["insights"]' role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('insights');}">
+        <div class="sb-group" data-group="insights" data-act="toggleNavGroup" data-args='["insights"]' role="button" tabindex="0" aria-expanded="false" data-keyact="toggleNavGroup" data-kargs='["insights"]'>
           <span>&#128200; Insights</span><span class="sb-caret">&#9662;</span>
         </div>
         <div class="sb-items" data-group="insights">
@@ -1396,7 +1396,7 @@
           <button class="sb-item" data-nav="doubts" data-act="navGo" data-args='["doubts"]'><span class="ico">&#128172;</span> Doubt History</button>
         </div>
 
-        <div class="sb-group" data-group="library" data-act="toggleNavGroup" data-args='["library"]' role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('library');}">
+        <div class="sb-group" data-group="library" data-act="toggleNavGroup" data-args='["library"]' role="button" tabindex="0" aria-expanded="false" data-keyact="toggleNavGroup" data-kargs='["library"]'>
           <span>&#128451;&#65039; Library &amp; Plan</span><span class="sb-caret">&#9662;</span>
         </div>
         <div class="sb-items" data-group="library">
@@ -1409,7 +1409,7 @@
         <button class="sb-item" data-nav="interview" data-act="navGo" data-args='["interview"]'><span class="ico">&#128101;</span> Interview Practice</button>
         <button class="sb-item" data-nav="videos" data-act="navGo" data-args='["videos"]'><span class="ico">&#127916;</span> Videos</button>
 
-        <div class="sb-group" data-group="account" data-act="toggleNavGroup" data-args='["account"]' role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('account');}">
+        <div class="sb-group" data-group="account" data-act="toggleNavGroup" data-args='["account"]' role="button" tabindex="0" aria-expanded="false" data-keyact="toggleNavGroup" data-kargs='["account"]'>
           <span>&#128100; Account</span><span class="sb-caret">&#9662;</span>
         </div>
         <div class="sb-items" data-group="account">
@@ -1437,7 +1437,7 @@
       <div class="brand-icon"><span class="logo-mark brand-mark" aria-hidden="true"></span></div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.56.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.57.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -1535,7 +1535,7 @@
           <div class="hs-tile"><span class="hs-k" data-i18n="dash.sets">&#128451;&#65039; Saved sets</span><span class="hs-v" id="hs-sets">0</span></div>
         </div>
         <div class="hs-cta">
-          <button class="btn-primary" style="width:auto; padding:11px 20px;" onclick="document.getElementById('generate-btn').scrollIntoView({behavior:'smooth',block:'center'})">&#128640; Go to Generate</button>
+          <button class="btn-primary" style="width:auto; padding:11px 20px;" data-act="scrollToEl" data-args='["generate-btn"]'>&#128640; Go to Generate</button>
           <span style="font-size:11.5px; color:var(--muted); align-self:center;">Baaki sab features menu (&#9776;) se khulte hain &rarr;</span>
         </div>
       </div>
@@ -1549,7 +1549,7 @@
 <!-- Step 3: 2GB Streaming PDF Upload & Full-PDF Coverage Selector -->
       <div class="upload-layout">
         <div id="drop-zone" class="drop-zone"
-          onclick="document.getElementById('pdf-upload').click()"
+          data-act="clickById" data-args='["pdf-upload"]'
           ondragover="event.preventDefault();"
           ondrop="handleDrop(event)">
           <input type="file" id="pdf-upload" accept="application/pdf,image/*" multiple class="hidden" onchange="handleFileSelect(event)">
@@ -1561,7 +1561,7 @@
         <div class="section-box" style="margin-bottom:0; display:flex; flex-direction:column; justify-content:space-between; gap:10px;">
           <div>
             <label>🌐 PDF Coverage Mode (Puri PDF vs Custom Range)</label>
-            <select id="coverage-mode" onchange="toggleCoverageInputs()">
+            <select id="coverage-mode" data-act="toggleCoverageInputs" data-ev="change" data-args='[]'>
               <option value="full_distributed" selected>🔥 Full PDF (Start, Middle & End — All Pages)</option>
               <option value="random_unvisited">🎲 Fresh Unvisited Pages (Next Practice Batch)</option>
               <option value="custom_range">📑 Custom Page Range (Specific Chapter)</option>
@@ -1681,7 +1681,7 @@
         <div class="grid-3">
           <div>
             <label>TTS Engine</label>
-            <select id="tts-engine" onchange="onTtsEngineChange()">
+            <select id="tts-engine" data-act="onTtsEngineChange" data-ev="change" data-args='[]'>
               <option value="browser" selected>🔈 Browser Voice (free, offline)</option>
               <option value="gemini">✨ Gemini TTS (natural voice, needs Gemini key)</option>
             </select>
@@ -1906,7 +1906,7 @@
             <div>
               <p id="fc-back-text" style="font-size:17px; font-weight:600; color:#fff; margin-bottom:12px;"></p>
               <div id="fc-hint-box" style="font-size:12px; color:#fde68a; background:rgba(245,158,11,0.15); padding:8px 14px; border-radius:10px; border:1px solid rgba(245,158,11,0.4);"></div>
-              <button onclick="event.stopPropagation(); simplifyFlashcard()" class="btn-secondary" style="margin-top:10px; padding:6px 12px; border-color:#38bdf8; color:#7dd3fc;">👶 Simplify (Feynman)</button>
+              <button data-act="stopAndSimplify" class="btn-secondary" style="margin-top:10px; padding:6px 12px; border-color:#38bdf8; color:#7dd3fc;">👶 Simplify (Feynman)</button>
             </div>
             <span style="font-size:11px; color:var(--text-muted);">Rate your recall below to schedule Spaced Repetition</span>
           </div>
@@ -2065,13 +2065,13 @@
                ondragover="event.preventDefault(); this.classList.add('over');"
                ondragleave="this.classList.remove('over');"
                ondrop="event.preventDefault(); this.classList.remove('over'); mainsOcrFile(event.dataTransfer.files[0]);">
-          <input type="file" id="mains-file" accept="image/*" onchange="mainsOcrUpload(this)" style="display:none;">
+          <input type="file" id="mains-file" accept="image/*" data-act="mainsOcrUpload" data-ev="change" data-args='["__THIS__"]' style="display:none;">
           <span class="mains-drop-ico" aria-hidden="true">&#128247;</span>
           <span class="mains-drop-t">Copy par likha answer upload karo</span>
           <span class="mains-drop-s">Photo lo &rarr; yahan tap ya drag karo. AI khud padh lega. (Ya neeche type karo.)</span>
         </label>
 
-        <textarea id="mains-answer" class="big-textarea mains-ta" oninput="mainsUpdateCount()" placeholder="Ya apna answer yahan likhein... (Intro &rarr; Body &rarr; Way forward)"></textarea>
+        <textarea id="mains-answer" class="big-textarea mains-ta" data-act="mainsUpdateCount" data-ev="input" data-args='[]' placeholder="Ya apna answer yahan likhein... (Intro &rarr; Body &rarr; Way forward)"></textarea>
 
         <button id="mains-eval-btn" data-act="evaluateMainsAnswer" data-args='[]' class="mains-eval">&#127919; Evaluate My Answer</button>
       </div>
@@ -2168,7 +2168,7 @@
       <div class="quiz-topbar">
         <div><h2 class="sec-h2">&#128451;&#65039; My Question Sets</h2><p class="sec-p">Generate kiye gaye quizzes save karo, dobara practice karo, ya dost ko bhejo.</p></div>
         <div class="panel-actions">
-          <button class="btn-secondary" onclick="document.getElementById('set-import-file').click()">&#11014;&#65039; Import set</button>
+          <button class="btn-secondary" data-act="clickById" data-args='["set-import-file"]'>&#11014;&#65039; Import set</button>
           <input type="file" id="set-import-file" accept="application/json" class="hidden" onchange="importSetFile(event)">
         </div>
       </div>
@@ -2180,7 +2180,7 @@
       <div class="quiz-topbar">
         <div><h2 class="sec-h2">&#128218; PDF Library</h2><p class="sec-p">PDF ek baar add karo &mdash; device par save rehti hai, dobara upload ki zarurat nahi.</p></div>
         <div class="panel-actions">
-          <button class="btn-secondary" onclick="document.getElementById('library-upload').click()">&#10133; Add PDF</button>
+          <button class="btn-secondary" data-act="clickById" data-args='["library-upload"]'>&#10133; Add PDF</button>
           <input type="file" id="library-upload" accept="application/pdf" class="hidden" onchange="addPdfToLibrary(event)">
         </div>
       </div>
@@ -2198,7 +2198,7 @@
       <div class="section-box">
         <label>Exam date (countdown ke liye)</label>
         <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-          <input type="date" id="exam-date" onchange="saveExamDate()" style="max-width:220px;">
+          <input type="date" id="exam-date" data-act="saveExamDate" data-ev="change" data-args='[]' style="max-width:220px;">
           <span id="exam-countdown" class="badge">--</span>
         </div>
       </div>
@@ -2240,7 +2240,7 @@
           <div>
             <label>Universal API Key (Supports Gemini, Groq, OpenAI, OpenRouter, DeepSeek, Mistral)</label>
             <div style="display:flex; gap:8px;">
-              <input type="password" id="api-key" oninput="onUniversalKeyInput()" placeholder="Paste your API Key here (AIzaSy... / gsk_... / sk-or-... / sk-...)">
+              <input type="password" id="api-key" data-act="onUniversalKeyInput" data-ev="input" data-args='[]' placeholder="Paste your API Key here (AIzaSy... / gsk_... / sk-or-... / sk-...)">
               <button type="button" data-act="toggleKeyVisibility" data-args='[]' class="btn-secondary" style="padding:0 12px;" title="Show/Hide Key">👁️</button>
               <button type="button" data-act="autoVerifyAndConfigureAgent" data-args='[true]' class="btn-cyan" style="padding:0 14px; white-space:nowrap;">⚡ Verify Agent</button>
             </div>
@@ -2248,11 +2248,11 @@
               <input checked type="checkbox" id="remember-key" style="width:15px; height:15px; accent-color:var(--primary);"> 🔐 Remember key on this device (localStorage)
             </label>
             <label style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:11.5px; color:var(--text-muted); cursor:pointer;">
-              <input type="checkbox" id="encrypt-keys" onchange="onEncryptToggle()" style="width:15px; height:15px; accent-color:var(--primary);"> 🔒 Encrypt saved keys with a passphrase (AES-GCM)
+              <input type="checkbox" id="encrypt-keys" data-act="onEncryptToggle" data-ev="change" data-args='[]' style="width:15px; height:15px; accent-color:var(--primary);"> 🔒 Encrypt saved keys with a passphrase (AES-GCM)
             </label>
             <div id="passphrase-box" class="hidden" style="margin-top:8px;">
               <label>Vault passphrase (yaad rakhein — recover nahi ho sakti)</label>
-              <input type="password" id="vault-pass" placeholder="Passphrase..." oninput="onVaultPassInput()" autocomplete="new-password">
+              <input type="password" id="vault-pass" placeholder="Passphrase..." data-act="onVaultPassInput" data-ev="input" data-args='[]' autocomplete="new-password">
             </div>
             <div style="font-size:11px; color:#fde68a; margin-top:8px;">&#128272; Tip: "Remember key" on hai to vault (encryption) bhi on rakho &mdash; warna key localStorage mein plain text mein rehti hai.</div>
             <p style="font-size:11px; color:var(--text-muted); margin-top:10px; line-height:1.5;">
@@ -2277,7 +2277,7 @@
             <div>
               <label>🛟 Fallback AI Agent — API Key (optional; alag provider best)</label>
               <div style="display:flex; gap:8px;">
-                <input type="password" id="fallback-key" oninput="onFallbackKeyInput()" placeholder="2nd API key (Groq / OpenRouter / OpenAI / Gemini...)">
+                <input type="password" id="fallback-key" data-act="onFallbackKeyInput" data-ev="input" data-args='[]' placeholder="2nd API key (Groq / OpenRouter / OpenAI / Gemini...)">
                 <button type="button" data-act="verifyFallbackAgent" data-args='[true]' class="btn-secondary" style="padding:0 14px; white-space:nowrap;">Verify</button>
               </div>
             </div>
@@ -2394,7 +2394,7 @@
           <button class="btn-primary" data-act="exportBackup" data-args='[]'>&#11015;&#65039; Export backup (.json)</button>
           <label class="btn-secondary" style="cursor:pointer; display:inline-block; margin:0;">
             &#11014;&#65039; Restore backup
-            <input type="file" accept="application/json,.json" onchange="importBackup(this)" style="display:none;">
+            <input type="file" accept="application/json,.json" data-act="importBackup" data-ev="change" data-args='["__THIS__"]' style="display:none;">
           </label>
         </div>
         <p class="sec-p" style="margin-top:10px; font-size:11.5px; opacity:.75;">Tip: file ko Google Drive / WhatsApp par apne aap ko bhej do &mdash; phone badalne par restore kar lena.</p>
@@ -2407,7 +2407,7 @@
           <button class="btn-primary" data-act="exportBackup" data-args='[]'>&#11015;&#65039; Export backup</button>
           <label class="btn-secondary" style="cursor:pointer; display:inline-block; margin:0;">
             &#11014;&#65039; Restore backup
-            <input type="file" accept="application/json,.json" onchange="importBackup(this)" style="display:none;">
+            <input type="file" accept="application/json,.json" data-act="importBackup" data-ev="change" data-args='["__THIS__"]' style="display:none;">
           </label>
         </div>
         <p class="sec-p" style="margin-top:10px; font-size:11.5px; opacity:.75;">Tip: file ko apne aap ko WhatsApp/Drive par bhej do &mdash; phone badalne par restore kar lena.</p>
@@ -2507,7 +2507,7 @@
         <div class="listen-now" id="listen-now">Listen Mode chalu karne ke liye <b>Play</b> dabayein. (Browser voice use hoti hai — free aur offline.)</div>
         <div style="display:flex; gap:10px; align-items:center; margin-top:12px; flex-wrap:wrap;">
           <label style="font-size:12px; color:var(--text-muted);">Source</label>
-          <select id="listen-source" class="theme-select" onchange="listenLoadSource()">
+          <select id="listen-source" class="theme-select" data-act="listenLoadSource" data-ev="change" data-args='[]'>
             <option value="due">&#9200; Due flashcards (SRS)</option>
             <option value="all">&#127183; Saare flashcards</option>
             <option value="mistakes">&#128213; Mistake questions</option>
@@ -2604,7 +2604,7 @@
         <span class="credit-heart">&#10084;&#65039;</span>
         <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
         <span class="credit-dot"></span>
-        <span class="credit-tag">AI Study Suite PRO v18.56.0</span>
+        <span class="credit-tag">AI Study Suite PRO v18.57.0</span>
       </div>
       <div class="ft-share">
         <button class="ft-share-btn" data-act="shareApp" data-args='[]'>&#128228; Share app</button>
@@ -2645,7 +2645,7 @@
     <span id="tts-speed-val" style="font-size:11px; color:var(--text-muted);">1.0x</span>
     <span id="tts-now" style="font-size:11px; color:#94a3b8; max-width:260px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"></span>
     <button data-act="ttsCycleLang" data-args='[]' id="tts-lang-btn" style="font-size:11px;">🌐 Auto</button>
-    <button onclick="ttsStop(); document.getElementById('tts-bar').classList.add('hidden')" style="font-size:11px;">✕</button>
+    <button data-act="closeTtsBar" style="font-size:11px;">✕</button>
   </div>
 
   <script src="app-core.js" defer></script>
