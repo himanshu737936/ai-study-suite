@@ -9,7 +9,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.47.2">
+  <meta name="app-version" content="18.48.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -37,7 +37,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-  <title>AI Study Suite PRO v18.47.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.48.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -1316,7 +1316,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.47.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.48.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -1334,7 +1334,7 @@
         <div class="sb-logo"><span class="logo-mark" aria-hidden="true"></span></div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.47.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.48.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -1415,7 +1415,7 @@
       <div class="brand-icon"><span class="logo-mark brand-mark" aria-hidden="true"></span></div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.47.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.48.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -2582,7 +2582,7 @@
         <span class="credit-heart">&#10084;&#65039;</span>
         <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
         <span class="credit-dot"></span>
-        <span class="credit-tag">AI Study Suite PRO v18.47.0</span>
+        <span class="credit-tag">AI Study Suite PRO v18.48.0</span>
       </div>
       <div class="ft-share">
         <button class="ft-share-btn" onclick="shareApp()">&#128228; Share app</button>
@@ -7638,13 +7638,12 @@
     let ivStartTs = 0, ivTick = null;
     function ivMetaUpdate() {
       const el = document.getElementById('iv-meta'); if (!el) return;
-      const qs = ivLog.filter(m => m.role === 'q').length;
       let t = '00:00';
       if (ivStartTs) {
         const sec = Math.floor((Date.now() - ivStartTs) / 1000);
         t = String(Math.floor(sec / 60)).padStart(2, '0') + ':' + String(sec % 60).padStart(2, '0');
       }
-      el.textContent = 'Q ' + qs + ' / 8   \u00B7   ' + t;
+      el.textContent = t;
     }
     function ivMetaStart() {
       ivStartTs = Date.now();
