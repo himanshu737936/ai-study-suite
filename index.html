@@ -9,7 +9,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.54.2">
+  <meta name="app-version" content="18.55.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -37,7 +37,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-  <title>AI Study Suite PRO v18.54.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.55.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <!-- jsPDF + autoTable are ~350 KB and are only needed for exports, so they are
@@ -1338,7 +1338,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.54.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.55.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -1356,64 +1356,64 @@
         <div class="sb-logo"><span class="logo-mark" aria-hidden="true"></span></div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.54.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.55.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
-        <button class="sb-item active" data-nav="setup" onclick="navGo('setup')"><span class="ico">&#9881;&#65039;</span> Setup</button>
+        <button class="sb-item active" data-nav="setup" data-act="navGo" data-args='["setup"]'><span class="ico">&#9881;&#65039;</span> Setup</button>
 
         <div class="sb-group" data-group="study" onclick="toggleNavGroup('study')" role="button" tabindex="0" aria-expanded="true" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('study');}">
           <span>&#128218; Study</span><span class="sb-caret">&#9662;</span>
         </div>
         <div class="sb-items" data-group="study">
-          <button class="sb-item" data-nav="quiz" onclick="navGo('quiz')"><span class="ico">&#128221;</span> Quiz</button>
-          <button class="sb-item" data-nav="flashcards" onclick="navGo('flashcards')"><span class="ico">&#9200;</span> Flashcards (SRS)</button>
-          <button class="sb-item" data-nav="mindmap" onclick="navGo('mindmap')"><span class="ico">&#128506;&#65039;</span> Mind Map</button>
-          <button class="sb-item" data-nav="notes" onclick="navGo('notes')"><span class="ico">&#9889;</span> Cheat Sheet</button>
-          <button class="sb-item" data-nav="results" onclick="navGo('results')"><span class="ico">&#127942;</span> Results</button>
+          <button class="sb-item" data-nav="quiz" data-act="navGo" data-args='["quiz"]'><span class="ico">&#128221;</span> Quiz</button>
+          <button class="sb-item" data-nav="flashcards" data-act="navGo" data-args='["flashcards"]'><span class="ico">&#9200;</span> Flashcards (SRS)</button>
+          <button class="sb-item" data-nav="mindmap" data-act="navGo" data-args='["mindmap"]'><span class="ico">&#128506;&#65039;</span> Mind Map</button>
+          <button class="sb-item" data-nav="notes" data-act="navGo" data-args='["notes"]'><span class="ico">&#9889;</span> Cheat Sheet</button>
+          <button class="sb-item" data-nav="results" data-act="navGo" data-args='["results"]'><span class="ico">&#127942;</span> Results</button>
         </div>
 
         <div class="sb-group" data-group="revise" onclick="toggleNavGroup('revise')" role="button" tabindex="0" aria-expanded="true" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('revise');}">
           <span>&#128257; Revise &amp; Practice</span><span class="sb-caret">&#9662;</span>
         </div>
         <div class="sb-items" data-group="revise">
-          <button class="sb-item" data-nav="mistake" onclick="navGo('mistake')"><span class="ico">&#128213;</span> Mistake Notebook</button>
-          <button class="sb-item" data-nav="adaptive" onclick="navGo('adaptive')"><span class="ico">&#127898;&#65039;</span> Adaptive Practice</button>
-          <button class="sb-item" data-nav="listen" onclick="navGo('listen')"><span class="ico">&#127911;</span> Listen Mode</button>
-          <button class="sb-item" data-nav="sprint" onclick="navGo('sprint')"><span class="ico">&#9201;&#65039;</span> Exam-Day Sprint</button>
-          <button class="sb-item" data-nav="mains" onclick="navGo('mains')"><span class="ico">&#9997;&#65039;</span> Mains Evaluator</button>
-          <button class="sb-item" data-nav="blurt" onclick="navGo('blurt')"><span class="ico">&#129504;</span> Active Recall</button>
-          <button class="sb-item" data-nav="teach" onclick="navGo('teach')"><span class="ico">&#127897;&#65039;</span> Teach-Back</button>
+          <button class="sb-item" data-nav="mistake" data-act="navGo" data-args='["mistake"]'><span class="ico">&#128213;</span> Mistake Notebook</button>
+          <button class="sb-item" data-nav="adaptive" data-act="navGo" data-args='["adaptive"]'><span class="ico">&#127898;&#65039;</span> Adaptive Practice</button>
+          <button class="sb-item" data-nav="listen" data-act="navGo" data-args='["listen"]'><span class="ico">&#127911;</span> Listen Mode</button>
+          <button class="sb-item" data-nav="sprint" data-act="navGo" data-args='["sprint"]'><span class="ico">&#9201;&#65039;</span> Exam-Day Sprint</button>
+          <button class="sb-item" data-nav="mains" data-act="navGo" data-args='["mains"]'><span class="ico">&#9997;&#65039;</span> Mains Evaluator</button>
+          <button class="sb-item" data-nav="blurt" data-act="navGo" data-args='["blurt"]'><span class="ico">&#129504;</span> Active Recall</button>
+          <button class="sb-item" data-nav="teach" data-act="navGo" data-args='["teach"]'><span class="ico">&#127897;&#65039;</span> Teach-Back</button>
         </div>
 
         <div class="sb-group" data-group="insights" onclick="toggleNavGroup('insights')" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('insights');}">
           <span>&#128200; Insights</span><span class="sb-caret">&#9662;</span>
         </div>
         <div class="sb-items" data-group="insights">
-          <button class="sb-item" data-nav="progress" onclick="navGo('progress')"><span class="ico">&#128200;</span> Progress</button>
-          <button class="sb-item" data-nav="weakness" onclick="navGo('weakness')"><span class="ico">&#128293;</span> Weakness Heatmap</button>
-          <button class="sb-item" data-nav="visual" onclick="navGo('visual')"><span class="ico">&#128202;</span> Visual Tools</button>
-          <button class="sb-item" data-nav="doubts" onclick="navGo('doubts')"><span class="ico">&#128172;</span> Doubt History</button>
+          <button class="sb-item" data-nav="progress" data-act="navGo" data-args='["progress"]'><span class="ico">&#128200;</span> Progress</button>
+          <button class="sb-item" data-nav="weakness" data-act="navGo" data-args='["weakness"]'><span class="ico">&#128293;</span> Weakness Heatmap</button>
+          <button class="sb-item" data-nav="visual" data-act="navGo" data-args='["visual"]'><span class="ico">&#128202;</span> Visual Tools</button>
+          <button class="sb-item" data-nav="doubts" data-act="navGo" data-args='["doubts"]'><span class="ico">&#128172;</span> Doubt History</button>
         </div>
 
         <div class="sb-group" data-group="library" onclick="toggleNavGroup('library')" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('library');}">
           <span>&#128451;&#65039; Library &amp; Plan</span><span class="sb-caret">&#9662;</span>
         </div>
         <div class="sb-items" data-group="library">
-          <button class="sb-item" data-nav="sets" onclick="navGo('sets')"><span class="ico">&#128451;&#65039;</span> My Sets</button>
-          <button class="sb-item" data-nav="library" onclick="navGo('library')"><span class="ico">&#128218;</span> PDF Library</button>
-          <button class="sb-item" data-nav="plan" onclick="navGo('plan')"><span class="ico">&#128197;</span> Revision Plan</button>
+          <button class="sb-item" data-nav="sets" data-act="navGo" data-args='["sets"]'><span class="ico">&#128451;&#65039;</span> My Sets</button>
+          <button class="sb-item" data-nav="library" data-act="navGo" data-args='["library"]'><span class="ico">&#128218;</span> PDF Library</button>
+          <button class="sb-item" data-nav="plan" data-act="navGo" data-args='["plan"]'><span class="ico">&#128197;</span> Revision Plan</button>
         </div>
 
-        <button class="sb-item" data-nav="keys" onclick="navGo('keys')"><span class="ico">&#128273;</span> API Keys</button>
-        <button class="sb-item" data-nav="interview" onclick="navGo('interview')"><span class="ico">&#128101;</span> Interview Practice</button>
-        <button class="sb-item" data-nav="videos" onclick="navGo('videos')"><span class="ico">&#127916;</span> Videos</button>
+        <button class="sb-item" data-nav="keys" data-act="navGo" data-args='["keys"]'><span class="ico">&#128273;</span> API Keys</button>
+        <button class="sb-item" data-nav="interview" data-act="navGo" data-args='["interview"]'><span class="ico">&#128101;</span> Interview Practice</button>
+        <button class="sb-item" data-nav="videos" data-act="navGo" data-args='["videos"]'><span class="ico">&#127916;</span> Videos</button>
 
         <div class="sb-group" data-group="account" onclick="toggleNavGroup('account')" role="button" tabindex="0" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleNavGroup('account');}">
           <span>&#128100; Account</span><span class="sb-caret">&#9662;</span>
         </div>
         <div class="sb-items" data-group="account">
-          <button class="sb-item" data-nav="account" onclick="navGo('account')"><span class="ico">&#128100;</span> Sign in / Create account</button>
+          <button class="sb-item" data-nav="account" data-act="navGo" data-args='["account"]'><span class="ico">&#128100;</span> Sign in / Create account</button>
         </div>
 
         <div class="sb-demo">
@@ -1437,7 +1437,7 @@
       <div class="brand-icon"><span class="logo-mark brand-mark" aria-hidden="true"></span></div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.54.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.55.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -2563,7 +2563,7 @@
         <div style="font-weight:800; font-size:14px;">&#127916; Latest on YouTube &mdash; Me With Cariad</div>
         <div style="font-size:12.5px; color:var(--text-muted);">Study vlogs &amp; tips. Watch ya Subscribe karne par channel ko support milta hai.</div>
       </div>
-      <button class="btn-cyan" onclick="navGo('videos')">&#9654;&#65039; Dekho</button>
+      <button class="btn-cyan" data-act="navGo" data-args='["videos"]'>&#9654;&#65039; Dekho</button>
     </div>
 
     <div class="ft-grid">
@@ -2577,10 +2577,10 @@
       <div class="ft-cols">
         <div class="ft-col">
           <div class="ft-h">App</div>
-          <a href="#" onclick="navGo('setup');return false;">Study</a>
-          <a href="#" onclick="navGo('sets');return false;">My Sets</a>
-          <a href="#" onclick="navGo('progress');return false;">Progress</a>
-          <a href="#" onclick="navGo('videos');return false;">Videos</a>
+          <a href="#" data-act="navGo" data-args='["setup"]' data-noprevent="1">Study</a>
+          <a href="#" data-act="navGo" data-args='["sets"]' data-noprevent="1">My Sets</a>
+          <a href="#" data-act="navGo" data-args='["progress"]' data-noprevent="1">Progress</a>
+          <a href="#" data-act="navGo" data-args='["videos"]' data-noprevent="1">Videos</a>
         </div>
         <div class="ft-col">
           <div class="ft-h">More</div>
@@ -2604,7 +2604,7 @@
         <span class="credit-heart">&#10084;&#65039;</span>
         <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
         <span class="credit-dot"></span>
-        <span class="credit-tag">AI Study Suite PRO v18.54.0</span>
+        <span class="credit-tag">AI Study Suite PRO v18.55.0</span>
       </div>
       <div class="ft-share">
         <button class="ft-share-btn" onclick="shareApp()">&#128228; Share app</button>
