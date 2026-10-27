@@ -7,7 +7,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="app-version" content="18.21.1">
+  <meta name="app-version" content="18.22.0">
   <meta name="description" content="PDF ya book ki photo se AI quiz, flashcards, mind map aur cheat sheet — UPSC / UPPCS / SSC prep.">
   <meta name="author" content="Himanshu">
   <meta name="keywords" content="UPSC quiz generator, UPPCS, SSC CGL, PDF to quiz, AI flashcards, spaced repetition, mind map, cheat sheet, current affairs, mains answer evaluation, study app India">
@@ -35,7 +35,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-  <title>AI Study Suite PRO v18.21.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
+  <title>AI Study Suite PRO v18.22.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -1103,7 +1103,7 @@
           <div class="face f-bottom">&#127942;</div>
         </div>
       </div>
-      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.21.0</span></div>
+      <div class="splash-title">AI Study Suite <span class="splash-pro">PRO v18.22.0</span></div>
       <div class="splash-sub">UPSC &bull; UPPCS &bull; SSC &mdash; AI Prep Engine</div>
       <div class="splash-progress">
         <div class="splash-bar"><div class="splash-bar-fill" id="splash-fill"></div></div>
@@ -1121,7 +1121,7 @@
         <div class="sb-logo"><svg class="logo-star" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M256 84L318 194L428 256L318 318L256 428L194 318L84 256L194 194Z" fill="#ffffff"/></svg></div>
         <div>
           <div class="sb-name">AI Study Suite</div>
-          <div class="sb-tag">PRO v18.21.0 &bull; UPSC / UPPCS / SSC</div>
+          <div class="sb-tag">PRO v18.22.0 &bull; UPSC / UPPCS / SSC</div>
         </div>
       </div>
       <nav class="sb-nav">
@@ -1200,7 +1200,7 @@
       <div class="brand-icon">🧠</div>
       <div>
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.21.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          AI Study Suite <span class="pro-badge">PRO v18.22.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
         <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
       </div>
@@ -2294,7 +2294,7 @@
         <span class="credit-heart">&#10084;&#65039;</span>
         <span class="credit-by">by <span class="credit-name">Himanshu</span></span>
         <span class="credit-dot"></span>
-        <span class="credit-tag">AI Study Suite PRO v18.21.0</span>
+        <span class="credit-tag">AI Study Suite PRO v18.22.0</span>
       </div>
       <div class="ft-share">
         <button class="ft-share-btn" onclick="shareApp()">&#128228; Share app</button>
@@ -3628,10 +3628,37 @@
     const PROBE_TIMEOUT_MS = 15000;
     const GEN_TIMEOUT_MS = 120000;
     async function fetchWithTimeout(url, opts, ms) {
-      const ctrl = new AbortController();
-      const t = setTimeout(() => ctrl.abort(), ms);
-      try { return await fetch(url, Object.assign({}, opts || {}, { signal: ctrl.signal })); }
-      finally { clearTimeout(t); }
+      // Retry transient failures (rate limits + network hiccups) so a single
+      // blip no longer fails a whole generation. Exponential backoff + jitter.
+      const ATTEMPTS = 3;
+      const RETRYABLE = [408, 425, 429, 500, 502, 503, 504];
+      let lastErr = null;
+      for (let attempt = 0; attempt < ATTEMPTS; attempt++) {
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), ms);
+        let wait = 0;
+        try {
+          const res = await fetch(url, Object.assign({}, opts || {}, { signal: ctrl.signal }));
+          if (RETRYABLE.indexOf(res.status) !== -1 && attempt < ATTEMPTS - 1) {
+            const ra = parseInt(res.headers.get('retry-after') || '0', 10);
+            wait = ra > 0 ? Math.min(ra * 1000, 8000) : (700 * Math.pow(2, attempt) + Math.random() * 400);
+            clearTimeout(timer);
+            await new Promise(r => setTimeout(r, wait));
+            continue;
+          }
+          return res;
+        } catch (e) {
+          lastErr = e;
+          if (attempt === ATTEMPTS - 1) throw e;
+          wait = 700 * Math.pow(2, attempt) + Math.random() * 400;
+          clearTimeout(timer);
+          await new Promise(r => setTimeout(r, wait));
+        } finally {
+          clearTimeout(timer);
+        }
+      }
+      if (lastErr) throw lastErr;
+      return fetch(url, Object.assign({}, opts || {}));
     }
 
     // ---- per-session probe cache: don't re-fetch the model list on every run ----
