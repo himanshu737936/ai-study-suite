@@ -6,7 +6,9 @@ Quiz · Flashcards (SRS) · Mind Map · Cheat Sheet · Mains Evaluator · Teach-
 
 Built for **UPSC CSE · UPPCS · SSC CGL/GD · State PSC** preparation.
 
-> **v18.10** · Single-file app · No build step · No backend · Bring your own API key
+> **v18.63** · No build step · No backend · Offline-first PWA · Bring your own API key
+>
+> **New UI:** a mobile-first, Android-native app shell — bottom dock, app bar, sheets and 23 searchable screens in one tap.
 
 ---
 
@@ -97,6 +99,31 @@ Then use the left sidebar to explore the Library, Practice Tools, and Progress.
 - **🗓️ Revision Plan** — exam countdown + today's plan (due SRS cards, weakest topics, streak).
 - **📈 Progress** — accuracy trend, 4-week activity heatmap, total attempts, best score.
 - **👤 Account** — optional **local** sign-in: create an account with just a **name + password**, stored only on your device (no internet, no email, no server).
+
+### v18.63 — the APEX UI: a real Android app shell
+
+The old layout was a desktop sidebar squeezed onto a phone. This release replaces the whole shell with a
+mobile-first design system built for how the app is actually used: one thumb, on a phone, in a hostel room.
+
+**New shell**
+- **Bottom dock** — Home · Quiz · Cards · Plan · More. Always in reach, with the active screen highlighted.
+- **All-tools sheet** — all 23 screens in one grid, grouped Study / Revise & practice / Insights / Library, with **instant search**. Swipe down or tap the scrim to close.
+- **Quick-settings sheet** — the pomodoro timer, theme, interface language, active PDF, install button and key-lock moved out of the crowded header into one tidy sheet (the nodes move, so nothing broke).
+- **App bar** — 58px, blurred, with a title that follows the screen you are on.
+- **Redesigned everything** — flat tonal surfaces instead of heavy glass blur (kinder to OLED battery), pill buttons, 20–24px cards, one accent colour per theme, 44px minimum touch targets, and safe-area padding for notched phones.
+- **Desktop keeps the rail** — from 1024px the sidebar returns and the dock steps aside.
+
+**New Android features**
+- **Share to app** — share a PDF or a book photo from WhatsApp, Drive, Files or any gallery straight into AI Study Suite; it opens on Setup with the file already loaded (`share_target` in the manifest + a service-worker receiver).
+- **Screen wake lock** — the phone stops sleeping while you are in a quiz, flashcards, listen mode, mains or teach-back, and releases it the moment you leave.
+- **Haptics** — a short vibration on tab and answer taps, with an on/off switch in quick settings.
+- **Offline chip** — a calm banner when the connection drops, because your saved sets, cards and notes keep working.
+- **Sheets respect the keyboard and screen readers** — closed sheets are `visibility:hidden`, Escape closes them, and Android's back gesture closes an open sheet instead of leaving the app.
+
+**Fixes that came out of the same audit**
+- **The Cloudflare deploy was shipping a broken app.** `deploy-cloudflare.yml` staged `index.html` and `app.js` but not `app-core.js` or `app-features.js` — and `index.html` loads all three, so every deploy published an app whose main logic 404'd. The staging list now includes every runtime file, and the workflow **fails loudly** if any asset referenced by `index.html` (or pre-cached by `sw.js`) is missing.
+- **CSP** — `form-action` relaxed from `'none'` to `'self'` so the Android share target can post to the app, and `_headers` now pins `must-revalidate` on every JS file.
+- Zero horizontal overflow re-verified at 360 / 390 / 768 / 1280 px.
 
 ### v18.10 — search-engine (SEO) fixes
 

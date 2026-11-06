@@ -10,6 +10,12 @@ name: Deploy to Cloudflare Pages
 #                            (or in the dashboard URL: dash.cloudflare.com/<account_id>)
 #
 # If the secrets are missing the workflow skips quietly instead of failing.
+#
+# IMPORTANT: the app is split across several JS files (app-core.js, app.js,
+# app-features.js, app-android.js) plus ui-android.css. The staging step below
+# lists every one of them, and then a hard check verifies that every local
+# asset referenced by index.html actually landed in dist/ — a missing file
+# used to ship an app that booted into a blank screen.
 
 on:
   push:
@@ -48,15 +54,86 @@ jobs:
       - name: Stage the site files
         if: steps.check.outputs.skip == 'false'
         run: |
+          set -euo pipefail
           mkdir -p dist/.well-known
-          for f in index.html app.js guide.html privacy.html terms.html disclaimer.html about.html logo.svg favicon.svg manifest.json sw.js icon-192.png icon-512.png og-image.png robots.txt sitemap.xml _headers; do
-            [ -f "$f" ] && cp "$f" dist/ && echo "staged $f"
+
+          # ---- every runtime file the app loads -------------------------------
+          FILES="index.html
+          app-core.js
+          app.js
+          app-features.js
+          app-android.js
+          ui-android.css
+          sw.js
+          manifest.json
+          logo.svg
+          favicon.svg
+          icon-192.png
+          icon-512.png
+          og-image.png
+          screenshot-mobile.png
+          screenshot-wide.png
+          guide.html
+          about.html
+          privacy.html
+          terms.html
+          disclaimer.html
+          robots.txt
+          sitemap.xml
+          _headers
+          _config.yml
+          .nojekyll"
+
+          for f in $FILES; do
+            if [ -f "$f" ]; then
+              cp "$f" dist/
+            else
+              echo "::warning title=Optional file missing::$f"
+            fi
           done
-          [ -f .well-known/assetlinks.json ] && cp .well-known/assetlinks.json dist/.well-known/ && echo "staged .well-known/assetlinks.json"
+
+          [ -f .well-known/assetlinks.json ] && cp .well-known/assetlinks.json dist/.well-known/
+          [ -f .well-known/security.txt ] && cp .well-known/security.txt dist/.well-known/
+
           shopt -s nullglob
-          for g in google*.html; do cp "$g" dist/ && echo "staged $g"; done
+          for g in google*.html; do cp "$g" dist/; done
           shopt -u nullglob
-          echo "--- dist ---"; ls -la dist
+
+          echo "--- dist ---"
+          ls -la dist
+
+      - name: Verify every referenced asset is present
+        if: steps.check.outputs.skip == 'false'
+        run: |
+          python3 - <<'PY'
+          import os, re, sys
+
+          html = open('dist/index.html', encoding='utf-8').read()
+          refs = set(re.findall(r'(?:src|href)="([^"#]+)"', html))
+          local = [
+              r for r in refs
+              if not r.startswith(('http://', 'https://', '//', 'mailto:', 'data:', 'tel:'))
+          ]
+          missing = sorted(r for r in local if not os.path.exists(os.path.join('dist', r)))
+
+          if missing:
+              print('::error title=Missing deploy assets::' + ', '.join(missing))
+              print('These are referenced by index.html but were not staged:', *missing, sep='\n  - ')
+              sys.exit(1)
+
+          print(f'OK — all {len(local)} local assets referenced by index.html are staged.')
+
+          # the service worker must be able to pre-cache the same files
+          sw = open('dist/sw.js', encoding='utf-8').read()
+          m = re.search(r"const SHELL = \[(.*?)\];", sw, re.S)
+          if m:
+              shell = re.findall(r"'\./([^']+)'", m.group(1))
+              gone = [f for f in shell if f and not os.path.exists(os.path.join('dist', f))]
+              if gone:
+                  print('::error title=Service-worker shell references missing files::' + ', '.join(gone))
+                  sys.exit(1)
+              print(f'OK — service-worker shell ({len(shell)} files) is complete.')
+          PY
 
       - name: Deploy to Cloudflare Pages
         if: steps.check.outputs.skip == 'false'

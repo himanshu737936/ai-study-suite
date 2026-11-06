@@ -9,7 +9,32 @@
  */
 const VERSION = 'v18.62.2';
 const CACHE = 'ai-study-' + VERSION;
-const SHELL = ['./', './index.html', './app.js', './app-core.js', './app-features.js', './manifest.json', './logo.svg', './favicon.svg', './icon-192.png', './icon-512.png', './og-image.png'];
+const SHELL = ['./', './index.html', './app.js', './app-core.js', './app-features.js', './app-android.js', './ui-android.css', './manifest.json', './logo.svg', './favicon.svg', './icon-192.png', './icon-512.png', './og-image.png'];
+
+/* Android share target: files arrive as a multipart POST to ./share.
+   They are parked in this cache and picked up by the page. */
+const SHARE_CACHE = 'ai-study-shared';
+
+async function handleShareTarget(request) {
+  try {
+    const form = await request.formData();
+    const cache = await caches.open(SHARE_CACHE);
+    const stale = await cache.keys();
+    await Promise.all(stale.map((k) => cache.delete(k)));
+    let i = 0;
+    for (const value of form.getAll('media')) {
+      if (typeof value === 'string' || !value) continue;
+      const headers = new Headers({
+        'content-type': value.type || 'application/octet-stream',
+        'x-file-name': encodeURIComponent(value.name || ('shared-' + i)),
+        'x-file-type': value.type || ''
+      });
+      await cache.put(new Request('/__shared/' + i), new Response(value, { headers }));
+      i++;
+    }
+  } catch (err) { /* a share we could not read — the app still opens normally */ }
+  return Response.redirect('./?shared=1', 303);
+}
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
@@ -34,8 +59,15 @@ self.addEventListener('message', (e) => {
 
 self.addEventListener('fetch', (e) => {
   const req = e.request;
-  if (req.method !== 'GET') return;
   const url = new URL(req.url);
+
+  // Android share sheet → POST ./share
+  if (req.method === 'POST' && url.pathname.endsWith('/share')) {
+    e.respondWith(handleShareTarget(req));
+    return;
+  }
+
+  if (req.method !== 'GET') return;
 
   // never intercept AI provider calls
   if (/generativelanguage\.googleapis\.com|api\.groq\.com|api\.openai\.com|openrouter\.ai|api\.deepseek\.com|api\.mistral\.ai/.test(url.host)) return;

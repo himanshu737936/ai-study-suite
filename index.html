@@ -36,7 +36,7 @@
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" type="image/png" href="icon-192.png">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://yt3.googleusercontent.com; media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' blob: data: https://generativelanguage.googleapis.com https://api.groq.com https://api.openai.com https://openrouter.ai https://api.deepseek.com https://api.mistral.ai https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://www.googleapis.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
   <title>AI Study Suite PRO v18.62.0 — PDF & Photo → AI Quiz, Flashcards, Mind Maps & Mains Prep</title>
   
   <!-- PDF.js & jsPDF Libraries (SRI-pinned) -->
@@ -1287,6 +1287,13 @@
       .brand-title { font-size: 17px; }
     }
 </style>
+
+  <!-- ==================== APEX UI — mobile-first redesign ====================
+       Loaded after the legacy sheet on purpose: it overrides the shell,
+       the type scale and every major component. The legacy rules remain the
+       fallback layer for the long tail of inner components. -->
+  <link rel="stylesheet" href="ui-android.css">
+
   <!-- Structured data for search engines -->
   <script type="application/ld+json">
   {
@@ -1435,11 +1442,11 @@
   <header class="app-header">
     <div class="brand-box">
       <div class="brand-icon"><span class="logo-mark brand-mark" aria-hidden="true"></span></div>
-      <div>
+      <div style="min-width:0;">
         <div class="brand-title">
-          AI Study Suite <span class="pro-badge">PRO v18.62.0 • Auto-Agent + Fallback</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
+          <span id="ab-title">AI Study Suite</span> <span class="pro-badge">PRO</span> <span class="exam-pill">UPSC • UPPCS • SSC</span>
         </div>
-        <div class="brand-sub">Zero Model Config • Paste Any API Key & AI Agent Auto-Selects Best Engine</div>
+        <div class="brand-sub" id="ab-sub">UPSC • UPPCS • SSC — AI prep engine</div>
       </div>
     </div>
 
@@ -1485,6 +1492,7 @@
       </div>
       <button id="lock-keys-btn" class="theme-btn" data-act="lockKeysNow" data-args='[]' title="Lock API keys now (wipe from memory)" aria-label="Lock API keys">&#128274;</button>
       <button id="a11y-toggle-btn" class="theme-btn" data-act="toggleA11yPanel" data-args='[]' title="Accessibility (font size, contrast)" aria-label="Accessibility settings" aria-expanded="false">♿</button>
+      <button id="tools-toggle-btn" class="ab-icon" data-act="openTools" data-args='[]' title="Quick settings — timer, theme, language, install" aria-label="Quick settings" aria-haspopup="dialog">⚙️</button>
 
     </div>
   </header>
@@ -1536,7 +1544,7 @@
         </div>
         <div class="hs-cta">
           <button class="btn-primary" style="width:auto; padding:11px 20px;" data-act="scrollToEl" data-args='["generate-btn"]'>&#128640; Go to Generate</button>
-          <span style="font-size:11.5px; color:var(--muted); align-self:center;">Baaki sab features menu (&#9776;) se khulte hain &rarr;</span>
+          <span style="font-size:11.5px; color:var(--muted); align-self:center;">Baaki sab features neeche <b>More</b> tab se khulte hain &rarr;</span>
         </div>
       </div>
       <section class="step" data-step="2">
@@ -2645,8 +2653,86 @@
     <button data-act="closeTtsBar" style="font-size:11px;">✕</button>
   </div>
 
+  <div id="offline-chip" class="offline-chip hidden" role="status">&#128225; Offline — saved sets, cards aur notes chalte rahenge</div>
+
+  <!-- ==================== BOTTOM DOCK (rendered by app-android.js) ==================== -->
+  <nav class="bnav" id="bnav" aria-label="Primary navigation"></nav>
+
+  <!-- ==================== SHEETS ==================== -->
+  <div class="sheet-scrim" data-close-sheet="" aria-hidden="true"></div>
+
+  <div class="sheet" id="more-sheet" role="dialog" aria-modal="true" aria-label="All tools" aria-hidden="true">
+    <div class="sheet-grip"></div>
+    <div class="sheet-head">
+      <div>
+        <div class="sheet-title">All tools</div>
+        <div class="sheet-sub">Study &bull; Practice &bull; Insights &bull; Library</div>
+      </div>
+      <button class="icon-btn" data-act="closeMore" data-args='[]' aria-label="Close">&#10005;</button>
+    </div>
+    <div class="sheet-body">
+      <input type="search" id="more-search" placeholder="Search tools&hellip;" aria-label="Search tools"
+        data-act="filterMore" data-ev="input" data-args='["__VALUE__"]' style="margin-bottom:16px;">
+      <div id="more-body"></div>
+      <div id="more-empty" class="hidden" style="text-align:center; color:var(--muted); font-size:13px; padding:24px 0;">Kuch nahi mila — doosra naam try karein.</div>
+    </div>
+  </div>
+
+  <div class="sheet" id="tools-sheet" role="dialog" aria-modal="true" aria-label="Quick settings" aria-hidden="true">
+    <div class="sheet-grip"></div>
+    <div class="sheet-head">
+      <div>
+        <div class="sheet-title">Quick settings</div>
+        <div class="sheet-sub">Timer &bull; theme &bull; language &bull; app</div>
+      </div>
+      <button class="icon-btn" data-act="closeTools" data-args='[]' aria-label="Close">&#10005;</button>
+    </div>
+    <div class="sheet-body">
+      <div class="qs-row">
+        <div><div class="qs-label">&#127813; Focus timer</div><div class="qs-hint">25-minute pomodoro</div></div>
+        <div class="qs-control" id="qs-slot-pomodoro"></div>
+      </div>
+      <div class="qs-row">
+        <div><div class="qs-label">&#127912; Theme</div><div class="qs-hint">Accent colour of the whole app</div></div>
+        <div class="qs-control" id="qs-slot-theme"></div>
+      </div>
+      <div class="qs-row">
+        <div><div class="qs-label">&#128483;&#65039; Interface language</div><div class="qs-hint">Hinglish / &#2361;&#2367;&#2306;&#2342;&#2368; / English</div></div>
+        <div class="qs-control" id="qs-slot-lang"></div>
+      </div>
+      <div class="qs-row">
+        <div><div class="qs-label">&#128196; Active source</div><div class="qs-hint">PDF ya photo jo abhi load hai</div></div>
+        <div class="qs-control" id="qs-slot-pdf"></div>
+      </div>
+      <div class="qs-row">
+        <div><div class="qs-label">&#128241; Install app</div><div class="qs-hint">Home screen par add karein</div></div>
+        <div class="qs-control" id="qs-slot-install"></div>
+      </div>
+      <div class="qs-row">
+        <div><div class="qs-label">&#128274; Lock API keys</div><div class="qs-hint">Memory se keys turant hatao</div></div>
+        <div class="qs-control" id="qs-slot-lock"></div>
+      </div>
+      <div class="qs-row">
+        <div><div class="qs-label">&#128242; Haptics</div><div class="qs-hint">Tap par halka vibration</div></div>
+        <div class="qs-control">
+          <label class="a11y-check" style="font-size:12px;"><input type="checkbox" id="haptics-toggle" checked data-act="toggleHaptics" data-ev="change" data-args='["__CHECKED__"]'> On</label>
+        </div>
+      </div>
+      <div class="qs-row">
+        <div><div class="qs-label">&#9855; Accessibility</div><div class="qs-hint">Text size, contrast, motion</div></div>
+        <div class="qs-control">
+          <button class="theme-btn" data-act="toggleA11yPanel" data-args='[]'>Open</button>
+        </div>
+      </div>
+      <div style="text-align:center; font-size:11.5px; color:var(--muted); padding:16px 0 4px;">
+        AI Study Suite PRO <span class="app-ver-inline">v18.62.0</span> &bull; Made by Himanshu
+      </div>
+    </div>
+  </div>
+
   <script src="app-core.js" defer></script>
 <script src="app.js" defer></script>
 <script src="app-features.js" defer></script>
+<script src="app-android.js" defer></script>
 </body>
 </html>
