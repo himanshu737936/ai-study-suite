@@ -9,13 +9,12 @@
   "scope": "./",
   "display": "standalone",
   "display_override": [
-    "window-controls-overlay",
     "standalone",
     "minimal-ui"
   ],
   "orientation": "portrait-primary",
-  "background_color": "#05070f",
-  "theme_color": "#6d6ff5",
+  "background_color": "#07080c",
+  "theme_color": "#5b7cfa",
   "categories": [
     "education",
     "productivity",
@@ -107,5 +106,30 @@
         }
       ]
     }
-  ]
+  ],
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "share_target": {
+    "action": "./share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "media",
+          "accept": [
+            "application/pdf",
+            "image/jpeg",
+            "image/png",
+            "image/webp",
+            "image/heic"
+          ]
+        }
+      ]
+    }
+  }
 }
