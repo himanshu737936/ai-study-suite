@@ -96,6 +96,11 @@
     DOCK.forEach(function (d) {
       var b = el('button', 'bnav-item', '<span class="bnav-ico">' + d.i + '</span><span class="bnav-lbl">' + d.l + '</span>');
       b.type = 'button';
+      b.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        if (d.id === '__more') { window.openMore(); return; }
+        window.navGo(d.id);
+      });
       if (d.id === '__more') {
         b.dataset.act = 'openMore';
         b.dataset.args = '[]';
@@ -126,6 +131,7 @@
         var tile = el('button', 'more-tile',
           '<span class="more-ico">' + s.i + '</span><span>' + s.l + '</span>');
         tile.type = 'button';
+        tile.addEventListener('click', function (ev) { ev.preventDefault(); window.navGo(id); });
         tile.dataset.act = 'navGo';
         tile.dataset.args = JSON.stringify([id]);
         tile.dataset.more = id;
@@ -231,10 +237,33 @@
      ------------------------------------------------------------------ */
   /* Any navigation closes whatever sheet is open (tapping a tile must not
      leave the sheet covering the screen it just opened). */
+  /* Screens that only exist once something has been generated. */
+  var NEEDS_CONTENT = {
+    quiz: 'Quiz', flashcards: 'Flashcards', mindmap: 'Mind Map',
+    notes: 'Cheat Sheet', results: 'Results'
+  };
+
   var _navGo = window.navGo;
   window.navGo = function (id) {
     if (openSheetId) closeSheet(openSheetId, true);
-    try { return _navGo(id); } catch (e) { /* the app reports its own errors */ }
+    try {
+      if (typeof _navGo === 'function') _navGo(id);
+      else if (typeof showNav === 'function') showNav(id);
+    } catch (e) { reportUnexpectedError(e.message || String(e)); return; }
+
+    /* The app quietly falls back to Setup when a study screen has nothing in
+       it yet. Say so out loud and take the user to the upload box instead of
+       leaving them on a screen that looks like nothing happened. */
+    var sec = document.getElementById(id + '-section');
+    if (NEEDS_CONTENT[id] && sec && sec.classList.contains('hidden')) {
+      try {
+        showError(NEEDS_CONTENT[id] + ' abhi khaali hai — pehle Step 2 mein PDF ya photo upload karke Generate dabayein.');
+      } catch (e) {}
+      setTimeout(function () {
+        var dz = document.getElementById('drop-zone');
+        if (dz) dz.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 350);
+    }
   };
 
   var _setActiveNav = window.setActiveNav;
@@ -400,6 +429,21 @@
   }
   window.addEventListener('online', updateOnlineState);
   window.addEventListener('offline', updateOnlineState);
+
+  /* ------------------------------------------------------------------
+     Never fail silently: any uncaught error is shown in the app's banner
+     ------------------------------------------------------------------ */
+  window.addEventListener('error', function (e) {
+    if (!e || !e.message) return;
+    try {
+      if (typeof showError === 'function') showError('App error: ' + e.message);
+    } catch (_) {}
+  });
+  window.addEventListener('unhandledrejection', function (e) {
+    var msg = e && e.reason && (e.reason.message || e.reason);
+    if (!msg) return;
+    try { if (typeof showError === 'function') showError('App error: ' + msg); } catch (_) {}
+  });
 
   /* ------------------------------------------------------------------
      Boot
